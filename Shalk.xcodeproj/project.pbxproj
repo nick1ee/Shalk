@@ -15,6 +15,10 @@
 		B872E6331F29C4F7009BD763 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E6321F29C4F7009BD763 /* LoginViewController.swift */; };
 		B872E6351F29D884009BD763 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B872E6341F29D884009BD763 /* GoogleService-Info.plist */; };
 		B872E6371F29E031009BD763 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E6361F29E031009BD763 /* RegisterViewController.swift */; };
+		B872E6391F29EB7C009BD763 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E6381F29EB7C009BD763 /* FirebaseManager.swift */; };
+		B872E63B1F29EEA8009BD763 /* ViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E63A1F29EEA8009BD763 /* ViewControllerExtensions.swift */; };
+		B872E63D1F29F046009BD763 /* AppDelegateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E63C1F29F046009BD763 /* AppDelegateExtensions.swift */; };
+		B872E63F1F29FBA4009BD763 /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E63E1F29FBA4009BD763 /* ProfileManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +33,10 @@
 		B872E6321F29C4F7009BD763 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B872E6341F29D884009BD763 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B872E6361F29E031009BD763 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		B872E6381F29EB7C009BD763 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		B872E63A1F29EEA8009BD763 /* ViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtensions.swift; sourceTree = "<group>"; };
+		B872E63C1F29F046009BD763 /* AppDelegateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateExtensions.swift; sourceTree = "<group>"; };
+		B872E63E1F29FBA4009BD763 /* ProfileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
 		CD49CAB9B1AE9138C94B72A9 /* Pods_Shalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -99,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				B872E62B1F29C498009BD763 /* AppDelegate.swift */,
+				B872E63C1F29F046009BD763 /* AppDelegateExtensions.swift */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -106,6 +115,8 @@
 		B872E62C1F29C498009BD763 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B872E6381F29EB7C009BD763 /* FirebaseManager.swift */,
+				B872E63E1F29FBA4009BD763 /* ProfileManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -122,6 +133,7 @@
 			children = (
 				B872E6321F29C4F7009BD763 /* LoginViewController.swift */,
 				B872E6361F29E031009BD763 /* RegisterViewController.swift */,
+				B872E63A1F29EEA8009BD763 /* ViewControllerExtensions.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -266,8 +278,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B872E6391F29EB7C009BD763 /* FirebaseManager.swift in Sources */,
 				B872E6371F29E031009BD763 /* RegisterViewController.swift in Sources */,
+				B872E63D1F29F046009BD763 /* AppDelegateExtensions.swift in Sources */,
+				B872E63F1F29FBA4009BD763 /* ProfileManager.swift in Sources */,
 				B872E6331F29C4F7009BD763 /* LoginViewController.swift in Sources */,
+				B872E63B1F29EEA8009BD763 /* ViewControllerExtensions.swift in Sources */,
 				B872E6301F29C498009BD763 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

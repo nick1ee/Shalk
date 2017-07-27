@@ -24,6 +24,14 @@ class RegisterViewController: UIViewController {
 
     @IBAction func btnSignUp(_ sender: UIButton) {
 
+        if !inputUserName.isEmpty && !inputEmail.isEmpty && !inputPassword.isEmpty {
+
+            guard let name = inputUserName.text, let email = inputEmail.text, let pwd = inputPassword.text else { return }
+
+            FirebaseManager().signUp(withUser: name, withEmail: email, withPassword: pwd)
+
+        }
+
     }
 
     @IBAction func btnBackToLogin(_ sender: UIButton) {

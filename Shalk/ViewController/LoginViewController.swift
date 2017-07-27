@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwifterSwift
 
 class LoginViewController: UIViewController {
 
@@ -14,10 +15,17 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var iconKey: UIImageView!
 
     @IBOutlet weak var inputEmail: UITextField!
-
     @IBOutlet weak var inputPassword: UITextField!
 
     @IBAction func btnLogin(_ sender: UIButton) {
+
+        if !inputEmail.isEmpty && !inputPassword.isEmpty {
+
+            guard let email = inputEmail.text, let pwd = inputPassword.text else { return }
+
+            FirebaseManager().logIn(withEmail: email, withPassword: pwd)
+
+        }
 
     }
 

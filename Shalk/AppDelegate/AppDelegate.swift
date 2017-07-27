@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
 
         // Init Firebase
-//        FirebaseApp.configure()
+        FirebaseApp.configure()
 
         // IQKeyboardManager
         IQKeyboardManager.sharedManager().enable = true

@@ -18,7 +18,7 @@
                         <viewControllerLayoutGuide type="top" id="FjL-BK-3Oi"/>
                         <viewControllerLayoutGuide type="bottom" id="UdB-jv-KTA"/>
                     </layoutGuides>
-                    <view key="view" alpha="0.80000000000000004" contentMode="scaleToFill" id="YNb-XY-9QR" userLabel="backgroundView">
+                    <view key="view" contentMode="scaleToFill" id="YNb-XY-9QR" userLabel="backgroundView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -111,8 +111,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEg-n5-jPL">
-                                <rect key="frame" x="111" y="542" width="152" height="32"/>
-                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
+                                <rect key="frame" x="96.5" y="542" width="181" height="27"/>
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="15"/>
                                 <state key="normal" title="Create a new account">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -121,7 +121,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.14412292838096619" green="0.16731914877891541" blue="0.23370784521102905" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.24709811810000001" green="0.26267260310000001" blue="0.30970364810000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="4TY-v6-1Ua" firstAttribute="top" secondItem="iGd-4Z-5IW" secondAttribute="bottom" constant="20" id="5xx-n8-hi9"/>
                             <constraint firstItem="fEg-n5-jPL" firstAttribute="top" secondItem="4TY-v6-1Ua" secondAttribute="bottom" constant="15" id="CSw-qB-vGc"/>
@@ -155,7 +155,7 @@
                         <viewControllerLayoutGuide type="top" id="Dn0-Mc-qBd"/>
                         <viewControllerLayoutGuide type="bottom" id="fMw-MW-3gn"/>
                     </layoutGuides>
-                    <view key="view" alpha="0.80000001192092896" contentMode="scaleToFill" id="IeW-4l-MGK" userLabel="backgroundView">
+                    <view key="view" contentMode="scaleToFill" id="IeW-4l-MGK" userLabel="backgroundView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -276,8 +276,8 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J2n-yA-PdO">
-                                <rect key="frame" x="121.5" y="532" width="131" height="32"/>
-                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
+                                <rect key="frame" x="105.5" y="532" width="163" height="27"/>
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="15"/>
                                 <state key="normal" title="Back to login page">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -286,7 +286,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.14412292839999999" green="0.16731914880000001" blue="0.23370784519999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.24709811810000001" green="0.26267260310000001" blue="0.30970364810000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Vmx-m7-l2p" firstAttribute="top" secondItem="Dn0-Mc-qBd" secondAttribute="bottom" constant="50" id="3hP-Oa-XhN"/>
                             <constraint firstItem="Vmx-m7-l2p" firstAttribute="leading" secondItem="IeW-4l-MGK" secondAttribute="leadingMargin" constant="30" id="405-XH-EFh"/>
@@ -315,6 +315,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0jm-Rb-OdV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-476" y="106.59670164917542"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Cl0-Tz-BOv">
+            <objects>
+                <viewController storyboardIdentifier="shakeVC" id="cAW-QU-5WG" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8LH-0U-0Xn"/>
+                        <viewControllerLayoutGuide type="bottom" id="9xl-g3-Zri"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="F9O-6f-cr5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SHC-OB-OQU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="289" y="107"/>
         </scene>
     </scenes>
     <resources>
