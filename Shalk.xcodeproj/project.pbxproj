@@ -101,6 +101,7 @@
 				B872E6121F29BF91009BD763 /* Resources */,
 				69E1AB00D71316EC450229B3 /* [CP] Embed Pods Frameworks */,
 				566107CBC1F5AEC70C8A0369 /* [CP] Copy Pods Resources */,
+				B872E6291F29C1FB009BD763 /* swiftlint */,
 			);
 			buildRules = (
 			);
@@ -123,6 +124,7 @@
 				TargetAttributes = {
 					B872E6131F29BF91009BD763 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = EQ43V2KPAV;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -203,6 +205,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Shalk/Pods-Shalk-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		B872E6291F29C1FB009BD763 /* swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -336,6 +352,7 @@
 			baseConfigurationReference = 62B84D84F08A0D2A952A2A78 /* Pods-Shalk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = EQ43V2KPAV;
 				INFOPLIST_FILE = Shalk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nicklee.Shalk;
@@ -349,6 +366,7 @@
 			baseConfigurationReference = 714FEE4C1D66F84E19F1666C /* Pods-Shalk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = EQ43V2KPAV;
 				INFOPLIST_FILE = Shalk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nicklee.Shalk;
@@ -376,6 +394,7 @@
 				B872E6281F29BF91009BD763 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
