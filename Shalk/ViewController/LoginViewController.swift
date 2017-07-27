@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
 
             guard let email = inputEmail.text, let pwd = inputPassword.text else { return }
 
-            FirebaseManager().logIn(withEmail: email, withPassword: pwd)
+            FirebaseManager().logIn(self, withEmail: email, withPassword: pwd)
 
         }
 
@@ -34,6 +34,18 @@ class LoginViewController: UIViewController {
         let registerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "registerVC")
 
         self.present(registerVC, animated: true, completion: nil)
+
+    }
+
+    @IBAction func btnResetPassword(_ sender: UIButton) {
+
+        if !inputEmail.isEmpty {
+
+            guard let email = inputEmail.text else { return }
+
+            FirebaseManager().resetPassword(withVC: self, withEmail: email)
+
+        }
 
     }
 

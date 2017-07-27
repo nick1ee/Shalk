@@ -28,7 +28,7 @@ class RegisterViewController: UIViewController {
 
             guard let name = inputUserName.text, let email = inputEmail.text, let pwd = inputPassword.text else { return }
 
-            FirebaseManager().signUp(withUser: name, withEmail: email, withPassword: pwd)
+            FirebaseManager().signUp(withVC: self, withUser: name, withEmail: email, withPassword: pwd)
 
         }
 

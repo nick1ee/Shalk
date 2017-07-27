@@ -8,9 +8,7 @@
 
 import UIKit
 
-class AlertManager: UIViewController {
-
-    static let shared = AlertManager()
+extension UIViewController {
 
     func loginMessageAlertController(title: String, message: String, handle: ((UIAlertAction) -> Void)?) {
 

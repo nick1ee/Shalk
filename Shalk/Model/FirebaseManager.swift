@@ -9,9 +9,10 @@
 import Foundation
 import Firebase
 
+//swiftlint:disable identifier_name
 class FirebaseManager {
 
-    func logIn(withEmail email: String, withPassword pwd: String) {
+    func logIn(_ vc: UIViewController, withEmail email: String, withPassword pwd: String) {
 
         // MARK: Start to login Firebase
 
@@ -26,17 +27,17 @@ class FirebaseManager {
 
             // MARK: User Signed in successfully.
 
-            AlertManager.shared.loginMessageAlertController(title: "Successfully",
+            vc.loginMessageAlertController(title: "Successfully",
 
-                                                            message: "You have signed in successfully! Click OK to main page. ",
+                                           message: "You have signed in successfully! Click OK to main page. ",
 
-                                                            handle: { _ in
+                                           handle: { _ in
 
-                                                                let shakeVC = UIStoryboard(name: "Main",
+                                            let shakeVC = UIStoryboard(name: "Main",
 
-                                                                                           bundle: nil).instantiateViewController(withIdentifier: "ShakeVC")
+                                                                       bundle: nil).instantiateViewController(withIdentifier: "shakeVC")
 
-                                                                AppDelegate.shared.window?.rootViewController = shakeVC
+                                            AppDelegate.shared.window?.rootViewController = shakeVC
 
             })
 
@@ -44,7 +45,7 @@ class FirebaseManager {
 
     }
 
-    func signUp(withUser name: String, withEmail email: String, withPassword pwd: String) {
+    func signUp(withVC vc: UIViewController, withUser name: String, withEmail email: String, withPassword pwd: String) {
 
         Auth.auth().createUser(withEmail: email, password: pwd) { (user, error) in
 
@@ -68,7 +69,7 @@ class FirebaseManager {
 
                 }
 
-                self.logIn(withEmail: email, withPassword: pwd)
+                self.logIn(vc, withEmail: email, withPassword: pwd)
 
             })
 
@@ -76,4 +77,26 @@ class FirebaseManager {
 
     }
 
+    func resetPassword(withVC vc: UIViewController, withEmail email: String) {
+
+        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+
+            if error != nil {
+
+                // TODO: Error handling
+                print(error?.localizedDescription ?? "No error data")
+
+            }
+
+            vc.loginMessageAlertController(title: "Reset Password",
+
+                                           message: "We have sent a link to your email, this is for you to reset your password.",
+
+                                           handle: nil)
+        }
+
+    }
+
 }
+
+//swiftlint:enable identifier_name
