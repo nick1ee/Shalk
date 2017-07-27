@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E8BCC1FAB03E1A516A8F11E /* Pods_Shalk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD49CAB9B1AE9138C94B72A9 /* Pods_Shalk.framework */; };
 		B872E6181F29BF91009BD763 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E6171F29BF91009BD763 /* AppDelegate.swift */; };
 		B872E61A1F29BF91009BD763 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E6191F29BF91009BD763 /* ViewController.swift */; };
 		B872E61D1F29BF91009BD763 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B872E61B1F29BF91009BD763 /* Main.storyboard */; };
@@ -15,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		62B84D84F08A0D2A952A2A78 /* Pods-Shalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shalk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Shalk/Pods-Shalk.debug.xcconfig"; sourceTree = "<group>"; };
+		714FEE4C1D66F84E19F1666C /* Pods-Shalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shalk.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shalk/Pods-Shalk.release.xcconfig"; sourceTree = "<group>"; };
 		B872E6141F29BF91009BD763 /* Shalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B872E6171F29BF91009BD763 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B872E6191F29BF91009BD763 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +25,7 @@
 		B872E61E1F29BF91009BD763 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B872E6211F29BF91009BD763 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B872E6231F29BF91009BD763 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD49CAB9B1AE9138C94B72A9 /* Pods_Shalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E8BCC1FAB03E1A516A8F11E /* Pods_Shalk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		33A6B763CE8404E31BA26C2C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CD49CAB9B1AE9138C94B72A9 /* Pods_Shalk.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A12B4203998B282BB4ACAE23 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				62B84D84F08A0D2A952A2A78 /* Pods-Shalk.debug.xcconfig */,
+				714FEE4C1D66F84E19F1666C /* Pods-Shalk.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		B872E60B1F29BF91009BD763 = {
 			isa = PBXGroup;
 			children = (
 				B872E6161F29BF91009BD763 /* Shalk */,
 				B872E6151F29BF91009BD763 /* Products */,
+				A12B4203998B282BB4ACAE23 /* Pods */,
+				33A6B763CE8404E31BA26C2C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B872E6261F29BF91009BD763 /* Build configuration list for PBXNativeTarget "Shalk" */;
 			buildPhases = (
+				52B603C2D702EB56DCD28A78 /* [CP] Check Pods Manifest.lock */,
 				B872E6101F29BF91009BD763 /* Sources */,
 				B872E6111F29BF91009BD763 /* Frameworks */,
 				B872E6121F29BF91009BD763 /* Resources */,
+				69E1AB00D71316EC450229B3 /* [CP] Embed Pods Frameworks */,
+				566107CBC1F5AEC70C8A0369 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,6 +157,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		52B603C2D702EB56DCD28A78 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		566107CBC1F5AEC70C8A0369 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Shalk/Pods-Shalk-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		69E1AB00D71316EC450229B3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Shalk/Pods-Shalk-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B872E6101F29BF91009BD763 /* Sources */ = {
@@ -258,6 +333,7 @@
 		};
 		B872E6271F29BF91009BD763 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62B84D84F08A0D2A952A2A78 /* Pods-Shalk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Shalk/Info.plist;
@@ -270,6 +346,7 @@
 		};
 		B872E6281F29BF91009BD763 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 714FEE4C1D66F84E19F1666C /* Pods-Shalk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Shalk/Info.plist;

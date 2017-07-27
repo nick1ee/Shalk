@@ -1,0 +1,24 @@
+PODS:
+  - IQKeyboardManagerSwift (4.0.10)
+  - SwifterSwift (3.1.0):
+    - SwifterSwift/Cocoa (= 3.1.0)
+    - SwifterSwift/Foundation (= 3.1.0)
+    - SwifterSwift/UIKit (= 3.1.0)
+  - SwifterSwift/Cocoa (3.1.0)
+  - SwifterSwift/Foundation (3.1.0)
+  - SwifterSwift/UIKit (3.1.0)
+  - SwiftLint (0.20.1)
+
+DEPENDENCIES:
+  - IQKeyboardManagerSwift
+  - SwifterSwift
+  - SwiftLint
+
+SPEC CHECKSUMS:
+  IQKeyboardManagerSwift: 75ba21a23794a1e6b6fe6d9a267ea17f80e06771
+  SwifterSwift: f84eb7308f7742724b3cbf84283ce00f7c06d7fc
+  SwiftLint: f60095dc173a3f3ec505bb34f5229c3dfd779a54
+
+PODFILE CHECKSUM: 6d107b7bc4a88040f1a6b2f52c7e89f2ff7d3742
+
+COCOAPODS: 1.2.0
