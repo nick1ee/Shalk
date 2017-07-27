@@ -9,5 +9,8 @@ target 'Shalk' do
   pod 'SwiftLint'
   pod 'IQKeyboardManagerSwift'
   pod 'SwifterSwift'
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Auth'
 
 end
