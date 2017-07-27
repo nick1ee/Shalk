@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>RAMAnimatedTabBarController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwifterSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,12 +47,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A760737C97689B37B6095FA3FD6EFE83</key>
+		<key>169A3085B10685D732CAAF9444932374</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BD7BB2D92080F4FB2F23ADBFE48C007C</key>
+		<key>3D6838D414A6C3C14DBF8B08C29F4CB8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -58,6 +63,11 @@
 			<true/>
 		</dict>
 		<key>C235F77E101E742652CCF98FFDFA5182</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D469F47F4157C965349984AF74DD9227</key>
 		<dict>
 			<key>primary</key>
 			<true/>

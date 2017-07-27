@@ -33,11 +33,11 @@ class FirebaseManager {
 
                                            handle: { _ in
 
-                                            let shakeVC = UIStoryboard(name: "Main",
+                                            let mainTabVC = UIStoryboard(name: "Main",
 
-                                                                       bundle: nil).instantiateViewController(withIdentifier: "shakeVC")
+                                                                       bundle: nil).instantiateViewController(withIdentifier: "mainTabVC")
 
-                                            AppDelegate.shared.window?.rootViewController = shakeVC
+                                            AppDelegate.shared.window?.rootViewController = mainTabVC
 
             })
 

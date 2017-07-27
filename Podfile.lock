@@ -40,6 +40,7 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - RAMAnimatedTabBarController (2.0.13)
   - SwifterSwift (3.1.0):
     - SwifterSwift/Cocoa (= 3.1.0)
     - SwifterSwift/Foundation (= 3.1.0)
@@ -54,6 +55,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - IQKeyboardManagerSwift
+  - RAMAnimatedTabBarController (~> 2.0.13)
   - SwifterSwift
   - SwiftLint
 
@@ -68,9 +70,10 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   IQKeyboardManagerSwift: 75ba21a23794a1e6b6fe6d9a267ea17f80e06771
   nanopb: 22bc080fa3955e2116b6ff3ee6c2cb3c15ab97cb
+  RAMAnimatedTabBarController: 2510f3b66954c3f77ea1042a35d34df8f5f3b604
   SwifterSwift: f84eb7308f7742724b3cbf84283ce00f7c06d7fc
   SwiftLint: f60095dc173a3f3ec505bb34f5229c3dfd779a54
 
-PODFILE CHECKSUM: 1e210626ca43530cb536fd17cbaed3a6e64d5fa6
+PODFILE CHECKSUM: 96a02079f5d8bb66e8148ee695984c793beabbe8
 
 COCOAPODS: 1.2.0
