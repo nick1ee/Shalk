@@ -10,22 +10,8 @@ import Foundation
 
 class ProfileManager {
 
-    var name: String = ""
+    static let shared = ProfileManager()
 
-    var email: String = ""
-
-    static var shared: ProfileManager?
-
-    static func sharedInstance() -> ProfileManager {
-
-        if shared == nil {
-
-            shared = ProfileManager()
-
-        }
-
-        return shared!
-
-    }
+    var currentUser: User?
 
 }

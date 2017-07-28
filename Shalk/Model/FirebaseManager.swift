@@ -11,8 +11,10 @@ import Firebase
 
 //swiftlint:disable identifier_name
 class FirebaseManager {
-    
-    var ref: DatabaseReference!
+
+    var ref = Database.database().reference()
+
+    let profile = ProfileManager.shared
 
     func logIn(_ vc: UIViewController, withEmail email: String, withPassword pwd: String) {
 
@@ -72,10 +74,16 @@ class FirebaseManager {
                     print(error?.localizedDescription ?? "No error data")
 
                 }
+
+                let quickbloxID = QBManager().signUp(withEmail: email, withPassword: pwd)
+
+                self.profile.currentUser = User(name: name, uid: okUser.uid, email: email, quickbloxID: quickbloxID, preferredLanguages: [])
+
+                guard let userDict = self.profile.currentUser?.description else { return }
                 
-//                self.ref.child(<#T##pathString: String##String#>)
-                
-                
+                print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", userDict)
+
+                self.ref.child("users").child(okUser.uid).setValue(userDict)
 
                 self.logIn(vc, withEmail: email, withPassword: pwd)
 
