@@ -59,7 +59,9 @@ class FirebaseManager {
             guard let okUser = user else { return }
 
             let request = okUser.createProfileChangeRequest()
+
             request.displayName = name
+
             request.commitChanges(completion: { (error) in
 
                 if error != nil {
