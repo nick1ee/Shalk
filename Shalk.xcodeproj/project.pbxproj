@@ -30,11 +30,11 @@
 /* Begin PBXFileReference section */
 		62B84D84F08A0D2A952A2A78 /* Pods-Shalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shalk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Shalk/Pods-Shalk.debug.xcconfig"; sourceTree = "<group>"; };
 		714FEE4C1D66F84E19F1666C /* Pods-Shalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shalk.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shalk/Pods-Shalk.release.xcconfig"; sourceTree = "<group>"; };
-		B80330FF1F2A334E00F89209 /* RAMBounceAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMBounceAnimation.swift; sourceTree = "<group>"; };
+		B80330FF1F2A334E00F89209 /* RAMBounceAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RAMBounceAnimation.swift; path = ../RAMBounceAnimation.swift; sourceTree = "<group>"; };
 		B80331031F2A374600F89209 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		B80331051F2A374F00F89209 /* ShakeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShakeViewController.swift; sourceTree = "<group>"; };
 		B80331071F2A375700F89209 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		B803310B1F2A437300F89209 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTabBarController.swift; path = ViewController/MainTabBarController.swift; sourceTree = "<group>"; };
+		B803310B1F2A437300F89209 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		B80331321F2B171D00F89209 /* MagneticExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagneticExtensions.swift; sourceTree = "<group>"; };
 		B872E6141F29BF91009BD763 /* Shalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B872E61C1F29BF91009BD763 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -111,8 +111,6 @@
 				B872E6201F29BF91009BD763 /* LaunchScreen.storyboard */,
 				B872E6231F29BF91009BD763 /* Info.plist */,
 				B872E6341F29D884009BD763 /* GoogleService-Info.plist */,
-				B80330FF1F2A334E00F89209 /* RAMBounceAnimation.swift */,
-				B803310B1F2A437300F89209 /* MainTabBarController.swift */,
 			);
 			path = Shalk;
 			sourceTree = "<group>";
@@ -152,6 +150,8 @@
 				B80331051F2A374F00F89209 /* ShakeViewController.swift */,
 				B80331071F2A375700F89209 /* ProfileViewController.swift */,
 				B80331321F2B171D00F89209 /* MagneticExtensions.swift */,
+				B80330FF1F2A334E00F89209 /* RAMBounceAnimation.swift */,
+				B803310B1F2A437300F89209 /* MainTabBarController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";

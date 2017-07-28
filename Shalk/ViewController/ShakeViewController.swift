@@ -13,7 +13,7 @@ import SpriteKit
 class ShakeViewController: UIViewController {
 
     var names = UIImage.names
-    
+
     var selectedNode: Node?
 
     @IBOutlet weak var magneticView: MagneticView! {
@@ -69,6 +69,8 @@ extension ShakeViewController: MagneticDelegate {
         selectedNode?.isSelected = false
 
         selectedNode = node
+
+        selectedNode?.isSelected = true
 
     }
 
