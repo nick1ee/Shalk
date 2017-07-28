@@ -11,6 +11,8 @@ import Firebase
 
 //swiftlint:disable identifier_name
 class FirebaseManager {
+    
+    var ref: DatabaseReference!
 
     func logIn(_ vc: UIViewController, withEmail email: String, withPassword pwd: String) {
 
@@ -70,6 +72,10 @@ class FirebaseManager {
                     print(error?.localizedDescription ?? "No error data")
 
                 }
+                
+//                self.ref.child(<#T##pathString: String##String#>)
+                
+                
 
                 self.logIn(vc, withEmail: email, withPassword: pwd)
 

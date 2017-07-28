@@ -490,6 +490,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
+## QuickBlox
+
+
+QuickBlox iOS SDK is licensed under the QuickBlox SDK License.
+
+Copyright (c) 2017 QuickBlox
+
+
+
+## Quickblox-WebRTC
+
+
+QuickBlox iOS SDK is licensed under the QuickBlox SDK License.
+
+Copyright (c) 2017 QuickBlox
+
+
+
 ## RAMAnimatedTabBarController
 
 The MIT License (MIT)

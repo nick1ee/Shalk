@@ -12,9 +12,10 @@
 		B80331061F2A374F00F89209 /* ShakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331051F2A374F00F89209 /* ShakeViewController.swift */; };
 		B80331081F2A375700F89209 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331071F2A375700F89209 /* ProfileViewController.swift */; };
 		B803310C1F2A437300F89209 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B803310B1F2A437300F89209 /* MainTabBarController.swift */; };
-		B803313C1F2B338200F89209 /* MagneticExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331371F2B338200F89209 /* MagneticExtensions.swift */; };
-		B803313D1F2B338200F89209 /* RAMBounceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331391F2B338200F89209 /* RAMBounceAnimation.swift */; };
 		B803313E1F2B338200F89209 /* UserStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B803313B1F2B338200F89209 /* UserStructure.swift */; };
+		B80331401F2B377B00F89209 /* QBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B803313F1F2B377B00F89209 /* QBManager.swift */; };
+		B80331451F2B388F00F89209 /* RAMBounceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331421F2B388F00F89209 /* RAMBounceAnimation.swift */; };
+		B80331461F2B388F00F89209 /* MagneticExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331441F2B388F00F89209 /* MagneticExtensions.swift */; };
 		B872E61D1F29BF91009BD763 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B872E61B1F29BF91009BD763 /* Main.storyboard */; };
 		B872E61F1F29BF91009BD763 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B872E61E1F29BF91009BD763 /* Assets.xcassets */; };
 		B872E6221F29BF91009BD763 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B872E6201F29BF91009BD763 /* LaunchScreen.storyboard */; };
@@ -35,9 +36,10 @@
 		B80331051F2A374F00F89209 /* ShakeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShakeViewController.swift; sourceTree = "<group>"; };
 		B80331071F2A375700F89209 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B803310B1F2A437300F89209 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		B80331371F2B338200F89209 /* MagneticExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagneticExtensions.swift; sourceTree = "<group>"; };
-		B80331391F2B338200F89209 /* RAMBounceAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMBounceAnimation.swift; sourceTree = "<group>"; };
 		B803313B1F2B338200F89209 /* UserStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStructure.swift; sourceTree = "<group>"; };
+		B803313F1F2B377B00F89209 /* QBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QBManager.swift; sourceTree = "<group>"; };
+		B80331421F2B388F00F89209 /* RAMBounceAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMBounceAnimation.swift; sourceTree = "<group>"; };
+		B80331441F2B388F00F89209 /* MagneticExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagneticExtensions.swift; sourceTree = "<group>"; };
 		B872E6141F29BF91009BD763 /* Shalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B872E61C1F29BF91009BD763 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B872E61E1F29BF91009BD763 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -83,24 +85,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		B80331361F2B338200F89209 /* Magnetic */ = {
-			isa = PBXGroup;
-			children = (
-				B80331371F2B338200F89209 /* MagneticExtensions.swift */,
-			);
-			name = Magnetic;
-			path = Shalk/Magnetic;
-			sourceTree = "<group>";
-		};
-		B80331381F2B338200F89209 /* RAMBounceAnimation */ = {
-			isa = PBXGroup;
-			children = (
-				B80331391F2B338200F89209 /* RAMBounceAnimation.swift */,
-			);
-			name = RAMBounceAnimation;
-			path = Shalk/RAMBounceAnimation;
-			sourceTree = "<group>";
-		};
 		B803313A1F2B338200F89209 /* Structures */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,12 +94,30 @@
 			path = Shalk/Structures;
 			sourceTree = "<group>";
 		};
+		B80331411F2B388F00F89209 /* BounceAnimationExtenstions */ = {
+			isa = PBXGroup;
+			children = (
+				B80331421F2B388F00F89209 /* RAMBounceAnimation.swift */,
+			);
+			name = BounceAnimationExtenstions;
+			path = Shalk/BounceAnimationExtenstions;
+			sourceTree = "<group>";
+		};
+		B80331431F2B388F00F89209 /* MagneticExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				B80331441F2B388F00F89209 /* MagneticExtensions.swift */,
+			);
+			name = MagneticExtensions;
+			path = Shalk/MagneticExtensions;
+			sourceTree = "<group>";
+		};
 		B872E60B1F29BF91009BD763 = {
 			isa = PBXGroup;
 			children = (
 				B872E6161F29BF91009BD763 /* Shalk */,
-				B80331361F2B338200F89209 /* Magnetic */,
-				B80331381F2B338200F89209 /* RAMBounceAnimation */,
+				B80331411F2B388F00F89209 /* BounceAnimationExtenstions */,
+				B80331431F2B388F00F89209 /* MagneticExtensions */,
 				B803313A1F2B338200F89209 /* Structures */,
 				B872E6151F29BF91009BD763 /* Products */,
 				A12B4203998B282BB4ACAE23 /* Pods */,
@@ -161,6 +163,7 @@
 			children = (
 				B872E6381F29EB7C009BD763 /* FirebaseManager.swift */,
 				B872E63E1F29FBA4009BD763 /* ProfileManager.swift */,
+				B803313F1F2B377B00F89209 /* QBManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B872E6391F29EB7C009BD763 /* FirebaseManager.swift in Sources */,
+				B80331451F2B388F00F89209 /* RAMBounceAnimation.swift in Sources */,
 				B803310C1F2A437300F89209 /* MainTabBarController.swift in Sources */,
 				B872E6371F29E031009BD763 /* RegisterViewController.swift in Sources */,
 				B872E63D1F29F046009BD763 /* AppDelegateExtensions.swift in Sources */,
@@ -337,9 +341,9 @@
 				B80331041F2A374600F89209 /* ChatViewController.swift in Sources */,
 				B803313E1F2B338200F89209 /* UserStructure.swift in Sources */,
 				B872E6301F29C498009BD763 /* AppDelegate.swift in Sources */,
+				B80331401F2B377B00F89209 /* QBManager.swift in Sources */,
 				B80331061F2A374F00F89209 /* ShakeViewController.swift in Sources */,
-				B803313C1F2B338200F89209 /* MagneticExtensions.swift in Sources */,
-				B803313D1F2B338200F89209 /* RAMBounceAnimation.swift in Sources */,
+				B80331461F2B388F00F89209 /* MagneticExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
