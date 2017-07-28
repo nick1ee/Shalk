@@ -14,6 +14,8 @@ class MainTabBarController: RAMAnimatedTabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        UIApplication.shared.statusBarStyle = .default
+
         let ramTBC = AppDelegate.shared.window?.rootViewController as? MainTabBarController
 
         ramTBC?.selectedIndex = 1

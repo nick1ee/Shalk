@@ -13,6 +13,7 @@
 		B80331061F2A374F00F89209 /* ShakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331051F2A374F00F89209 /* ShakeViewController.swift */; };
 		B80331081F2A375700F89209 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331071F2A375700F89209 /* ProfileViewController.swift */; };
 		B803310C1F2A437300F89209 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B803310B1F2A437300F89209 /* MainTabBarController.swift */; };
+		B80331331F2B171D00F89209 /* MagneticExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331321F2B171D00F89209 /* MagneticExtensions.swift */; };
 		B872E61D1F29BF91009BD763 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B872E61B1F29BF91009BD763 /* Main.storyboard */; };
 		B872E61F1F29BF91009BD763 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B872E61E1F29BF91009BD763 /* Assets.xcassets */; };
 		B872E6221F29BF91009BD763 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B872E6201F29BF91009BD763 /* LaunchScreen.storyboard */; };
@@ -34,6 +35,7 @@
 		B80331051F2A374F00F89209 /* ShakeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShakeViewController.swift; sourceTree = "<group>"; };
 		B80331071F2A375700F89209 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B803310B1F2A437300F89209 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTabBarController.swift; path = ViewController/MainTabBarController.swift; sourceTree = "<group>"; };
+		B80331321F2B171D00F89209 /* MagneticExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagneticExtensions.swift; sourceTree = "<group>"; };
 		B872E6141F29BF91009BD763 /* Shalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B872E61C1F29BF91009BD763 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B872E61E1F29BF91009BD763 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				B80331031F2A374600F89209 /* ChatViewController.swift */,
 				B80331051F2A374F00F89209 /* ShakeViewController.swift */,
 				B80331071F2A375700F89209 /* ProfileViewController.swift */,
+				B80331321F2B171D00F89209 /* MagneticExtensions.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				B872E63F1F29FBA4009BD763 /* ProfileManager.swift in Sources */,
 				B872E6331F29C4F7009BD763 /* LoginViewController.swift in Sources */,
 				B80331081F2A375700F89209 /* ProfileViewController.swift in Sources */,
+				B80331331F2B171D00F89209 /* MagneticExtensions.swift in Sources */,
 				B872E63B1F29EEA8009BD763 /* ViewControllerExtensions.swift in Sources */,
 				B80331041F2A374600F89209 /* ChatViewController.swift in Sources */,
 				B872E6301F29C498009BD763 /* AppDelegate.swift in Sources */,

@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Magnetic.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Shalk.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,12 +52,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>169A3085B10685D732CAAF9444932374</key>
+		<key>13D55D801DDC2CABFB9A5E75DD182601</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3D6838D414A6C3C14DBF8B08C29F4CB8</key>
+		<key>5748CBD6628E5BED81C1A3FF982B380B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,12 +72,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D469F47F4157C965349984AF74DD9227</key>
+		<key>CE2191196151691D82D55B9C998A2877</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>E4DD95323C54A78F879DAB0F1508B8E7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ED8A8806184B4578009BA3BB75C0DCE1</key>
 		<dict>
 			<key>primary</key>
 			<true/>

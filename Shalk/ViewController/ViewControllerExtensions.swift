@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController {
 
-    func loginMessageAlertController(title: String, message: String, handle: ((UIAlertAction) -> Void)?) {
+    func pushLoginMessage(title: String, message: String, handle: ((UIAlertAction) -> Void)?) {
 
         let alertController = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
 

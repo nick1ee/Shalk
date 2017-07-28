@@ -340,27 +340,56 @@
                     <view key="view" contentMode="scaleToFill" id="F9O-6f-cr5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover new partners." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuu-V9-iGG">
+                                <rect key="frame" x="53.5" y="40" width="268.5" height="32.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="27"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap a preferred language." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYz-1j-DRa">
+                                <rect key="frame" x="89" y="82.5" width="196.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWZ-um-rAQ" customClass="MagneticView" customModule="Magnetic">
+                                <rect key="frame" x="0.0" y="123.5" width="375" height="200"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="wnX-BU-SZW"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <accessibility key="accessibilityConfiguration">
                             <accessibilityTraits key="traits" selected="YES"/>
                         </accessibility>
+                        <constraints>
+                            <constraint firstItem="fuu-V9-iGG" firstAttribute="centerX" secondItem="F9O-6f-cr5" secondAttribute="centerX" id="BG5-Ho-8Gm"/>
+                            <constraint firstAttribute="trailing" secondItem="nWZ-um-rAQ" secondAttribute="trailing" id="PRm-Ec-nPw"/>
+                            <constraint firstItem="nYz-1j-DRa" firstAttribute="centerX" secondItem="F9O-6f-cr5" secondAttribute="centerX" id="UlT-HQ-rLQ"/>
+                            <constraint firstItem="nWZ-um-rAQ" firstAttribute="leading" secondItem="F9O-6f-cr5" secondAttribute="leading" id="rmF-dJ-K2C"/>
+                            <constraint firstItem="fuu-V9-iGG" firstAttribute="top" secondItem="8LH-0U-0Xn" secondAttribute="bottom" constant="20" id="w5i-uK-MF2"/>
+                            <constraint firstItem="nYz-1j-DRa" firstAttribute="top" secondItem="fuu-V9-iGG" secondAttribute="bottom" constant="10" id="wBQ-XT-S87"/>
+                            <constraint firstItem="nWZ-um-rAQ" firstAttribute="top" secondItem="nYz-1j-DRa" secondAttribute="bottom" constant="20" id="zMf-F9-h47"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Shake" image="icon-shake" id="1Yc-1h-gVA" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
-                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                 <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="number" keyPath="yOffSet">
-                                <real key="value" value="3"/>
+                            <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
+                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
                             <outlet property="animation" destination="sH4-o4-hM1" id="13E-m0-yay"/>
                         </connections>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="magneticView" destination="nWZ-um-rAQ" id="6tI-Yd-Nsj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SHC-OB-OQU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="sH4-o4-hM1" customClass="RAMBounceAnimation" customModule="Shalk" customModuleProvider="target"/>
@@ -443,6 +472,7 @@
                 <tabBarController storyboardIdentifier="mainTabVC" automaticallyAdjustsScrollViewInsets="NO" id="h9F-AG-JyE" customClass="MainTabBarController" customModule="Shalk" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="hDw-Ud-Ao6">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>

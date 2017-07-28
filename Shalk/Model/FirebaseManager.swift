@@ -27,7 +27,7 @@ class FirebaseManager {
 
             // MARK: User Signed in successfully.
 
-            vc.loginMessageAlertController(title: "Successfully",
+            vc.pushLoginMessage(title: "Successfully",
 
                                            message: "You have signed in successfully! Click OK to main page. ",
 
@@ -88,7 +88,7 @@ class FirebaseManager {
 
             }
 
-            vc.loginMessageAlertController(title: "Reset Password",
+            vc.pushLoginMessage(title: "Reset Password",
 
                                            message: "We have sent a link to your email, this is for you to reset your password.",
 
