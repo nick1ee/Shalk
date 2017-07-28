@@ -9,14 +9,15 @@
 import Foundation
 import Firebase
 
-//swiftlint:disable identifier_name
 class FirebaseManager {
 
     var ref = Database.database().reference()
 
     let profile = ProfileManager.shared
 
-    func logIn(_ vc: UIViewController, withEmail email: String, withPassword pwd: String) {
+    var tempUser: User?
+
+    func logIn(_ withVC: UIViewController, withEmail email: String, withPassword pwd: String) {
 
         // MARK: Start to login Firebase
 
@@ -31,7 +32,7 @@ class FirebaseManager {
 
             // MARK: User Signed in successfully.
 
-            vc.pushLoginMessage(title: "Successfully",
+            withVC.pushLoginMessage(title: "Successfully",
 
                                            message: "You have signed in successfully! Click OK to main page. ",
 
@@ -49,7 +50,7 @@ class FirebaseManager {
 
     }
 
-    func signUp(withVC vc: UIViewController, withUser name: String, withEmail email: String, withPassword pwd: String) {
+    func signUp(_ withVC: UIViewController, withUser name: String, withEmail email: String, withPassword pwd: String) {
 
         Auth.auth().createUser(withEmail: email, password: pwd) { (user, error) in
 
@@ -61,6 +62,18 @@ class FirebaseManager {
             }
 
             guard let okUser = user else { return }
+
+            QBManager().signUp(withEmail: email, withPassword: pwd)
+
+            self.profile.currentUser = User(name: name,
+
+                                            uid: okUser.uid,
+
+                                            email: email,
+
+                                            quickbloxID: 0,
+
+                                            preferredLanguages: [PreferredLangauge.notSelected.rawValue])
 
             let request = okUser.createProfileChangeRequest()
 
@@ -75,17 +88,7 @@ class FirebaseManager {
 
                 }
 
-                let quickbloxID = QBManager().signUp(withEmail: email, withPassword: pwd)
-
-                self.profile.currentUser = User(name: name, uid: okUser.uid, email: email, quickbloxID: quickbloxID, preferredLanguages: [])
-
-                guard let userDict = self.profile.currentUser?.description else { return }
-                
-                print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", userDict)
-
-                self.ref.child("users").child(okUser.uid).setValue(userDict)
-
-                self.logIn(vc, withEmail: email, withPassword: pwd)
+                self.logIn(withVC, withEmail: email, withPassword: pwd)
 
             })
 
@@ -93,7 +96,7 @@ class FirebaseManager {
 
     }
 
-    func resetPassword(withVC vc: UIViewController, withEmail email: String) {
+    func resetPassword(_ withVC: UIViewController, withEmail email: String) {
 
         Auth.auth().sendPasswordReset(withEmail: email) { (error) in
 
@@ -104,7 +107,7 @@ class FirebaseManager {
 
             }
 
-            vc.pushLoginMessage(title: "Reset Password",
+            withVC.pushLoginMessage(title: "Reset Password",
 
                                            message: "We have sent a link to your email, this is for you to reset your password.",
 
@@ -114,5 +117,3 @@ class FirebaseManager {
     }
 
 }
-
-//swiftlint:enable identifier_name

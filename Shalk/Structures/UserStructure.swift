@@ -12,6 +12,8 @@ typealias UserObject = [String: Any]
 
 enum PreferredLangauge: String {
 
+    case notSelected
+
     case english
 
     case chinese
@@ -24,15 +26,15 @@ enum PreferredLangauge: String {
 
 struct User {
 
-    let name: String
+    var name: String
 
-    let uid: String
+    var uid: String
 
-    let email: String
+    var email: String
 
-    let quickbloxID: Int
+    var quickbloxID: Int
 
-    var preferredLanguages: [PreferredLangauge]
+    var preferredLanguages: [PreferredLangauge.RawValue]
 
     var description: UserObject {
 

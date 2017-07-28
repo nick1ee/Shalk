@@ -7,11 +7,32 @@
 //
 
 import Foundation
+import Firebase
 
 class ProfileManager {
+
+    let ref = Database.database().reference()
 
     static let shared = ProfileManager()
 
     var currentUser: User?
+
+    var qbID: Int = 0 {
+
+        didSet {
+
+            if qbID != 0 {
+
+                currentUser?.quickbloxID = qbID
+
+                guard let userDict = currentUser?.description else { return }
+
+                self.ref.child("users").child((currentUser?.uid)!).setValue(userDict)
+
+            }
+
+        }
+
+    }
 
 }

@@ -24,25 +24,27 @@ class QBManager {
 
             let error = response.error?.error
 
-            print(error?.localizedDescription)
+            print(error?.localizedDescription ?? "No error data")
 
         }
 
     }
 
-    func signUp(withEmail email: String, withPassword password: String) -> Int {
+    func signUp(withEmail email: String, withPassword password: String) {
 
-        var signUpUser = QBUUser()
+        let signUpUser = QBUUser()
+
         signUpUser.email = email
+
         signUpUser.password = password
 
         QBRequest.signUp(signUpUser, successBlock: {(response, user) in
 
             // MARK: User signed up a new account on Quickblox successfully.
 
-            print("~~~~~~~~~~~~~~~~", response, "~~~~~~~~~~~~~~``", user)
+            guard let okUser = user else { return }
 
-            signUpUser = user!
+            ProfileManager.shared.qbID = Int(okUser.id)
 
         }) { (response) in
 
@@ -50,11 +52,9 @@ class QBManager {
 
             let error = response.error?.error
 
-            print(error?.localizedDescription)
+            print(error?.localizedDescription ?? "No error data")
 
         }
-
-        return Int(signUpUser.id)
 
     }
 

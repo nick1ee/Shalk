@@ -43,7 +43,7 @@ class LoginViewController: UIViewController {
 
             guard let email = inputEmail.text else { return }
 
-            FirebaseManager().resetPassword(withVC: self, withEmail: email)
+            FirebaseManager().resetPassword(self, withEmail: email)
 
         }
 
