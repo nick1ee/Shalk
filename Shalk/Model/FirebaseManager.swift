@@ -11,7 +11,7 @@ import Firebase
 
 class FirebaseManager {
 
-    let ref = Database.database().reference()
+    var ref: DatabaseReference? = Database.database().reference()
 
     var handle: DatabaseHandle?
 
@@ -23,7 +23,7 @@ class FirebaseManager {
 
         // MARK: Start to login Firebase
 
-        Auth.auth().signIn(withEmail: email, password: pwd) { (_, error) in
+        Auth.auth().signIn(withEmail: email, password: pwd) { (user, error) in
 
             if error != nil {
 
@@ -32,6 +32,8 @@ class FirebaseManager {
 
             }
 
+            guard let _ = user else { return }
+
             // MARK: User Signed in successfully.
 
             withVC.pushLoginMessage(title: "Successfully",
@@ -39,6 +41,8 @@ class FirebaseManager {
                                            message: "You have signed in successfully! Click OK to main page. ",
 
                                            handle: { _ in
+
+                                            self.profile.fetchUserData()
 
                                             let mainTabVC = UIStoryboard(name: "Main",
 
@@ -126,12 +130,22 @@ class FirebaseManager {
 
         guard let userID = Auth.auth().currentUser?.uid else { return }
 
-        handle = ref.child("users").child(userID).observe(.childAdded, with: {(snapshot) in
+        ref?.child("users").child(userID).observeSingleEvent(of: .value, with: {(snapshot) in
 
             guard let object = snapshot.value as? [String: Any] else { return }
 
             do {
 
+                let user = try User.init(json: object)
+
+                self.profile.currentUser = user
+
+                print("user:", user)
+
+            } catch let error {
+
+                // TODO: Error handling
+                print(error.localizedDescription ?? "No error data")
             }
 
         })

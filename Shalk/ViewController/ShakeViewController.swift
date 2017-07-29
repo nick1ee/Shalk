@@ -35,25 +35,25 @@ class ShakeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        for _ in 0...3 {
-
-            self.add(nil)
-
-        }
+        addLangBubbles(nil)
 
     }
 
-    @IBAction func add(_ sender: UIControl?) {
+    @IBAction func addLangBubbles(_ sender: UIControl?) {
 
-        let name = names.randomItem()
+        for _ in 0...3 {
 
-        names.removeAll(name)
+            let name = names.randomItem()
 
-        let color = UIColor.colors.randomItem()
+            names.removeAll(name)
 
-        let node = Node(text: name.capitalized, image: UIImage(named: name), color: color, radius: 40)
+            let color = UIColor.colors.randomItem()
 
-        magnetic.addChild(node)
+            let node = Node(text: name.capitalized, image: UIImage(named: name), color: color, radius: 40)
+
+            magnetic.addChild(node)
+
+        }
 
     }
 

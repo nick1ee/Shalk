@@ -36,7 +36,7 @@
 		714FEE4C1D66F84E19F1666C /* Pods-Shalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shalk.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shalk/Pods-Shalk.release.xcconfig"; sourceTree = "<group>"; };
 		B80331031F2A374600F89209 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		B80331051F2A374F00F89209 /* ShakeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShakeViewController.swift; sourceTree = "<group>"; };
-		B80331071F2A375700F89209 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = ViewController/ProfileViewController.swift; sourceTree = "<group>"; };
+		B80331071F2A375700F89209 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B803310B1F2A437300F89209 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		B803313B1F2B338200F89209 /* UserStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStructure.swift; sourceTree = "<group>"; };
 		B803313F1F2B377B00F89209 /* QBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QBManager.swift; sourceTree = "<group>"; };
@@ -146,7 +146,6 @@
 				B872E62E1F29C498009BD763 /* ViewController */,
 				B872E61B1F29BF91009BD763 /* Main.storyboard */,
 				B872E61E1F29BF91009BD763 /* Assets.xcassets */,
-				B80331071F2A375700F89209 /* ProfileViewController.swift */,
 				B872E6201F29BF91009BD763 /* LaunchScreen.storyboard */,
 				B872E6231F29BF91009BD763 /* Info.plist */,
 				B872E6341F29D884009BD763 /* GoogleService-Info.plist */,
@@ -191,6 +190,7 @@
 				B80331031F2A374600F89209 /* ChatViewController.swift */,
 				B80331051F2A374F00F89209 /* ShakeViewController.swift */,
 				B803310B1F2A437300F89209 /* MainTabBarController.swift */,
+				B80331071F2A375700F89209 /* ProfileViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";

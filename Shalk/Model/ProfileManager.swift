@@ -37,4 +37,10 @@ class ProfileManager {
 
     }
 
+    func fetchUserData() {
+
+        FirebaseManager().fetchUserProfile()
+
+    }
+
 }

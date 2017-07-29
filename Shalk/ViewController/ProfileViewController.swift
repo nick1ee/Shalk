@@ -10,6 +10,8 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    let profile = ProfileManager.shared
+
     @IBOutlet weak var userImageView: UIImageView!
 
     @IBOutlet weak var labelUserName: UILabel!
@@ -30,6 +32,24 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        displayUserInfo()
+
+    }
+
+    func displayUserInfo() {
+
+        guard let currentUser = profile.currentUser else { return }
+
+        labelUserName.text = currentUser.name
+
+        labelUserEmail.text = currentUser.email
+
+        for lang in currentUser.preferredLanguages {
+
+            labelPreferLang1.text = lang
+
+        }
 
     }
 
