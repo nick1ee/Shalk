@@ -43,3 +43,77 @@ struct User {
     }
 
 }
+
+extension User {
+
+    enum FetchUserProfileError: Error {
+
+        case invaidJSONObject, missingName, missingUID, missingEmail, missingQBID, missingPreferredLanguages
+
+    }
+
+    struct Schema {
+
+        static let name = "name"
+
+        static let uid = "uid"
+
+        static let email = "email"
+
+        static let qbID = "quickbloxID"
+
+        static let preferredLanguages = "preferredLanguages"
+
+    }
+
+    init(json: Any) throws {
+
+        guard let jsonObject = json as? UserObject else {
+
+            throw FetchUserProfileError.invaidJSONObject
+
+        }
+
+        guard let name = jsonObject[Schema.name] as? String else {
+
+            throw FetchUserProfileError.missingName
+
+        }
+
+        self.name = name
+
+        guard let uid = jsonObject[Schema.uid] as? String else {
+
+            throw FetchUserProfileError.missingUID
+
+        }
+
+        self.uid = uid
+
+        guard let email = jsonObject[Schema.email] as? String else {
+
+            throw FetchUserProfileError.missingEmail
+
+        }
+
+        self.email = email
+
+        guard let qbID = jsonObject[Schema.qbID] as? Int else {
+
+            throw FetchUserProfileError.missingQBID
+
+        }
+
+        self.quickbloxID = qbID
+
+        guard let languages = jsonObject[Schema.preferredLanguages] as? [String] else {
+
+            throw FetchUserProfileError.missingPreferredLanguages
+
+        }
+
+        self.preferredLanguages = languages
+
+    }
+
+}

@@ -11,7 +11,9 @@ import Firebase
 
 class FirebaseManager {
 
-    var ref = Database.database().reference()
+    let ref = Database.database().reference()
+
+    var handle: DatabaseHandle?
 
     let profile = ProfileManager.shared
 
@@ -113,6 +115,26 @@ class FirebaseManager {
 
                                            handle: nil)
         }
+
+    }
+
+    func logOut() {
+
+    }
+
+    func fetchUserProfile() {
+
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+
+        handle = ref.child("users").child(userID).observe(.childAdded, with: {(snapshot) in
+
+            guard let object = snapshot.value as? [String: Any] else { return }
+
+            do {
+
+            }
+
+        })
 
     }
 

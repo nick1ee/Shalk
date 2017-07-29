@@ -27,7 +27,9 @@ class ProfileManager {
 
                 guard let userDict = currentUser?.description else { return }
 
-                self.ref.child("users").child((currentUser?.uid)!).setValue(userDict)
+                guard let uid = currentUser?.uid else { return }
+
+                self.ref.child("users").child(uid).setValue(userDict)
 
             }
 
