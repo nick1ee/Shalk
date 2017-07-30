@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:VideoCallViewController.swift">
-   </FileRef>
-   <FileRef
       location = "group:Shalk.xcodeproj">
    </FileRef>
    <FileRef
