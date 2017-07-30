@@ -41,6 +41,9 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - NVActivityIndicatorView (3.7.0):
+    - NVActivityIndicatorView/Presenter (= 3.7.0)
+  - NVActivityIndicatorView/Presenter (3.7.0)
   - QuickBlox (2.9.2)
   - Quickblox-WebRTC (2.6.1):
     - QuickBlox (>= 2.7)
@@ -60,6 +63,7 @@ DEPENDENCIES:
   - Firebase/Database
   - IQKeyboardManagerSwift
   - Magnetic
+  - NVActivityIndicatorView
   - QuickBlox (~> 2.9.2)
   - Quickblox-WebRTC (~> 2.6.1)
   - RAMAnimatedTabBarController (~> 2.0.13)
@@ -78,12 +82,13 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 75ba21a23794a1e6b6fe6d9a267ea17f80e06771
   Magnetic: f74297dd1797b35d9bebf7a768d91cadf71bb1cb
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
   QuickBlox: 67cafa5d7b237db7344c506ca5dc38365180cacb
   Quickblox-WebRTC: 496447d228663836d6372cdb8e63affa46fe5039
   RAMAnimatedTabBarController: 2510f3b66954c3f77ea1042a35d34df8f5f3b604
   SwifterSwift: f84eb7308f7742724b3cbf84283ce00f7c06d7fc
   SwiftLint: f60095dc173a3f3ec505bb34f5229c3dfd779a54
 
-PODFILE CHECKSUM: 947b0773c50b83d5fd2cf99c0bff766d3966dd69
+PODFILE CHECKSUM: 1522d1397f1fdf42f7d148b9062f00339d2e0fe7
 
 COCOAPODS: 1.2.0

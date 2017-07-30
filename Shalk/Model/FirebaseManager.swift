@@ -32,25 +32,27 @@ class FirebaseManager {
 
             }
 
-            guard let _ = user else { return }
+            if user != nil {
 
-            // MARK: User Signed in successfully.
+                // MARK: User Signed in successfully.
 
-            withVC.pushLoginMessage(title: "Successfully",
+                withVC.pushLoginMessage(title: "Successfully",
 
-                                           message: "You have signed in successfully! Click OK to main page. ",
+                                        message: "You have signed in successfully! Click OK to main page. ",
 
-                                           handle: { _ in
+                                        handle: { _ in
 
                                             self.profile.fetchUserData()
 
                                             let mainTabVC = UIStoryboard(name: "Main",
 
-                                                                       bundle: nil).instantiateViewController(withIdentifier: "mainTabVC")
+                                                                         bundle: nil).instantiateViewController(withIdentifier: "mainTabVC")
 
                                             AppDelegate.shared.window?.rootViewController = mainTabVC
 
-            })
+                })
+
+            }
 
         }
 
@@ -145,7 +147,7 @@ class FirebaseManager {
             } catch let error {
 
                 // TODO: Error handling
-                print(error.localizedDescription ?? "No error data")
+                print(error.localizedDescription)
             }
 
         })

@@ -29,6 +29,7 @@
 		B872E63B1F29EEA8009BD763 /* ViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E63A1F29EEA8009BD763 /* ViewControllerExtensions.swift */; };
 		B872E63D1F29F046009BD763 /* AppDelegateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E63C1F29F046009BD763 /* AppDelegateExtensions.swift */; };
 		B872E63F1F29FBA4009BD763 /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E63E1F29FBA4009BD763 /* ProfileManager.swift */; };
+		B8DB3F101F2E2852006E5A58 /* AudioCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DB3F0F1F2E2852006E5A58 /* AudioCallViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		B872E63A1F29EEA8009BD763 /* ViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtensions.swift; sourceTree = "<group>"; };
 		B872E63C1F29F046009BD763 /* AppDelegateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateExtensions.swift; sourceTree = "<group>"; };
 		B872E63E1F29FBA4009BD763 /* ProfileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
+		B8DB3F0F1F2E2852006E5A58 /* AudioCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioCallViewController.swift; sourceTree = "<group>"; };
 		CD49CAB9B1AE9138C94B72A9 /* Pods_Shalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -191,6 +193,7 @@
 				B80331051F2A374F00F89209 /* ShakeViewController.swift */,
 				B803310B1F2A437300F89209 /* MainTabBarController.swift */,
 				B80331071F2A375700F89209 /* ProfileViewController.swift */,
+				B8DB3F0F1F2E2852006E5A58 /* AudioCallViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B872E6391F29EB7C009BD763 /* FirebaseManager.swift in Sources */,
+				B8DB3F101F2E2852006E5A58 /* AudioCallViewController.swift in Sources */,
 				B80331451F2B388F00F89209 /* RAMBounceAnimation.swift in Sources */,
 				B803310C1F2A437300F89209 /* MainTabBarController.swift in Sources */,
 				B872E6371F29E031009BD763 /* RegisterViewController.swift in Sources */,

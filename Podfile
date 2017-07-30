@@ -14,6 +14,7 @@ target 'Shalk' do
   pod 'Firebase/Auth'
   pod 'RAMAnimatedTabBarController', "~> 2.0.13"
   pod 'Magnetic'
+  pod 'NVActivityIndicatorView'
   
   source 'https://github.com/CocoaPods/Specs.git'
   pod 'Quickblox-WebRTC', '~> 2.6.1'

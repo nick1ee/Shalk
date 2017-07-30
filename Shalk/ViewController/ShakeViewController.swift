@@ -9,8 +9,13 @@
 import UIKit
 import Magnetic
 import SpriteKit
+import NVActivityIndicatorView
 
 class ShakeViewController: UIViewController {
+
+    @IBOutlet weak var loadingView: NVActivityIndicatorView!
+
+    @IBOutlet weak var labelSearching: UILabel!
 
     var names = UIImage.names
 
@@ -36,6 +41,20 @@ class ShakeViewController: UIViewController {
         super.viewDidLoad()
 
         addLangBubbles(nil)
+
+        labelSearching.isHidden = true
+
+    }
+
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+
+        if motion == .motionShake {
+
+            loadingView.startAnimating()
+
+            labelSearching.isHidden = false
+
+        }
 
     }
 
