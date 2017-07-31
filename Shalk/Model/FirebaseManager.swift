@@ -34,6 +34,8 @@ class FirebaseManager {
 
             if user != nil {
 
+                QBManager().logIn(withEmail: email, withPassword: pwd)
+
                 // MARK: User Signed in successfully.
 
                 withVC.pushLoginMessage(title: "Successfully",

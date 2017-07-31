@@ -14,9 +14,23 @@ class QBManager {
 
     func logIn(withEmail email: String, withPassword password: String) {
 
-        QBRequest.logIn(withUserEmail: email, password: password, successBlock: { (response, _) in
+        QBRequest.logIn(withUserEmail: email, password: password, successBlock: { (response, user) in
 
             // MARK: User logged in with Quickblox successfully.
+
+            guard let okUser = user else { return }
+
+            okUser.password = password
+
+            QBChat.instance().connect(with: okUser, completion: { (error) in
+
+                if error == nil {
+
+                    print("user login quickblox successfully")
+
+                }
+
+            })
 
         }) { (response) in
 

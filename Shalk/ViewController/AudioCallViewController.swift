@@ -26,19 +26,21 @@ class AudioCallViewController: UIViewController {
 
     @IBAction func btnSpeaker(_ sender: UIButton) {
 
-        if isSpeakerEnabled {
+        if isSpeakerEnabled == false {
 
-            // MARK: User muted the speaker
-
-            isSpeakerEnabled = false
-
-            outletSpeaker.setImage(UIImage(named: "icon-nospeaker.png"), for: .normal)
-
-        } else {
+            // MARK: User enable the speaker
 
             isSpeakerEnabled = true
 
             outletSpeaker.setImage(UIImage(named: "icon-speaker.png"), for: .normal)
+
+        } else {
+
+            // MARK: User disable the speaker
+
+            isSpeakerEnabled = false
+
+            outletSpeaker.setImage(UIImage(named: "icon-nospeaker.png"), for: .normal)
 
         }
 
@@ -67,6 +69,8 @@ class AudioCallViewController: UIViewController {
     }
 
     @IBAction func btnEndCall(_ sender: UIButton) {
+
+        self.dismiss(animated: true, completion: nil)
 
     }
 

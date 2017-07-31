@@ -54,6 +54,14 @@ class ShakeViewController: UIViewController {
 
             labelSearching.isHidden = false
 
+            let currentTime = DispatchTime.now() + 3.0
+
+            DispatchQueue.main.asyncAfter(deadline: currentTime, execute: {
+
+                self.performSegue(withIdentifier: "audioCall", sender: nil)
+
+            })
+
         }
 
     }
