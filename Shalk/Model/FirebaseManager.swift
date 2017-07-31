@@ -25,7 +25,7 @@ class FirebaseManager {
 
     var tempUser: User?
 
-    var delegate: FirebaseManagerDelegate?
+//    var delegate: FirebaseManagerDelegate?
 
     func logIn(_ withVC: UIViewController, withEmail email: String, withPassword pwd: String) {
 
@@ -178,7 +178,11 @@ class FirebaseManager {
 
                     let opponent = try Opponent.init(json: object)
 
-                    self.delegate?.manager(self, didGetOpponent: opponent)
+                    QBManager.shared.opponent = opponent
+
+                    QBManager.shared.startAudioCall()
+
+//                    self.delegate?.manager(self, didGetOpponent: opponent)
 
                 } catch let error {
 

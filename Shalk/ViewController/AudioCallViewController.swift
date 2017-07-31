@@ -7,12 +7,24 @@
 //
 
 import UIKit
+import Quickblox
+import QuickbloxWebRTC
 
 class AudioCallViewController: UIViewController {
 
     var isMicrophoneEnabled: Bool = true
 
     var isSpeakerEnabled: Bool = false
+
+//    var session: QBRTCSession?
+
+    var userName = ""
+
+//    var audioTrack 
+
+    let qbManager = QBManager.shared
+
+    let rtcManager = QBRTCClient.instance()
 
     @IBOutlet weak var userImageView: UIImageView!
 
@@ -34,6 +46,8 @@ class AudioCallViewController: UIViewController {
 
             outletSpeaker.setImage(UIImage(named: "icon-speaker.png"), for: .normal)
 
+            qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.speaker
+
         } else {
 
             // MARK: User disable the speaker
@@ -41,6 +55,8 @@ class AudioCallViewController: UIViewController {
             isSpeakerEnabled = false
 
             outletSpeaker.setImage(UIImage(named: "icon-nospeaker.png"), for: .normal)
+
+            qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
 
         }
 
@@ -56,6 +72,8 @@ class AudioCallViewController: UIViewController {
 
             outletMicrophone.setImage(UIImage(named: "icon-nomic.png"), for: .normal)
 
+            qbManager.session?.localMediaStream.audioTrack.isEnabled = false
+
         } else {
 
             // MARK: User enabled the local microphone
@@ -63,6 +81,8 @@ class AudioCallViewController: UIViewController {
             isMicrophoneEnabled = true
 
             outletMicrophone.setImage(UIImage(named: "icon-mic.png"), for: .normal)
+
+            qbManager.session?.localMediaStream.audioTrack.isEnabled = true
 
         }
 
@@ -72,10 +92,16 @@ class AudioCallViewController: UIViewController {
 
         self.dismiss(animated: true, completion: nil)
 
+        qbManager.hangUpCall()
+
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        qbManager.session?.localMediaStream.audioTrack.isEnabled = true
+
+        qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
 
     }
 

@@ -373,14 +373,14 @@
                                             <userDefinedRuntimeAttribute type="color" keyPath="color">
                                                 <color key="value" red="1" green="0.74212950470000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballTrianglePath"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballScaleMultiple"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="padding">
                                                 <real key="value" value="30"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discovering, please wait!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ud4-SZ-7yg">
-                                        <rect key="frame" x="92" y="175" width="190" height="21"/>
+                                        <rect key="frame" x="92" y="185" width="190" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="0.74212950470000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -389,7 +389,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Ud4-SZ-7yg" firstAttribute="centerX" secondItem="7hI-G9-Reo" secondAttribute="centerX" id="QZo-rn-yX9"/>
-                                    <constraint firstItem="Ud4-SZ-7yg" firstAttribute="top" secondItem="fAX-J7-cMa" secondAttribute="bottom" constant="10" id="Y2n-Ai-L3J"/>
+                                    <constraint firstItem="Ud4-SZ-7yg" firstAttribute="top" secondItem="fAX-J7-cMa" secondAttribute="bottom" constant="20" id="Y2n-Ai-L3J"/>
                                     <constraint firstItem="fAX-J7-cMa" firstAttribute="centerY" secondItem="7hI-G9-Reo" secondAttribute="centerY" id="abv-aW-3uB"/>
                                     <constraint firstItem="fAX-J7-cMa" firstAttribute="centerX" secondItem="7hI-G9-Reo" secondAttribute="centerX" id="f1H-ZD-01f"/>
                                 </constraints>
@@ -422,7 +422,7 @@
                         <outlet property="labelSearching" destination="Ud4-SZ-7yg" id="KsY-k8-9Sw"/>
                         <outlet property="loadingView" destination="fAX-J7-cMa" id="X3d-kI-FYF"/>
                         <outlet property="magneticView" destination="nWZ-um-rAQ" id="6tI-Yd-Nsj"/>
-                        <segue destination="ysa-3g-96l" kind="show" identifier="audioCall" id="2DN-BE-LBf"/>
+                        <segue destination="ysa-3g-96l" kind="presentation" identifier="audioCall" id="QaB-9j-3kA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SHC-OB-OQU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -432,7 +432,7 @@
         <!--Shalk.-->
         <scene sceneID="nqg-2X-Wbr">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="S5N-9p-1Fg" customClass="AudioCallViewController" customModule="Shalk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="S5N-9p-1Fg" customClass="AudioCallViewController" customModule="Shalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="f3K-IZ-8S1"/>
                         <viewControllerLayoutGuide type="bottom" id="dSP-Ea-XoA"/>
@@ -454,7 +454,7 @@
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                             <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOl-D8-VzJ">
-                                <rect key="frame" x="0.0" y="484.5" width="375" height="133.5"/>
+                                <rect key="frame" x="0.0" y="533.5" width="375" height="133.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WrG-4S-147">
                                         <rect key="frame" x="0.0" y="61" width="375" height="1"/>
@@ -558,7 +558,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-biguser" translatesAutoresizingMaskIntoConstraints="NO" id="KSo-7U-Gap">
-                                <rect key="frame" x="0.0" y="84" width="375" height="400.5"/>
+                                <rect key="frame" x="0.0" y="84" width="375" height="449.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.9533242583" green="0.67907041310000005" blue="0.1825418174" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
@@ -593,7 +593,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x15-8b-NRr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5391.1999999999998" y="106.59670164917542"/>
+            <point key="canvasLocation" x="4151" y="107"/>
         </scene>
         <!--Video Call View Controller-->
         <scene sceneID="d9f-Ea-AMC">
@@ -611,7 +611,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4mo-Vq-K6y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4452" y="869"/>
+            <point key="canvasLocation" x="4988" y="107"/>
         </scene>
         <!--Profile-->
         <scene sceneID="vzK-YK-WGd">
@@ -985,9 +985,10 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ysa-3g-96l" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="21y-tc-tga">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="21y-tc-tga">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.9533242583" green="0.67907041310000005" blue="0.1825418174" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -996,7 +997,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZSg-Gv-XPb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4452" y="106.59670164917542"/>
+            <point key="canvasLocation" x="3345" y="107"/>
         </scene>
     </scenes>
     <resources>

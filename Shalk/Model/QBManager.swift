@@ -12,6 +12,16 @@ import QuickbloxWebRTC
 
 class QBManager {
 
+    static let shared = QBManager()
+
+    let rtcManager = QBRTCClient.instance()
+
+    let audioManager = QBRTCAudioSession.instance()
+
+    var opponent: Opponent?
+
+    var session: QBRTCSession?
+
     func logIn(withEmail email: String, withPassword password: String) {
 
         QBRequest.logIn(withUserEmail: email, password: password, successBlock: { (response, user) in
@@ -69,6 +79,37 @@ class QBManager {
             print(error?.localizedDescription ?? "No error data")
 
         }
+
+    }
+
+    func startAudioCall() {
+
+        guard
+            let name = opponent?.name,
+            let image = opponent?.imageURL,
+            let opponentID = [opponent?.quickbloxID] as? [NSNumber] else { return }
+
+        session = rtcManager.createNewSession(withOpponents: opponentID, with: .audio)
+
+        let userInfo = ["name": name, "image": image]
+
+        session?.startCall(userInfo)
+
+    }
+
+    func rejectCall() {
+
+    }
+
+    func acceptCall() {
+
+        self.session?.acceptCall(nil)
+
+    }
+
+    func hangUpCall() {
+
+        self.opponent = nil
 
     }
 

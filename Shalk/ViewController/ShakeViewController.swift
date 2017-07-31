@@ -17,11 +17,17 @@ class ShakeViewController: UIViewController {
 
     let rtcManager = QBRTCClient.instance()
 
-    var session: QBRTCSession?
+    let qbManager = QBManager.shared
+
+    let fbManager = FirebaseManager()
 
     var names = UIImage.names
 
     var selectedNode: Node?
+
+    var opponent: Opponent?
+
+    var userInfo: [String: String] = [:]
 
     @IBOutlet weak var loadingView: NVActivityIndicatorView!
 
@@ -52,14 +58,16 @@ class ShakeViewController: UIViewController {
 
         rtcManager.add(self)
 
-        QBRTCAudioSession.instance().initialize()
+        QBManager.shared.audioManager.initialize()
 
-        QBRTCAudioSession.instance().currentAudioDevice = QBRTCAudioDevice.receiver
+        QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
 
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+
+        selectedNode?.isSelected = false
 
         selectedNode = nil
 
@@ -91,13 +99,7 @@ class ShakeViewController: UIViewController {
 
             labelSearching.isHidden = false
 
-            let currentTime = DispatchTime.now() + 3.0
-
-            DispatchQueue.main.asyncAfter(deadline: currentTime, execute: {
-
-                self.performSegue(withIdentifier: "audioCall", sender: nil)
-
-            })
+            fbManager.checkChatPool(selected: selectedLanguage)
 
         }
 
@@ -127,7 +129,7 @@ extension ShakeViewController: QBRTCClientDelegate {
 
     func didReceiveNewSession(_ session: QBRTCSession, userInfo: [String : String]? = nil) {
 
-        if self.session != nil {
+        if qbManager.session != nil {
 
             let userInfo = ["key": "value"]
 
@@ -135,35 +137,40 @@ extension ShakeViewController: QBRTCClientDelegate {
 
         } else {
 
-            self.session = session
-            
-            self.session?.acceptCall(nil)
-            
-            self.session?.localMediaStream.audioTrack.isEnabled = true
+            qbManager.session = session
+
+            qbManager.acceptCall()
+
+            self.performSegue(withIdentifier: "audioCall", sender: nil)
 
         }
     }
 
-    func session(_ session: QBRTCBaseSession, receivedRemoteAudioTrack audioTrack: QBRTCAudioTrack, fromUser userID: NSNumber) {
+    func session(_ session: QBRTCSession, receivedRemoteAudioTrack audioTrack: QBRTCAudioTrack, fromUser userID: NSNumber) {
 
         audioTrack.isEnabled = true
 
     }
 
-}
+    func session(_ session: QBRTCSession, connectedToUser userID: NSNumber) {
 
-extension ShakeViewController: FirebaseManagerDelegate {
+        self.performSegue(withIdentifier: "audioCall", sender: nil)
 
-    func manager(_ manager: FirebaseManager, didGetOpponent: Opponent) {
+    }
 
-        guard let opponent = [didGetOpponent.quickbloxID] as? [NSNumber] else { return }
+    func sessionDidClose(_ session: QBRTCSession) {
 
-        session = rtcManager.createNewSession(withOpponents: opponent, with: .audio)
+        qbManager.session = nil
 
-        let userInfo = ["name": didGetOpponent.name, "image": didGetOpponent.imageURL]
-
-        session?.startCall(userInfo)
-
+    }
+    
+    func session(_ session: QBRTCSession, hungUpByUser userID: NSNumber, userInfo: [String : String]? = nil) {
+        
+        if session.initiatorID.isEqual(to: userID) {
+            
+            qbManager.hangUpCall()
+            
+        }
     }
 
 }
