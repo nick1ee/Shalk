@@ -109,6 +109,8 @@ class QBManager {
 
     func hangUpCall() {
 
+        self.session?.hangUp(nil)
+
         self.opponent = nil
 
     }

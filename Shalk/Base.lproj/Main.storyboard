@@ -432,7 +432,7 @@
         <!--Shalk.-->
         <scene sceneID="nqg-2X-Wbr">
             <objects>
-                <viewController id="S5N-9p-1Fg" customClass="AudioCallViewController" customModule="Shalk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AudioCallVC" id="S5N-9p-1Fg" customClass="AudioCallViewController" customModule="Shalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="f3K-IZ-8S1"/>
                         <viewControllerLayoutGuide type="bottom" id="dSP-Ea-XoA"/>
@@ -985,7 +985,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ysa-3g-96l" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="21y-tc-tga">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="21y-tc-tga">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.9533242583" green="0.67907041310000005" blue="0.1825418174" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

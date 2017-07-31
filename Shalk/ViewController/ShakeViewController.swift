@@ -146,13 +146,13 @@ extension ShakeViewController: QBRTCClientDelegate {
         }
     }
 
-    func session(_ session: QBRTCSession, receivedRemoteAudioTrack audioTrack: QBRTCAudioTrack, fromUser userID: NSNumber) {
+    func session(_ session: QBRTCBaseSession, receivedRemoteAudioTrack audioTrack: QBRTCAudioTrack, fromUser userID: NSNumber) {
 
         audioTrack.isEnabled = true
 
     }
 
-    func session(_ session: QBRTCSession, connectedToUser userID: NSNumber) {
+    func session(_ session: QBRTCBaseSession, connectedToUser userID: NSNumber) {
 
         self.performSegue(withIdentifier: "audioCall", sender: nil)
 
@@ -163,14 +163,15 @@ extension ShakeViewController: QBRTCClientDelegate {
         qbManager.session = nil
 
     }
-    
+
     func session(_ session: QBRTCSession, hungUpByUser userID: NSNumber, userInfo: [String : String]? = nil) {
-        
-        if session.initiatorID.isEqual(to: userID) {
-            
-            qbManager.hangUpCall()
-            
-        }
+
+        print("hung up the call")
+
+        self.presentedViewController?.dismiss(animated: true, completion: nil)
+
+        qbManager.hangUpCall()
+
     }
 
 }
