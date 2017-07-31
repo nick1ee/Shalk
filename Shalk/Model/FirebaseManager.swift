@@ -9,15 +9,23 @@
 import Foundation
 import Firebase
 
+protocol FirebaseManagerDelegate {
+
+    func manager (_ manager: FirebaseManager, didGetOpponent: Opponent)
+
+}
+
 class FirebaseManager {
 
     var ref: DatabaseReference? = Database.database().reference()
 
-    var handle: DatabaseHandle?
+//    var handle: DatabaseHandle?
 
     let profile = ProfileManager.shared
 
     var tempUser: User?
+
+    var delegate: FirebaseManagerDelegate?
 
     func logIn(_ withVC: UIViewController, withEmail email: String, withPassword pwd: String) {
 
@@ -153,6 +161,43 @@ class FirebaseManager {
             }
 
         })
+
+    }
+
+    func checkChatPool(selected language: String) {
+
+        ref?.child("chatPool").child(language).observeSingleEvent(of: .value, with: { (snapshot) in
+
+            guard let onlineUsers = snapshot.value as? [String] else { return }
+
+            self.ref?.child("users").child(onlineUsers.randomItem).observeSingleEvent(of: .value, with: { (snapshot) in
+
+                guard let object = snapshot.value as? [String: Any] else { return }
+
+                do {
+
+                    let opponent = try Opponent.init(json: object)
+
+                    self.delegate?.manager(self, didGetOpponent: opponent)
+
+                } catch let error {
+
+                    // TODO: Error handling
+                    print(error.localizedDescription)
+
+                }
+
+            })
+
+        })
+
+    }
+
+    func addToChatPool() {
+
+    }
+
+    func removeFromChatPool() {
 
     }
 

@@ -9,17 +9,23 @@
 import UIKit
 import Magnetic
 import SpriteKit
+import Quickblox
+import QuickbloxWebRTC
 import NVActivityIndicatorView
 
 class ShakeViewController: UIViewController {
 
-    @IBOutlet weak var loadingView: NVActivityIndicatorView!
+    let rtcManager = QBRTCClient.instance()
 
-    @IBOutlet weak var labelSearching: UILabel!
+    var session: QBRTCSession?
 
     var names = UIImage.names
 
     var selectedNode: Node?
+
+    @IBOutlet weak var loadingView: NVActivityIndicatorView!
+
+    @IBOutlet weak var labelSearching: UILabel!
 
     @IBOutlet weak var magneticView: MagneticView! {
 
@@ -44,13 +50,44 @@ class ShakeViewController: UIViewController {
 
         labelSearching.isHidden = true
 
+        rtcManager.add(self)
+
+        QBRTCAudioSession.instance().initialize()
+
+        QBRTCAudioSession.instance().currentAudioDevice = QBRTCAudioDevice.receiver
+
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        selectedNode = nil
+
+        loadingView.stopAnimating()
+
+        labelSearching.isHidden = true
+
     }
 
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
 
         if motion == .motionShake {
 
+            guard let selectedLanguage = selectedNode?.text else {
+
+                labelSearching.text = "Please select a preferred language."
+
+                labelSearching.isHidden = false
+
+                return
+
+            }
+
+            // MARK: Start pairing...
+
             loadingView.startAnimating()
+
+            labelSearching.text = "Discovering, please wait."
 
             labelSearching.isHidden = false
 
@@ -81,6 +118,51 @@ class ShakeViewController: UIViewController {
             magnetic.addChild(node)
 
         }
+
+    }
+
+}
+
+extension ShakeViewController: QBRTCClientDelegate {
+
+    func didReceiveNewSession(_ session: QBRTCSession, userInfo: [String : String]? = nil) {
+
+        if self.session != nil {
+
+            let userInfo = ["key": "value"]
+
+            session.rejectCall(userInfo)
+
+        } else {
+
+            self.session = session
+            
+            self.session?.acceptCall(nil)
+            
+            self.session?.localMediaStream.audioTrack.isEnabled = true
+
+        }
+    }
+
+    func session(_ session: QBRTCBaseSession, receivedRemoteAudioTrack audioTrack: QBRTCAudioTrack, fromUser userID: NSNumber) {
+
+        audioTrack.isEnabled = true
+
+    }
+
+}
+
+extension ShakeViewController: FirebaseManagerDelegate {
+
+    func manager(_ manager: FirebaseManager, didGetOpponent: Opponent) {
+
+        guard let opponent = [didGetOpponent.quickbloxID] as? [NSNumber] else { return }
+
+        session = rtcManager.createNewSession(withOpponents: opponent, with: .audio)
+
+        let userInfo = ["name": didGetOpponent.name, "image": didGetOpponent.imageURL]
+
+        session?.startCall(userInfo)
 
     }
 

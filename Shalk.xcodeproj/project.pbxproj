@@ -31,6 +31,7 @@
 		B872E63F1F29FBA4009BD763 /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E63E1F29FBA4009BD763 /* ProfileManager.swift */; };
 		B8DB3F101F2E2852006E5A58 /* AudioCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DB3F0F1F2E2852006E5A58 /* AudioCallViewController.swift */; };
 		B8DB3F121F2E28AC006E5A58 /* VideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DB3F111F2E28AC006E5A58 /* VideoCallViewController.swift */; };
+		B8DB3F141F2EFA43006E5A58 /* OpponentUserStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DB3F131F2EFA43006E5A58 /* OpponentUserStructure.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		B872E63E1F29FBA4009BD763 /* ProfileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
 		B8DB3F0F1F2E2852006E5A58 /* AudioCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioCallViewController.swift; sourceTree = "<group>"; };
 		B8DB3F111F2E28AC006E5A58 /* VideoCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCallViewController.swift; sourceTree = "<group>"; };
+		B8DB3F131F2EFA43006E5A58 /* OpponentUserStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpponentUserStructure.swift; sourceTree = "<group>"; };
 		CD49CAB9B1AE9138C94B72A9 /* Pods_Shalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				B803313B1F2B338200F89209 /* UserStructure.swift */,
+				B8DB3F131F2EFA43006E5A58 /* OpponentUserStructure.swift */,
 			);
 			name = Structures;
 			path = Shalk/Structures;
@@ -346,6 +349,7 @@
 				B80331451F2B388F00F89209 /* RAMBounceAnimation.swift in Sources */,
 				B803310C1F2A437300F89209 /* MainTabBarController.swift in Sources */,
 				B872E6371F29E031009BD763 /* RegisterViewController.swift in Sources */,
+				B8DB3F141F2EFA43006E5A58 /* OpponentUserStructure.swift in Sources */,
 				B8DB3F121F2E28AC006E5A58 /* VideoCallViewController.swift in Sources */,
 				B872E63D1F29F046009BD763 /* AppDelegateExtensions.swift in Sources */,
 				B872E63F1F29FBA4009BD763 /* ProfileManager.swift in Sources */,
