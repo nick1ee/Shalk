@@ -38,7 +38,7 @@ extension UIViewController {
 
     }
 
-    func pushFriendRequestMessage(withInfo info: [String: String]) {
+    func receivedEndCallwithFriendRequest(withInfo info: [String: String]) {
 
         let alertController = UIAlertController.init(title: "Send a friend request?", message: "If you enjoy the time with \(UserManager.shared.opponent?.name ?? ""), send a friend request!", preferredStyle: .alert)
 
@@ -51,6 +51,8 @@ extension UIViewController {
             QBManager.shared.hangUpCall()
 
             if info["sendRequest"] == "yes" && UserManager.shared.isSendingFriendRequest! {
+                
+                print("=======================================", UserManager.shared.isSendingFriendRequest)
 
                 FirebaseManager().addIntoFriendList(withOpponent: UserManager.shared.opponent!)
 
@@ -72,15 +74,15 @@ extension UIViewController {
 
         }
 
+        alertController.addAction(cancelAction)
+        
         alertController.addAction(okAction)
 
-        alertController.addAction(cancelAction)
-
-        self.present(alertController, animated: true, completion: nil)
+        self.presentedViewController?.present(alertController, animated: true, completion: nil)
 
     }
 
-    func pushFriendRequestMessage(withVC: UIViewController) {
+    func endCallWithFriendRequest() {
 
         let alertController = UIAlertController.init(title: "Send a friend request?", message: "If you enjoy the time with \(UserManager.shared.opponent?.name ?? ""), send a friend request!", preferredStyle: .alert)
 
@@ -88,7 +90,7 @@ extension UIViewController {
 
             UserManager.shared.isSendingFriendRequest = true
 
-            withVC.presentedViewController?.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
 
             QBManager.shared.hangUpCall()
 
@@ -98,9 +100,9 @@ extension UIViewController {
 
         let cancelAction = UIAlertAction.init(title: "Cancel", style: .default) { (_) in
 
-            UserManager.shared.isSendingFriendRequest = true
+            UserManager.shared.isSendingFriendRequest = false
 
-            withVC.presentedViewController?.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
 
             QBManager.shared.hangUpCall()
 

@@ -104,7 +104,7 @@ class AudioCallViewController: UIViewController {
 
     @IBAction func btnEndCall(_ sender: UIButton) {
 
-        self.pushFriendRequestMessage(withVC: self)
+        self.endCallWithFriendRequest()
 
     }
 

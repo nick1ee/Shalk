@@ -180,8 +180,10 @@ extension ShakeViewController: QBRTCClientDelegate {
             do {
 
                 qbManager.session = session
+                
+                print("@@@@@@@@@@@@@@@@@@@", userInfo!)
 
-//                userManager.opponent = try Opponent.init(json: userInfo!)
+                userManager.opponent = try Opponent.init(json: userInfo!)
 
                 qbManager.acceptCall()
 
@@ -239,7 +241,7 @@ extension ShakeViewController: QBRTCClientDelegate {
 
         print("-------------- user info -------------", userInfo)
 
-        self.pushFriendRequestMessage(withInfo: info)
+        self.receivedEndCallwithFriendRequest(withInfo: info)
 
     }
 

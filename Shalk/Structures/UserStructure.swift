@@ -18,7 +18,7 @@ struct User {
 
     var email: String
 
-    var quickbloxID: Int
+    var quickbloxID: String
 
     var imageURL: String
 
@@ -88,7 +88,7 @@ extension User {
 
         self.email = email
 
-        guard let qbID = jsonObject[Schema.qbID] as? Int else {
+        guard let qbID = jsonObject[Schema.qbID] as? String else {
 
             throw FetchUserProfileError.missingQBID
 

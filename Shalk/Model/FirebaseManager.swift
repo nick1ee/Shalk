@@ -81,7 +81,7 @@ class FirebaseManager {
 
                                             email: email,
 
-                                            quickbloxID: 0,
+                                            quickbloxID: "",
 
                                             imageURL: "null",
 
@@ -181,6 +181,8 @@ class FirebaseManager {
                     let room = try Room.init(json: object[roomkey] as Any)
 
                     if room.isLocked == false && room.isFinished == false {
+                        
+                        // MARK: Find an available to join
 
                         self.userManager.roomKey = roomkey
 
@@ -216,6 +218,8 @@ class FirebaseManager {
             guard let object = snapshot.value as? [String: Any] else { return }
 
             do {
+                
+                // MARK: Init the opponent and get started to join the call.
 
                 let opponent = try Opponent.init(json: object)
 

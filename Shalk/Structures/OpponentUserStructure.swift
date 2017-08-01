@@ -14,7 +14,7 @@ struct Opponent {
 
     var name: String
 
-    var quickbloxID: Int
+    var quickbloxID: String
 
     var imageURL: String
 
@@ -64,7 +64,7 @@ extension Opponent {
 
         self.name = name
 
-        guard let qbID = jsonObject[Schema.qbID] as? Int else {
+        guard let qbID = jsonObject[Schema.qbID] as? String else {
 
             throw GetOpponentInfo.missingQBID
 

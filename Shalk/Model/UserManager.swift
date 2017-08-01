@@ -45,7 +45,7 @@ class UserManager {
 
             if qbID != 0 {
 
-                currentUser?.quickbloxID = qbID
+                currentUser?.quickbloxID = String(qbID)
 
                 guard let userDict = currentUser?.description else { return }
 
