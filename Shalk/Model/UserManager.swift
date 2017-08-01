@@ -9,13 +9,35 @@
 import Foundation
 import Firebase
 
-class ProfileManager {
+class UserManager {
 
     let ref = Database.database().reference()
 
-    static let shared = ProfileManager()
+    static let shared = UserManager()
 
     var currentUser: User?
+
+    var opponent: Opponent?
+
+    var roomKey: String?
+
+    var language: String?
+
+    var isSendingFriendRequest: Bool?
+
+    var isConnected = false {
+
+        didSet {
+
+            if isConnected == true {
+
+                FirebaseManager().updateChannel(withRoomKey: self.roomKey!, withLang: language!)
+
+            }
+
+        }
+
+    }
 
     var qbID: Int = 0 {
 
@@ -40,6 +62,18 @@ class ProfileManager {
     func fetchUserData() {
 
         FirebaseManager().fetchUserProfile()
+
+    }
+
+    func joinChannel() {
+
+        QBManager.shared.startAudioCall()
+
+    }
+
+    func closeChannel() {
+
+        FirebaseManager().closeChannel(withRoomKey: self.roomKey!, withLang: self.language!)
 
     }
 

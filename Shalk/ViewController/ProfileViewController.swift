@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    let profile = ProfileManager.shared
+    let userManager = UserManager.shared
 
     @IBOutlet weak var userImageView: UIImageView!
 
@@ -39,17 +39,11 @@ class ProfileViewController: UIViewController {
 
     func displayUserInfo() {
 
-        guard let currentUser = profile.currentUser else { return }
+        guard let currentUser = userManager.currentUser else { return }
 
         labelUserName.text = currentUser.name
 
         labelUserEmail.text = currentUser.email
-
-        for lang in currentUser.preferredLanguages {
-
-            labelPreferLang1.text = lang
-
-        }
 
     }
 

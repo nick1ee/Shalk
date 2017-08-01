@@ -10,17 +10,13 @@ import Foundation
 
 struct Opponent {
 
+    var uid: String
+
     var name: String
 
     var quickbloxID: Int
 
     var imageURL: String
-
-    var description: UserObject {
-
-        return ["name": name, "quickbloxID": quickbloxID, "imageURL": imageURL]
-
-    }
 
 }
 
@@ -28,11 +24,13 @@ extension Opponent {
 
     enum GetOpponentInfo: Error {
 
-        case invaidJSONObject, missingName, missingQBID, missingImageURL
+        case invaidJSONObject, missingUid, missingName, missingQBID, missingImageURL
 
     }
 
     struct Schema {
+
+        static let uid = "uid"
 
         static let name = "name"
 
@@ -49,6 +47,14 @@ extension Opponent {
             throw GetOpponentInfo.invaidJSONObject
 
         }
+
+        guard let uid = jsonObject[Schema.uid] as? String else {
+
+            throw GetOpponentInfo.missingUid
+
+        }
+
+        self.uid = uid
 
         guard let name = jsonObject[Schema.name] as? String else {
 

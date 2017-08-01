@@ -9,23 +9,15 @@
 import Foundation
 import Firebase
 
-protocol FirebaseManagerDelegate {
-
-    func manager (_ manager: FirebaseManager, didGetOpponent: Opponent)
-
-}
-
 class FirebaseManager {
 
     var ref: DatabaseReference? = Database.database().reference()
 
-//    var handle: DatabaseHandle?
+    var handle: DatabaseHandle?
 
-    let profile = ProfileManager.shared
+    let userManager = UserManager.shared
 
     var tempUser: User?
-
-//    var delegate: FirebaseManagerDelegate?
 
     func logIn(_ withVC: UIViewController, withEmail email: String, withPassword pwd: String) {
 
@@ -52,7 +44,7 @@ class FirebaseManager {
 
                                         handle: { _ in
 
-                                            self.profile.fetchUserData()
+                                            self.userManager.fetchUserData()
 
                                             let mainTabVC = UIStoryboard(name: "Main",
 
@@ -83,7 +75,7 @@ class FirebaseManager {
 
             QBManager().signUp(withEmail: email, withPassword: pwd)
 
-            self.profile.currentUser = User(name: name,
+            self.userManager.currentUser = User(name: name,
 
                                             uid: okUser.uid,
 
@@ -91,7 +83,9 @@ class FirebaseManager {
 
                                             quickbloxID: 0,
 
-                                            preferredLanguages: [PreferredLangauge.notSelected.rawValue])
+                                            imageURL: "null",
+
+                                            friends: ["null"])
 
             let request = okUser.createProfileChangeRequest()
 
@@ -150,7 +144,7 @@ class FirebaseManager {
 
                 let user = try User.init(json: object)
 
-                self.profile.currentUser = user
+                self.userManager.currentUser = user
 
                 print("user:", user)
 
@@ -164,44 +158,128 @@ class FirebaseManager {
 
     }
 
-    func checkChatPool(selected language: String) {
+    func fetchChannels(withLang language: String) {
 
-        ref?.child("chatPool").child(language).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref?.child("channels").child(language).observeSingleEvent(of: .value, with: { (snapshot) in
 
-            guard let onlineUsers = snapshot.value as? [String] else { return }
+            guard let object = snapshot.value as? [String: Any] else {
 
-            self.ref?.child("users").child(onlineUsers.randomItem).observeSingleEvent(of: .value, with: { (snapshot) in
+                // MARK: No online rooms, create a new one.
 
-                guard let object = snapshot.value as? [String: Any] else { return }
+                self.createNewChannel(withLanguage: language)
+
+                return
+
+            }
+
+            let roomkeys = object.keys
+
+            for roomkey in roomkeys {
 
                 do {
 
-                    let opponent = try Opponent.init(json: object)
+                    let room = try Room.init(json: object[roomkey] as Any)
 
-                    QBManager.shared.opponent = opponent
+                    if room.isLocked == false && room.isFinished == false {
 
-                    QBManager.shared.startAudioCall()
+                        self.userManager.roomKey = roomkey
 
-//                    self.delegate?.manager(self, didGetOpponent: opponent)
+                        self.userManager.language = language
+
+                        self.fetchOpponentData(withRoom: room)
+
+                        return
+
+                    }
 
                 } catch let error {
 
                     // TODO: Error handling
-                    print(error.localizedDescription)
 
+                    print(error.localizedDescription)
                 }
 
-            })
+            }
+
+            // MARK: No available rooms, create a new one.
+
+            self.createNewChannel(withLanguage: language)
 
         })
 
     }
 
-    func addToChatPool() {
+    func fetchOpponentData(withRoom room: Room) {
+
+        ref?.child("users").child(room.owner).observeSingleEvent(of: .value, with: { (snapshot) in
+
+            guard let object = snapshot.value as? [String: Any] else { return }
+
+            do {
+
+                let opponent = try Opponent.init(json: object)
+
+                self.userManager.opponent = opponent
+
+                self.userManager.joinChannel()
+
+            } catch let error {
+
+                // TODO: Error handling
+
+                print(error.localizedDescription)
+
+            }
+
+        })
 
     }
 
-    func removeFromChatPool() {
+    func createNewChannel(withLanguage language: String) {
+
+        // MARK: No rooms online.
+
+        guard let uid = Auth.auth().currentUser?.uid, let id = ref?.childByAutoId().key else { return }
+
+        let roomInfo: [String: Any] = ["roomID": id, "participant": "null", "owner": uid, "isLocked": false, "isFinished": false]
+
+        userManager.roomKey = id
+
+        userManager.language = language
+
+        self.ref?.child("channels").child(language).child(id).setValue(roomInfo)
+
+    }
+
+    func removeFromChatPool(withLanguage language: String) {
+
+        ref?.child("chatPool").child(language).setValue(nil)
+
+    }
+
+    func updateChannel(withRoomKey key: String, withLang language: String) {
+
+        guard let uid = userManager.currentUser?.uid else { return }
+
+        ref?.child("channels").child(language).child(key).updateChildValues(["isLocked": true])
+
+        ref?.child("channels").child(language).child(key).updateChildValues(["participant": uid])
+
+    }
+
+    func closeChannel(withRoomKey key: String, withLang language: String) {
+
+        ref?.child("channels").child(language).child(key).updateChildValues(["isFinished": true])
+
+    }
+
+    func addIntoFriendList(withOpponent opponent: Opponent) {
+
+        guard let myUid = userManager.currentUser?.uid else { return }
+
+        ref?.child("users").child(myUid).child("friends").updateChildValues([opponent.uid: "isAccepted"])
+
+        ref?.child("users").child(opponent.uid).child("friends").updateChildValues([myUid: "isAccepted"])
 
     }
 

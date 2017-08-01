@@ -16,6 +16,8 @@ class AudioCallViewController: UIViewController {
 
     var isSpeakerEnabled: Bool = false
 
+    var selectedLang: String = ""
+
     var userName = ""
 
     let qbManager = QBManager.shared
@@ -102,9 +104,7 @@ class AudioCallViewController: UIViewController {
 
     @IBAction func btnEndCall(_ sender: UIButton) {
 
-        self.dismiss(animated: true, completion: nil)
-
-        qbManager.hangUpCall()
+        self.pushFriendRequestMessage(withVC: self)
 
     }
 

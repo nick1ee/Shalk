@@ -10,20 +10,6 @@ import Foundation
 
 typealias UserObject = [String: Any]
 
-enum PreferredLangauge: String {
-
-    case notSelected
-
-    case english
-
-    case chinese
-
-    case japanese
-
-    case korean
-
-}
-
 struct User {
 
     var name: String
@@ -34,11 +20,13 @@ struct User {
 
     var quickbloxID: Int
 
-    var preferredLanguages: [PreferredLangauge.RawValue]
+    var imageURL: String
+
+    var friends: [String]
 
     var description: UserObject {
 
-        return ["name": name, "uid": uid, "email": email, "quickbloxID": quickbloxID, "preferredLanguages": preferredLanguages]
+        return ["name": name, "uid": uid, "email": email, "quickbloxID": quickbloxID, "imageURL": imageURL, "friends": friends]
 
     }
 
@@ -48,7 +36,7 @@ extension User {
 
     enum FetchUserProfileError: Error {
 
-        case invaidJSONObject, missingName, missingUID, missingEmail, missingQBID, missingPreferredLanguages
+        case invaidJSONObject, missingName, missingUID, missingEmail, missingQBID, missingImageURL, missingFriends
 
     }
 
@@ -62,7 +50,9 @@ extension User {
 
         static let qbID = "quickbloxID"
 
-        static let preferredLanguages = "preferredLanguages"
+        static let imageURL = "imageURL"
+
+        static let friends = "friends"
 
     }
 
@@ -106,13 +96,21 @@ extension User {
 
         self.quickbloxID = qbID
 
-        guard let languages = jsonObject[Schema.preferredLanguages] as? [String] else {
+        guard let imageURL = jsonObject[Schema.imageURL] as? String else {
 
-            throw FetchUserProfileError.missingPreferredLanguages
+            throw FetchUserProfileError.missingImageURL
 
         }
 
-        self.preferredLanguages = languages
+        self.imageURL = imageURL
+
+        guard let friends = jsonObject[Schema.friends] as? [String] else {
+
+            throw FetchUserProfileError.missingFriends
+
+        }
+
+        self.friends = friends
 
     }
 

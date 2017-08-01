@@ -18,7 +18,9 @@ class QBManager {
 
     let audioManager = QBRTCAudioSession.instance()
 
-    var opponent: Opponent?
+    let userManager = UserManager.shared
+
+//    var opponent: Opponent?
 
     var session: QBRTCSession?
 
@@ -68,7 +70,7 @@ class QBManager {
 
             guard let okUser = user else { return }
 
-            ProfileManager.shared.qbID = Int(okUser.id)
+            UserManager.shared.qbID = Int(okUser.id)
 
         }) { (response) in
 
@@ -84,14 +86,19 @@ class QBManager {
 
     func startAudioCall() {
 
+        userManager.isConnected = true
+
         guard
-            let name = opponent?.name,
-            let image = opponent?.imageURL,
-            let opponentID = [opponent?.quickbloxID] as? [NSNumber] else { return }
+            let uid = userManager.opponent?.uid,
+            let name = userManager.opponent?.name,
+            let image = userManager.opponent?.imageURL,
+            let opponentID = [userManager.opponent?.quickbloxID] as? [NSNumber] else { return }
 
         session = rtcManager.createNewSession(withOpponents: opponentID, with: .audio)
 
-        let userInfo = ["name": name, "image": image]
+        let qbID = String(describing: opponentID[0])
+
+        let userInfo = ["uid": uid, "name": name, "imageURL": image, "quickbloxID": qbID]
 
         session?.startCall(userInfo)
 
@@ -105,13 +112,31 @@ class QBManager {
 
         self.session?.acceptCall(nil)
 
+        userManager.isConnected = true
+
     }
 
     func hangUpCall() {
 
-        self.session?.hangUp(nil)
+        var info: [String: String] = [:]
 
-        self.opponent = nil
+        if userManager.isSendingFriendRequest == true {
+
+            info = ["sendRequest": "yes"]
+
+        } else {
+
+            info = ["sendRequest": "no"]
+
+        }
+
+        self.session?.hangUp(info)
+
+        userManager.closeChannel()
+
+        userManager.isConnected = false
+
+        userManager.opponent = nil
 
     }
 
