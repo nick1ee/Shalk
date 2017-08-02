@@ -35,6 +35,9 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.11)
   - IQKeyboardManagerSwift (4.0.10)
+  - JSQMessagesViewController (7.3.5):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
   - Magnetic (1.0.7)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -62,6 +65,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - IQKeyboardManagerSwift
+  - JSQMessagesViewController
   - Magnetic
   - NVActivityIndicatorView
   - QuickBlox (~> 2.9.2)
@@ -80,6 +84,8 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   IQKeyboardManagerSwift: 75ba21a23794a1e6b6fe6d9a267ea17f80e06771
+  JSQMessagesViewController: 6587f56aedbcb150a8ba1d968e1ef58b1bc758b7
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   Magnetic: f74297dd1797b35d9bebf7a768d91cadf71bb1cb
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
@@ -89,6 +95,6 @@ SPEC CHECKSUMS:
   SwifterSwift: f84eb7308f7742724b3cbf84283ce00f7c06d7fc
   SwiftLint: f60095dc173a3f3ec505bb34f5229c3dfd779a54
 
-PODFILE CHECKSUM: 1522d1397f1fdf42f7d148b9062f00339d2e0fe7
+PODFILE CHECKSUM: 88d0f7b871842108db33d02ac561030875f36635
 
 COCOAPODS: 1.2.0
