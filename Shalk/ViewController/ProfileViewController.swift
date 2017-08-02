@@ -355,7 +355,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             if UserManager.shared.currentUser?.intro == "null" {
 
-                cell.userIntroduction.text = "Add a comment to introduct yourself."
+                cell.userIntroduction.text = "Add a comment to introduce yourself."
 
             } else {
 

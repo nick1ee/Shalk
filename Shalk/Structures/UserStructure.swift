@@ -56,7 +56,7 @@ extension User {
 
         static let intro = "intro"
 
-        static let friends = "friends"
+        static let friends = "friendList"
 
     }
 

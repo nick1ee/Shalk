@@ -67,8 +67,6 @@ class ShakeViewController: UIViewController {
 
         QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
 
-//        fbManager.getFriendList()
-
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -157,7 +155,11 @@ class ShakeViewController: UIViewController {
 
         if segue.identifier == "audioCall" {
 
-            let audioVC = segue.destination as? AudioCallViewController
+            let destinationNavi = segue.destination as? UINavigationController
+
+            let audioVC = destinationNavi?.viewControllers.first as? AudioCallViewController
+
+            print(userManager.opponent?.name)
 
             guard let opponentName = userManager.opponent?.name else { return }
 
@@ -188,8 +190,6 @@ extension ShakeViewController: QBRTCClientDelegate {
 //                print("@@@@@@@@@@@@@@@@@@@", userInfo!)
 
                 userManager.opponent = try Opponent.init(json: userInfo!)
-
-//                print("@@@@@@@@@@@@@@@@@@@", userManager.opponent)
 
                 qbManager.acceptCall()
 

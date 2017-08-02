@@ -91,18 +91,19 @@ class QBManager {
         userManager.isConnected = true
 
         guard
-            let uid = userManager.opponent?.uid,
-            let name = userManager.opponent?.name,
-            let image = userManager.opponent?.imageURL,
-            let qbID = userManager.opponent?.quickbloxID else { return }
+            let uid = userManager.currentUser?.uid,
+            let name = userManager.currentUser?.name,
+            let image = userManager.currentUser?.imageURL,
+            let myQBID = userManager.currentUser?.quickbloxID else { return }
 
-        guard let qbIDInteger = Int(qbID) else { return }
-
-        guard let opponentID = [qbIDInteger] as? [NSNumber] else { return }
+        guard
+            let qbID = userManager.opponent?.quickbloxID,
+            let qbIDInteger = Int(qbID),
+            let opponentID = [qbIDInteger] as? [NSNumber] else { return }
 
         session = rtcManager.createNewSession(withOpponents: opponentID, with: .audio)
 
-        let userInfo = ["uid": uid, "name": name, "imageURL": image, "quickbloxID": qbID]
+        let userInfo = ["uid": uid, "name": name, "imageURL": image, "quickbloxID": myQBID]
 
         session?.startCall(userInfo)
 

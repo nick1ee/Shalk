@@ -289,9 +289,9 @@ class FirebaseManager {
 
         guard let myUid = userManager.currentUser?.uid, let language = userManager.language else { return }
 
-        ref?.child("users").child(myUid).child("friends").updateChildValues([opponent.uid: language])
+        ref?.child("users").child(myUid).child("friendList").updateChildValues([opponent.uid: language])
 
-        ref?.child("users").child(opponent.uid).child("friends").updateChildValues([myUid: language])
+        ref?.child("users").child(opponent.uid).child("friendList").updateChildValues([myUid: language])
 
     }
 
