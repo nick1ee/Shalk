@@ -9,15 +9,23 @@
 import Foundation
 import Firebase
 
+protocol FirebaseManagerDelegate: class {
+
+    func manager (_ manager: FirebaseManager, didGetList friends: [Friend], byLanguage: String)
+
+    func manager (_ manager: FirebaseManager, didGetError error: Error)
+
+}
+
 class FirebaseManager {
+
+    weak var delegate: FirebaseManagerDelegate?
 
     var ref: DatabaseReference? = Database.database().reference()
 
     var handle: DatabaseHandle?
 
     let userManager = UserManager.shared
-
-    var tempUser: User?
 
     func logIn(_ withVC: UIViewController, withEmail email: String, withPassword pwd: String) {
 
@@ -147,8 +155,6 @@ class FirebaseManager {
                 let user = try User.init(json: object)
 
                 self.userManager.currentUser = user
-
-                print("user:", user)
 
             } catch let error {
 
@@ -281,20 +287,42 @@ class FirebaseManager {
 
     func addIntoFriendList(withOpponent opponent: Opponent) {
 
-        guard let myUid = userManager.currentUser?.uid else { return }
+        guard let myUid = userManager.currentUser?.uid, let language = userManager.language else { return }
 
-        ref?.child("users").child(myUid).child("friends").updateChildValues([opponent.uid: "isAccepted"])
+        ref?.child("users").child(myUid).child("friends").updateChildValues([opponent.uid: language])
 
-        ref?.child("users").child(opponent.uid).child("friends").updateChildValues([myUid: "isAccepted"])
+        ref?.child("users").child(opponent.uid).child("friends").updateChildValues([myUid: language])
 
     }
 
-    func getFriendList() {
+    func fetchFriendsInfo(withUsers uidArray: [String], withLang language: String) {
 
-        ref?.child("users").child("friends").observe(.childAdded, with: { (snapshot) in
+        var friendsByLanguage: [Friend] = []
 
-            print(snapshot.value)
-        })
+        for uid in uidArray {
+
+            self.ref?.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+
+                guard let object = snapshot.value else { return }
+
+                do {
+
+                    let friend = try Friend.init(json: object)
+
+                    friendsByLanguage.append(friend)
+
+                } catch let error {
+
+                    // TODO: Error handling
+                    print(error.localizedDescription)
+
+                }
+
+                self.delegate?.manager(self, didGetList: friendsByLanguage, byLanguage: language)
+
+            })
+
+        }
 
     }
 

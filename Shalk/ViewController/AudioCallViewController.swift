@@ -18,7 +18,7 @@ class AudioCallViewController: UIViewController {
 
     var selectedLang: String = ""
 
-    var userName = ""
+    var receivedUserName = ""
 
     let qbManager = QBManager.shared
 
@@ -114,6 +114,8 @@ class AudioCallViewController: UIViewController {
         qbManager.session?.localMediaStream.audioTrack.isEnabled = true
 
         qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
+
+        userNameLabel.text = receivedUserName
 
     }
 

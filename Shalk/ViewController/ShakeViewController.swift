@@ -67,7 +67,7 @@ class ShakeViewController: UIViewController {
 
         QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
 
-        fbManager.getFriendList()
+//        fbManager.getFriendList()
 
     }
 
@@ -159,7 +159,9 @@ class ShakeViewController: UIViewController {
 
             let audioVC = segue.destination as? AudioCallViewController
 
-//            audioVC.userName =
+            guard let opponentName = userManager.opponent?.name else { return }
+
+            audioVC?.receivedUserName = opponentName
 
         }
 
@@ -183,11 +185,11 @@ extension ShakeViewController: QBRTCClientDelegate {
 
                 qbManager.session = session
 
-                print("@@@@@@@@@@@@@@@@@@@", userInfo!)
+//                print("@@@@@@@@@@@@@@@@@@@", userInfo!)
 
                 userManager.opponent = try Opponent.init(json: userInfo!)
 
-                print("@@@@@@@@@@@@@@@@@@@", userManager.opponent)
+//                print("@@@@@@@@@@@@@@@@@@@", userManager.opponent)
 
                 qbManager.acceptCall()
 
@@ -243,7 +245,7 @@ extension ShakeViewController: QBRTCClientDelegate {
 
         guard let info = userInfo else { return }
 
-        print("-------------- user info -------------", userInfo)
+//        print("-------------- user info -------------", userInfo)
 
         self.receivedEndCallwithFriendRequest(withInfo: info)
 

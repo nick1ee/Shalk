@@ -11,7 +11,7 @@ import Firebase
 import JSQMessagesViewController
 
 final class ChattingViewController: JSQMessagesViewController {
-    
+
 //    var channelRef: DatabaseReference?
 //    
 //    var channel: Channel? {

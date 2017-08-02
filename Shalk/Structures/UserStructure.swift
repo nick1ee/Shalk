@@ -28,7 +28,7 @@ struct User {
 
     var description: UserObject {
 
-        return ["name": name, "uid": uid, "email": email, "quickbloxID": quickbloxID, "imageURL": imageURL, intro: "intro", "friends": friends]
+        return ["name": name, "uid": uid, "email": email, "quickbloxID": quickbloxID, "imageURL": imageURL, "intro": intro, "friendList": friends]
 
     }
 
@@ -123,8 +123,6 @@ extension User {
         }
 
         self.friends = friends
-
-        print(self.friends.filter({ $0.value == "English" }))
 
     }
 

@@ -10,13 +10,87 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    var englishFriends: [String] = []
+    let fbManager = FirebaseManager()
 
-    var chineseFriends: [String] = []
+    var isExistedEnglishFriends: Bool = false
 
-    var japaneseFriends: [String] = []
+    var isExistedChineseFriends: Bool = false
 
-    var koreanFriends: [String] = []
+    var isExistedJapaneseFriends: Bool = false
+
+    var isExistedKoreanFriends: Bool = false
+
+    var englishFriends: [Friend] = []
+
+    var chineseFriends: [Friend] = []
+
+    var japaneseFriends: [Friend] = []
+
+    var koreanFriends: [Friend] = []
+
+    var englishFriendUIDs: [String] = [] {
+
+        didSet {
+
+            if englishFriendUIDs.count != 0 {
+
+                isExistedEnglishFriends = true
+
+                fbManager.fetchFriendsInfo(withUsers: englishFriendUIDs, withLang: "English")
+
+            }
+
+        }
+
+    }
+
+    var chineseFriendUIDs: [String] = [] {
+
+        didSet {
+
+            if chineseFriendUIDs.count != 0 {
+
+                isExistedChineseFriends = true
+
+                fbManager.fetchFriendsInfo(withUsers: chineseFriendUIDs, withLang: "Chinese")
+
+            }
+
+        }
+
+    }
+
+    var japaneseFriendUIDs: [String] = [] {
+
+        didSet {
+
+            if japaneseFriendUIDs.count != 0 {
+
+                isExistedJapaneseFriends = true
+
+                fbManager.fetchFriendsInfo(withUsers: japaneseFriendUIDs, withLang: "Japanese")
+
+            }
+
+        }
+
+    }
+
+    var koreanFriendUIDs: [String] = [] {
+
+        didSet {
+
+            if koreanFriendUIDs.count != 0 {
+
+                isExistedKoreanFriends = true
+
+                fbManager.fetchFriendsInfo(withUsers: koreanFriendUIDs, withLang: "Korean")
+
+            }
+
+        }
+
+    }
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -31,17 +105,28 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        englishFriends = self.separateFriends(withLanguage: "English")
-
-        chineseFriends = self.separateFriends(withLanguage: "Chinese")
-
-        japaneseFriends = self.separateFriends(withLanguage: "Japanese")
-
-        koreanFriends = self.separateFriends(withLanguage: "Korean")
-
         tableView.estimatedRowHeight = 200
 
         tableView.rowHeight = UITableViewAutomaticDimension
+
+        fbManager.delegate = self
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        DispatchQueue.global().async {
+
+            self.englishFriendUIDs = self.separateFriends(withLanguage: "English")
+
+            self.chineseFriendUIDs = self.separateFriends(withLanguage: "Chinese")
+
+            self.japaneseFriendUIDs = self.separateFriends(withLanguage: "Japanese")
+
+            self.koreanFriendUIDs = self.separateFriends(withLanguage: "Korean")
+
+        }
 
     }
 
@@ -59,37 +144,124 @@ class ProfileViewController: UIViewController {
 
 }
 
+extension ProfileViewController: FirebaseManagerDelegate {
+
+    func manager(_ manager: FirebaseManager, didGetError error: Error) {
+
+        // TODO: Error handling
+
+        print(error.localizedDescription)
+
+    }
+
+    func manager(_ manager: FirebaseManager, didGetList friends: [Friend], byLanguage: String) {
+
+        switch byLanguage {
+
+        case "English":
+
+            self.englishFriends = friends
+
+            self.tableView.reloadData()
+
+            break
+
+        case "Chinese":
+
+            self.chineseFriends = friends
+
+            self.tableView.reloadData()
+
+            break
+
+        case "Japanese":
+
+            self.japaneseFriends = friends
+
+            self.tableView.reloadData()
+
+            break
+
+        case "Korean":
+
+            self.koreanFriends = friends
+
+            self.tableView.reloadData()
+
+            break
+
+        default: break
+
+        }
+
+    }
+
+}
+
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
 
-        var count = 1
+        return 5
 
-        if englishFriends.count != 0 {
+    }
 
-            count += 1
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 
+        switch section {
+
+        case 1:
+
+            if isExistedEnglishFriends == false {
+
+                return nil
+
+            } else {
+
+                return "English"
+
+            }
+
+        case 2:
+
+            if isExistedChineseFriends == false {
+
+                return nil
+
+            } else {
+
+            return "Chinese"
+
+            }
+
+        case 3:
+
+            if isExistedJapaneseFriends == false {
+
+                return nil
+
+            } else {
+
+            return "Japanese"
+
+            }
+
+        case 4:
+
+            if isExistedKoreanFriends == false {
+
+                return nil
+
+            } else {
+
+                return "Korean"
+
+            }
+
+        default:
+
+            return nil
         }
-
-        if chineseFriends.count != 0 {
-
-            count += 1
-
-        }
-
-        if japaneseFriends.count != 0 {
-
-            count += 1
-
-        }
-
-        if koreanFriends.count != 0 {
-
-            count += 1
-
-        }
-
-        return count
 
     }
 
@@ -123,9 +295,57 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     //swiftlint:disable force_cast
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        switch indexPath {
+        switch indexPath.section {
 
-        case [0, 0]:
+        case 1:
+
+            // MARK: Display cells for friends.
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
+
+//            cell.friendImageView.image =
+
+            cell.friendName.text = self.englishFriends[indexPath.row].name
+
+            return cell
+
+        case 2:
+
+            // MARK: Display cells for friends.
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
+
+//            cell.friendImageView.image =
+
+            cell.friendName.text = self.chineseFriends[indexPath.row].name
+
+            return cell
+
+        case 3:
+
+            // MARK: Display cells for friends.
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
+
+//            cell.friendImageView.image =
+
+            cell.friendName.text = self.japaneseFriends[indexPath.row].name
+
+            return cell
+
+        case 4:
+
+            // MARK: Display cells for friends.
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
+
+//            cell.friendImageView.image =
+
+            cell.friendName.text = self.koreanFriends[indexPath.row].name
+
+            return cell
+
+        default:
 
             // MARK: Display profile cell.
 
@@ -145,61 +365,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             return cell
 
-        default:
-
-            // MARK: Display cells for friends.
-
-            let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
-
-//            cell.friendImageView.image = 
-
-            cell.friendName.text = "friend"
-
-            return cell
-
         }
 
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-
-        switch  section {
-
-        case 0:
-
-            return 0
-
-        default:
-
-            return 30
-
-        }
-
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
-        let screenSize = UIScreen.main.bounds
-
-        if section == 1 {
-
-            let header = UIView(frame: CGRect(x: 0, y: 0, width: screenSize.width, height: 30))
-
-            header.backgroundColor = UIColor.white
-
-            let friendAmountLabel = UILabel(frame: CGRect(x: screenSize.width / 2 - 30, y: 2, width: 80, height: 25))
-
-            friendAmountLabel.text = "English"
-
-            friendAmountLabel.textColor = UIColor.init(red: 243/255, green: 174/255, blue: 47/255, alpha: 1)
-
-            header.addSubview(friendAmountLabel)
-
-            return header
-
-        }
-
-        return nil
     }
 
 }

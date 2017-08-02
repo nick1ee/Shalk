@@ -50,6 +50,7 @@
 		B8DB3F301F2F02AE006E5A58 /* Quickblox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F161F2F0255006E5A58 /* Quickblox.framework */; };
 		B8DB3F311F2F02AE006E5A58 /* Quickblox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F161F2F0255006E5A58 /* Quickblox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B8DB3F331F2F02AE006E5A58 /* QuickbloxWebRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F171F2F0255006E5A58 /* QuickbloxWebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B8E3C8001F31F9A40086C68A /* FriendStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E3C7FF1F31F9A40086C68A /* FriendStructure.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -113,6 +114,7 @@
 		B8DB3F2A1F2F0297006E5A58 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B8DB3F2C1F2F029C006E5A58 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		B8DB3F2E1F2F02A2006E5A58 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		B8E3C7FF1F31F9A40086C68A /* FriendStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendStructure.swift; sourceTree = "<group>"; };
 		CD49CAB9B1AE9138C94B72A9 /* Pods_Shalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -177,6 +179,7 @@
 				B803313B1F2B338200F89209 /* UserStructure.swift */,
 				B8DB3F131F2EFA43006E5A58 /* OpponentUserStructure.swift */,
 				B89872861F306008007DEDA6 /* RoomStructure.swift */,
+				B8E3C7FF1F31F9A40086C68A /* FriendStructure.swift */,
 			);
 			name = Structures;
 			path = Shalk/Structures;
@@ -426,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B872E6391F29EB7C009BD763 /* FirebaseManager.swift in Sources */,
+				B8E3C8001F31F9A40086C68A /* FriendStructure.swift in Sources */,
 				B8DB3F101F2E2852006E5A58 /* AudioCallViewController.swift in Sources */,
 				B89872871F306008007DEDA6 /* RoomStructure.swift in Sources */,
 				B84968B81F31753200400579 /* ProfileTableViewCell.swift in Sources */,
