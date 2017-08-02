@@ -82,8 +82,8 @@ class ShakeViewController: UIViewController {
 
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
         userManager.isConnected = false
 
@@ -180,10 +180,12 @@ extension ShakeViewController: QBRTCClientDelegate {
             do {
 
                 qbManager.session = session
-                
+
                 print("@@@@@@@@@@@@@@@@@@@", userInfo!)
 
                 userManager.opponent = try Opponent.init(json: userInfo!)
+
+                print("@@@@@@@@@@@@@@@@@@@", userManager.opponent)
 
                 qbManager.acceptCall()
 
@@ -195,7 +197,7 @@ extension ShakeViewController: QBRTCClientDelegate {
 
                 // TODO: Error handling
 
-                print(error.localizedDescription)
+                print("=======================================", error.localizedDescription)
 
             }
         }

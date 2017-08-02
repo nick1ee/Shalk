@@ -64,6 +64,8 @@ class QBManager {
 
         signUpUser.password = password
 
+        print("~~~~~~~~~~~~~~~~~~~~~~~~", signUpUser)
+
         QBRequest.signUp(signUpUser, successBlock: {(response, user) in
 
             // MARK: User signed up a new account on Quickblox successfully.
@@ -78,7 +80,7 @@ class QBManager {
 
             let error = response.error?.error
 
-            print(error?.localizedDescription ?? "No error data")
+            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", error?.localizedDescription ?? "No error data")
 
         }
 
@@ -93,8 +95,10 @@ class QBManager {
             let name = userManager.opponent?.name,
             let image = userManager.opponent?.imageURL,
             let qbID = userManager.opponent?.quickbloxID else { return }
-        
-        guard let opponentID = [Int(qbID)] as? [NSNumber] else { return }
+
+        guard let qbIDInteger = Int(qbID) else { return }
+
+        guard let opponentID = [qbIDInteger] as? [NSNumber] else { return }
 
         session = rtcManager.createNewSession(withOpponents: opponentID, with: .audio)
 
@@ -135,8 +139,6 @@ class QBManager {
         userManager.closeChannel()
 
         userManager.isConnected = false
-
-        userManager.opponent = nil
 
     }
 

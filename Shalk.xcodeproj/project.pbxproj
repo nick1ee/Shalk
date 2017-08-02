@@ -18,6 +18,8 @@
 		B80331461F2B388F00F89209 /* MagneticExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331441F2B388F00F89209 /* MagneticExtensions.swift */; };
 		B80331481F2B3E5000F89209 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331471F2B3E5000F89209 /* Const.swift */; };
 		B82C6DA01F2BAC5A00C5948D /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82C6D9F1F2BAC5A00C5948D /* ChatTableViewCell.swift */; };
+		B84968B81F31753200400579 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84968B71F31753200400579 /* ProfileTableViewCell.swift */; };
+		B84968BA1F31753F00400579 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84968B91F31753F00400579 /* FriendTableViewCell.swift */; };
 		B872E61D1F29BF91009BD763 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B872E61B1F29BF91009BD763 /* Main.storyboard */; };
 		B872E61F1F29BF91009BD763 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B872E61E1F29BF91009BD763 /* Assets.xcassets */; };
 		B872E6221F29BF91009BD763 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B872E6201F29BF91009BD763 /* LaunchScreen.storyboard */; };
@@ -78,6 +80,8 @@
 		B80331441F2B388F00F89209 /* MagneticExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagneticExtensions.swift; sourceTree = "<group>"; };
 		B80331471F2B3E5000F89209 /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		B82C6D9F1F2BAC5A00C5948D /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		B84968B71F31753200400579 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		B84968B91F31753F00400579 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		B872E6141F29BF91009BD763 /* Shalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B872E61C1F29BF91009BD763 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B872E61E1F29BF91009BD763 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -258,6 +262,8 @@
 			isa = PBXGroup;
 			children = (
 				B82C6D9F1F2BAC5A00C5948D /* ChatTableViewCell.swift */,
+				B84968B71F31753200400579 /* ProfileTableViewCell.swift */,
+				B84968B91F31753F00400579 /* FriendTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -422,6 +428,7 @@
 				B872E6391F29EB7C009BD763 /* FirebaseManager.swift in Sources */,
 				B8DB3F101F2E2852006E5A58 /* AudioCallViewController.swift in Sources */,
 				B89872871F306008007DEDA6 /* RoomStructure.swift in Sources */,
+				B84968B81F31753200400579 /* ProfileTableViewCell.swift in Sources */,
 				B80331451F2B388F00F89209 /* RAMBounceAnimation.swift in Sources */,
 				B803310C1F2A437300F89209 /* MainTabBarController.swift in Sources */,
 				B872E6371F29E031009BD763 /* RegisterViewController.swift in Sources */,
@@ -436,6 +443,7 @@
 				B803313E1F2B338200F89209 /* UserStructure.swift in Sources */,
 				B872E6301F29C498009BD763 /* AppDelegate.swift in Sources */,
 				B82C6DA01F2BAC5A00C5948D /* ChatTableViewCell.swift in Sources */,
+				B84968BA1F31753F00400579 /* FriendTableViewCell.swift in Sources */,
 				B80331401F2B377B00F89209 /* QBManager.swift in Sources */,
 				B80331481F2B3E5000F89209 /* Const.swift in Sources */,
 				B80331061F2A374F00F89209 /* ShakeViewController.swift in Sources */,

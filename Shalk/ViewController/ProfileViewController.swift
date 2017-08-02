@@ -10,18 +10,6 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    let userManager = UserManager.shared
-
-    @IBOutlet weak var userImageView: UIImageView!
-
-    @IBOutlet weak var labelUserName: UILabel!
-
-    @IBOutlet weak var labelUserIntro: UILabel!
-
-    @IBOutlet weak var labelUserEmail: UILabel!
-
-    @IBOutlet weak var labelPreferLang1: UILabel!
-
     @IBAction func btnModifyProfile(_ sender: UIBarButtonItem) {
 
     }
@@ -33,17 +21,64 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        displayUserInfo()
+//        displayUserInfo()
 
     }
 
-    func displayUserInfo() {
+}
 
-        guard let currentUser = userManager.currentUser else { return }
+extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
-        labelUserName.text = currentUser.name
+    func numberOfSections(in tableView: UITableView) -> Int {
 
-        labelUserEmail.text = currentUser.email
+        return 2
+
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+        switch section {
+
+        case 0:
+
+            return 1
+
+        default:
+
+            return 10
+
+        }
+
+    }
+
+    //swiftlint:disable force_cast
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        switch indexPath {
+
+        case [0, 0]:
+
+            // MARK: Display profile cell.
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: "profileCell") as! ProfileTableViewCell
+
+            cell.userName.text = UserManager.shared.currentUser?.name
+
+            return cell
+
+        default:
+
+            // MARK: Display cells for friends.
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
+
+//            cell.friendImageView.image = 
+
+            cell.friendName.text = "friend"
+
+            return cell
+
+        }
 
     }
 
