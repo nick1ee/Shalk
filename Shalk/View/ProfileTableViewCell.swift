@@ -18,9 +18,11 @@ class ProfileTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-//        userImageView.tintColor = UIColor.white
-        
+
+        userImageView.tintColor = UIColor.white
+
+        userImageView.backgroundColor = UIColor.lightGray
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

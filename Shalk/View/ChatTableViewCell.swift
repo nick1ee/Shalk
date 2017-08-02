@@ -14,11 +14,17 @@ class ChatTableViewCell: UITableViewCell {
 
     @IBOutlet weak var opponentName: UILabel!
 
-    @IBOutlet weak var preferredLanguage: UILabel!
+    @IBOutlet weak var latestMessage: UILabel!
+
+    @IBOutlet weak var newMessageBubble: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
+        newMessageBubble.tintColor = UIColor.init(red: 243/255, green: 174/255, blue: 47/255, alpha: 1)
+
+        opponentImageView.tintColor = UIColor.white
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
