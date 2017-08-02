@@ -10,6 +10,14 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    var englishFriends: [String] = []
+
+    var chineseFriends: [String] = []
+
+    var japaneseFriends: [String] = []
+
+    var koreanFriends: [String] = []
+
     @IBOutlet weak var tableView: UITableView!
 
     @IBAction func btnModifyProfile(_ sender: UIBarButtonItem) {
@@ -23,9 +31,29 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        englishFriends = self.separateFriends(withLanguage: "English")
+
+        chineseFriends = self.separateFriends(withLanguage: "Chinese")
+
+        japaneseFriends = self.separateFriends(withLanguage: "Japanese")
+
+        koreanFriends = self.separateFriends(withLanguage: "Korean")
+
         tableView.estimatedRowHeight = 200
 
         tableView.rowHeight = UITableViewAutomaticDimension
+
+    }
+
+    func separateFriends(withLanguage language: String) -> [String] {
+
+        guard let friends = UserManager.shared.currentUser?.friends.filter({ $0.value == language }).map({ $0.key }) else {
+
+            return []
+
+        }
+
+        return friends
 
     }
 
@@ -35,7 +63,33 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
 
-        return 2
+        var count = 1
+
+        if englishFriends.count != 0 {
+
+            count += 1
+
+        }
+
+        if chineseFriends.count != 0 {
+
+            count += 1
+
+        }
+
+        if japaneseFriends.count != 0 {
+
+            count += 1
+
+        }
+
+        if koreanFriends.count != 0 {
+
+            count += 1
+
+        }
+
+        return count
 
     }
 
@@ -43,14 +97,25 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
         switch section {
 
-        case 0:
+        case 1:
 
-            return 1
+            return englishFriends.count
+
+        case 2:
+
+            return chineseFriends.count
+
+        case 3:
+
+            return japaneseFriends.count
+
+        case 4:
+
+            return koreanFriends.count
 
         default:
 
-            return 10
-
+            return 1
         }
 
     }
@@ -67,6 +132,16 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "profileCell") as! ProfileTableViewCell
 
             cell.userName.text = UserManager.shared.currentUser?.name
+
+            if UserManager.shared.currentUser?.intro == "null" {
+
+                cell.userIntroduction.text = "Add a comment to introduct yourself."
+
+            } else {
+
+                cell.userIntroduction.text = UserManager.shared.currentUser?.intro
+
+            }
 
             return cell
 
@@ -110,21 +185,13 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             let header = UIView(frame: CGRect(x: 0, y: 0, width: screenSize.width, height: 30))
 
-            header.backgroundColor = UIColor.init(red: 243/255, green: 174/255, blue: 47/255, alpha: 1)
+            header.backgroundColor = UIColor.white
 
-            let iconFriend = UIImageView.init(image: UIImage(named: "icon-friend.png"))
+            let friendAmountLabel = UILabel(frame: CGRect(x: screenSize.width / 2 - 30, y: 2, width: 80, height: 25))
 
-            iconFriend.tintColor = UIColor.white
+            friendAmountLabel.text = "English"
 
-            iconFriend.frame = CGRect(x: screenSize.width / 2 - 15, y: 2, width: 25, height: 25)
-
-            let friendAmountLabel = UILabel(frame: CGRect(x: screenSize.width / 2 + 10, y: 2, width: 25, height: 25))
-
-            friendAmountLabel.text = "10"
-
-            friendAmountLabel.textColor = UIColor.white
-
-            header.addSubview(iconFriend)
+            friendAmountLabel.textColor = UIColor.init(red: 243/255, green: 174/255, blue: 47/255, alpha: 1)
 
             header.addSubview(friendAmountLabel)
 

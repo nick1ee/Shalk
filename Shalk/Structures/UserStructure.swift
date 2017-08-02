@@ -22,11 +22,13 @@ struct User {
 
     var imageURL: String
 
-    var friends: [String]
+    var intro: String
+
+    var friends: [String: String]
 
     var description: UserObject {
 
-        return ["name": name, "uid": uid, "email": email, "quickbloxID": quickbloxID, "imageURL": imageURL, "friends": friends]
+        return ["name": name, "uid": uid, "email": email, "quickbloxID": quickbloxID, "imageURL": imageURL, intro: "intro", "friends": friends]
 
     }
 
@@ -36,7 +38,7 @@ extension User {
 
     enum FetchUserProfileError: Error {
 
-        case invaidJSONObject, missingName, missingUID, missingEmail, missingQBID, missingImageURL, missingFriends
+        case invaidJSONObject, missingName, missingUID, missingEmail, missingQBID, missingImageURL, missingIntro, missingFriends
 
     }
 
@@ -51,6 +53,8 @@ extension User {
         static let qbID = "quickbloxID"
 
         static let imageURL = "imageURL"
+
+        static let intro = "intro"
 
         static let friends = "friends"
 
@@ -104,13 +108,23 @@ extension User {
 
         self.imageURL = imageURL
 
-        guard let friends = jsonObject[Schema.friends] as? [String] else {
+        guard let intro = jsonObject[Schema.intro] as? String else {
+
+            throw FetchUserProfileError.missingIntro
+
+        }
+
+        self.intro = intro
+
+        guard let friends = jsonObject[Schema.friends] as? [String: String] else {
 
             throw FetchUserProfileError.missingFriends
 
         }
 
         self.friends = friends
+
+        print(self.friends.filter({ $0.value == "English" }))
 
     }
 

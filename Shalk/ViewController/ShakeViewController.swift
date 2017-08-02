@@ -67,6 +67,8 @@ class ShakeViewController: UIViewController {
 
         QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
 
+        fbManager.getFriendList()
+
     }
 
     override func viewWillDisappear(_ animated: Bool) {

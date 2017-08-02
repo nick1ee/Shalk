@@ -85,7 +85,9 @@ class FirebaseManager {
 
                                             imageURL: "null",
 
-                                            friends: ["null"])
+                                            intro: "null",
+
+                                            friends: ["default": "null"])
 
             let request = okUser.createProfileChangeRequest()
 
@@ -284,6 +286,15 @@ class FirebaseManager {
         ref?.child("users").child(myUid).child("friends").updateChildValues([opponent.uid: "isAccepted"])
 
         ref?.child("users").child(opponent.uid).child("friends").updateChildValues([myUid: "isAccepted"])
+
+    }
+
+    func getFriendList() {
+
+        ref?.child("users").child("friends").observe(.childAdded, with: { (snapshot) in
+
+            print(snapshot.value)
+        })
 
     }
 
