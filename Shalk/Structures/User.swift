@@ -25,7 +25,7 @@ struct User {
     var intro: String
 
     var friends: [String: String]
-    
+
     var chats: [String: String]
 
     var description: UserObject {
@@ -59,7 +59,7 @@ extension User {
         static let intro = "intro"
 
         static let friends = "friendList"
-        
+
         static let chats = "chats"
 
     }
@@ -127,13 +127,13 @@ extension User {
         }
 
         self.friends = friends
-        
+
         guard let chats = jsonObject[Schema.chats] as? [String: String] else {
-            
+
             throw FetchUserProfileError.missingChats
-            
+
         }
-        
+
         self.chats = chats
 
     }

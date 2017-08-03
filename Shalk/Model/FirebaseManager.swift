@@ -96,7 +96,7 @@ class FirebaseManager {
                                             intro: "null",
 
                                             friends: ["default": "null"],
-            
+
                                             chats: ["default": "null"])
 
             let request = okUser.createProfileChangeRequest()
@@ -265,11 +265,11 @@ class FirebaseManager {
 
     }
 
-    func removeFromChatPool(withLanguage language: String) {
-
-        ref?.child("chatPool").child(language).setValue(nil)
-
-    }
+//    func removeFromChatPool(withLanguage language: String) {
+//
+//        ref?.child("chatPool").child(language).setValue(nil)
+//
+//    }
 
     func updateChannel(withRoomKey key: String, withLang language: String) {
 

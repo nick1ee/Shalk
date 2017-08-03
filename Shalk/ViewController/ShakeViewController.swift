@@ -159,7 +159,7 @@ class ShakeViewController: UIViewController {
 
             let audioVC = destinationNavi?.viewControllers.first as? AudioCallViewController
 
-            print(userManager.opponent?.name)
+//            print(userManager.opponent?.name)
 
             guard let opponentName = userManager.opponent?.name else { return }
 
@@ -272,9 +272,9 @@ extension ShakeViewController: MagneticDelegate {
 
         print("didDeselect -> \(node)")
 
-        guard let language = node.text else { return }
-
-        fbManager.removeFromChatPool(withLanguage: language)
+//        guard let language = node.text else { return }
+//
+//        fbManager.removeFromChatPool(withLanguage: language)
 
     }
 

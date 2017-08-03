@@ -95,5 +95,11 @@ extension Room {
         self.isFinished = isFinished
 
     }
+    
+    init() {
+        
+        let roomInfo: [String: Any] = ["roomID": id, "participant": "null", "owner": uid, "isLocked": false, "isFinished": false]
+        
+    }
 
 }
