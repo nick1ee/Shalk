@@ -1,5 +1,5 @@
 //
-//  RoomStructure.swift
+//  Room.swift
 //  Shalk
 //
 //  Created by Nick Lee on 2017/8/1.

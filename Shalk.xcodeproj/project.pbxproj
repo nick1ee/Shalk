@@ -12,7 +12,7 @@
 		B80331061F2A374F00F89209 /* ShakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331051F2A374F00F89209 /* ShakeViewController.swift */; };
 		B80331081F2A375700F89209 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331071F2A375700F89209 /* ProfileViewController.swift */; };
 		B803310C1F2A437300F89209 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B803310B1F2A437300F89209 /* MainTabBarController.swift */; };
-		B803313E1F2B338200F89209 /* UserStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B803313B1F2B338200F89209 /* UserStructure.swift */; };
+		B803313E1F2B338200F89209 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B803313B1F2B338200F89209 /* User.swift */; };
 		B80331401F2B377B00F89209 /* QBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B803313F1F2B377B00F89209 /* QBManager.swift */; };
 		B80331451F2B388F00F89209 /* RAMBounceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331421F2B388F00F89209 /* RAMBounceAnimation.swift */; };
 		B80331461F2B388F00F89209 /* MagneticExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331441F2B388F00F89209 /* MagneticExtensions.swift */; };
@@ -31,10 +31,11 @@
 		B872E63B1F29EEA8009BD763 /* ViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E63A1F29EEA8009BD763 /* ViewControllerExtensions.swift */; };
 		B872E63D1F29F046009BD763 /* AppDelegateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E63C1F29F046009BD763 /* AppDelegateExtensions.swift */; };
 		B872E63F1F29FBA4009BD763 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E63E1F29FBA4009BD763 /* UserManager.swift */; };
-		B89872871F306008007DEDA6 /* RoomStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89872861F306008007DEDA6 /* RoomStructure.swift */; };
+		B89872871F306008007DEDA6 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89872861F306008007DEDA6 /* Room.swift */; };
+		B8D9ECDD1F32F7BE00B9FEED /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D9ECDC1F32F7BE00B9FEED /* Message.swift */; };
 		B8DB3F101F2E2852006E5A58 /* AudioCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DB3F0F1F2E2852006E5A58 /* AudioCallViewController.swift */; };
 		B8DB3F121F2E28AC006E5A58 /* VideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DB3F111F2E28AC006E5A58 /* VideoCallViewController.swift */; };
-		B8DB3F141F2EFA43006E5A58 /* OpponentUserStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DB3F131F2EFA43006E5A58 /* OpponentUserStructure.swift */; };
+		B8DB3F141F2EFA43006E5A58 /* Opponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DB3F131F2EFA43006E5A58 /* Opponent.swift */; };
 		B8DB3F191F2F0255006E5A58 /* QuickbloxWebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F171F2F0255006E5A58 /* QuickbloxWebRTC.framework */; };
 		B8DB3F1B1F2F0265006E5A58 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F1A1F2F0265006E5A58 /* libicucore.tbd */; };
 		B8DB3F1D1F2F026D006E5A58 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F1C1F2F026D006E5A58 /* libc++.tbd */; };
@@ -50,7 +51,7 @@
 		B8DB3F301F2F02AE006E5A58 /* Quickblox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F161F2F0255006E5A58 /* Quickblox.framework */; };
 		B8DB3F311F2F02AE006E5A58 /* Quickblox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F161F2F0255006E5A58 /* Quickblox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B8DB3F331F2F02AE006E5A58 /* QuickbloxWebRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F171F2F0255006E5A58 /* QuickbloxWebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B8E3C8001F31F9A40086C68A /* FriendStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E3C7FF1F31F9A40086C68A /* FriendStructure.swift */; };
+		B8E3C8001F31F9A40086C68A /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E3C7FF1F31F9A40086C68A /* Friend.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,7 +76,7 @@
 		B80331051F2A374F00F89209 /* ShakeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShakeViewController.swift; sourceTree = "<group>"; };
 		B80331071F2A375700F89209 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B803310B1F2A437300F89209 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		B803313B1F2B338200F89209 /* UserStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStructure.swift; sourceTree = "<group>"; };
+		B803313B1F2B338200F89209 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B803313F1F2B377B00F89209 /* QBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QBManager.swift; sourceTree = "<group>"; };
 		B80331421F2B388F00F89209 /* RAMBounceAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMBounceAnimation.swift; sourceTree = "<group>"; };
 		B80331441F2B388F00F89209 /* MagneticExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagneticExtensions.swift; sourceTree = "<group>"; };
@@ -96,10 +97,11 @@
 		B872E63A1F29EEA8009BD763 /* ViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtensions.swift; sourceTree = "<group>"; };
 		B872E63C1F29F046009BD763 /* AppDelegateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateExtensions.swift; sourceTree = "<group>"; };
 		B872E63E1F29FBA4009BD763 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
-		B89872861F306008007DEDA6 /* RoomStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomStructure.swift; sourceTree = "<group>"; };
+		B89872861F306008007DEDA6 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		B8D9ECDC1F32F7BE00B9FEED /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		B8DB3F0F1F2E2852006E5A58 /* AudioCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioCallViewController.swift; sourceTree = "<group>"; };
 		B8DB3F111F2E28AC006E5A58 /* VideoCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCallViewController.swift; sourceTree = "<group>"; };
-		B8DB3F131F2EFA43006E5A58 /* OpponentUserStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpponentUserStructure.swift; sourceTree = "<group>"; };
+		B8DB3F131F2EFA43006E5A58 /* Opponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opponent.swift; sourceTree = "<group>"; };
 		B8DB3F151F2F0237006E5A58 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B8DB3F161F2F0255006E5A58 /* Quickblox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Quickblox.framework; sourceTree = "<group>"; };
 		B8DB3F171F2F0255006E5A58 /* QuickbloxWebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QuickbloxWebRTC.framework; sourceTree = "<group>"; };
@@ -114,7 +116,7 @@
 		B8DB3F2A1F2F0297006E5A58 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B8DB3F2C1F2F029C006E5A58 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		B8DB3F2E1F2F02A2006E5A58 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		B8E3C7FF1F31F9A40086C68A /* FriendStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendStructure.swift; sourceTree = "<group>"; };
+		B8E3C7FF1F31F9A40086C68A /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		CD49CAB9B1AE9138C94B72A9 /* Pods_Shalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -176,10 +178,11 @@
 		B803313A1F2B338200F89209 /* Structures */ = {
 			isa = PBXGroup;
 			children = (
-				B803313B1F2B338200F89209 /* UserStructure.swift */,
-				B8DB3F131F2EFA43006E5A58 /* OpponentUserStructure.swift */,
-				B89872861F306008007DEDA6 /* RoomStructure.swift */,
-				B8E3C7FF1F31F9A40086C68A /* FriendStructure.swift */,
+				B803313B1F2B338200F89209 /* User.swift */,
+				B8DB3F131F2EFA43006E5A58 /* Opponent.swift */,
+				B89872861F306008007DEDA6 /* Room.swift */,
+				B8E3C7FF1F31F9A40086C68A /* Friend.swift */,
+				B8D9ECDC1F32F7BE00B9FEED /* Message.swift */,
 			);
 			name = Structures;
 			path = Shalk/Structures;
@@ -429,14 +432,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				B872E6391F29EB7C009BD763 /* FirebaseManager.swift in Sources */,
-				B8E3C8001F31F9A40086C68A /* FriendStructure.swift in Sources */,
+				B8E3C8001F31F9A40086C68A /* Friend.swift in Sources */,
 				B8DB3F101F2E2852006E5A58 /* AudioCallViewController.swift in Sources */,
-				B89872871F306008007DEDA6 /* RoomStructure.swift in Sources */,
+				B89872871F306008007DEDA6 /* Room.swift in Sources */,
 				B84968B81F31753200400579 /* ProfileTableViewCell.swift in Sources */,
 				B80331451F2B388F00F89209 /* RAMBounceAnimation.swift in Sources */,
 				B803310C1F2A437300F89209 /* MainTabBarController.swift in Sources */,
+				B8D9ECDD1F32F7BE00B9FEED /* Message.swift in Sources */,
 				B872E6371F29E031009BD763 /* RegisterViewController.swift in Sources */,
-				B8DB3F141F2EFA43006E5A58 /* OpponentUserStructure.swift in Sources */,
+				B8DB3F141F2EFA43006E5A58 /* Opponent.swift in Sources */,
 				B8DB3F121F2E28AC006E5A58 /* VideoCallViewController.swift in Sources */,
 				B872E63D1F29F046009BD763 /* AppDelegateExtensions.swift in Sources */,
 				B872E63F1F29FBA4009BD763 /* UserManager.swift in Sources */,
@@ -444,7 +448,7 @@
 				B80331081F2A375700F89209 /* ProfileViewController.swift in Sources */,
 				B872E63B1F29EEA8009BD763 /* ViewControllerExtensions.swift in Sources */,
 				B80331041F2A374600F89209 /* ChatViewController.swift in Sources */,
-				B803313E1F2B338200F89209 /* UserStructure.swift in Sources */,
+				B803313E1F2B338200F89209 /* User.swift in Sources */,
 				B872E6301F29C498009BD763 /* AppDelegate.swift in Sources */,
 				B82C6DA01F2BAC5A00C5948D /* ChatTableViewCell.swift in Sources */,
 				B84968BA1F31753F00400579 /* FriendTableViewCell.swift in Sources */,

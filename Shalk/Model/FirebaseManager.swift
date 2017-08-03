@@ -95,7 +95,9 @@ class FirebaseManager {
 
                                             intro: "null",
 
-                                            friends: ["default": "null"])
+                                            friends: ["default": "null"],
+            
+                                            chats: ["default": "null"])
 
             let request = okUser.createProfileChangeRequest()
 
@@ -290,8 +292,18 @@ class FirebaseManager {
         guard let myUid = userManager.currentUser?.uid, let language = userManager.language else { return }
 
         ref?.child("users").child(myUid).child("friendList").updateChildValues([opponent.uid: language])
-
         ref?.child("users").child(opponent.uid).child("friendList").updateChildValues([myUid: language])
+
+//        guard let roomId = ref?.childByAutoId().key, let messageId = ref?.childByAutoId().key else { return }
+//
+//        guard let time = Date().timeIntervalSince1970 as? Double else { return }
+//
+//        let messageDict: [String: Any] = ["id": messageId, "uid": "Admin", "message": "You are frineds now.", "time": time]
+//
+//        ref?.child("chats").child(roomId).child(messageId).setValue(messageDict)
+//        
+//        ref?.child("users").child(myUid).child("chats").updateChildValues(["roomIdD": roomId])
+//        ref?.child("users").child(opponent.uid).child("chats").updateChildValues(["roomIdD": roomId])
 
     }
 

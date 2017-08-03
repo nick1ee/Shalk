@@ -1,5 +1,5 @@
 //
-//  FriendStructure.swift
+//  Friend.swift
 //  Shalk
 //
 //  Created by Nick Lee on 2017/8/2.

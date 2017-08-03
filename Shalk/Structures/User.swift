@@ -1,5 +1,5 @@
 //
-//  UserStructure.swift
+//  User.swift
 //  Shalk
 //
 //  Created by Nick Lee on 2017/7/28.
@@ -25,10 +25,12 @@ struct User {
     var intro: String
 
     var friends: [String: String]
+    
+    var chats: [String: String]
 
     var description: UserObject {
 
-        return ["name": name, "uid": uid, "email": email, "quickbloxID": quickbloxID, "imageURL": imageURL, "intro": intro, "friendList": friends]
+        return ["name": name, "uid": uid, "email": email, "quickbloxID": quickbloxID, "imageURL": imageURL, "intro": intro, "friendList": friends, "chats": chats]
 
     }
 
@@ -38,7 +40,7 @@ extension User {
 
     enum FetchUserProfileError: Error {
 
-        case invaidJSONObject, missingName, missingUID, missingEmail, missingQBID, missingImageURL, missingIntro, missingFriends
+        case invaidJSONObject, missingName, missingUID, missingEmail, missingQBID, missingImageURL, missingIntro, missingFriends, missingChats
 
     }
 
@@ -57,6 +59,8 @@ extension User {
         static let intro = "intro"
 
         static let friends = "friendList"
+        
+        static let chats = "chats"
 
     }
 
@@ -123,6 +127,14 @@ extension User {
         }
 
         self.friends = friends
+        
+        guard let chats = jsonObject[Schema.chats] as? [String: String] else {
+            
+            throw FetchUserProfileError.missingChats
+            
+        }
+        
+        self.chats = chats
 
     }
 

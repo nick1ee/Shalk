@@ -1,5 +1,5 @@
 //
-//  OpponentUserStructure.swift
+//  Opponent.swift
 //  Shalk
 //
 //  Created by Nick Lee on 2017/7/31.
