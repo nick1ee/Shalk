@@ -12,85 +12,13 @@ class ProfileViewController: UIViewController {
 
     let fbManager = FirebaseManager()
 
-    var isExistedEnglishFriends: Bool = false
+    var englishFriends: [User] = []
 
-    var isExistedChineseFriends: Bool = false
+    var chineseFriends: [User] = []
 
-    var isExistedJapaneseFriends: Bool = false
+    var japaneseFriends: [User] = []
 
-    var isExistedKoreanFriends: Bool = false
-
-    var englishFriends: [Friend] = []
-
-    var chineseFriends: [Friend] = []
-
-    var japaneseFriends: [Friend] = []
-
-    var koreanFriends: [Friend] = []
-
-    var englishFriendUIDs: [String] = [] {
-
-        didSet {
-
-            if englishFriendUIDs.count != 0 {
-
-                isExistedEnglishFriends = true
-
-                fbManager.fetchFriendsInfo(withUsers: englishFriendUIDs, withLang: "English")
-
-            }
-
-        }
-
-    }
-
-    var chineseFriendUIDs: [String] = [] {
-
-        didSet {
-
-            if chineseFriendUIDs.count != 0 {
-
-                isExistedChineseFriends = true
-
-                fbManager.fetchFriendsInfo(withUsers: chineseFriendUIDs, withLang: "Chinese")
-
-            }
-
-        }
-
-    }
-
-    var japaneseFriendUIDs: [String] = [] {
-
-        didSet {
-
-            if japaneseFriendUIDs.count != 0 {
-
-                isExistedJapaneseFriends = true
-
-                fbManager.fetchFriendsInfo(withUsers: japaneseFriendUIDs, withLang: "Japanese")
-
-            }
-
-        }
-
-    }
-
-    var koreanFriendUIDs: [String] = [] {
-
-        didSet {
-
-            if koreanFriendUIDs.count != 0 {
-
-                isExistedKoreanFriends = true
-
-                fbManager.fetchFriendsInfo(withUsers: koreanFriendUIDs, withLang: "Korean")
-
-            }
-
-        }
-
-    }
+    var koreanFriends: [User] = []
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -116,30 +44,20 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        DispatchQueue.global().async {
-
-            self.englishFriendUIDs = self.separateFriends(withLanguage: "English")
-
-            self.chineseFriendUIDs = self.separateFriends(withLanguage: "Chinese")
-
-            self.japaneseFriendUIDs = self.separateFriends(withLanguage: "Japanese")
-
-            self.koreanFriendUIDs = self.separateFriends(withLanguage: "Korean")
-
-        }
+        fbManager.fetchFriendList()
 
     }
 
-    func separateFriends(withLanguage language: String) -> [String] {
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
 
-        guard let friends = UserManager.shared.currentUser?.friends.filter({ $0.value == language }).map({ $0.key }) else {
+        self.englishFriends = []
 
-            return []
+        self.chineseFriends = []
 
-        }
+        self.japaneseFriends = []
 
-        return friends
-
+        self.koreanFriends = []
     }
 
 }
@@ -154,13 +72,13 @@ extension ProfileViewController: FirebaseManagerDelegate {
 
     }
 
-    func manager(_ manager: FirebaseManager, didGetList friends: [Friend], byLanguage: String) {
+    func manager(_ manager: FirebaseManager, didGetFriend friend: User, byLanguage: String) {
 
         switch byLanguage {
 
         case "English":
 
-            self.englishFriends = friends
+            self.englishFriends.append(friend)
 
             self.tableView.reloadData()
 
@@ -168,7 +86,7 @@ extension ProfileViewController: FirebaseManagerDelegate {
 
         case "Chinese":
 
-            self.chineseFriends = friends
+            self.chineseFriends.append(friend)
 
             self.tableView.reloadData()
 
@@ -176,7 +94,7 @@ extension ProfileViewController: FirebaseManagerDelegate {
 
         case "Japanese":
 
-            self.japaneseFriends = friends
+            self.japaneseFriends.append(friend)
 
             self.tableView.reloadData()
 
@@ -184,7 +102,7 @@ extension ProfileViewController: FirebaseManagerDelegate {
 
         case "Korean":
 
-            self.koreanFriends = friends
+            self.koreanFriends.append(friend)
 
             self.tableView.reloadData()
 
@@ -212,7 +130,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
         case 1:
 
-            if isExistedEnglishFriends == false {
+            if englishFriends.count == 0 {
 
                 return nil
 
@@ -224,7 +142,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
         case 2:
 
-            if isExistedChineseFriends == false {
+            if chineseFriends.count == 0 {
 
                 return nil
 
@@ -236,7 +154,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
         case 3:
 
-            if isExistedJapaneseFriends == false {
+            if japaneseFriends.count == 0 {
 
                 return nil
 
@@ -248,7 +166,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
         case 4:
 
-            if isExistedKoreanFriends == false {
+            if koreanFriends.count == 0 {
 
                 return nil
 

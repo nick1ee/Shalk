@@ -31,11 +31,10 @@
 		B872E63B1F29EEA8009BD763 /* ViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E63A1F29EEA8009BD763 /* ViewControllerExtensions.swift */; };
 		B872E63D1F29F046009BD763 /* AppDelegateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E63C1F29F046009BD763 /* AppDelegateExtensions.swift */; };
 		B872E63F1F29FBA4009BD763 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E63E1F29FBA4009BD763 /* UserManager.swift */; };
-		B89872871F306008007DEDA6 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89872861F306008007DEDA6 /* Room.swift */; };
+		B89872871F306008007DEDA6 /* AudioChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89872861F306008007DEDA6 /* AudioChannel.swift */; };
 		B8D9ECDD1F32F7BE00B9FEED /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D9ECDC1F32F7BE00B9FEED /* Message.swift */; };
 		B8DB3F101F2E2852006E5A58 /* AudioCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DB3F0F1F2E2852006E5A58 /* AudioCallViewController.swift */; };
 		B8DB3F121F2E28AC006E5A58 /* VideoCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DB3F111F2E28AC006E5A58 /* VideoCallViewController.swift */; };
-		B8DB3F141F2EFA43006E5A58 /* Opponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DB3F131F2EFA43006E5A58 /* Opponent.swift */; };
 		B8DB3F191F2F0255006E5A58 /* QuickbloxWebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F171F2F0255006E5A58 /* QuickbloxWebRTC.framework */; };
 		B8DB3F1B1F2F0265006E5A58 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F1A1F2F0265006E5A58 /* libicucore.tbd */; };
 		B8DB3F1D1F2F026D006E5A58 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F1C1F2F026D006E5A58 /* libc++.tbd */; };
@@ -97,11 +96,10 @@
 		B872E63A1F29EEA8009BD763 /* ViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtensions.swift; sourceTree = "<group>"; };
 		B872E63C1F29F046009BD763 /* AppDelegateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateExtensions.swift; sourceTree = "<group>"; };
 		B872E63E1F29FBA4009BD763 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
-		B89872861F306008007DEDA6 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		B89872861F306008007DEDA6 /* AudioChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioChannel.swift; sourceTree = "<group>"; };
 		B8D9ECDC1F32F7BE00B9FEED /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		B8DB3F0F1F2E2852006E5A58 /* AudioCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioCallViewController.swift; sourceTree = "<group>"; };
 		B8DB3F111F2E28AC006E5A58 /* VideoCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCallViewController.swift; sourceTree = "<group>"; };
-		B8DB3F131F2EFA43006E5A58 /* Opponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opponent.swift; sourceTree = "<group>"; };
 		B8DB3F151F2F0237006E5A58 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B8DB3F161F2F0255006E5A58 /* Quickblox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Quickblox.framework; sourceTree = "<group>"; };
 		B8DB3F171F2F0255006E5A58 /* QuickbloxWebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QuickbloxWebRTC.framework; sourceTree = "<group>"; };
@@ -179,8 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				B803313B1F2B338200F89209 /* User.swift */,
-				B8DB3F131F2EFA43006E5A58 /* Opponent.swift */,
-				B89872861F306008007DEDA6 /* Room.swift */,
+				B89872861F306008007DEDA6 /* AudioChannel.swift */,
 				B8E3C7FF1F31F9A40086C68A /* Friend.swift */,
 				B8D9ECDC1F32F7BE00B9FEED /* Message.swift */,
 			);
@@ -434,13 +431,12 @@
 				B872E6391F29EB7C009BD763 /* FirebaseManager.swift in Sources */,
 				B8E3C8001F31F9A40086C68A /* Friend.swift in Sources */,
 				B8DB3F101F2E2852006E5A58 /* AudioCallViewController.swift in Sources */,
-				B89872871F306008007DEDA6 /* Room.swift in Sources */,
+				B89872871F306008007DEDA6 /* AudioChannel.swift in Sources */,
 				B84968B81F31753200400579 /* ProfileTableViewCell.swift in Sources */,
 				B80331451F2B388F00F89209 /* RAMBounceAnimation.swift in Sources */,
 				B803310C1F2A437300F89209 /* MainTabBarController.swift in Sources */,
 				B8D9ECDD1F32F7BE00B9FEED /* Message.swift in Sources */,
 				B872E6371F29E031009BD763 /* RegisterViewController.swift in Sources */,
-				B8DB3F141F2EFA43006E5A58 /* Opponent.swift in Sources */,
 				B8DB3F121F2E28AC006E5A58 /* VideoCallViewController.swift in Sources */,
 				B872E63D1F29F046009BD763 /* AppDelegateExtensions.swift in Sources */,
 				B872E63F1F29FBA4009BD763 /* UserManager.swift in Sources */,

@@ -28,7 +28,7 @@ class ShakeViewController: UIViewController {
 
     var selectedNode: Node?
 
-    var opponent: Opponent?
+    var opponent: User?
 
     var selectedLanguage: String = ""
 
@@ -91,6 +91,8 @@ class ShakeViewController: UIViewController {
 
         isDiscovering = false
 
+        FirebaseManager().fetchFriendList()
+
     }
 
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
@@ -121,7 +123,7 @@ class ShakeViewController: UIViewController {
 
                 labelSearching.isHidden = false
 
-                fbManager.fetchChannels(withLang: selectedLanguage)
+                fbManager.fetchChannel(withLang: selectedLanguage)
 
             }
 
@@ -187,9 +189,7 @@ extension ShakeViewController: QBRTCClientDelegate {
 
                 qbManager.session = session
 
-                print("@@@@@@@@@@@@@@@@@@@", userInfo!)
-
-                userManager.opponent = try Opponent.init(json: userInfo!)
+                userManager.opponent = try User.init(json: userInfo!)
 
                 qbManager.acceptCall()
 
@@ -235,7 +235,7 @@ extension ShakeViewController: QBRTCClientDelegate {
 
     func session(_ session: QBRTCSession, rejectedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
 
-        fbManager.fetchChannels(withLang: selectedLanguage)
+        fbManager.fetchChannel(withLang: selectedLanguage)
 
     }
 
@@ -271,10 +271,6 @@ extension ShakeViewController: MagneticDelegate {
     func magnetic(_ magnetic: Magnetic, didDeselect node: Node) {
 
         print("didDeselect -> \(node)")
-
-//        guard let language = node.text else { return }
-//
-//        fbManager.removeFromChatPool(withLanguage: language)
 
     }
 

@@ -24,23 +24,13 @@ struct User {
 
     var intro: String
 
-    var friends: [String: String]
-
-    var chats: [String: String]
-
-    var description: UserObject {
-
-        return ["name": name, "uid": uid, "email": email, "quickbloxID": quickbloxID, "imageURL": imageURL, "intro": intro, "friendList": friends, "chats": chats]
-
-    }
-
 }
 
 extension User {
 
     enum FetchUserProfileError: Error {
 
-        case invaidJSONObject, missingName, missingUID, missingEmail, missingQBID, missingImageURL, missingIntro, missingFriends, missingChats
+        case invaidJSONObject, missingName, missingUID, missingEmail, missingQBID, missingImageURL, missingIntro
 
     }
 
@@ -57,10 +47,6 @@ extension User {
         static let imageURL = "imageURL"
 
         static let intro = "intro"
-
-        static let friends = "friendList"
-
-        static let chats = "chats"
 
     }
 
@@ -120,21 +106,13 @@ extension User {
 
         self.intro = intro
 
-        guard let friends = jsonObject[Schema.friends] as? [String: String] else {
+    }
 
-            throw FetchUserProfileError.missingFriends
+    func toDictionary() -> [String: String] {
 
-        }
+        let userInfo: [String: String] = [Schema.name: self.name, Schema.uid: self.uid, Schema.email: self.email, Schema.qbID: self.quickbloxID, Schema.imageURL: self.imageURL, Schema.intro: self.intro]
 
-        self.friends = friends
-
-        guard let chats = jsonObject[Schema.chats] as? [String: String] else {
-
-            throw FetchUserProfileError.missingChats
-
-        }
-
-        self.chats = chats
+        return userInfo
 
     }
 

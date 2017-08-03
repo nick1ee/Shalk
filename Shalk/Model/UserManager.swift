@@ -17,13 +17,25 @@ class UserManager {
 
     var currentUser: User?
 
-    var opponent: Opponent?
+    var opponent: User?
 
     var roomKey: String?
 
     var language: String?
 
+    var friends: [[String: String]] = [[:]]
+
     var isSendingFriendRequest: Bool?
+
+    var friendsWithEnglish: [User] = []
+
+    var friendsWithChinese: [User] = []
+
+    var friendsWithJapanese: [User] = []
+
+    var friendsWithKorean: [User] = []
+
+//    var chatrooms: [Room]
 
     var isConnected = false {
 
@@ -47,7 +59,7 @@ class UserManager {
 
                 currentUser?.quickbloxID = String(qbID)
 
-                guard let userDict = currentUser?.description else { return }
+                let userDict = currentUser?.toDictionary()
 
                 guard let uid = currentUser?.uid else { return }
 
@@ -61,7 +73,9 @@ class UserManager {
 
     func fetchUserData() {
 
-        FirebaseManager().fetchUserProfile()
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+
+        FirebaseManager().fetchUserProfile(withUid: userID, type: .myself)
 
     }
 
@@ -74,6 +88,10 @@ class UserManager {
     func closeChannel() {
 
         FirebaseManager().closeChannel(withRoomKey: self.roomKey!, withLang: self.language!)
+
+    }
+
+    func fetchChatList() {
 
     }
 
