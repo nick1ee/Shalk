@@ -187,7 +187,7 @@ extension ShakeViewController: QBRTCClientDelegate {
 
                 qbManager.session = session
 
-//                print("@@@@@@@@@@@@@@@@@@@", userInfo!)
+                print("@@@@@@@@@@@@@@@@@@@", userInfo!)
 
                 userManager.opponent = try Opponent.init(json: userInfo!)
 
