@@ -610,7 +610,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4mo-Vq-K6y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4988" y="107"/>
+            <point key="canvasLocation" x="4188" y="-657"/>
         </scene>
         <!--Profile-->
         <scene sceneID="vzK-YK-WGd">
@@ -757,6 +757,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="EfT-Bn-btP" id="UhB-ae-3R3"/>
+                        <segue destination="qrV-HA-xDB" kind="show" identifier="startChat" id="mPj-GX-nCn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NVN-mv-veM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1047,4 +1048,7 @@
         <image name="icon-shake" width="25" height="25"/>
         <image name="icon-user" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="mPj-GX-nCn"/>
+    </inferredMetricsTieBreakers>
 </document>

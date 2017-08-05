@@ -261,7 +261,7 @@ class FirebaseManager {
 
     }
 
-    func addIntoFriendList(withOpponent opponent: User) {
+    func addFriend(withOpponent opponent: User) {
 
         guard let myUid = userManager.currentUser?.uid, let language = userManager.language else { return }
 
@@ -306,7 +306,7 @@ class FirebaseManager {
 
     func fetchFriendInfo(withUser uid: String, withLang language: String) {
 
-        self.ref?.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref?.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
 
             guard let object = snapshot.value else { return }
 
@@ -319,6 +319,51 @@ class FirebaseManager {
             } catch let error {
 
                 // TODO: Error handling
+                print(error.localizedDescription)
+
+            }
+
+        })
+
+    }
+
+    func startChat(to opponent: User) {
+
+        ref?.child("")
+
+    }
+
+    func createChatRoom(to opponent: User) {
+
+        guard
+            let myUid = Auth.auth().currentUser?.uid,
+            let roomId = ref?.childByAutoId().key else { return }
+
+        let room = ChatRoom.init(roomId: roomId, opponent: opponent)
+
+        ref?.child("chatRoomList").child(myUid).child(roomId).updateChildValues(room.toDictionary())
+
+        ref?.child("chatRoomList").child(opponent.uid).child(roomId).updateChildValues(room.toDictionary())
+
+    }
+
+    func fetchChatRoomList() {
+
+        guard let myUid = Auth.auth().currentUser?.uid else { return }
+
+        ref?.child("chatRoomList").child(myUid).observe(.childAdded, with: { (snapshot) in
+
+            guard let obejct = snapshot.value as? [String: String] else { return }
+
+            do {
+
+                let room = try ChatRoom.init(json: obejct)
+
+                self.userManager.chatRooms.append(room)
+
+            } catch let error {
+
+                // TODO: Error handlng
                 print(error.localizedDescription)
 
             }

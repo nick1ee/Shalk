@@ -23,7 +23,7 @@ class UserManager {
 
     var language: String?
 
-    var friends: [[String: String]] = [[:]]
+    var chatRooms: [ChatRoom] = []
 
     var isSendingFriendRequest: Bool?
 
@@ -89,7 +89,27 @@ class UserManager {
 
     }
 
-    func fetchChatList() {
+    func fetchChatRoomList() {
+
+        FirebaseManager().fetchChatRoomList()
+
+    }
+
+    func startChat(withVC vc: UIViewController, to opponent: User) {
+
+        let result = chatRooms.filter({ $0.user1Id == opponent.uid || $0.user2Id == opponent.uid })
+
+        if result.count == 0 {
+
+            FirebaseManager().createChatRoom(to: opponent)
+
+            vc.performSegue(withIdentifier: "startChat", sender: nil)
+
+        } else {
+
+            vc.performSegue(withIdentifier: "startChat", sender: nil)
+
+        }
 
     }
 

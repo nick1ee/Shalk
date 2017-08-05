@@ -12,9 +12,13 @@ struct ChatRoom {
 
     var roomId: String
 
-    var user1: String
+    var user1Name: String
 
-    var user2: String
+    var user1Id: String
+
+    var user2Name: String
+
+    var user2Id: String
 
     var latestMessage: String
 
@@ -26,7 +30,7 @@ extension ChatRoom {
 
     enum FetchChatRoomError: Error {
 
-        case invalidChatRoomObject, missingRoomId, missingUser1, missingUser2, missingLatestMessage
+        case invalidChatRoomObject, missingRoomId, missingUser1Name, missingUser1Id, missingUser2Name, missingUser2Id, missingLatestMessage
 
     }
 
@@ -34,9 +38,13 @@ extension ChatRoom {
 
         static let roomId = "roomId"
 
-        static let user1 = "user1"
+        static let user1Name = "user1Name"
 
-        static let user2 = "user2"
+        static let user1Id = "user1Id"
+
+        static let user2Name = "user2Name"
+
+        static let user2Id = "user2Id"
 
         static let latestMessage = "latestMessage"
     }
@@ -57,21 +65,37 @@ extension ChatRoom {
 
         self.roomId = roomId
 
-        guard let user1 = jsonObject[Schema.user1] else {
+        guard let user1Name = jsonObject[Schema.user1Name] else {
 
-            throw FetchChatRoomError.missingUser1
-
-        }
-
-        self.user1 = user1
-
-        guard let user2 = jsonObject[Schema.user2] else {
-
-            throw FetchChatRoomError.missingUser2
+            throw FetchChatRoomError.missingUser1Name
 
         }
 
-        self.user2 = user2
+        self.user1Name = user1Name
+
+        guard let user1Id = jsonObject[Schema.user1Id] else {
+
+            throw FetchChatRoomError.missingUser1Id
+
+        }
+
+        self.user1Id = user1Id
+
+        guard let user2Name = jsonObject[Schema.user2Name] else {
+
+            throw FetchChatRoomError.missingUser2Name
+
+        }
+
+        self.user2Name = user2Name
+
+        guard let user2Id = jsonObject[Schema.user2Id] else {
+
+            throw FetchChatRoomError.missingUser2Id
+
+        }
+
+        self.user2Id = user2Id
 
         guard let text = jsonObject[Schema.latestMessage] else {
 
@@ -83,13 +107,35 @@ extension ChatRoom {
 
     }
 
+    init(roomId: String, opponent: User) {
+
+        let me = UserManager.shared.currentUser
+
+        self.roomId = roomId
+
+        self.user1Name = me!.name
+
+        self.user1Id = me!.uid
+
+        self.user2Name = opponent.name
+
+        self.user2Id = opponent.uid
+
+        self.latestMessage = ""
+
+    }
+
     func toDictionary() -> RoomObject {
 
         let roomInfo = [Schema.roomId: self.roomId,
 
-                        Schema.user1: self.user1,
+                        Schema.user1Name: self.user1Name,
 
-                        Schema.user2: self.user2,
+                        Schema.user1Id: self.user1Id,
+
+                        Schema.user2Name: self.user2Name,
+
+                        Schema.user2Id: self.user2Id,
 
                         Schema.latestMessage: self.latestMessage]
 

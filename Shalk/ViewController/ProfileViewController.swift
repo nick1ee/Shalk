@@ -39,6 +39,8 @@ class ProfileViewController: UIViewController {
 
         fbManager.delegate = self
 
+        UserManager.shared.fetchChatRoomList()
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -282,6 +284,40 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             }
 
             return cell
+
+        }
+
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        switch indexPath.section {
+
+        case 1:
+
+            UserManager.shared.startChat(withVC: self, to: englishFriends[indexPath.row])
+
+            break
+
+        case 2:
+
+            UserManager.shared.startChat(withVC: self, to: chineseFriends[indexPath.row])
+
+            break
+
+        case 3:
+
+            UserManager.shared.startChat(withVC: self, to: japaneseFriends[indexPath.row])
+
+            break
+
+        case 4:
+
+            UserManager.shared.startChat(withVC: self, to: koreanFriends[indexPath.row])
+
+            break
+
+        default: break
 
         }
 

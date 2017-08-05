@@ -52,7 +52,7 @@ extension UIViewController {
 
             if info["sendRequest"] == "yes" && UserManager.shared.isSendingFriendRequest! {
 
-                FirebaseManager().addIntoFriendList(withOpponent: UserManager.shared.opponent!)
+                FirebaseManager().addFriend(withOpponent: UserManager.shared.opponent!)
 
             }
 
