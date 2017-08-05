@@ -64,7 +64,14 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
         print("push~~~~~~~~")
 
-        self.performSegue(withIdentifier: "showChatDetails", sender: nil)
+        let chatVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chatVC")
+
+        //////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////
+        chatVC.hidesBottomBarWhenPushed = true
+
+        self.navigationController?.pushViewController(chatVC, animated: true)
 
     }
 
