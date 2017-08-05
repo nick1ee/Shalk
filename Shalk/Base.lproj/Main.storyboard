@@ -864,6 +864,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Chat" id="WSp-v3-i7H"/>
                     <connections>
+                        <outlet property="chatListTableView" destination="Kqu-zn-LWa" id="jVy-zV-O8Z"/>
                         <segue destination="qrV-HA-xDB" kind="show" identifier="showChatDetails" id="toT-2O-9g9"/>
                     </connections>
                 </viewController>
@@ -1049,6 +1050,6 @@
         <image name="icon-user" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mPj-GX-nCn"/>
+        <segue reference="toT-2O-9g9"/>
     </inferredMetricsTieBreakers>
 </document>

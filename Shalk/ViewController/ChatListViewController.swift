@@ -10,10 +10,19 @@ import UIKit
 
 class ChatListViewController: UIViewController {
 
+    let fbManager = FirebaseManager()
+
+    var rooms: [ChatRoom] = []
+
+    @IBOutlet weak var chatListTableView: UITableView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        fbManager.delegate = self
+
+        fbManager.fetchChatRoomList()
+
     }
 
 }
@@ -23,7 +32,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 10
+        return rooms.count
 
     }
 
@@ -31,9 +40,23 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "chatCell", for: indexPath) as! ChatTableViewCell
 
-        cell.opponentName.text = "\(indexPath.row)"
+        guard let myUid = UserManager.shared.currentUser?.uid else { return UITableViewCell() }
 
-        return cell
+        let room = rooms[indexPath.row]
+
+        if myUid == room.user1Id {
+
+            cell.opponentName.text = room.user2Name
+
+            return cell
+
+        } else {
+
+            cell.opponentName.text = room.user1Name
+
+            return cell
+
+        }
 
     }
 
@@ -47,3 +70,25 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
 }
 //swiftlint:enable force_cast
+
+extension ChatListViewController: FirebaseManagerDelegate {
+
+    func manager(_ manager: FirebaseManager, didGetChatRooms rooms: [ChatRoom]) {
+
+        self.rooms = rooms
+
+        chatListTableView.reloadData()
+
+    }
+
+    func manager(_ manager: FirebaseManager, didGetError error: Error) {
+
+        print(error.localizedDescription)
+
+    }
+
+    func manager(_ manager: FirebaseManager, didGetFriend friend: User, byLanguage: String) {
+
+    }
+
+}

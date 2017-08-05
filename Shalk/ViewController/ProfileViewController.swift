@@ -66,6 +66,10 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: FirebaseManagerDelegate {
 
+    func manager(_ manager: FirebaseManager, didGetChatRooms rooms: [ChatRoom]) {
+
+    }
+
     func manager(_ manager: FirebaseManager, didGetError error: Error) {
 
         // TODO: Error handling

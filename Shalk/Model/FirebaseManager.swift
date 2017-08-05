@@ -13,6 +13,8 @@ protocol FirebaseManagerDelegate: class {
 
     func manager (_ manager: FirebaseManager, didGetFriend friend: User, byLanguage: String)
 
+    func manager (_ manager: FirebaseManager, didGetChatRooms rooms: [ChatRoom])
+
     func manager (_ manager: FirebaseManager, didGetError error: Error)
 
 }
@@ -349,9 +351,11 @@ class FirebaseManager {
 
     func fetchChatRoomList() {
 
+        var rooms: [ChatRoom] = []
+
         guard let myUid = Auth.auth().currentUser?.uid else { return }
 
-        ref?.child("chatRoomList").child(myUid).observe(.childAdded, with: { (snapshot) in
+        handle = ref?.child("chatRoomList").child(myUid).observe(.childAdded, with: { (snapshot) in
 
             guard let obejct = snapshot.value as? [String: String] else { return }
 
@@ -359,7 +363,7 @@ class FirebaseManager {
 
                 let room = try ChatRoom.init(json: obejct)
 
-                self.userManager.chatRooms.append(room)
+                rooms.append(room)
 
             } catch let error {
 
@@ -367,6 +371,12 @@ class FirebaseManager {
                 print(error.localizedDescription)
 
             }
+
+            self.ref?.removeObserver(withHandle: self.handle!)
+
+            self.userManager.chatRooms = rooms
+
+            self.delegate?.manager(self, didGetChatRooms: rooms)
 
         })
 

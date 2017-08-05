@@ -95,7 +95,7 @@ class UserManager {
 
     }
 
-    func startChat(withVC vc: UIViewController, to opponent: User) {
+    func startChat(withVC: UIViewController, to opponent: User) {
 
         let result = chatRooms.filter({ $0.user1Id == opponent.uid || $0.user2Id == opponent.uid })
 
@@ -103,11 +103,11 @@ class UserManager {
 
             FirebaseManager().createChatRoom(to: opponent)
 
-            vc.performSegue(withIdentifier: "startChat", sender: nil)
+            withVC.performSegue(withIdentifier: "startChat", sender: nil)
 
         } else {
 
-            vc.performSegue(withIdentifier: "startChat", sender: nil)
+            withVC.performSegue(withIdentifier: "startChat", sender: nil)
 
         }
 
