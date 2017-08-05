@@ -91,10 +91,10 @@ class QBManager {
         userManager.isConnected = true
 
         guard
-            let qbID = userManager.opponent?.quickbloxID,
+            let qbID = userManager.opponent?.quickbloxId,
             let qbIDInteger = Int(qbID),
             let opponentID = [qbIDInteger] as? [NSNumber] else { return }
-        
+
         let userInfo = userManager.currentUser?.toDictionary()
 
         session = rtcManager.createNewSession(withOpponents: opponentID, with: .audio)

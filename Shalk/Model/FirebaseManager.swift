@@ -89,7 +89,7 @@ class FirebaseManager {
 
             QBManager().signUp(withEmail: email, withPassword: pwd)
 
-            let currentUser = User.init(name: name, uid: okUser.uid, email: email, quickbloxID: "", imageURL: "null", intro: "null")
+            let currentUser = User.init(name: name, uid: okUser.uid, email: email, quickbloxId: "", imageUrl: "null", intro: "null")
 
             self.userManager.currentUser = currentUser
 
@@ -127,9 +127,9 @@ class FirebaseManager {
 
             withVC.pushLoginMessage(title: "Reset Password",
 
-                                           message: "We have sent a link to your email, this is for you to reset your password.",
+                                    message: "We have sent a link to your email, this is for you to reset your password.",
 
-                                           handle: nil)
+                                    handle: nil)
         }
 
     }
@@ -241,7 +241,7 @@ class FirebaseManager {
 
         userManager.language = language
 
-        self.ref?.child("channels").child(language).child(roomId).setValue(newChannel.toAnyObject())
+        self.ref?.child("channels").child(language).child(roomId).setValue(newChannel.toDictionary())
 
     }
 
@@ -265,12 +265,12 @@ class FirebaseManager {
 
         guard let myUid = userManager.currentUser?.uid, let language = userManager.language else { return }
 
-        ref?.child("friendlist").child(myUid).updateChildValues([opponent.uid: language])
+        ref?.child("friendList").child(myUid).updateChildValues([opponent.uid: language])
 
-        ref?.child("friendlist").child(opponent.uid).updateChildValues([myUid: language])
+        ref?.child("friendList").child(opponent.uid).updateChildValues([myUid: language])
 
     }
-    
+
     //        guard let roomId = ref?.childByAutoId().key, let messageId = ref?.childByAutoId().key else { return }
     //
     //        guard let time = Date().timeIntervalSince1970 as? Double else { return }
@@ -286,7 +286,7 @@ class FirebaseManager {
 
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
-        ref?.child("friendlist").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref?.child("friendList").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
 
             for object in snapshot.children {
 

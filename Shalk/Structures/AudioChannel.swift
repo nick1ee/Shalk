@@ -110,9 +110,17 @@ extension AudioChannel {
 
     }
 
-    func toAnyObject() -> [String: Any] {
+    func toDictionary() -> [String: Any] {
 
-        let channelInfo: [String: Any] = ["roomID": self.roomID, "participant": self.participant, "owner": self.owner, "isLocked": self.isLocked, "isFinished": self.isFinished]
+        let channelInfo: [String: Any] = [Schema.roomID: self.roomID,
+
+                                          Schema.participant: self.participant,
+
+                                          Schema.owner: self.owner,
+
+                                          Schema.isLocked: self.isLocked,
+
+                                          Schema.isFinished: self.isFinished]
 
         return channelInfo
 

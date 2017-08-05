@@ -18,9 +18,9 @@ struct User {
 
     var email: String
 
-    var quickbloxID: String
+    var quickbloxId: String
 
-    var imageURL: String
+    var imageUrl: String
 
     var intro: String
 
@@ -30,7 +30,7 @@ extension User {
 
     enum FetchUserProfileError: Error {
 
-        case invaidJSONObject, missingName, missingUID, missingEmail, missingQBID, missingImageURL, missingIntro
+        case invaidJSONObject, missingName, missingUID, missingEmail, missingQuickbloxId, missingImageUrl, missingIntro
 
     }
 
@@ -42,9 +42,9 @@ extension User {
 
         static let email = "email"
 
-        static let qbID = "quickbloxID"
+        static let qbID = "quickbloxId"
 
-        static let imageURL = "imageURL"
+        static let imageUrl = "imageUrl"
 
         static let intro = "intro"
 
@@ -84,19 +84,19 @@ extension User {
 
         guard let qbID = jsonObject[Schema.qbID] as? String else {
 
-            throw FetchUserProfileError.missingQBID
+            throw FetchUserProfileError.missingQuickbloxId
 
         }
 
-        self.quickbloxID = qbID
+        self.quickbloxId = qbID
 
-        guard let imageURL = jsonObject[Schema.imageURL] as? String else {
+        guard let imageUrl = jsonObject[Schema.imageUrl] as? String else {
 
-            throw FetchUserProfileError.missingImageURL
+            throw FetchUserProfileError.missingImageUrl
 
         }
 
-        self.imageURL = imageURL
+        self.imageUrl = imageUrl
 
         guard let intro = jsonObject[Schema.intro] as? String else {
 
@@ -110,7 +110,17 @@ extension User {
 
     func toDictionary() -> [String: String] {
 
-        let userInfo: [String: String] = [Schema.name: self.name, Schema.uid: self.uid, Schema.email: self.email, Schema.qbID: self.quickbloxID, Schema.imageURL: self.imageURL, Schema.intro: self.intro]
+        let userInfo: [String: String] = [Schema.name: self.name,
+
+                                          Schema.uid: self.uid,
+
+                                          Schema.email: self.email,
+
+                                          Schema.qbID: self.quickbloxId,
+
+                                          Schema.imageUrl: self.imageUrl,
+
+                                          Schema.intro: self.intro]
 
         return userInfo
 

@@ -50,7 +50,7 @@
 		B8DB3F301F2F02AE006E5A58 /* Quickblox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F161F2F0255006E5A58 /* Quickblox.framework */; };
 		B8DB3F311F2F02AE006E5A58 /* Quickblox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F161F2F0255006E5A58 /* Quickblox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B8DB3F331F2F02AE006E5A58 /* QuickbloxWebRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F171F2F0255006E5A58 /* QuickbloxWebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B8E3C8001F31F9A40086C68A /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E3C7FF1F31F9A40086C68A /* Friend.swift */; };
+		B8F1CFEC1F35E0A5003BACF8 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1CFEB1F35E0A5003BACF8 /* ChatRoom.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -114,7 +114,7 @@
 		B8DB3F2A1F2F0297006E5A58 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B8DB3F2C1F2F029C006E5A58 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		B8DB3F2E1F2F02A2006E5A58 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		B8E3C7FF1F31F9A40086C68A /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		B8F1CFEB1F35E0A5003BACF8 /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		CD49CAB9B1AE9138C94B72A9 /* Pods_Shalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -178,8 +178,8 @@
 			children = (
 				B803313B1F2B338200F89209 /* User.swift */,
 				B89872861F306008007DEDA6 /* AudioChannel.swift */,
-				B8E3C7FF1F31F9A40086C68A /* Friend.swift */,
 				B8D9ECDC1F32F7BE00B9FEED /* Message.swift */,
+				B8F1CFEB1F35E0A5003BACF8 /* ChatRoom.swift */,
 			);
 			name = Structures;
 			path = Shalk/Structures;
@@ -429,7 +429,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B872E6391F29EB7C009BD763 /* FirebaseManager.swift in Sources */,
-				B8E3C8001F31F9A40086C68A /* Friend.swift in Sources */,
 				B8DB3F101F2E2852006E5A58 /* AudioCallViewController.swift in Sources */,
 				B89872871F306008007DEDA6 /* AudioChannel.swift in Sources */,
 				B84968B81F31753200400579 /* ProfileTableViewCell.swift in Sources */,
@@ -442,6 +441,7 @@
 				B872E63F1F29FBA4009BD763 /* UserManager.swift in Sources */,
 				B872E6331F29C4F7009BD763 /* LoginViewController.swift in Sources */,
 				B80331081F2A375700F89209 /* ProfileViewController.swift in Sources */,
+				B8F1CFEC1F35E0A5003BACF8 /* ChatRoom.swift in Sources */,
 				B872E63B1F29EEA8009BD763 /* ViewControllerExtensions.swift in Sources */,
 				B80331041F2A374600F89209 /* ChatViewController.swift in Sources */,
 				B803313E1F2B338200F89209 /* User.swift in Sources */,
@@ -581,7 +581,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Shalk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nicklee.Shalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -600,7 +600,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Shalk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nicklee.Shalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";

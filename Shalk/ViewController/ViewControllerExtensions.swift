@@ -40,8 +40,6 @@ extension UIViewController {
 
     func receivedEndCallwithFriendRequest(withInfo info: [String: String]) {
 
-//        print("push alert controller~~~~~~~~~~", UserManager.shared.opponent)
-
         let alertController = UIAlertController.init(title: "Send a friend request?", message: "If you enjoy the time with \(UserManager.shared.opponent?.name ?? ""), send a friend request!", preferredStyle: .alert)
 
         let okAction = UIAlertAction.init(title: "Send", style: .default) { (_) in
@@ -53,10 +51,6 @@ extension UIViewController {
             QBManager.shared.hangUpCall()
 
             if info["sendRequest"] == "yes" && UserManager.shared.isSendingFriendRequest! {
-
-//                print("=======================================", UserManager.shared.isSendingFriendRequest)
-//
-//                print(UserManager.shared.opponent)
 
                 FirebaseManager().addIntoFriendList(withOpponent: UserManager.shared.opponent!)
 
@@ -87,8 +81,6 @@ extension UIViewController {
     }
 
     func endCallWithFriendRequest() {
-
-//        print("push alert controller~~~~~~~~~~", UserManager.shared.opponent)
 
         let alertController = UIAlertController.init(title: "Send a friend request?", message: "If you enjoy the time with \(UserManager.shared.opponent?.name ?? ""), send a friend request!", preferredStyle: .alert)
 

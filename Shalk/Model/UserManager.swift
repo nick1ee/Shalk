@@ -35,8 +35,6 @@ class UserManager {
 
     var friendsWithKorean: [User] = []
 
-//    var chatrooms: [Room]
-
     var isConnected = false {
 
         didSet {
@@ -57,7 +55,7 @@ class UserManager {
 
             if qbID != 0 {
 
-                currentUser?.quickbloxID = String(qbID)
+                currentUser?.quickbloxId = String(qbID)
 
                 let userDict = currentUser?.toDictionary()
 
