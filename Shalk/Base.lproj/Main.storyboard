@@ -766,7 +766,7 @@
         <!--Chat-->
         <scene sceneID="h32-H0-wH9">
             <objects>
-                <viewController storyboardIdentifier="chatVC" automaticallyAdjustsScrollViewInsets="NO" id="1X1-Zo-SaZ" customClass="ChatViewController" customModule="Shalk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="chatVC" automaticallyAdjustsScrollViewInsets="NO" id="1X1-Zo-SaZ" customClass="ChatListViewController" customModule="Shalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="f7f-SU-gSf"/>
                         <viewControllerLayoutGuide type="bottom" id="jIW-LJ-OsM"/>
@@ -819,7 +819,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-bubble" translatesAutoresizingMaskIntoConstraints="NO" id="fhY-Rb-bpX">
-                                                    <rect key="frame" x="340" y="29" width="25" height="25"/>
+                                                    <rect key="frame" x="379" y="29" width="25" height="25"/>
                                                     <color key="tintColor" red="0.9533242583" green="0.67907041310000005" blue="0.1825418174" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="hpL-m1-LSz"/>

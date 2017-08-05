@@ -1,5 +1,5 @@
 //
-//  ChatViewController.swift
+//  ChatListViewController.swift
 //  Shalk
 //
 //  Created by Nick Lee on 2017/7/27.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatViewController: UIViewController {
+class ChatListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,7 @@ class ChatViewController: UIViewController {
 }
 
 //swiftlint:disable force_cast
-extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
+extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
