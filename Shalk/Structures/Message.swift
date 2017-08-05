@@ -7,66 +7,92 @@
 //
 
 import Foundation
-import FirebaseDatabase
 
 struct Message {
 
-    var text: String!
+    var text: String
 
-    var senderId: String!
+    var senderId: String
 
-    var userName: String!
-
-    var ref: DatabaseReference!
-
-    var key: String = ""
+    var time: Int
 
 }
 
 extension Message {
 
+    typealias MessageObject = [String: Any]
+
     enum FetchMessageError: Error {
 
-        case defaultError
+        case invalidMessageObject, missingText, missingSenderId, missingTime
 
     }
 
-    init(snapshot: DataSnapshot) throws {
+    struct Schema {
 
-        guard
-            let json = snapshot.value as? Any?,
-            let jsonObject = json as? [String: Any] else {
+        static let text = "text"
 
-            throw FetchMessageError.defaultError
+        static let senderId = "senderId"
+
+        static let time = "time"
+
+    }
+
+    init(json: Any) throws {
+
+        guard let jsonObject = json as? MessageObject else {
+
+            throw FetchMessageError.invalidMessageObject
 
         }
 
-        guard let text = jsonObject["text"] as? String else {
+        guard let text = jsonObject[Schema.text] as? String else {
 
-            throw FetchMessageError.defaultError
+            throw FetchMessageError.missingText
 
         }
 
         self.text = text
 
-        guard let senderId = jsonObject["sender"] as? String else {
-            throw FetchMessageError.defaultError
+        guard let senderId = jsonObject[Schema.senderId] as? String else {
+
+            throw FetchMessageError.missingSenderId
 
         }
 
         self.senderId = senderId
 
-        guard let userName = jsonObject["userName"] as? String else {
+        guard let time = jsonObject[Schema.time] as? Int else {
 
-            throw FetchMessageError.defaultError
+            throw FetchMessageError.missingTime
 
         }
 
-        self.userName = userName
+        self.time = time
 
-        self.ref = snapshot.ref
+    }
 
-        self.key = snapshot.key
+    init(text: String) {
+
+        self.text = text
+
+        let uid = UserManager.shared.currentUser?.uid
+
+        self.senderId = uid!
+
+        self.time = Int(Date().timeIntervalSince1970 * 1000.0)
+
+    }
+
+    func toDictionary() -> MessageObject {
+
+        let messageInfo: [String: Any] = [Schema.text: self.text,
+
+                                          Schema.senderId: self.senderId,
+
+                                          Schema.time: self.time]
+
+        return messageInfo
 
     }
 
