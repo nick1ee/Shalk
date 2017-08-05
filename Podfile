@@ -19,7 +19,5 @@ target 'Shalk' do
   source 'https://github.com/CocoaPods/Specs.git'
   pod 'Quickblox-WebRTC', '~> 2.6.1'
   pod 'QuickBlox', '~>2.9.2'
-  
-  pod 'JSQMessagesViewController'
-  
+
 end

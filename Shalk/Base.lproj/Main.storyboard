@@ -872,10 +872,10 @@
             </objects>
             <point key="canvasLocation" x="2511.1999999999998" y="-657.12143928035982"/>
         </scene>
-        <!--View Controller-->
+        <!--Chat List View Controller-->
         <scene sceneID="n7J-hb-C2W">
             <objects>
-                <viewController id="qrV-HA-xDB" sceneMemberID="viewController">
+                <viewController id="qrV-HA-xDB" customClass="ChatListViewController" customModule="Shalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Njk-y6-gAP"/>
                         <viewControllerLayoutGuide type="bottom" id="obZ-gS-0H4"/>
@@ -889,7 +889,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ijZ-Jr-kYI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3346" y="-657"/>
+            <point key="canvasLocation" x="3345" y="-657"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="xwK-tQ-awH">

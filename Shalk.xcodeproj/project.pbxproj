@@ -51,6 +51,7 @@
 		B8DB3F311F2F02AE006E5A58 /* Quickblox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F161F2F0255006E5A58 /* Quickblox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B8DB3F331F2F02AE006E5A58 /* QuickbloxWebRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F171F2F0255006E5A58 /* QuickbloxWebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B8F1CFEC1F35E0A5003BACF8 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1CFEB1F35E0A5003BACF8 /* ChatRoom.swift */; };
+		B8F1D0541F362063003BACF8 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1D0531F362063003BACF8 /* ChatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -115,6 +116,7 @@
 		B8DB3F2C1F2F029C006E5A58 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		B8DB3F2E1F2F02A2006E5A58 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		B8F1CFEB1F35E0A5003BACF8 /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
+		B8F1D0531F362063003BACF8 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		CD49CAB9B1AE9138C94B72A9 /* Pods_Shalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -283,6 +285,7 @@
 				B80331071F2A375700F89209 /* ProfileViewController.swift */,
 				B8DB3F0F1F2E2852006E5A58 /* AudioCallViewController.swift */,
 				B8DB3F111F2E28AC006E5A58 /* VideoCallViewController.swift */,
+				B8F1D0531F362063003BACF8 /* ChatViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -446,6 +449,7 @@
 				B80331041F2A374600F89209 /* ChatListViewController.swift in Sources */,
 				B803313E1F2B338200F89209 /* User.swift in Sources */,
 				B872E6301F29C498009BD763 /* AppDelegate.swift in Sources */,
+				B8F1D0541F362063003BACF8 /* ChatViewController.swift in Sources */,
 				B82C6DA01F2BAC5A00C5948D /* ChatTableViewCell.swift in Sources */,
 				B84968BA1F31753F00400579 /* FriendTableViewCell.swift in Sources */,
 				B80331401F2B377B00F89209 /* QBManager.swift in Sources */,
