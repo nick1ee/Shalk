@@ -366,7 +366,7 @@ class FirebaseManager {
         ref?.child("chatRoomList").child(opponent.uid).child(roomId).updateChildValues(room.toDictionary())
 
         ref?.child("chatHistory").child(roomId).child("init").updateChildValues(Message.init(text: "").toDictionary())
-        
+
         userManager.chatRoomId = roomId
 
     }
@@ -409,7 +409,7 @@ class FirebaseManager {
         let roomId = userManager.chatRoomId
 
         guard let messageId = ref?.childByAutoId().key else { return }
-        
+
         let newMessage = Message.init(text: text)
 
         ref?.child("chatHistory").child(roomId).child(messageId).updateChildValues(newMessage.toDictionary())
@@ -440,7 +440,7 @@ class FirebaseManager {
             }
 
 //            self.ref?.removeObserver(withHandle: self.handle!)
-            
+
             self.chatHistroyDelegate?.manager(self, didGetMessages: messages)
 
         })

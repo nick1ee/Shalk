@@ -108,7 +108,7 @@ class UserManager {
             withVC.performSegue(withIdentifier: "startChat", sender: nil)
 
         } else {
-            
+
             self.chatRoomId = result[0].roomId
 
             withVC.performSegue(withIdentifier: "startChat", sender: nil)

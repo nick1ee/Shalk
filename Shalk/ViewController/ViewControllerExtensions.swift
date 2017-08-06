@@ -115,5 +115,51 @@ extension UIViewController {
         self.present(alertController, animated: true, completion: nil)
 
     }
+    
+    func startAudioCall() {
+
+        let alertController = UIAlertController.init(title: "Audio Call", message: "Do you want to start an audio call with \(UserManager.shared.opponent?.name ?? "")?", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction.init(title: "Confirm", style: .default) { (_) in
+            
+
+            
+        }
+        
+        let cancelAction = UIAlertAction.init(title: "Cancel", style: .default) { (_) in
+            
+            
+        }
+        
+        alertController.addAction(cancelAction)
+        
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    func startVideoCall() {
+        
+        let alertController = UIAlertController.init(title: "Video Call", message: "Do you want to start an video call with \(UserManager.shared.opponent?.name ?? "")?", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction.init(title: "Confirm", style: .default) { (_) in
+            
+            
+            
+        }
+        
+        let cancelAction = UIAlertAction.init(title: "Cancel", style: .default) { (_) in
+            
+            
+        }
+        
+        alertController.addAction(cancelAction)
+        
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
 
 }

@@ -23,7 +23,7 @@ class ChatViewController: UIViewController {
         fbManager.sendMessage(text: inputTextView.text)
 
         inputTextView.text = ""
-        
+
         chatTableView.scrollToBottom(animated: true)
 
     }
@@ -31,22 +31,20 @@ class ChatViewController: UIViewController {
     @IBAction func sendImage(_ sender: UIButton) {
 
     }
-    
-    
+
     @IBAction func btnBack(_ sender: UIBarButtonItem) {
-        
+
         self.navigationController?.popViewController(animated: true)
-        
+
     }
-    
+
     @IBAction func btnAudioCall(_ sender: UIBarButtonItem) {
-        
+
     }
 
     @IBAction func btnVideoCall(_ sender: UIBarButtonItem) {
-        
+
     }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +52,7 @@ class ChatViewController: UIViewController {
         inputTextView.delegate = self
 
         fbManager.chatHistroyDelegate = self
-        
+
         fbManager.fetchChatHistory()
 
         chatTableView.estimatedRowHeight = 300
