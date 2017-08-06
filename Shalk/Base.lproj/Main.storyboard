@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -610,7 +611,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4mo-Vq-K6y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4188" y="-657"/>
+            <point key="canvasLocation" x="5886.9565217391309" y="-657.06521739130437"/>
         </scene>
         <!--Profile-->
         <scene sceneID="vzK-YK-WGd">
@@ -757,7 +758,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="EfT-Bn-btP" id="UhB-ae-3R3"/>
-                        <segue destination="qrV-HA-xDB" kind="show" identifier="startChat" id="I3B-ca-MSw"/>
+                        <segue destination="eBj-kb-lPV" kind="show" identifier="startChat" id="I3B-ca-MSw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NVN-mv-veM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -865,6 +866,7 @@
                     <navigationItem key="navigationItem" title="Chat" id="WSp-v3-i7H"/>
                     <connections>
                         <outlet property="chatListTableView" destination="Kqu-zn-LWa" id="jVy-zV-O8Z"/>
+                        <segue destination="eBj-kb-lPV" kind="show" identifier="goChat" id="pce-DS-Z4y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5wv-kY-zao" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -874,7 +876,7 @@
         <!--Chat View Controller-->
         <scene sceneID="n7J-hb-C2W">
             <objects>
-                <viewController storyboardIdentifier="chatVC" automaticallyAdjustsScrollViewInsets="NO" id="qrV-HA-xDB" customClass="ChatViewController" customModule="Shalk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="qrV-HA-xDB" customClass="ChatViewController" customModule="Shalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Njk-y6-gAP"/>
                         <viewControllerLayoutGuide type="bottom" id="obZ-gS-0H4"/>
@@ -933,7 +935,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-user" translatesAutoresizingMaskIntoConstraints="NO" id="sjo-op-ggq">
-                                                    <rect key="frame" x="10" y="10" width="50" height="50"/>
+                                                    <rect key="frame" x="10" y="20" width="50" height="50"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -975,7 +977,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="FQ5-Gu-WPw" secondAttribute="bottom" constant="10" id="Mdx-hw-Yg1"/>
                                                 <constraint firstAttribute="trailing" secondItem="DLp-zx-gtf" secondAttribute="trailing" constant="10" id="YKi-wV-x96"/>
                                                 <constraint firstItem="FQ5-Gu-WPw" firstAttribute="leading" secondItem="sjo-op-ggq" secondAttribute="trailing" constant="10" id="ZlK-Bv-XdE"/>
-                                                <constraint firstItem="sjo-op-ggq" firstAttribute="top" secondItem="xoC-7C-3DC" secondAttribute="top" constant="10" id="ctT-7o-QXm"/>
+                                                <constraint firstItem="sjo-op-ggq" firstAttribute="top" secondItem="xoC-7C-3DC" secondAttribute="top" constant="20" id="ctT-7o-QXm"/>
                                                 <constraint firstItem="DLp-zx-gtf" firstAttribute="leading" secondItem="sjo-op-ggq" secondAttribute="trailing" constant="10" id="e5a-Fj-VdS"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -996,12 +998,15 @@
                                 <rect key="frame" x="0.0" y="676" width="414" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="paq-8C-Ajy">
-                                        <rect key="frame" x="10" y="8" width="44" height="44"/>
+                                        <rect key="frame" x="10" y="17.666666666666629" width="25" height="25"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="icon_plus"/>
+                                        <state key="normal" image="icon-attach"/>
+                                        <connections>
+                                            <action selector="sendImage:" destination="qrV-HA-xDB" eventType="touchUpInside" id="YoD-e8-wVg"/>
+                                        </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="write something.." translatesAutoresizingMaskIntoConstraints="NO" id="mTn-mZ-D9l">
-                                        <rect key="frame" x="64" y="10" width="300" height="40"/>
+                                        <rect key="frame" x="45" y="10" width="300" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="a8m-Mb-gTm"/>
                                         </constraints>
@@ -1042,7 +1047,28 @@
                             <constraint firstAttribute="trailing" secondItem="mU1-Kg-ryA" secondAttribute="trailing" id="vQT-Bx-xVH"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="9gg-iH-JCY"/>
+                    <navigationItem key="navigationItem" id="9gg-iH-JCY">
+                        <barButtonItem key="leftBarButtonItem" image="icon-back" id="yYt-41-hne">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="btnBack:" destination="qrV-HA-xDB" id="l5a-pV-fUp"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="icon-video" id="OfE-vj-e1n">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="btnVideoCall:" destination="qrV-HA-xDB" id="M3W-ab-G4l"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="icon-audio" id="UoJ-D9-hWO">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="btnAudioCall:" destination="qrV-HA-xDB" id="Hlo-ka-o3a"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="chatTableView" destination="mU1-Kg-ryA" id="Wyx-GG-XUU"/>
@@ -1051,7 +1077,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ijZ-Jr-kYI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3344.9275362318845" y="-657.06521739130437"/>
+            <point key="canvasLocation" x="4150.7246376811599" y="-657.06521739130437"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="xwK-tQ-awH">
@@ -1197,8 +1223,31 @@
             </objects>
             <point key="canvasLocation" x="3345" y="107"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6oa-wr-69H">
+            <objects>
+                <navigationController storyboardIdentifier="chatVC" automaticallyAdjustsScrollViewInsets="NO" id="eBj-kb-lPV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="idM-V0-Itl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.46529024300825128" green="0.35942899009471363" blue="0.58205107868020312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.24184587597846985" green="0.18653875589370728" blue="0.29894664883613586" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qrV-HA-xDB" kind="relationship" relationship="rootViewController" id="7wl-Qd-IhI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mpM-9y-cWs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3345" y="-657"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="icon-attach" width="25" height="25"/>
+        <image name="icon-audio" width="25" height="25"/>
+        <image name="icon-back" width="25" height="25"/>
         <image name="icon-biguser" width="256" height="256"/>
         <image name="icon-bubble" width="25" height="25"/>
         <image name="icon-chat" width="25" height="25"/>
@@ -1211,6 +1260,9 @@
         <image name="icon-send" width="25" height="25"/>
         <image name="icon-shake" width="25" height="25"/>
         <image name="icon-user" width="25" height="25"/>
-        <image name="icon_plus" width="44" height="44"/>
+        <image name="icon-video" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="pce-DS-Z4y"/>
+    </inferredMetricsTieBreakers>
 </document>

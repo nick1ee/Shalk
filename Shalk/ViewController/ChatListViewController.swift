@@ -66,9 +66,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
         UserManager.shared.chatRoomId = rooms[indexPath.row].roomId
 
-        let chatVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chatVC")
-
-        self.navigationController?.pushViewController(chatVC, animated: true)
+        self.performSegue(withIdentifier: "goChat", sender: nil)
 
     }
 
