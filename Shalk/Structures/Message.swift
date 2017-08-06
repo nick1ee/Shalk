@@ -6,7 +6,7 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Message {
 
@@ -14,13 +14,13 @@ struct Message {
 
     var senderId: String
 
-    var time: Int
+    var time: String
 
 }
 
 extension Message {
 
-    typealias MessageObject = [String: Any]
+    typealias MessageObject = [String: String]
 
     enum FetchMessageError: Error {
 
@@ -46,7 +46,7 @@ extension Message {
 
         }
 
-        guard let text = jsonObject[Schema.text] as? String else {
+        guard let text = jsonObject[Schema.text] else {
 
             throw FetchMessageError.missingText
 
@@ -54,7 +54,7 @@ extension Message {
 
         self.text = text
 
-        guard let senderId = jsonObject[Schema.senderId] as? String else {
+        guard let senderId = jsonObject[Schema.senderId] else {
 
             throw FetchMessageError.missingSenderId
 
@@ -62,7 +62,7 @@ extension Message {
 
         self.senderId = senderId
 
-        guard let time = jsonObject[Schema.time] as? Int else {
+        guard let time = jsonObject[Schema.time] else {
 
             throw FetchMessageError.missingTime
 
@@ -80,13 +80,19 @@ extension Message {
 
         self.senderId = uid!
 
-        self.time = Int(Date().timeIntervalSince1970 * 1000.0)
+        let formatter = DateFormatter()
+
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+
+        let timestamp = formatter.string(from: Date())
+
+        self.time = timestamp
 
     }
 
     func toDictionary() -> MessageObject {
 
-        let messageInfo: [String: Any] = [Schema.text: self.text,
+        let messageInfo: MessageObject = [Schema.text: self.text,
 
                                           Schema.senderId: self.senderId,
 

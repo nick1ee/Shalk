@@ -9,11 +9,25 @@
 import Foundation
 import Firebase
 
-protocol FirebaseManagerDelegate: class {
+protocol FirebaseManagerFriendDelegate: class {
 
     func manager (_ manager: FirebaseManager, didGetFriend friend: User, byLanguage: String)
 
+    func manager (_ manager: FirebaseManager, didGetError error: Error)
+
+}
+
+protocol FirebaseManagerChatRoomDelegate: class {
+
     func manager (_ manager: FirebaseManager, didGetChatRooms rooms: [ChatRoom])
+
+    func manager (_ manager: FirebaseManager, didGetError error: Error)
+
+}
+
+protocol FirebaseManagerChatHistoryDelegate: class {
+
+    func manager (_ manager: FirebaseManager, didGetMessages messages: [Message])
 
     func manager (_ manager: FirebaseManager, didGetError error: Error)
 
@@ -27,7 +41,11 @@ enum UserProfile {
 
 class FirebaseManager {
 
-    weak var delegate: FirebaseManagerDelegate?
+    weak var friendDelegate: FirebaseManagerFriendDelegate?
+
+    weak var chatRoomDelegate: FirebaseManagerChatRoomDelegate?
+
+    weak var chatHistroyDelegate: FirebaseManagerChatHistoryDelegate?
 
     var ref: DatabaseReference? = Database.database().reference()
 
@@ -316,7 +334,7 @@ class FirebaseManager {
 
                 let user = try User.init(json: object)
 
-                self.delegate?.manager(self, didGetFriend: user, byLanguage: language)
+                self.friendDelegate?.manager(self, didGetFriend: user, byLanguage: language)
 
             } catch let error {
 
@@ -347,6 +365,10 @@ class FirebaseManager {
 
         ref?.child("chatRoomList").child(opponent.uid).child(roomId).updateChildValues(room.toDictionary())
 
+        ref?.child("chatHistory").child(roomId).child("init").updateChildValues(Message.init(text: "").toDictionary())
+        
+        userManager.chatRoomId = roomId
+
     }
 
     func fetchChatRoomList() {
@@ -376,7 +398,50 @@ class FirebaseManager {
 
             self.userManager.chatRooms = rooms
 
-            self.delegate?.manager(self, didGetChatRooms: rooms)
+            self.chatRoomDelegate?.manager(self, didGetChatRooms: rooms)
+
+        })
+
+    }
+
+    func sendMessage(text: String) {
+
+        let roomId = userManager.chatRoomId
+
+        guard let messageId = ref?.childByAutoId().key else { return }
+        
+        let newMessage = Message.init(text: text)
+
+        ref?.child("chatHistory").child(roomId).child(messageId).updateChildValues(newMessage.toDictionary())
+
+    }
+
+    func fetchChatHistory() {
+
+        var messages: [Message] = []
+
+        let roomId = userManager.chatRoomId
+
+        handle = ref?.child("chatHistory").child(roomId).observe(.childAdded, with: { (snapshot) in
+
+            guard let object = snapshot.value as? [String: String] else { return }
+
+            do {
+
+                let message = try Message.init(json: object)
+
+                messages.append(message)
+
+            } catch let error {
+
+                // TODO: Error handling
+                print(error.localizedDescription)
+
+            }
+
+//            self.ref?.removeObserver(withHandle: self.handle!)
+            
+            self.chatHistroyDelegate?.manager(self, didGetMessages: messages)
 
         })
 

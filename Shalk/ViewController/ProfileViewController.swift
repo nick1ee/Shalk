@@ -37,7 +37,7 @@ class ProfileViewController: UIViewController {
 
         tableView.rowHeight = UITableViewAutomaticDimension
 
-        fbManager.delegate = self
+        fbManager.friendDelegate = self
 
         UserManager.shared.fetchChatRoomList()
 
@@ -64,11 +64,7 @@ class ProfileViewController: UIViewController {
 
 }
 
-extension ProfileViewController: FirebaseManagerDelegate {
-
-    func manager(_ manager: FirebaseManager, didGetChatRooms rooms: [ChatRoom]) {
-
-    }
+extension ProfileViewController: FirebaseManagerFriendDelegate {
 
     func manager(_ manager: FirebaseManager, didGetError error: Error) {
 

@@ -25,6 +25,8 @@ class UserManager {
 
     var chatRooms: [ChatRoom] = []
 
+    var chatRoomId: String = ""
+
     var isSendingFriendRequest: Bool?
 
     var friendsWithEnglish: [User] = []
@@ -106,10 +108,16 @@ class UserManager {
             withVC.performSegue(withIdentifier: "startChat", sender: nil)
 
         } else {
+            
+            self.chatRoomId = result[0].roomId
 
             withVC.performSegue(withIdentifier: "startChat", sender: nil)
 
         }
+
+    }
+
+    func fetchChatHistroy() {
 
     }
 

@@ -19,7 +19,7 @@ class ChatListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fbManager.delegate = self
+        fbManager.chatRoomDelegate = self
 
         fbManager.fetchChatRoomList()
 
@@ -64,12 +64,9 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
         print("push~~~~~~~~")
 
-        let chatVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chatVC")
+        UserManager.shared.chatRoomId = rooms[indexPath.row].roomId
 
-        //////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////
-        chatVC.hidesBottomBarWhenPushed = true
+        let chatVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chatVC")
 
         self.navigationController?.pushViewController(chatVC, animated: true)
 
@@ -78,7 +75,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 }
 //swiftlint:enable force_cast
 
-extension ChatListViewController: FirebaseManagerDelegate {
+extension ChatListViewController: FirebaseManagerChatRoomDelegate {
 
     func manager(_ manager: FirebaseManager, didGetChatRooms rooms: [ChatRoom]) {
 
@@ -91,10 +88,6 @@ extension ChatListViewController: FirebaseManagerDelegate {
     func manager(_ manager: FirebaseManager, didGetError error: Error) {
 
         print(error.localizedDescription)
-
-    }
-
-    func manager(_ manager: FirebaseManager, didGetFriend friend: User, byLanguage: String) {
 
     }
 
