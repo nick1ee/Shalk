@@ -159,7 +159,7 @@ class ShakeViewController: UIViewController {
 
             let destinationNavi = segue.destination as? UINavigationController
 
-            let audioVC = destinationNavi?.viewControllers.first as? AudioCallViewController
+            let audioVC = destinationNavi?.viewControllers.first as? RandomCallViewController
 
 //            print(userManager.opponent?.name)
 

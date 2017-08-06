@@ -39,10 +39,14 @@ class ChatViewController: UIViewController {
     }
 
     @IBAction func btnAudioCall(_ sender: UIBarButtonItem) {
+        
+        self.performSegue(withIdentifier: "audioCall", sender: nil)
 
     }
 
     @IBAction func btnVideoCall(_ sender: UIBarButtonItem) {
+        
+        self.performSegue(withIdentifier: "videoCall", sender: nil)
 
     }
 
