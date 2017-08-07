@@ -28,15 +28,15 @@ class ProfileViewController: UIViewController {
     }
 
     @IBAction func btnLogOut(_ sender: UIBarButtonItem) {
-        
-        self.pushLogOutMessage { (action) in
-            
+
+        self.pushLogOutMessage { (_) in
+
             // MARK: User log out.
-            
+
             SVProgressHUD.show(withStatus: "Start to log out.")
-            
+
             UserManager.shared.logOut()
-            
+
         }
 
     }

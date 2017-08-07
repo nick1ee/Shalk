@@ -30,9 +30,9 @@ extension UIViewController {
 
         let cancelAction = UIAlertAction.init(title: "Cancel", style: .default, handler: nil)
 
-        alertController.addAction(okAction)
-
         alertController.addAction(cancelAction)
+
+        alertController.addAction(okAction)
 
         self.present(alertController, animated: true, completion: nil)
 

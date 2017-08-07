@@ -71,6 +71,8 @@ class FirebaseManager {
 
                 SVProgressHUD.dismiss()
 
+                UIApplication.shared.endIgnoringInteractionEvents()
+
                 UIAlertController(error: error!).show()
 
             }
@@ -78,8 +80,6 @@ class FirebaseManager {
             if user != nil {
 
                 // MARK: User Signed in Firebase successfully, start sign in with Quickblox.
-
-//                UserManager.shared.isFirebaseLogin = true
 
                 QBManager().logIn(withEmail: email, withPassword: pwd)
 
@@ -98,6 +98,8 @@ class FirebaseManager {
                 // MARK: User failed to sign up on Firebase.
 
                 SVProgressHUD.dismiss()
+
+                UIApplication.shared.endIgnoringInteractionEvents()
 
                 UIAlertController(error: error!).show()
 
@@ -151,8 +153,6 @@ class FirebaseManager {
 
             // MARK: User log out Firebase successfully, start to log out with Quickblox.
 
-//            userManager.isFirebaseLogin = false
-
             SVProgressHUD.show(withStatus: "Disconnected from chat service.")
 
             QBManager().logOut()
@@ -162,6 +162,8 @@ class FirebaseManager {
             // MARK: User failed to log out with Firebase.
 
             SVProgressHUD.dismiss()
+
+            UIApplication.shared.endIgnoringInteractionEvents()
 
             UIAlertController(error: error).show()
 

@@ -37,10 +37,6 @@ class UserManager {
 
     var friendsWithKorean: [User] = []
 
-//    var isFirebaseLogin: Bool = false
-//
-//    var isQuickbloxLogin: Bool = false
-
     var isDiscovering: Bool = false
 
     var discoveredLanguage = ""
@@ -49,11 +45,15 @@ class UserManager {
 
     func logIn(withEmail email: String, withPassword pwd: String) {
 
+        UIApplication.shared.beginIgnoringInteractionEvents()
+
         FirebaseManager().logIn(withEmail: email, withPassword: pwd)
 
     }
 
     func signUP(name: String, withEmail email: String, withPassword pwd: String) {
+
+        UIApplication.shared.beginIgnoringInteractionEvents()
 
         FirebaseManager().signUp(name: name, withEmail: email, withPassword: pwd)
 
@@ -70,6 +70,8 @@ class UserManager {
     }
 
     func logOut() {
+
+        UIApplication.shared.beginIgnoringInteractionEvents()
 
         FirebaseManager().logOut()
 

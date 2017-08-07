@@ -32,8 +32,6 @@ class QBManager {
 
             guard let okUser = user else { return }
 
-//            self.userManager.isQuickbloxLogin = true
-
             okUser.password = password
 
             QBChat.instance().connect(with: okUser, completion: { (error) in
@@ -44,17 +42,23 @@ class QBManager {
 
                     SVProgressHUD.dismiss()
 
+                    UIApplication.shared.endIgnoringInteractionEvents()
+
                     UserManager.shared.fetchUserData()
-                    
+
                     UserDefaults.standard.set(email, forKey: "email")
-                    
+
                     UserDefaults.standard.set(password, forKey: "password")
-                    
+
                     UserDefaults.standard.synchronize()
 
                     let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainTabVC")
 
                     AppDelegate.shared.window?.rootViewController = mainTabVC
+
+                } else {
+
+                    // MARK: Failed to connect chat service.
 
                 }
 
@@ -65,6 +69,8 @@ class QBManager {
             // MARK: User failed to login.
 
             SVProgressHUD.dismiss()
+
+            UIApplication.shared.endIgnoringInteractionEvents()
 
             let error = response.error?.error
 
@@ -80,20 +86,46 @@ class QBManager {
 
         QBRequest.logOut(successBlock: { (response) in
 
-            // MARK: User Log out successfully.
-            
-//            self.userManager.isQuickbloxLogin = false
+            QBChat.instance().disconnect(completionBlock: { (error) in
 
-            UserManager.shared.currentUser = nil
+                if error == nil {
+
+                    // MARK: User Log out successfully.
+
+                    SVProgressHUD.dismiss()
+
+                    UIApplication.shared.endIgnoringInteractionEvents()
+
+                    let loginVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginVC")
+
+                    AppDelegate.shared.window?.rootViewController = loginVC
+
+                    UserManager.shared.currentUser = nil
+
+                } else {
+
+                    // MARK: User failed to log out with chat service.
+
+                    SVProgressHUD.dismiss()
+
+                    UIApplication.shared.endIgnoringInteractionEvents()
+
+                    UIAlertController(error: error!).show()
+
+                }
+
+            })
 
         }) { (response) in
-            
+
             // MARK: User failed to log out with Quickblox
 
             SVProgressHUD.dismiss()
 
+            UIApplication.shared.endIgnoringInteractionEvents()
+
             let error = response.error?.error
-            
+
             UIAlertController(error: error!).show()
 
         }
@@ -133,6 +165,8 @@ class QBManager {
             // MARK: User failed to sign up a new account.
 
             SVProgressHUD.dismiss()
+
+            UIApplication.shared.endIgnoringInteractionEvents()
 
             let error = response.error?.error
 

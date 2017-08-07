@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let email = userToken["email"],
             let password = userToken["password"] else { return true }
 
-        FirebaseManager().logIn(withEmail: email, withPassword: password)
+        UserManager.shared.logIn(withEmail: email, withPassword: password)
 
         SVProgressHUD.show(withStatus: "Token loadded successfully, start to log in.")
 
