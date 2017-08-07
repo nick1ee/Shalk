@@ -20,8 +20,6 @@ class ShakeViewController: UIViewController {
 
     let qbManager = QBManager.shared
 
-    let fbManager = FirebaseManager()
-
     let userManager = UserManager.shared
 
     var names = UIImage.names
@@ -30,9 +28,9 @@ class ShakeViewController: UIViewController {
 
     var opponent: User?
 
-    var selectedLanguage: String = ""
+//    var selectedLanguage: String = ""
 
-    var isDiscovering: Bool = false
+//    var isDiscovering: Bool = false
 
     @IBOutlet weak var loadingView: NVActivityIndicatorView!
 
@@ -61,7 +59,7 @@ class ShakeViewController: UIViewController {
 
         labelSearching.isHidden = true
 
-        rtcManager.add(self)
+//        rtcManager.add(self)
 
         QBManager.shared.audioManager.initialize()
 
@@ -80,6 +78,8 @@ class ShakeViewController: UIViewController {
 
         labelSearching.isHidden = true
 
+        UserManager.shared.isDiscovering = false
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -89,7 +89,7 @@ class ShakeViewController: UIViewController {
 
         userManager.opponent = nil
 
-        isDiscovering = false
+        UserManager.shared.isDiscovering = false
 
         FirebaseManager().fetchFriendList()
 
@@ -97,9 +97,9 @@ class ShakeViewController: UIViewController {
 
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
 
-        if isDiscovering == false {
+        if UserManager.shared.isDiscovering == false {
 
-            isDiscovering = true
+            UserManager.shared.isDiscovering = true
 
             if motion == .motionShake {
 
@@ -113,7 +113,7 @@ class ShakeViewController: UIViewController {
 
                 }
 
-                self.selectedLanguage = selectedLanguage
+                UserManager.shared.discoveredLanguage = selectedLanguage
 
                 // MARK: Start pairing...
 
@@ -123,7 +123,7 @@ class ShakeViewController: UIViewController {
 
                 labelSearching.isHidden = false
 
-                fbManager.fetchChannel(withLang: selectedLanguage)
+                FirebaseManager().fetchChannel(withLang: selectedLanguage)
 
             }
 
@@ -173,85 +173,85 @@ class ShakeViewController: UIViewController {
 
 }
 
-extension ShakeViewController: QBRTCClientDelegate {
-
-    func didReceiveNewSession(_ session: QBRTCSession, userInfo: [String : String]? = nil) {
-
-        if qbManager.session != nil {
-
-            let userInfo = ["key": "value"]
-
-            session.rejectCall(userInfo)
-
-        } else {
-
-            do {
-
-                qbManager.session = session
-
-                userManager.opponent = try User.init(json: userInfo!)
-
-                qbManager.acceptCall()
-
-                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-
-                self.performSegue(withIdentifier: "audioCall", sender: nil)
-
-            } catch let error {
-
-                // TODO: Error handling
-
-                print("=======================================", error.localizedDescription)
-
-            }
-        }
-    }
-
-    func session(_ session: QBRTCBaseSession, receivedRemoteAudioTrack audioTrack: QBRTCAudioTrack, fromUser userID: NSNumber) {
-
-        audioTrack.isEnabled = true
-
-    }
-
-    func session(_ session: QBRTCSession, acceptedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
-
-        userManager.isConnected = true
-
-        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-
-    }
-
-    func session(_ session: QBRTCBaseSession, connectedToUser userID: NSNumber) {
-
-        self.performSegue(withIdentifier: "audioCall", sender: nil)
-
-    }
-
-    func sessionDidClose(_ session: QBRTCSession) {
-
-        qbManager.session = nil
-
-    }
-
-    func session(_ session: QBRTCSession, rejectedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
-
-        fbManager.fetchChannel(withLang: selectedLanguage)
-
-    }
-
-    func session(_ session: QBRTCSession, hungUpByUser userID: NSNumber, userInfo: [String : String]? = nil) {
-
-        // MARK: Received a hung up signal from user.
-
-        guard let info = userInfo else { return }
-
-//        print("-------------- user info -------------", userInfo)
-
-        self.receivedEndCallwithFriendRequest(withInfo: info)
-
-    }
-
-}
+//extension ShakeViewController: QBRTCClientDelegate {
+//
+//    func didReceiveNewSession(_ session: QBRTCSession, userInfo: [String : String]? = nil) {
+//
+//        if qbManager.session != nil {
+//
+//            let userInfo = ["key": "value"]
+//
+//            session.rejectCall(userInfo)
+//
+//        } else {
+//
+//            do {
+//
+//                qbManager.session = session
+//
+//                userManager.opponent = try User.init(json: userInfo!)
+//
+//                qbManager.acceptCall()
+//
+//                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+//
+//                self.performSegue(withIdentifier: "callDiscovered", sender: nil)
+//
+//            } catch let error {
+//
+//                // TODO: Error handling
+//
+//                print("=======================================", error.localizedDescription)
+//
+//            }
+//        }
+//    }
+//
+//    func session(_ session: QBRTCBaseSession, receivedRemoteAudioTrack audioTrack: QBRTCAudioTrack, fromUser userID: NSNumber) {
+//
+//        audioTrack.isEnabled = true
+//
+//    }
+//
+//    func session(_ session: QBRTCSession, acceptedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
+//
+//        userManager.isConnected = true
+//
+//        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+//
+//    }
+//
+//    func session(_ session: QBRTCBaseSession, connectedToUser userID: NSNumber) {
+//
+//        self.performSegue(withIdentifier: "callDiscovered", sender: nil)
+//
+//    }
+//
+//    func sessionDidClose(_ session: QBRTCSession) {
+//
+//        qbManager.session = nil
+//
+//    }
+//
+//    func session(_ session: QBRTCSession, rejectedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
+//
+//        FirebaseManager().fetchChannel(withLang: UserManager.shared.discoveredLanguage)
+//
+//    }
+//
+//    func session(_ session: QBRTCSession, hungUpByUser userID: NSNumber, userInfo: [String : String]? = nil) {
+//
+//        // MARK: Received a hung up signal from user.
+//
+//        guard let info = userInfo else { return }
+//
+////        print("-------------- user info -------------", userInfo)
+//
+//        self.receivedEndCallwithFriendRequest(withInfo: info)
+//
+//    }
+//
+//}
 
 // MARK: - MagneticDelegate
 extension ShakeViewController: MagneticDelegate {

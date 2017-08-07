@@ -57,6 +57,10 @@ class UserManager {
 
     var isQuickbloxLogin: Bool = false
 
+    var isDiscovering: Bool = false
+
+    var discoveredLanguage = ""
+
     var isConnected = false
 
     var qbID: Int = 0 {
@@ -133,10 +137,6 @@ class UserManager {
             withVC.performSegue(withIdentifier: "startChat", sender: nil)
 
         }
-
-    }
-
-    func fetchChatHistroy() {
 
     }
 

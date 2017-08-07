@@ -205,8 +205,6 @@ class FirebaseManager {
 
                     case .audio:
 
-                        print("PPPPPPPP", self.userManager.opponent)
-
                         self.userManager.startAudioCall()
 
                         break

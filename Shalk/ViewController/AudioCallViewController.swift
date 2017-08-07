@@ -82,7 +82,7 @@ class AudioCallViewController: UIViewController {
 
         self.dismiss(animated: true, completion: nil)
 
-        QBManager.shared.hangUpCall()
+        QBManager.shared.handUpCall()
 
         UserManager.shared.isConnected = false
 
@@ -91,53 +91,11 @@ class AudioCallViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        rtcManager.add(self)
+//        rtcManager.add(self)
 
-        QBManager.shared.audioManager.initialize()
+        qbManager.session?.localMediaStream.audioTrack.isEnabled = true
 
-        QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
-    }
-
-}
-
-extension AudioCallViewController: QBRTCClientDelegate {
-
-    func session(_ session: QBRTCBaseSession, receivedRemoteAudioTrack audioTrack: QBRTCAudioTrack, fromUser userID: NSNumber) {
-
-        // MARK: Received the remote audio track.
-
-        audioTrack.isEnabled = true
-
-    }
-
-    func session(_ session: QBRTCSession, acceptedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
-
-        // MARK: The callee accepted the call.
-
-        userManager.isConnected = true
-
-        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-
-    }
-
-    func session(_ session: QBRTCBaseSession, connectedToUser userID: NSNumber) {
-
-        // MARK: connected successfully, and get started to chat.
-
-    }
-
-    func sessionDidClose(_ session: QBRTCSession) {
-
-        // MARK: The session had been closed.
-
-        qbManager.session = nil
-
-    }
-
-    func session(_ session: QBRTCSession, rejectedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
-
-        // MARK: If user reject the call, do something here.
-
+        qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
     }
 
 }

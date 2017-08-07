@@ -10,7 +10,7 @@ import UIKit
 
 class ComingCallViewController: UIViewController {
 
-    var opponentName = ""
+    let opponent = UserManager.shared.opponent
 
     var callTypeString = ""
 
@@ -22,16 +22,38 @@ class ComingCallViewController: UIViewController {
 
     @IBAction func btnAcceptCall(_ sender: UIButton) {
 
+        QBManager.shared.acceptCall()
+
+        switch callTypeString {
+
+        case "Audio Call":
+
+            self.performSegue(withIdentifier: "acceptAudioCall", sender: nil)
+
+            self.dismiss(animated: false, completion: nil)
+
+        default:
+
+            self.performSegue(withIdentifier: "acceptVideoCall", sender: nil)
+
+            self.dismiss(animated: false, completion: nil)
+
+        }
+
     }
 
     @IBAction func btnEndCall(_ sender: UIButton) {
+
+        QBManager.shared.handUpCall()
+
+        self.dismiss(animated: true, completion: nil)
 
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        opponentNameLabel.text = opponentName
+        opponentNameLabel.text = opponent?.name
 
         callType.text = callTypeString
 

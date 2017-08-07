@@ -154,7 +154,15 @@ class QBManager {
 
     }
 
-    func hangUpCall() {
+    func handUpCall() {
+
+        self.session?.hangUp(nil)
+
+        userManager.isConnected = false
+
+    }
+
+    func leaveChannel() {
 
         var info: [String: String] = [:]
 

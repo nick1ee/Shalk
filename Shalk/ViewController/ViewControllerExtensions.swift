@@ -48,7 +48,7 @@ extension UIViewController {
 
             self.presentedViewController?.dismiss(animated: true, completion: nil)
 
-            QBManager.shared.hangUpCall()
+            QBManager.shared.leaveChannel()
 
             if info["sendRequest"] == "yes" && UserManager.shared.isSendingFriendRequest! {
 
@@ -66,7 +66,7 @@ extension UIViewController {
 
             self.presentedViewController?.dismiss(animated: true, completion: nil)
 
-            QBManager.shared.hangUpCall()
+            QBManager.shared.leaveChannel()
 
             UserManager.shared.isConnected = false
 
@@ -90,7 +90,7 @@ extension UIViewController {
 
             self.dismiss(animated: true, completion: nil)
 
-            QBManager.shared.hangUpCall()
+            QBManager.shared.leaveChannel()
 
             UserManager.shared.isConnected = false
 
@@ -102,7 +102,7 @@ extension UIViewController {
 
             self.dismiss(animated: true, completion: nil)
 
-            QBManager.shared.hangUpCall()
+            QBManager.shared.leaveChannel()
 
             UserManager.shared.isConnected = false
 

@@ -39,10 +39,23 @@ class MainTabViewController: UITabBarController {
 
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == "comingCall" {
+
+            let comingCallVC = segue.destination as? ComingCallViewController
+
+            comingCallVC?.callTypeString = callType
+
+        }
+
+    }
+
 }
 
 extension MainTabViewController: QBRTCClientDelegate {
 
+    // MARK: 收到新的連線請求
     func didReceiveNewSession(_ session: QBRTCSession, userInfo: [String : String]? = nil) {
 
         print("get in here~~~~~~~~~~~~~~~~~~~~~~")
@@ -65,6 +78,37 @@ extension MainTabViewController: QBRTCClientDelegate {
 
                 UserManager.shared.opponent = user
 
+                qbManager.session = session
+
+                // MARK: 如果使用者正在配對，則前往random call的畫面，不然則表示是好友的來電，前往commingCall的畫面
+                if UserManager.shared.isDiscovering == true {
+
+                    qbManager.acceptCall()
+
+                    AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+
+                    self.performSegue(withIdentifier: "callDiscovered", sender: nil)
+
+                } else {
+
+                    switch session.conferenceType {
+
+                    case .audio:
+
+                        callType = "Audio Call"
+
+                        self.performSegue(withIdentifier: "comingCall", sender: nil)
+
+                    case .video:
+
+                        callType = "Video Call"
+
+                        self.performSegue(withIdentifier: "comingCall", sender: nil)
+
+                    }
+
+                }
+
             } catch let error {
 
                 // TODO: Error handling
@@ -73,43 +117,60 @@ extension MainTabViewController: QBRTCClientDelegate {
 
             }
 
-            switch session.conferenceType {
-
-            case .audio:
-
-                callType = "Audio Call"
-
-                self.performSegue(withIdentifier: "comingCall", sender: nil)
-
-            case .video:
-
-                callType = "Video Call"
-
-                self.performSegue(withIdentifier: "comingCall", sender: nil)
-
-            }
-
         }
 
     }
 
+    // MARK: 收到遠端語音
+    func session(_ session: QBRTCBaseSession, receivedRemoteAudioTrack audioTrack: QBRTCAudioTrack, fromUser userID: NSNumber) {
+
+        audioTrack.isEnabled = true
+
+    }
+
+    // MARK: 電話被對方接起後
     func session(_ session: QBRTCSession, acceptedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
 
-        // MARK: The opponent has accepted the call.
+        UserManager.shared.isConnected = true
 
-        print("The call had been accepted by \(userID)")
+        UserManager.shared.isDiscovering = false
+
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
 
     }
 
+    // MARK: 連線確定與該使用者進行連接
+    func session(_ session: QBRTCBaseSession, connectedToUser userID: NSNumber) {
+
+        self.performSegue(withIdentifier: "callDiscovered", sender: nil)
+
+    }
+
+    // MARK: 連接關閉後
+    func sessionDidClose(_ session: QBRTCSession) {
+
+        qbManager.session = nil
+
+    }
+
+    // MARK: 電話被使用者拒絕
+    func session(_ session: QBRTCSession, rejectedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
+
+        FirebaseManager().fetchChannel(withLang: UserManager.shared.discoveredLanguage)
+
+    }
+
+    // MARK: 電話被使用者掛斷
     func session(_ session: QBRTCSession, hungUpByUser userID: NSNumber, userInfo: [String : String]? = nil) {
 
-        // MARK: The call had been hung up by the opponent
+        // MARK: Received a hung up signal from user.
 
-        if session.initiatorID.isEqual(to: userID) {
+        guard let info = userInfo else { return }
 
-            session.hangUp(userInfo)
+        //        print("-------------- user info -------------", userInfo)
 
-        }
+        self.receivedEndCallwithFriendRequest(withInfo: info)
+
     }
 
 }
