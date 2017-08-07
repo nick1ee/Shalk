@@ -121,6 +121,12 @@ class QBManager {
 
         session = rtcManager.createNewSession(withOpponents: opponentID, with: .audio)
 
+        session?.startCall(userInfo)
+
+    }
+
+    func captureVideo() {
+
         let videoFormat = QBRTCVideoFormat.init()
 
         videoFormat.frameRate = 30
@@ -135,13 +141,11 @@ class QBManager {
 
         self.session?.localMediaStream.videoTrack.videoCapture = self.videoCapture
 
-//        self.videoCapture!.previewLayer.frame = self.localVideoView.bounds
+        //        self.videoCapture!.previewLayer.frame = self.localVideoView.bounds
 
         self.videoCapture!.startSession()
 
-//        self.localVideoView.layer.insertSublayer(videoCapture!.previewLayer, at: 0)
-
-        session?.startCall(userInfo)
+        //        self.localVideoView.layer.insertSublayer(videoCapture!.previewLayer, at: 0)
 
     }
 
@@ -157,6 +161,8 @@ class QBManager {
         let userInfo = userManager.currentUser?.toDictionary()
 
         session = rtcManager.createNewSession(withOpponents: opponentID, with: .video)
+
+        captureVideo()
 
         session?.startCall(userInfo)
 
