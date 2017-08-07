@@ -15,23 +15,7 @@ class UserManager {
 
     static let shared = UserManager()
 
-    var currentUser: User? {
-
-        didSet {
-
-            if self.isFirebaseLogin == false && self.isQuickbloxLogin == false {
-
-                let loginVC = UIStoryboard(name: "Main",
-
-                                           bundle: nil).instantiateViewController(withIdentifier: "loginVC")
-
-                AppDelegate.shared.window?.rootViewController = loginVC
-
-            }
-
-        }
-
-    }
+    var currentUser: User?
 
     var opponent: User?
 
@@ -53,9 +37,9 @@ class UserManager {
 
     var friendsWithKorean: [User] = []
 
-    var isFirebaseLogin: Bool = false
-
-    var isQuickbloxLogin: Bool = false
+//    var isFirebaseLogin: Bool = false
+//
+//    var isQuickbloxLogin: Bool = false
 
     var isDiscovering: Bool = false
 
@@ -63,23 +47,25 @@ class UserManager {
 
     var isConnected = false
 
-    var qbID: Int = 0 {
+    func logIn(withEmail email: String, withPassword pwd: String) {
 
-        didSet {
+        FirebaseManager().logIn(withEmail: email, withPassword: pwd)
 
-            if qbID != 0 {
+    }
 
-                currentUser?.quickbloxId = String(qbID)
+    func signUP(name: String, withEmail email: String, withPassword pwd: String) {
 
-                let userDict = currentUser?.toDictionary()
+        FirebaseManager().signUp(name: name, withEmail: email, withPassword: pwd)
 
-                guard let uid = currentUser?.uid else { return }
+    }
 
-                self.ref.child("users").child(uid).setValue(userDict)
+    func registerProfile() {
 
-            }
+        let userDict = currentUser?.toDictionary()
 
-        }
+        guard let uid = currentUser?.uid else { return }
+
+        FirebaseManager().registerProfile(uid: uid, userDict: userDict!)
 
     }
 

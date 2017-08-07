@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class RegisterViewController: UIViewController {
 
@@ -28,7 +29,9 @@ class RegisterViewController: UIViewController {
 
             guard let name = inputUserName.text, let email = inputEmail.text, let pwd = inputPassword.text else { return }
 
-            FirebaseManager().signUp(self, withUser: name, withEmail: email, withPassword: pwd)
+            SVProgressHUD.show(withStatus: "Registering a new account")
+
+            UserManager.shared.signUP(name: name, withEmail: email, withPassword: pwd)
 
         }
 

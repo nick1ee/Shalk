@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class ProfileViewController: UIViewController {
 
@@ -27,8 +28,16 @@ class ProfileViewController: UIViewController {
     }
 
     @IBAction func btnLogOut(_ sender: UIBarButtonItem) {
-
-        UserManager.shared.logOut()
+        
+        self.pushLogOutMessage { (action) in
+            
+            // MARK: User log out.
+            
+            SVProgressHUD.show(withStatus: "Start to log out.")
+            
+            UserManager.shared.logOut()
+            
+        }
 
     }
 

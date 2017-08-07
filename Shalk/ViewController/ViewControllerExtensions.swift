@@ -22,13 +22,13 @@ extension UIViewController {
 
     }
 
-    func pushLogOutMessage(title: String, message: String, handle: ((UIAlertAction) -> Void)?) {
+    func pushLogOutMessage(handle: ((UIAlertAction) -> Void)?) {
 
-        let alertController = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
+        let alertController = UIAlertController.init(title: "Notification", message: "Do you want to log out this account?", preferredStyle: .alert)
 
-        let okAction = UIAlertAction.init(title: "OK", style: .default, handler: handle)
+        let okAction = UIAlertAction.init(title: "Confirm", style: .default, handler: handle)
 
-        let cancelAction = UIAlertAction.init(title: "Cancel", style: .default, handler: handle)
+        let cancelAction = UIAlertAction.init(title: "Cancel", style: .default, handler: nil)
 
         alertController.addAction(okAction)
 

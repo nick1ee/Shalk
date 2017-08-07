@@ -8,6 +8,7 @@
 
 import UIKit
 import SwifterSwift
+import SVProgressHUD
 
 class LoginViewController: UIViewController {
 
@@ -23,7 +24,11 @@ class LoginViewController: UIViewController {
 
             guard let email = inputEmail.text, let pwd = inputPassword.text else { return }
 
-            FirebaseManager().logIn(self, withEmail: email, withPassword: pwd)
+            SVProgressHUD.show(withStatus: "Start to log in")
+
+            // MARK: User start to log in.
+
+            UserManager.shared.logIn(withEmail: email, withPassword: pwd)
 
         }
 

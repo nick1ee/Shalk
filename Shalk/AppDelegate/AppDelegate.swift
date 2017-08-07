@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import Quickblox
 import QuickbloxWebRTC
+import SVProgressHUD
 import IQKeyboardManagerSwift
 
 @UIApplicationMain
@@ -38,6 +39,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
+
+        guard
+            let userToken = self.checkUserToken(),
+            let email = userToken["email"],
+            let password = userToken["password"] else { return true }
+
+        FirebaseManager().logIn(withEmail: email, withPassword: password)
+
+        SVProgressHUD.show(withStatus: "Token loadded successfully, start to log in.")
 
         return true
     }

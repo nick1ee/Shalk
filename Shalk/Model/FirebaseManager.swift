@@ -6,8 +6,8 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
-import Foundation
 import Firebase
+import SVProgressHUD
 
 protocol FirebaseManagerFriendDelegate: class {
 
@@ -59,7 +59,7 @@ class FirebaseManager {
 
     let userManager = UserManager.shared
 
-    func logIn(_ withVC: UIViewController, withEmail email: String, withPassword pwd: String) {
+    func logIn(withEmail email: String, withPassword pwd: String) {
 
         // MARK: Start to login Firebase
 
@@ -67,34 +67,21 @@ class FirebaseManager {
 
             if error != nil {
 
-                // TODO: Error handling
-                print(error?.localizedDescription ?? "No error data")
+                // MARK: User failed to sign in on Firebase.
+
+                SVProgressHUD.dismiss()
+
+                UIAlertController(error: error!).show()
 
             }
 
             if user != nil {
 
+                // MARK: User Signed in Firebase successfully, start sign in with Quickblox.
+
+//                UserManager.shared.isFirebaseLogin = true
+
                 QBManager().logIn(withEmail: email, withPassword: pwd)
-
-                // MARK: User Signed in successfully.
-
-                UserManager.shared.isFirebaseLogin = true
-
-                withVC.pushLoginMessage(title: "Successfully",
-
-                                        message: "You have signed in successfully! Click OK to main page. ",
-
-                                        handle: { _ in
-
-                                            self.userManager.fetchUserData()
-
-                                            let mainTabVC = UIStoryboard(name: "Main",
-
-                                                                         bundle: nil).instantiateViewController(withIdentifier: "mainTabVC")
-
-                                            AppDelegate.shared.window?.rootViewController = mainTabVC
-
-                })
 
             }
 
@@ -102,43 +89,37 @@ class FirebaseManager {
 
     }
 
-    func signUp(_ withVC: UIViewController, withUser name: String, withEmail email: String, withPassword pwd: String) {
+    func signUp(name: String, withEmail email: String, withPassword pwd: String) {
 
         Auth.auth().createUser(withEmail: email, password: pwd) { (user, error) in
 
             if error != nil {
 
-                // TODO: Error handling
-                print(error?.localizedDescription ?? "No error data")
+                // MARK: User failed to sign up on Firebase.
+
+                SVProgressHUD.dismiss()
+
+                UIAlertController(error: error!).show()
 
             }
 
             guard let okUser = user else { return }
 
-            QBManager().signUp(withEmail: email, withPassword: pwd)
+            // MARK: User sign up on Firebase successfully, start sign up on Quickblox.
 
-            let currentUser = User.init(name: name, uid: okUser.uid, email: email, quickbloxId: "", imageUrl: "null", intro: "null")
+            SVProgressHUD.show(withStatus: "Registering on chat service.")
 
-            self.userManager.currentUser = currentUser
+            QBManager().signUp(name: name, uid: okUser.uid, withEmail: email, withPassword: pwd)
 
-            let request = okUser.createProfileChangeRequest()
+                self.logIn(withEmail: email, withPassword: pwd)
 
-            request.displayName = name
-
-            request.commitChanges(completion: { (error) in
-
-                if error != nil {
-
-                    // TODO: Error handling
-                    print(error?.localizedDescription ?? "No error data")
-
-                }
-
-                self.logIn(withVC, withEmail: email, withPassword: pwd)
-
-            })
+            }
 
         }
+
+    func registerProfile(uid: String, userDict: [String: String]) {
+
+        ref?.child("users").child(uid).setValue(userDict)
 
     }
 
@@ -168,12 +149,21 @@ class FirebaseManager {
 
             try Auth.auth().signOut()
 
+            // MARK: User log out Firebase successfully, start to log out with Quickblox.
+
+//            userManager.isFirebaseLogin = false
+
+            SVProgressHUD.show(withStatus: "Disconnected from chat service.")
+
             QBManager().logOut()
 
         } catch let error {
 
-            // TODO: Error handling
-            print(error.localizedDescription)
+            // MARK: User failed to log out with Firebase.
+
+            SVProgressHUD.dismiss()
+
+            UIAlertController(error: error).show()
 
         }
 

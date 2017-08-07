@@ -6,9 +6,9 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
-import Foundation
 import Quickblox
 import QuickbloxWebRTC
+import SVProgressHUD
 
 class QBManager {
 
@@ -32,7 +32,7 @@ class QBManager {
 
             guard let okUser = user else { return }
 
-            self.userManager.isQuickbloxLogin = true
+//            self.userManager.isQuickbloxLogin = true
 
             okUser.password = password
 
@@ -40,7 +40,21 @@ class QBManager {
 
                 if error == nil {
 
-                    print("user login quickblox successfully")
+                    // MARK: User sign in with Quickblox successfully.
+
+                    SVProgressHUD.dismiss()
+
+                    UserManager.shared.fetchUserData()
+                    
+                    UserDefaults.standard.set(email, forKey: "email")
+                    
+                    UserDefaults.standard.set(password, forKey: "password")
+                    
+                    UserDefaults.standard.synchronize()
+
+                    let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainTabVC")
+
+                    AppDelegate.shared.window?.rootViewController = mainTabVC
 
                 }
 
@@ -48,13 +62,17 @@ class QBManager {
 
         }) { (response) in
 
-            // TODO: User failed to loggin.
+            // MARK: User failed to login.
+
+            SVProgressHUD.dismiss()
 
             let error = response.error?.error
 
-            print(error?.localizedDescription ?? "No error data")
+            UIAlertController(error: error!).show()
 
         }
+
+        SVProgressHUD.show(withStatus: "Connecting to chat service.")
 
     }
 
@@ -63,22 +81,28 @@ class QBManager {
         QBRequest.logOut(successBlock: { (response) in
 
             // MARK: User Log out successfully.
-            self.userManager.isQuickbloxLogin = false
+            
+//            self.userManager.isQuickbloxLogin = false
 
             UserManager.shared.currentUser = nil
 
         }) { (response) in
+            
+            // MARK: User failed to log out with Quickblox
 
-            // TODO: Error handling
+            SVProgressHUD.dismiss()
 
             let error = response.error?.error
-            print(error?.localizedDescription)
+            
+            UIAlertController(error: error!).show()
 
         }
 
     }
 
-    func signUp(withEmail email: String, withPassword password: String) {
+    func signUp(name: String, uid: String, withEmail email: String, withPassword password: String) {
+
+        // MARK: Start to sign up on Quickblox
 
         let signUpUser = QBUUser()
 
@@ -86,23 +110,33 @@ class QBManager {
 
         signUpUser.password = password
 
-        print("~~~~~~~~~~~~~~~~~~~~~~~~", signUpUser)
-
         QBRequest.signUp(signUpUser, successBlock: {(response, user) in
 
             // MARK: User signed up a new account on Quickblox successfully.
 
-            guard let okUser = user else { return }
+            guard let qbUser = user else { return }
 
-            self.userManager.qbID = Int(okUser.id)
+            SVProgressHUD.show(withStatus: "Sign up successfully, start to log in.")
+
+            let qbIdToString = String(qbUser.id)
+
+            let okUser = User.init(name: name, uid: uid, email: email, quickbloxId: qbIdToString)
+
+            UserManager.shared.currentUser = okUser
+
+            UserManager.shared.registerProfile()
+
+            FirebaseManager().logIn(withEmail: email, withPassword: password)
 
         }) { (response) in
 
-            // TODO: User failed to sign up a new account.
+            // MARK: User failed to sign up a new account.
+
+            SVProgressHUD.dismiss()
 
             let error = response.error?.error
 
-            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", error?.localizedDescription ?? "No error data")
+            UIAlertController(error: error!).show()
 
         }
 

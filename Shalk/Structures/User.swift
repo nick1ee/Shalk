@@ -108,6 +108,22 @@ extension User {
 
     }
 
+    init(name: String, uid: String, email: String, quickbloxId: String) {
+
+        self.name = name
+
+        self.uid = uid
+
+        self.email = email
+
+        self.quickbloxId = quickbloxId
+
+        self.imageUrl = "null"
+
+        self.intro = "null"
+
+    }
+
     func toDictionary() -> [String: String] {
 
         let userInfo: [String: String] = [Schema.name: self.name,
