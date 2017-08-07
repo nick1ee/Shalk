@@ -47,6 +47,7 @@ PODS:
   - QuickBlox (2.9.2)
   - Quickblox-WebRTC (2.6.1):
     - QuickBlox (>= 2.7)
+  - SVProgressHUD (2.1.2)
   - SwifterSwift (3.1.0):
     - SwifterSwift/Cocoa (= 3.1.0)
     - SwifterSwift/Foundation (= 3.1.0)
@@ -65,6 +66,7 @@ DEPENDENCIES:
   - NVActivityIndicatorView
   - QuickBlox (~> 2.9.2)
   - Quickblox-WebRTC (~> 2.6.1)
+  - SVProgressHUD
   - SwifterSwift
   - SwiftLint
 
@@ -83,9 +85,10 @@ SPEC CHECKSUMS:
   NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
   QuickBlox: 67cafa5d7b237db7344c506ca5dc38365180cacb
   Quickblox-WebRTC: 496447d228663836d6372cdb8e63affa46fe5039
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwifterSwift: f84eb7308f7742724b3cbf84283ce00f7c06d7fc
   SwiftLint: f60095dc173a3f3ec505bb34f5229c3dfd779a54
 
-PODFILE CHECKSUM: 4e64f78d40ad45767f7eedadbab90c85408acfa0
+PODFILE CHECKSUM: ba8bb232a81151164369c4d015647aba25b155e2
 
 COCOAPODS: 1.2.0
