@@ -121,10 +121,9 @@ extension UIViewController {
         let alertController = UIAlertController.init(title: "Audio Call", message: "Do you want to start an audio call with \(name)?", preferredStyle: .alert)
 
         let okAction = UIAlertAction.init(title: "Confirm", style: .default) { (_) in
-            
-            FirebaseManager().fetchUserProfile(withUid: uid, type: .opponent
-                , call: .audio)
-            
+
+            FirebaseManager().fetchUserProfile(withUid: uid, type: .opponent, call: .audio)
+
             self.performSegue(withIdentifier: "audioCall", sender: nil)
 
         }
@@ -146,10 +145,9 @@ extension UIViewController {
         let alertController = UIAlertController.init(title: "Video Call", message: "Do you want to start an video call with \(name)?", preferredStyle: .alert)
 
         let okAction = UIAlertAction.init(title: "Confirm", style: .default) { (_) in
-            
-            FirebaseManager().fetchUserProfile(withUid: uid, type: .opponent
-                , call: .video)
-            
+
+            FirebaseManager().fetchUserProfile(withUid: uid, type: .opponent, call: .video)
+
             self.performSegue(withIdentifier: "videoCall", sender: nil)
 
         }

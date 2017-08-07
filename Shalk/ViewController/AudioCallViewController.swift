@@ -12,15 +12,79 @@ import QuickbloxWebRTC
 
 class AudioCallViewController: UIViewController {
 
+    var isMicrophoneEnabled: Bool = true
+
+    var isSpeakerEnabled: Bool = false
+
     let qbManager = QBManager.shared
 
     let userManager = UserManager.shared
 
     let rtcManager = QBRTCClient.instance()
 
-    @IBAction func btnEndCall(_ sender: UIButton) {
+    @IBOutlet weak var outletMicrophone: UIButton!
+
+    @IBOutlet weak var outletSpeaker: UIButton!
+
+    @IBAction func btnMicrophone(_ sender: UIButton) {
+
+        if isMicrophoneEnabled {
+
+            // MARK: User muted the local microphone
+
+            isMicrophoneEnabled = false
+
+            outletMicrophone.setImage(UIImage(named: "icon-nomic.png"), for: .normal)
+
+            qbManager.session?.localMediaStream.audioTrack.isEnabled = false
+
+        } else {
+
+            // MARK: User enabled the local microphone
+
+            isMicrophoneEnabled = true
+
+            outletMicrophone.setImage(UIImage(named: "icon-mic.png"), for: .normal)
+
+            qbManager.session?.localMediaStream.audioTrack.isEnabled = true
+
+        }
+
+    }
+
+    @IBAction func btnSpeaker(_ sender: UIButton) {
+
+        if isSpeakerEnabled == false {
+
+            // MARK: User enable the speaker
+
+            isSpeakerEnabled = true
+
+            outletSpeaker.setImage(UIImage(named: "icon-speaker.png"), for: .normal)
+
+            qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.speaker
+
+        } else {
+
+            // MARK: User disable the speaker
+
+            isSpeakerEnabled = false
+
+            outletSpeaker.setImage(UIImage(named: "icon-nospeaker.png"), for: .normal)
+
+            qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
+
+        }
+
+    }
+
+    @IBAction func btnHungUp(_ sender: UIButton) {
 
         self.dismiss(animated: true, completion: nil)
+
+        QBManager.shared.hangUpCall()
+
+        UserManager.shared.isConnected = false
 
     }
 
@@ -37,40 +101,6 @@ class AudioCallViewController: UIViewController {
 }
 
 extension AudioCallViewController: QBRTCClientDelegate {
-
-    func didReceiveNewSession(_ session: QBRTCSession, userInfo: [String : String]? = nil) {
-
-        // MARK: received other's call
-
-        if qbManager.session != nil {
-
-            let userInfo = ["key": "value"]
-
-            session.rejectCall(userInfo)
-
-        } else {
-
-            do {
-
-                qbManager.session = session
-
-                userManager.opponent = try User.init(json: userInfo!)
-
-                qbManager.acceptCall()
-
-                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-
-                self.performSegue(withIdentifier: "audioCall", sender: nil)
-
-            } catch let error {
-
-                // TODO: Error handling
-
-                print("=======================================", error.localizedDescription)
-
-            }
-        }
-    }
 
     func session(_ session: QBRTCBaseSession, receivedRemoteAudioTrack audioTrack: QBRTCAudioTrack, fromUser userID: NSNumber) {
 
@@ -107,18 +137,6 @@ extension AudioCallViewController: QBRTCClientDelegate {
     func session(_ session: QBRTCSession, rejectedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
 
         // MARK: If user reject the call, do something here.
-
-    }
-
-    func session(_ session: QBRTCSession, hungUpByUser userID: NSNumber, userInfo: [String : String]? = nil) {
-
-        // MARK: Received a hung up signal from user.
-
-        guard let info = userInfo else { return }
-
-        //        print("-------------- user info -------------", userInfo)
-
-        self.receivedEndCallwithFriendRequest(withInfo: info)
 
     }
 

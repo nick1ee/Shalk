@@ -205,6 +205,8 @@ class FirebaseManager {
 
                     case .audio:
 
+                        print("PPPPPPPP", self.userManager.opponent)
+
                         self.userManager.startAudioCall()
 
                         break
@@ -258,6 +260,8 @@ class FirebaseManager {
                         self.userManager.roomKey = roomkey
 
                         self.userManager.language = language
+
+                        self.updateChannel(withRoomKey: roomkey, withLang: language)
 
                         self.fetchUserProfile(withUid: channel.owner, type: .opponent, call: .audio)
 

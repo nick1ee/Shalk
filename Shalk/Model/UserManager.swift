@@ -57,19 +57,7 @@ class UserManager {
 
     var isQuickbloxLogin: Bool = false
 
-    var isConnected = false {
-
-        didSet {
-
-            if isConnected == true {
-
-                FirebaseManager().updateChannel(withRoomKey: self.roomKey!, withLang: language!)
-
-            }
-
-        }
-
-    }
+    var isConnected = false
 
     var qbID: Int = 0 {
 
