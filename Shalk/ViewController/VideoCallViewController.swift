@@ -12,7 +12,15 @@ import QuickbloxWebRTC
 
 class VideoCallViewController: UIViewController {
 
+    var isCameraEnabled = true
+
+    var isMicrophoneEnabled = true
+
+    let rtcManager = QBRTCClient.instance()
+
     var videoCapture: QBRTCCameraCapture?
+
+    let qbManager = QBManager.shared
 
     @IBOutlet weak var remoteVideoView: QBRTCRemoteVideoView!
 
@@ -26,7 +34,29 @@ class VideoCallViewController: UIViewController {
 
     }
 
-    @IBAction func btnSpeaker(_ sender: UIButton) {
+    @IBAction func btnMicrophone(_ sender: UIButton) {
+
+        if isMicrophoneEnabled {
+
+            // MARK: User muted the local microphone
+
+            isMicrophoneEnabled = false
+
+            outletMicrophone.setImage(UIImage(named: "icon-nomic.png"), for: .normal)
+
+            qbManager.session?.localMediaStream.audioTrack.isEnabled = false
+
+        } else {
+
+            // MARK: User enabled the local microphone
+
+            isMicrophoneEnabled = true
+
+            outletMicrophone.setImage(UIImage(named: "icon-mic.png"), for: .normal)
+
+            qbManager.session?.localMediaStream.audioTrack.isEnabled = true
+
+        }
 
     }
 
@@ -34,12 +64,18 @@ class VideoCallViewController: UIViewController {
 
         self.dismiss(animated: true, completion: nil)
 
+        QBManager.shared.handUpCall()
+
+        UserManager.shared.isConnected = false
+
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         captureVideoAndAudio()
+
+        rtcManager.add(self)
 
     }
 
@@ -80,16 +116,6 @@ extension VideoCallViewController: QBRTCClientDelegate {
         self.remoteVideoView.setVideoTrack(videoTrack)
 
         videoTrack.isEnabled = true
-
-    }
-
-    func session(_ session: QBRTCSession, receivedRemoteAudioTrack audioTrack: QBRTCAudioTrack, fromUser userID: NSNumber) {
-
-        print("Gotcha Audio")
-
-        // MARK: Received remote audio track
-
-        audioTrack.isEnabled = true
 
     }
 

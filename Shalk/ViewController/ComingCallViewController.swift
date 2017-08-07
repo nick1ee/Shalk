@@ -10,6 +10,8 @@ import UIKit
 
 class ComingCallViewController: UIViewController {
 
+    var isFinishCall: Bool = false
+
     let opponent = UserManager.shared.opponent
 
     var callTypeString = ""
@@ -30,13 +32,13 @@ class ComingCallViewController: UIViewController {
 
             self.performSegue(withIdentifier: "acceptAudioCall", sender: nil)
 
-            self.dismiss(animated: false, completion: nil)
+            self.isFinishCall = true
 
         default:
 
             self.performSegue(withIdentifier: "acceptVideoCall", sender: nil)
 
-            self.dismiss(animated: false, completion: nil)
+            self.isFinishCall = true
 
         }
 
@@ -56,6 +58,19 @@ class ComingCallViewController: UIViewController {
         opponentNameLabel.text = opponent?.name
 
         callType.text = callTypeString
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if isFinishCall == true {
+
+            self.dismiss(animated: true, completion: nil)
+
+            isFinishCall = false
+
+        }
 
     }
 

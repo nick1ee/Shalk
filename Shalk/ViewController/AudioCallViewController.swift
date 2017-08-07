@@ -91,8 +91,6 @@ class AudioCallViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        rtcManager.add(self)
-
         qbManager.session?.localMediaStream.audioTrack.isEnabled = true
 
         qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver

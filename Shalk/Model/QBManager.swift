@@ -20,7 +20,7 @@ class QBManager {
 
     let userManager = UserManager.shared
 
-//    var opponent: Opponent?
+    var videoCapture: QBRTCCameraCapture?
 
     var session: QBRTCSession?
 
@@ -120,6 +120,26 @@ class QBManager {
         let userInfo = userManager.currentUser?.toDictionary()
 
         session = rtcManager.createNewSession(withOpponents: opponentID, with: .audio)
+
+        let videoFormat = QBRTCVideoFormat.init()
+
+        videoFormat.frameRate = 30
+
+        videoFormat.pixelFormat = QBRTCPixelFormat.format420f
+
+        videoFormat.width = 640
+
+        videoFormat.height = 480
+
+        self.videoCapture = QBRTCCameraCapture.init(videoFormat: videoFormat, position: AVCaptureDevicePosition.front)
+
+        self.session?.localMediaStream.videoTrack.videoCapture = self.videoCapture
+
+//        self.videoCapture!.previewLayer.frame = self.localVideoView.bounds
+
+        self.videoCapture!.startSession()
+
+//        self.localVideoView.layer.insertSublayer(videoCapture!.previewLayer, at: 0)
 
         session?.startCall(userInfo)
 
