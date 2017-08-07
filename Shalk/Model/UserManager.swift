@@ -15,7 +15,23 @@ class UserManager {
 
     static let shared = UserManager()
 
-    var currentUser: User?
+    var currentUser: User? {
+
+        didSet {
+
+            if self.isFirebaseLogin == false && self.isQuickbloxLogin == false {
+
+                let loginVC = UIStoryboard(name: "Main",
+
+                                           bundle: nil).instantiateViewController(withIdentifier: "loginVC")
+
+                AppDelegate.shared.window?.rootViewController = loginVC
+
+            }
+
+        }
+
+    }
 
     var opponent: User?
 
@@ -36,6 +52,10 @@ class UserManager {
     var friendsWithJapanese: [User] = []
 
     var friendsWithKorean: [User] = []
+
+    var isFirebaseLogin: Bool = false
+
+    var isQuickbloxLogin: Bool = false
 
     var isConnected = false {
 
@@ -71,17 +91,28 @@ class UserManager {
 
     }
 
+    func logOut() {
+
+        FirebaseManager().logOut()
+
+    }
+
     func fetchUserData() {
 
         guard let userID = Auth.auth().currentUser?.uid else { return }
 
-        FirebaseManager().fetchUserProfile(withUid: userID, type: .myself)
+        FirebaseManager().fetchUserProfile(withUid: userID, type: .myself, call: CallType.audio)
 
     }
 
-    func joinChannel() {
+    func startAudioCall() {
 
         QBManager.shared.startAudioCall()
+    }
+
+    func startVideoCall() {
+
+        QBManager.shared.startVideoCall()
 
     }
 

@@ -47,7 +47,6 @@ PODS:
   - QuickBlox (2.9.2)
   - Quickblox-WebRTC (2.6.1):
     - QuickBlox (>= 2.7)
-  - RAMAnimatedTabBarController (2.0.13)
   - SwifterSwift (3.1.0):
     - SwifterSwift/Cocoa (= 3.1.0)
     - SwifterSwift/Foundation (= 3.1.0)
@@ -66,7 +65,6 @@ DEPENDENCIES:
   - NVActivityIndicatorView
   - QuickBlox (~> 2.9.2)
   - Quickblox-WebRTC (~> 2.6.1)
-  - RAMAnimatedTabBarController (~> 2.0.13)
   - SwifterSwift
   - SwiftLint
 
@@ -85,10 +83,9 @@ SPEC CHECKSUMS:
   NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
   QuickBlox: 67cafa5d7b237db7344c506ca5dc38365180cacb
   Quickblox-WebRTC: 496447d228663836d6372cdb8e63affa46fe5039
-  RAMAnimatedTabBarController: 2510f3b66954c3f77ea1042a35d34df8f5f3b604
   SwifterSwift: f84eb7308f7742724b3cbf84283ce00f7c06d7fc
   SwiftLint: f60095dc173a3f3ec505bb34f5229c3dfd779a54
 
-PODFILE CHECKSUM: 663d27406da3c3c71950db6aceada146874e0031
+PODFILE CHECKSUM: 4e64f78d40ad45767f7eedadbab90c85408acfa0
 
 COCOAPODS: 1.2.0

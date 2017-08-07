@@ -13,6 +13,10 @@ class ChatListViewController: UIViewController {
     let fbManager = FirebaseManager()
 
     var rooms: [ChatRoom] = []
+    
+    var opponentUid = ""
+    
+    var opponentName = ""
 
     @IBOutlet weak var chatListTableView: UITableView!
 
@@ -63,11 +67,47 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         print("push~~~~~~~~")
+        
 
-        UserManager.shared.chatRoomId = rooms[indexPath.row].roomId
+        guard let myUid = UserManager.shared.currentUser?.uid else { return }
 
-        self.performSegue(withIdentifier: "goChat", sender: nil)
+        let room = rooms[indexPath.row]
 
+        if myUid == room.user1Id {
+
+            UserManager.shared.chatRoomId = room.roomId
+            
+            opponentName = room.user2Name
+            
+            opponentUid = room.user2Id
+
+            self.performSegue(withIdentifier: "goChat", sender: nil)
+
+        } else {
+
+            UserManager.shared.chatRoomId = room.roomId
+            
+            opponentName = room.user1Name
+            
+            opponentUid = room.user1Id
+
+            self.performSegue(withIdentifier: "goChat", sender: nil)
+
+        }
+
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == "goChat" {
+
+            let chatVC = segue.destination as? ChatViewController
+
+            chatVC?.opponentName = self.opponentName
+            
+            chatVC?.opponentUid = self.opponentUid
+
+        }
     }
 
 }

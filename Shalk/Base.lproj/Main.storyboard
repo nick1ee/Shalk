@@ -1102,7 +1102,7 @@
         <!--Title-->
         <scene sceneID="n7J-hb-C2W">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="qrV-HA-xDB" customClass="ChatViewController" customModule="Shalk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="qrV-HA-xDB" customClass="ChatViewController" customModule="Shalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Njk-y6-gAP"/>
                         <viewControllerLayoutGuide type="bottom" id="obZ-gS-0H4"/>
@@ -1305,10 +1305,10 @@
             </objects>
             <point key="canvasLocation" x="3345" y="-658"/>
         </scene>
-        <!--Main Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="xwK-tQ-awH">
             <objects>
-                <tabBarController storyboardIdentifier="mainTabVC" automaticallyAdjustsScrollViewInsets="NO" id="h9F-AG-JyE" customClass="MainTabBarController" customModule="Shalk" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="mainTabVC" automaticallyAdjustsScrollViewInsets="NO" id="h9F-AG-JyE" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="hDw-Ud-Ao6">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -1329,24 +1329,9 @@
         <scene sceneID="Mr9-EH-Xkt">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XGa-g4-miM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="icon-user" id="Zoj-L9-Jd7" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
-                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="number" keyPath="yOffSet">
-                                <real key="value" value="3"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                        <connections>
-                            <outlet property="animation" destination="XkI-Ho-dk7" id="Ndr-ox-OiR"/>
-                        </connections>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Profile" image="icon-user" id="Zoj-L9-Jd7"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5Sq-to-EJ9">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5Sq-to-EJ9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.24398827549999999" green="0.18944382670000001" blue="0.29701077939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1360,7 +1345,6 @@
                         <segue destination="T1v-mB-ifR" kind="relationship" relationship="rootViewController" id="Z6g-dz-c6e"/>
                     </connections>
                 </navigationController>
-                <customObject id="XkI-Ho-dk7" customClass="RAMBounceAnimation" customModule="Shalk" customModuleProvider="target"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a3I-zc-pVX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1572" y="868.51574212893559"/>
@@ -1369,24 +1353,9 @@
         <scene sceneID="F4Z-2u-Rbq">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mkS-HT-gtI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Chat" image="icon-chat" id="wxM-Hv-sf2" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
-                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="number" keyPath="yOffSet">
-                                <real key="value" value="3"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                        <connections>
-                            <outlet property="animation" destination="xyL-bR-JRH" id="LCX-my-qBx"/>
-                        </connections>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Chat" image="icon-chat" id="wxM-Hv-sf2"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="dKu-gw-DAY">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dKu-gw-DAY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.24184587599999999" green="0.18653875589999999" blue="0.29894664879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1401,7 +1370,6 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9WX-Ku-OtF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="xyL-bR-JRH" customClass="RAMBounceAnimation" customModule="Shalk" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1572" y="-657.12143928035982"/>
         </scene>
@@ -1409,21 +1377,9 @@
         <scene sceneID="SzW-tW-tSs">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="osy-gO-RLA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Shake" image="icon-shake" id="1Yc-1h-gVA" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
-                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                        <connections>
-                            <outlet property="animation" destination="QOb-ug-ddv" id="YUU-NQ-7eJ"/>
-                        </connections>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Shake" image="icon-shake" id="1Yc-1h-gVA"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GdU-fe-PRp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GdU-fe-PRp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.24398827549999999" green="0.18944382670000001" blue="0.29701077939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1437,7 +1393,6 @@
                         <segue destination="cAW-QU-5WG" kind="relationship" relationship="rootViewController" id="ZvB-JI-yJ0"/>
                     </connections>
                 </navigationController>
-                <customObject id="QOb-ug-ddv" customClass="RAMBounceAnimation" customModule="Shalk" customModuleProvider="target"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B7h-2h-5Bm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1572" y="106.59670164917542"/>
@@ -1447,7 +1402,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ysa-3g-96l" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="21y-tc-tga">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="21y-tc-tga">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.24398827549999999" green="0.18944382670000001" blue="0.29701077939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1484,6 +1439,6 @@
         <image name="icon-video" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="M4q-bF-we2"/>
+        <segue reference="xxV-J9-TX2"/>
     </inferredMetricsTieBreakers>
 </document>

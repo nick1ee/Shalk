@@ -39,6 +39,12 @@ enum UserProfile {
 
 }
 
+enum CallType {
+
+    case audio, video
+
+}
+
 class FirebaseManager {
 
     weak var friendDelegate: FirebaseManagerFriendDelegate?
@@ -71,6 +77,8 @@ class FirebaseManager {
                 QBManager().logIn(withEmail: email, withPassword: pwd)
 
                 // MARK: User Signed in successfully.
+
+                UserManager.shared.isFirebaseLogin = true
 
                 withVC.pushLoginMessage(title: "Successfully",
 
@@ -156,9 +164,22 @@ class FirebaseManager {
 
     func logOut() {
 
+        do {
+
+            try Auth.auth().signOut()
+
+            QBManager().logOut()
+
+        } catch let error {
+
+            // TODO: Error handling
+            print(error.localizedDescription)
+
+        }
+
     }
 
-    func fetchUserProfile(withUid uid: String, type: UserProfile) {
+    func fetchUserProfile(withUid uid: String, type: UserProfile, call: CallType) {
 
         ref?.child("users").child(uid).observeSingleEvent(of: .value, with: {(snapshot) in
 
@@ -180,9 +201,21 @@ class FirebaseManager {
 
                     self.userManager.opponent = user
 
-                    self.userManager.joinChannel()
+                    switch call {
 
-                    break
+                    case .audio:
+
+                        self.userManager.startAudioCall()
+
+                        break
+
+                    case .video:
+
+                        self.userManager.startVideoCall()
+
+                        break
+
+                    }
 
                 }
 
@@ -226,7 +259,7 @@ class FirebaseManager {
 
                         self.userManager.language = language
 
-                        self.fetchUserProfile(withUid: channel.owner, type: .opponent)
+                        self.fetchUserProfile(withUid: channel.owner, type: .opponent, call: .audio)
 
                         return
 
@@ -290,17 +323,6 @@ class FirebaseManager {
         ref?.child("friendList").child(opponent.uid).updateChildValues([myUid: language])
 
     }
-
-    //        guard let roomId = ref?.childByAutoId().key, let messageId = ref?.childByAutoId().key else { return }
-    //
-    //        guard let time = Date().timeIntervalSince1970 as? Double else { return }
-    //
-    //        let messageDict: [String: Any] = ["id": messageId, "uid": "Admin", "message": "You are frineds now.", "time": time]
-    //
-    //        ref?.child("chats").child(roomId).child(messageId).setValue(messageDict)
-    //
-    //        ref?.child("users").child(myUid).child("chats").updateChildValues(["roomIdD": roomId])
-    //        ref?.child("users").child(opponent.uid).child("chats").updateChildValues(["roomIdD": roomId])
 
     func fetchFriendList() {
 

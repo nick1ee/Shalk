@@ -32,6 +32,8 @@ class QBManager {
 
             guard let okUser = user else { return }
 
+            self.userManager.isQuickbloxLogin = true
+
             okUser.password = password
 
             QBChat.instance().connect(with: okUser, completion: { (error) in
@@ -56,6 +58,26 @@ class QBManager {
 
     }
 
+    func logOut() {
+
+        QBRequest.logOut(successBlock: { (response) in
+
+            // MARK: User Log out successfully.
+            self.userManager.isQuickbloxLogin = false
+
+            UserManager.shared.currentUser = nil
+
+        }) { (response) in
+
+            // TODO: Error handling
+
+            let error = response.error?.error
+            print(error?.localizedDescription)
+
+        }
+
+    }
+
     func signUp(withEmail email: String, withPassword password: String) {
 
         let signUpUser = QBUUser()
@@ -72,7 +94,7 @@ class QBManager {
 
             guard let okUser = user else { return }
 
-            UserManager.shared.qbID = Int(okUser.id)
+            self.userManager.qbID = Int(okUser.id)
 
         }) { (response) in
 
@@ -98,6 +120,23 @@ class QBManager {
         let userInfo = userManager.currentUser?.toDictionary()
 
         session = rtcManager.createNewSession(withOpponents: opponentID, with: .audio)
+
+        session?.startCall(userInfo)
+
+    }
+
+    func startVideoCall() {
+
+        userManager.isConnected = true
+
+        guard
+            let qbID = userManager.opponent?.quickbloxId,
+            let qbIDInteger = Int(qbID),
+            let opponentID = [qbIDInteger] as? [NSNumber] else { return }
+
+        let userInfo = userManager.currentUser?.toDictionary()
+
+        session = rtcManager.createNewSession(withOpponents: opponentID, with: .video)
 
         session?.startCall(userInfo)
 

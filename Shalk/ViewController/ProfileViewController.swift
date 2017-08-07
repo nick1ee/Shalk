@@ -28,6 +28,8 @@ class ProfileViewController: UIViewController {
 
     @IBAction func btnLogOut(_ sender: UIBarButtonItem) {
 
+        UserManager.shared.logOut()
+
     }
 
     override func viewDidLoad() {

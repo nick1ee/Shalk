@@ -11,10 +11,8 @@
 		B80331041F2A374600F89209 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331031F2A374600F89209 /* ChatListViewController.swift */; };
 		B80331061F2A374F00F89209 /* ShakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331051F2A374F00F89209 /* ShakeViewController.swift */; };
 		B80331081F2A375700F89209 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331071F2A375700F89209 /* ProfileViewController.swift */; };
-		B803310C1F2A437300F89209 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B803310B1F2A437300F89209 /* MainTabBarController.swift */; };
 		B803313E1F2B338200F89209 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B803313B1F2B338200F89209 /* User.swift */; };
 		B80331401F2B377B00F89209 /* QBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B803313F1F2B377B00F89209 /* QBManager.swift */; };
-		B80331451F2B388F00F89209 /* RAMBounceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331421F2B388F00F89209 /* RAMBounceAnimation.swift */; };
 		B80331461F2B388F00F89209 /* MagneticExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331441F2B388F00F89209 /* MagneticExtensions.swift */; };
 		B80331481F2B3E5000F89209 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331471F2B3E5000F89209 /* Const.swift */; };
 		B82C6DA01F2BAC5A00C5948D /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82C6D9F1F2BAC5A00C5948D /* ChatTableViewCell.swift */; };
@@ -78,10 +76,8 @@
 		B80331031F2A374600F89209 /* ChatListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		B80331051F2A374F00F89209 /* ShakeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShakeViewController.swift; sourceTree = "<group>"; };
 		B80331071F2A375700F89209 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		B803310B1F2A437300F89209 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		B803313B1F2B338200F89209 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B803313F1F2B377B00F89209 /* QBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QBManager.swift; sourceTree = "<group>"; };
-		B80331421F2B388F00F89209 /* RAMBounceAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMBounceAnimation.swift; sourceTree = "<group>"; };
 		B80331441F2B388F00F89209 /* MagneticExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagneticExtensions.swift; sourceTree = "<group>"; };
 		B80331471F2B3E5000F89209 /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		B82C6D9F1F2BAC5A00C5948D /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
@@ -193,15 +189,6 @@
 			path = Shalk/Structures;
 			sourceTree = "<group>";
 		};
-		B80331411F2B388F00F89209 /* BounceAnimationExtenstions */ = {
-			isa = PBXGroup;
-			children = (
-				B80331421F2B388F00F89209 /* RAMBounceAnimation.swift */,
-			);
-			name = BounceAnimationExtenstions;
-			path = Shalk/BounceAnimationExtenstions;
-			sourceTree = "<group>";
-		};
 		B80331431F2B388F00F89209 /* MagneticExtensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,7 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				B872E6161F29BF91009BD763 /* Shalk */,
-				B80331411F2B388F00F89209 /* BounceAnimationExtenstions */,
 				B80331431F2B388F00F89209 /* MagneticExtensions */,
 				B803313A1F2B338200F89209 /* Structures */,
 				B872E6151F29BF91009BD763 /* Products */,
@@ -289,7 +275,6 @@
 				B872E63A1F29EEA8009BD763 /* ViewControllerExtensions.swift */,
 				B80331031F2A374600F89209 /* ChatListViewController.swift */,
 				B80331051F2A374F00F89209 /* ShakeViewController.swift */,
-				B803310B1F2A437300F89209 /* MainTabBarController.swift */,
 				B80331071F2A375700F89209 /* ProfileViewController.swift */,
 				B8DB3F0F1F2E2852006E5A58 /* RandomCallViewController.swift */,
 				B8F1D0531F362063003BACF8 /* ChatViewController.swift */,
@@ -444,8 +429,6 @@
 				B8DB3F101F2E2852006E5A58 /* RandomCallViewController.swift in Sources */,
 				B89872871F306008007DEDA6 /* AudioChannel.swift in Sources */,
 				B84968B81F31753200400579 /* ProfileTableViewCell.swift in Sources */,
-				B80331451F2B388F00F89209 /* RAMBounceAnimation.swift in Sources */,
-				B803310C1F2A437300F89209 /* MainTabBarController.swift in Sources */,
 				B8D9ECDD1F32F7BE00B9FEED /* Message.swift in Sources */,
 				B872E6371F29E031009BD763 /* RegisterViewController.swift in Sources */,
 				B872E63D1F29F046009BD763 /* AppDelegateExtensions.swift in Sources */,

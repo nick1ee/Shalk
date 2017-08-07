@@ -9,12 +9,11 @@
 import UIKit
 
 class VideoCallViewController: UIViewController {
-    
-    
+
     @IBAction func btnEndCall(_ sender: UIButton) {
-        
+
         self.dismiss(animated: true, completion: nil)
-        
+
     }
 
     override func viewDidLoad() {

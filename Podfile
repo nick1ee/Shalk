@@ -12,7 +12,7 @@ target 'Shalk' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
-  pod 'RAMAnimatedTabBarController', "~> 2.0.13"
+#  pod 'RAMAnimatedTabBarController', "~> 2.0.13"
   pod 'Magnetic'
   pod 'NVActivityIndicatorView'
   

@@ -14,6 +14,10 @@ class ChatViewController: UIViewController {
 
     let fbManager = FirebaseManager()
 
+    var opponentName = ""
+
+    var opponentUid = ""
+
     @IBOutlet weak var chatTableView: UITableView!
 
     @IBOutlet weak var inputTextView: UITextView!
@@ -40,13 +44,13 @@ class ChatViewController: UIViewController {
 
     @IBAction func btnAudioCall(_ sender: UIBarButtonItem) {
         
-        self.performSegue(withIdentifier: "audioCall", sender: nil)
+        self.startAudioCall(uid: opponentUid, name: opponentName)
 
     }
 
     @IBAction func btnVideoCall(_ sender: UIBarButtonItem) {
-        
-        self.performSegue(withIdentifier: "videoCall", sender: nil)
+
+        self.startVideoCall(uid: opponentUid, name: opponentName)
 
     }
 
@@ -62,6 +66,15 @@ class ChatViewController: UIViewController {
         chatTableView.estimatedRowHeight = 300
 
         chatTableView.rowHeight = UITableViewAutomaticDimension
+
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        UserManager.shared.opponent = nil
+
+        UserManager.shared.chatRoomId = ""
 
     }
 
