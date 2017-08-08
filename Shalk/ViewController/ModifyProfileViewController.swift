@@ -10,6 +10,12 @@ import UIKit
 
 class ModifyProfileViewController: UIViewController {
 
+    var receivedUserName = ""
+
+    var receivedUserIntro = ""
+    
+    var isChanged: Bool = false
+
     let imagePicker = UIImagePickerController()
 
     @IBOutlet weak var inputName: UITextField!
@@ -32,7 +38,7 @@ class ModifyProfileViewController: UIViewController {
 
         let alertController = UIAlertController.init(title: "Hint", message: "Choose a photo from .. ?", preferredStyle: .actionSheet)
 
-        let cameraAction = UIAlertAction.init(title: "Camere", style: .default, handler: { (_) in
+        let cameraAction = UIAlertAction.init(title: "Camera", style: .default, handler: { (_) in
 
             self.imagePicker.sourceType = .camera
 
@@ -48,9 +54,15 @@ class ModifyProfileViewController: UIViewController {
 
         })
 
+        let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel, handler: {(_) in
+
+        })
+
         alertController.addAction(cameraAction)
 
         alertController.addAction(phoneLibraryAction)
+
+        alertController.addAction(cancelAction)
 
         self.present(alertController, animated: true, completion: nil)
 
@@ -60,6 +72,10 @@ class ModifyProfileViewController: UIViewController {
         super.viewDidLoad()
 
         imagePicker.delegate = self
+
+        self.inputName.text = receivedUserName
+
+        self.inputIntro.text = receivedUserIntro
 
     }
 

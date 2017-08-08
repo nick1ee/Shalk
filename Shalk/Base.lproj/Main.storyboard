@@ -1138,9 +1138,9 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kAg-Xw-quR">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Input your name here." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kAg-Xw-quR">
                                                 <rect key="frame" x="50" y="225" width="354" height="40"/>
-                                                <color key="backgroundColor" red="1" green="0.30231175059999998" blue="0.30362829050000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="dDz-0F-UFY"/>
                                                 </constraints>
@@ -1155,9 +1155,9 @@
                                                     <constraint firstAttribute="width" constant="30" id="n1u-Gt-QDq"/>
                                                 </constraints>
                                             </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q3X-fB-goB">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Introduce yourself here." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q3X-fB-goB">
                                                 <rect key="frame" x="50" y="275" width="354" height="40"/>
-                                                <color key="backgroundColor" red="1" green="0.30231175059999998" blue="0.30362829050000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="u6E-QW-aVZ"/>
                                                 </constraints>
@@ -1218,6 +1218,11 @@
                                     <constraint firstAttribute="height" constant="120" id="MuM-vw-A8G"/>
                                     <constraint firstAttribute="width" constant="120" id="Var-hH-fiK"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="60"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szY-a1-opx">
                                 <rect key="frame" x="237" y="204" width="30" height="30"/>

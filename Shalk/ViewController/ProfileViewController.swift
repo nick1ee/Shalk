@@ -75,6 +75,28 @@ class ProfileViewController: UIViewController {
         self.koreanFriends = []
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == "ModifyProfile" {
+
+            let manageProfileVC = segue.destination as? ModifyProfileViewController
+
+            guard let user = UserManager.shared.currentUser else { return }
+
+            manageProfileVC?.receivedUserName = user.name
+
+            if user.intro == "null" {
+
+                manageProfileVC?.receivedUserIntro = ""
+
+            } else {
+
+                manageProfileVC?.receivedUserIntro = user.intro
+            }
+
+        }
+    }
+
 }
 
 extension ProfileViewController: FirebaseManagerFriendDelegate {
