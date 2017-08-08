@@ -170,12 +170,9 @@ class FirebaseManager {
         }
 
     }
-    
+
     func updateUserProfile() {
-        
-        
-        
-        
+
     }
 
     func fetchUserProfile(withUid uid: String, type: UserProfile, call: CallType) {

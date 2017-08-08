@@ -40,5 +40,7 @@
 	<string>我們將會存取您的麥克風，以利進行語音通話。</string>
 	<key>NSCameraUsageDescription</key>
 	<string>我們將會存取您的視訊鏡頭，以利進行視訊通話。</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>我們將會存取您的相片，以利您選擇圖片進行上傳。</string>
 </dict>
 </plist>

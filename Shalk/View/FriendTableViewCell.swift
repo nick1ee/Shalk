@@ -18,7 +18,7 @@ class FriendTableViewCell: UITableViewCell {
         super.awakeFromNib()
 
         friendImageView.tintColor = UIColor.init(red: 62/255, green: 48/255, blue: 76/255, alpha: 1)
-        
+
         friendImageView.backgroundColor = UIColor.white
     }
 
