@@ -24,6 +24,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     @IBAction func btnModifyProfile(_ sender: UIBarButtonItem) {
+        
+        self.performSegue(withIdentifier: "ModifyProfile", sender: nil)
 
     }
 

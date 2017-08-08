@@ -26,6 +26,12 @@ class ChatListViewController: UIViewController {
         fbManager.chatRoomDelegate = self
 
         fbManager.fetchChatRoomList()
+        
+        let bgImageView = UIImageView(image: UIImage(named: "background"))
+        
+        chatListTableView.backgroundColor = UIColor.clear
+        
+        chatListTableView.backgroundView = bgImageView
 
     }
 
@@ -43,6 +49,8 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "chatCell", for: indexPath) as! ChatTableViewCell
+        
+        cell.backgroundColor = UIColor.clear
 
         guard let myUid = UserManager.shared.currentUser?.uid else { return UITableViewCell() }
 

@@ -21,9 +21,11 @@ class ChatTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        newMessageBubble.tintColor = UIColor.init(red: 243/255, green: 174/255, blue: 47/255, alpha: 1)
+//        newMessageBubble.tintColor = UIColor.init(red: 243/255, green: 174/255, blue: 47/255, alpha: 1)
 
         opponentImageView.tintColor = UIColor.white
+        
+        opponentImageView.backgroundColor = UIColor.clear
 
     }
 
