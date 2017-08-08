@@ -58,6 +58,8 @@ class FirebaseManager {
     var handle: DatabaseHandle?
 
     let userManager = UserManager.shared
+    
+    var storeageRef = st
 
     func logIn(withEmail email: String, withPassword pwd: String) {
 

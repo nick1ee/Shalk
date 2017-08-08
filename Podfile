@@ -15,6 +15,8 @@ target 'Shalk' do
   pod 'SVProgressHUD'
   pod 'Magnetic'
   pod 'NVActivityIndicatorView'
+  pod 'Firebase/Storage'
+  pod 'SDWebImage'
   
   source 'https://github.com/CocoaPods/Specs.git'
   pod 'Quickblox-WebRTC', '~> 2.6.1'
