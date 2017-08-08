@@ -7,6 +7,7 @@
 //
 
 import Firebase
+import FirebaseStorage
 import SVProgressHUD
 
 protocol FirebaseManagerFriendDelegate: class {
@@ -58,8 +59,10 @@ class FirebaseManager {
     var handle: DatabaseHandle?
 
     let userManager = UserManager.shared
-    
-    var storeageRef = st
+
+    let storage = Storage.storage()
+
+    let storageRef = Storage.storage().reference()
 
     func logIn(withEmail email: String, withPassword pwd: String) {
 
@@ -174,6 +177,32 @@ class FirebaseManager {
     }
 
     func updateUserProfile() {
+
+    }
+
+    func uploadImage(withData data: Data) {
+
+        let metaData = StorageMetadata()
+
+        guard let user = UserManager.shared.currentUser else { return }
+
+        metaData.contentType = user.uid
+
+        storageRef.child("userImage").child(user.uid).putData(data, metadata: metaData) { (_, error) in
+
+            if error != nil {
+
+                // MARK: Failed to upload image.
+
+                UIAlertController(error: error!).show()
+
+            }
+
+            // MARK: Upload image successfully.
+
+            print("upload successfully")
+
+        }
 
     }
 

@@ -13,8 +13,8 @@ class ModifyProfileViewController: UIViewController {
     var receivedUserName = ""
 
     var receivedUserIntro = ""
-    
-    var isChanged: Bool = false
+
+    var isImageChanged: Bool = false
 
     let imagePicker = UIImagePickerController()
 
@@ -31,6 +31,12 @@ class ModifyProfileViewController: UIViewController {
     }
 
     @IBAction func btnSave(_ sender: UIBarButtonItem) {
+
+//        if isImageChanged == true {
+
+            self.uploadUserImage()
+
+//        }
 
     }
 
@@ -79,6 +85,13 @@ class ModifyProfileViewController: UIViewController {
 
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        isImageChanged = false
+
+    }
+
 }
 
 extension ModifyProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -89,6 +102,8 @@ extension ModifyProfileViewController: UIImagePickerControllerDelegate, UINaviga
 
             userImageView.image = pickedImage
 
+            isImageChanged = true
+
         }
 
         dismiss(animated: true, completion: nil)
@@ -98,6 +113,18 @@ extension ModifyProfileViewController: UIImagePickerControllerDelegate, UINaviga
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 
         dismiss(animated: true, completion: nil)
+
+    }
+
+}
+
+extension ModifyProfileViewController {
+
+    func uploadUserImage() {
+
+        guard let data = UIImageJPEGRepresentation(userImageView.image!, 1) else { return }
+
+        FirebaseManager().uploadImage(withData: data)
 
     }
 
