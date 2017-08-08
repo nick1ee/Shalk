@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 import SVProgressHUD
 
 class ProfileViewController: UIViewController {
@@ -258,7 +259,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
 
-//            cell.friendImageView.image =
+            if englishFriends[indexPath.row].imageUrl != "null" {
+
+                cell.friendImageView.sd_setImage(with: URL(string: englishFriends[indexPath.row].imageUrl))
+
+            }
 
             cell.friendName.text = self.englishFriends[indexPath.row].name
 
@@ -270,7 +275,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
 
-//            cell.friendImageView.image =
+            if chineseFriends[indexPath.row].imageUrl != "null" {
+
+                cell.friendImageView.sd_setImage(with: URL(string: chineseFriends[indexPath.row].imageUrl))
+
+            }
 
             cell.friendName.text = self.chineseFriends[indexPath.row].name
 
@@ -282,7 +291,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
 
-//            cell.friendImageView.image =
+            if japaneseFriends[indexPath.row].imageUrl != "null" {
+
+                cell.friendImageView.sd_setImage(with: URL(string: japaneseFriends[indexPath.row].imageUrl))
+
+            }
 
             cell.friendName.text = self.japaneseFriends[indexPath.row].name
 
@@ -294,7 +307,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
 
-//            cell.friendImageView.image =
+            if koreanFriends[indexPath.row].imageUrl != "null" {
+
+                cell.friendImageView.sd_setImage(with: URL(string: koreanFriends[indexPath.row].imageUrl))
+
+            }
 
             cell.friendName.text = self.koreanFriends[indexPath.row].name
 
@@ -304,17 +321,25 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             // MARK: Display profile cell.
 
+            guard let user = UserManager.shared.currentUser else { return UITableViewCell() }
+
             let cell = tableView.dequeueReusableCell(withIdentifier: "profileCell") as! ProfileTableViewCell
 
-            cell.userName.text = UserManager.shared.currentUser?.name
+            cell.userName.text = user.name
 
-            if UserManager.shared.currentUser?.intro == "null" {
+            if user.intro == "null" {
 
                 cell.userIntroduction.text = "Add a comment to introduce yourself."
 
             } else {
 
-                cell.userIntroduction.text = UserManager.shared.currentUser?.intro
+                cell.userIntroduction.text = user.intro
+
+            }
+
+            if user.imageUrl != "null" {
+
+                cell.userImageView.sd_setImage(with: URL(string: user.imageUrl))
 
             }
 

@@ -16,6 +16,8 @@ class ModifyProfileViewController: UIViewController {
 
     var isImageChanged: Bool = false
 
+    var isProfileChanged: Bool = false
+
     let imagePicker = UIImagePickerController()
 
     @IBOutlet weak var inputName: UITextField!
@@ -32,11 +34,21 @@ class ModifyProfileViewController: UIViewController {
 
     @IBAction func btnSave(_ sender: UIBarButtonItem) {
 
-//        if isImageChanged == true {
+        if isImageChanged == true {
 
             self.uploadUserImage()
 
-//        }
+        }
+
+        guard let user = UserManager.shared.currentUser else { return }
+
+        if inputName.text != user.name || inputIntro.text != user.intro {
+
+            isProfileChanged = true
+
+            self.updateUserProfile()
+
+        }
 
     }
 
@@ -85,13 +97,6 @@ class ModifyProfileViewController: UIViewController {
 
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        isImageChanged = false
-
-    }
-
 }
 
 extension ModifyProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -100,9 +105,9 @@ extension ModifyProfileViewController: UIImagePickerControllerDelegate, UINaviga
 
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
 
-            userImageView.image = pickedImage
+            self.isImageChanged = true
 
-            isImageChanged = true
+            userImageView.image = pickedImage
 
         }
 
@@ -122,9 +127,21 @@ extension ModifyProfileViewController {
 
     func uploadUserImage() {
 
-        guard let data = UIImageJPEGRepresentation(userImageView.image!, 1) else { return }
+        guard let data = UIImageJPEGRepresentation(userImageView.image!, 0.7) else { return }
 
         FirebaseManager().uploadImage(withData: data)
+
+        self.isImageChanged = false
+
+    }
+
+    func updateUserProfile() {
+
+        guard let name = inputName.text, let intro = inputIntro.text else { return }
+
+        FirebaseManager().updateUserProfile(withName: name, withIntro: intro)
+
+        self.isProfileChanged = false
 
     }
 

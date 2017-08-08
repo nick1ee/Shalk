@@ -176,7 +176,21 @@ class FirebaseManager {
 
     }
 
-    func updateUserProfile() {
+    func updateUserProfile(withName name: String, withIntro intro: String) {
+
+        guard let user = UserManager.shared.currentUser else { return }
+
+//        self.ref?.child("users").child(user.uid).child("name").setValue(name)
+
+        if intro == "" {
+
+            self.ref?.child("users").child(user.uid).child("intro").setValue("null")
+
+        } else {
+
+            self.ref?.child("users").child(user.uid).child("intro").setValue(intro)
+
+        }
 
     }
 
@@ -186,9 +200,9 @@ class FirebaseManager {
 
         guard let user = UserManager.shared.currentUser else { return }
 
-        metaData.contentType = user.uid
+        metaData.contentType = "image/jpeg"
 
-        storageRef.child("userImage").child(user.uid).putData(data, metadata: metaData) { (_, error) in
+        storageRef.child("userImage").child(user.uid).putData(data, metadata: metaData) { (metadata, error) in
 
             if error != nil {
 
@@ -196,11 +210,15 @@ class FirebaseManager {
 
                 UIAlertController(error: error!).show()
 
+                return
+
             }
 
-            // MARK: Upload image successfully.
+            // MARK: Upload image successfully, and updated user image url.
 
-            print("upload successfully")
+            guard let imageUrlString = metadata?.downloadURL()?.absoluteString else { return }
+
+            self.ref?.child("users").child(user.uid).child("imageUrl").setValue(imageUrlString)
 
         }
 
@@ -489,8 +507,6 @@ class FirebaseManager {
                 print(error.localizedDescription)
 
             }
-
-//            self.ref?.removeObserver(withHandle: self.handle!)
 
             self.chatHistroyDelegate?.manager(self, didGetMessages: messages)
 
