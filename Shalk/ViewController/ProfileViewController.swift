@@ -62,6 +62,8 @@ class ProfileViewController: UIViewController {
 
         fbManager.fetchFriendList()
 
+        self.tableView.reloadData()
+
     }
 
     override func viewDidDisappear(_ animated: Bool) {

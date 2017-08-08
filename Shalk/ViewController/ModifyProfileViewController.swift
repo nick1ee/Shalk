@@ -20,6 +20,10 @@ class ModifyProfileViewController: UIViewController {
 
     let imagePicker = UIImagePickerController()
 
+    @IBOutlet weak var iconUser: UIImageView!
+
+    @IBOutlet weak var iconIntro: UIImageView!
+
     @IBOutlet weak var inputName: UITextField!
 
     @IBOutlet weak var inputIntro: UITextField!

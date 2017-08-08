@@ -1122,6 +1122,7 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-user" translatesAutoresizingMaskIntoConstraints="NO" id="zfN-fa-aPc">
                                                 <rect key="frame" x="10" y="230" width="30" height="30"/>
+                                                <color key="tintColor" red="0.46529024299999999" green="0.35942899010000001" blue="0.58205107869999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="G1l-mM-onX"/>
                                                     <constraint firstAttribute="width" constant="30" id="Xe9-d7-FK4"/>
@@ -1150,6 +1151,7 @@
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-info" translatesAutoresizingMaskIntoConstraints="NO" id="sey-Pk-dX9">
                                                 <rect key="frame" x="10" y="280" width="30" height="30"/>
+                                                <color key="tintColor" red="0.46529024299999999" green="0.35942899010000001" blue="0.58205107869999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Ytv-xx-UV7"/>
                                                     <constraint firstAttribute="width" constant="30" id="n1u-Gt-QDq"/>
@@ -1280,6 +1282,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="iconIntro" destination="sey-Pk-dX9" id="2qq-Nv-kAs"/>
+                        <outlet property="iconUser" destination="zfN-fa-aPc" id="Ssy-DY-rS5"/>
                         <outlet property="inputIntro" destination="q3X-fB-goB" id="NiO-MR-eBa"/>
                         <outlet property="inputName" destination="kAg-Xw-quR" id="lGH-Yj-fr9"/>
                         <outlet property="userImageView" destination="FER-gx-HWX" id="h3N-Bo-FzH"/>
