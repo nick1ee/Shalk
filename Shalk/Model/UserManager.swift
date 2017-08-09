@@ -29,13 +29,7 @@ class UserManager {
 
     var isSendingFriendRequest: Bool?
 
-    var friendsWithEnglish: [User] = []
-
-    var friendsWithChinese: [User] = []
-
-    var friendsWithJapanese: [User] = []
-
-    var friendsWithKorean: [User] = []
+    var friendsInfo: [User] = []
 
     var isDiscovering: Bool = false
 

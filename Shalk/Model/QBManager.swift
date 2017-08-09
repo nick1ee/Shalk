@@ -52,7 +52,10 @@ class QBManager {
 
                     UserDefaults.standard.synchronize()
 
-                    let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainTabVC")
+                    //swiftlint:disable force_cast
+                    let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainTabVC") as! UITabBarController
+
+                    mainTabVC.selectedIndex = 2
 
                     AppDelegate.shared.window?.rootViewController = mainTabVC
 

@@ -78,28 +78,6 @@ class ProfileViewController: UIViewController {
         self.koreanFriends = []
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        if segue.identifier == "ModifyProfile" {
-
-            let manageProfileVC = segue.destination as? ModifyProfileViewController
-
-            guard let user = UserManager.shared.currentUser else { return }
-
-            manageProfileVC?.receivedUserName = user.name
-
-            if user.intro == "null" {
-
-                manageProfileVC?.receivedUserIntro = ""
-
-            } else {
-
-                manageProfileVC?.receivedUserIntro = user.intro
-            }
-
-        }
-    }
-
 }
 
 extension ProfileViewController: FirebaseManagerFriendDelegate {
@@ -113,6 +91,12 @@ extension ProfileViewController: FirebaseManagerFriendDelegate {
     }
 
     func manager(_ manager: FirebaseManager, didGetFriend friend: User, byLanguage: String) {
+
+        var tempFriends = UserManager.shared.friendsInfo.filter { $0.uid != friend.uid }
+
+        tempFriends.append(friend)
+
+        UserManager.shared.friendsInfo = tempFriends
 
         switch byLanguage {
 
@@ -263,7 +247,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             if englishFriends[indexPath.row].imageUrl != "null" {
 
-                cell.friendImageView.sd_setImage(with: URL(string: englishFriends[indexPath.row].imageUrl))
+            cell.friendImageView.sd_setImage(with: URL(string: englishFriends[indexPath.row].imageUrl))
 
             }
 
@@ -296,7 +280,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             if japaneseFriends[indexPath.row].imageUrl != "null" {
 
                 cell.friendImageView.sd_setImage(with: URL(string: japaneseFriends[indexPath.row].imageUrl))
-
             }
 
             cell.friendName.text = self.japaneseFriends[indexPath.row].name
@@ -312,7 +295,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             if koreanFriends[indexPath.row].imageUrl != "null" {
 
                 cell.friendImageView.sd_setImage(with: URL(string: koreanFriends[indexPath.row].imageUrl))
-
             }
 
             cell.friendName.text = self.koreanFriends[indexPath.row].name

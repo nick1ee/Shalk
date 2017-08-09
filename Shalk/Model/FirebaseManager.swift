@@ -42,7 +42,7 @@ enum UserProfile {
 
 enum CallType {
 
-    case audio, video
+    case audio, video, none
 
 }
 
@@ -180,7 +180,7 @@ class FirebaseManager {
 
         guard let user = UserManager.shared.currentUser else { return }
 
-//        self.ref?.child("users").child(user.uid).child("name").setValue(name)
+        self.ref?.child("users").child(user.uid).child("name").setValue(name)
 
         if intro == "" {
 
@@ -258,6 +258,10 @@ class FirebaseManager {
 
                         self.userManager.startVideoCall()
 
+                        break
+                        
+                    case .none:
+                        
                         break
 
                     }

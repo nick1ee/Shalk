@@ -27,6 +27,8 @@ class MainTabViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.tabBarController?.selectedIndex = 2
+
         rtcManager.add(self)
 
         QBRTCAudioSession.instance().initialize()

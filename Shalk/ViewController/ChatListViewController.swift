@@ -58,13 +58,29 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
         if myUid == room.user1Id {
 
-            cell.opponentName.text = room.user2Name
+            let friend = UserManager.shared.friendsInfo.filter { $0.uid == room.user2Id }
+
+            cell.opponentName.text = friend[0].name
+
+            if friend[0].imageUrl != "null" {
+
+                cell.opponentImageView.sd_setImage(with: URL(string: friend[0].imageUrl))
+
+            }
 
             return cell
 
         } else {
 
-            cell.opponentName.text = room.user1Name
+            let friend = UserManager.shared.friendsInfo.filter { $0.uid == room.user1Id }
+
+            cell.opponentName.text = friend[0].name
+
+            if friend[0].imageUrl != "null" {
+
+                cell.opponentImageView.sd_setImage(with: URL(string: friend[0].imageUrl))
+
+            }
 
             return cell
 
@@ -74,8 +90,6 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        print("push~~~~~~~~")
-
         guard let myUid = UserManager.shared.currentUser?.uid else { return }
 
         let room = rooms[indexPath.row]
@@ -84,9 +98,9 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
             UserManager.shared.chatRoomId = room.roomId
 
-            opponentName = room.user2Name
+            let friend = UserManager.shared.friendsInfo.filter { $0.uid == room.user2Id }
 
-            opponentUid = room.user2Id
+            UserManager.shared.opponent = friend[0]
 
             self.performSegue(withIdentifier: "goChat", sender: nil)
 
@@ -94,27 +108,14 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
             UserManager.shared.chatRoomId = room.roomId
 
-            opponentName = room.user1Name
+            let friend = UserManager.shared.friendsInfo.filter { $0.uid == room.user1Id }
 
-            opponentUid = room.user1Id
+            UserManager.shared.opponent = friend[0]
 
             self.performSegue(withIdentifier: "goChat", sender: nil)
 
         }
 
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        if segue.identifier == "goChat" {
-
-            let chatVC = segue.destination as? ChatViewController
-
-            chatVC?.opponentName = self.opponentName
-
-            chatVC?.opponentUid = self.opponentUid
-
-        }
     }
 
 }

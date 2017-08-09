@@ -14,9 +14,7 @@ class ChatViewController: UIViewController {
 
     let fbManager = FirebaseManager()
 
-    var opponentName = ""
-
-    var opponentUid = ""
+    var opponent: User!
 
     @IBOutlet weak var chatTableView: UITableView!
 
@@ -28,7 +26,7 @@ class ChatViewController: UIViewController {
 
         inputTextView.text = ""
 
-        chatTableView.scrollToBottom(animated: true)
+//        chatTableView.scrollToBottom(animated: true)
 
     }
 
@@ -44,18 +42,20 @@ class ChatViewController: UIViewController {
 
     @IBAction func btnAudioCall(_ sender: UIBarButtonItem) {
 
-        self.startAudioCall(uid: opponentUid, name: opponentName)
+        self.startAudioCall(uid: opponent.uid, name: opponent.name)
 
     }
 
     @IBAction func btnVideoCall(_ sender: UIBarButtonItem) {
 
-        self.startVideoCall(uid: opponentUid, name: opponentName)
+        self.startVideoCall(uid: opponent.uid, name: opponent.name)
 
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        opponent = UserManager.shared.opponent
 
         inputTextView.delegate = self
 
@@ -96,18 +96,20 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let showMessages = messages.filter { $0.text != "" }
 
         guard let myUid = UserManager.shared.currentUser?.uid else { return UITableViewCell() }
 
-        switch messages[indexPath.row].senderId {
+        switch showMessages[indexPath.row].senderId {
 
         case myUid:
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "senderCell", for: indexPath) as! SenderTableViewCell
 
-            cell.sendedMessage.text = messages[indexPath.row].text
+            cell.sendedMessage.text = showMessages[indexPath.row].text
 
-            cell.sendedTime.text = messages[indexPath.row].time
+            cell.sendedTime.text = showMessages[indexPath.row].time
 
             return cell
 
@@ -115,9 +117,9 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "receiverCell", for: indexPath) as! ReceiverTableViewCell
 
-            cell.receivedMessage.text = messages[indexPath.row].text
+            cell.receivedMessage.text = showMessages[indexPath.row].text
 
-            cell.receivedTime.text = messages[indexPath.row].time
+            cell.receivedTime.text = showMessages[indexPath.row].time
 
             return cell
 
