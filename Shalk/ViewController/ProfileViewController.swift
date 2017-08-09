@@ -55,6 +55,12 @@ class ProfileViewController: UIViewController {
 
         UserManager.shared.fetchChatRoomList()
 
+        let bgImageView = UIImageView(image: UIImage(named: "background"))
+
+        tableView.backgroundColor = UIColor.clear
+
+        tableView.backgroundView = bgImageView
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -88,9 +94,9 @@ extension ProfileViewController: FirebaseManagerFriendDelegate {
 
     func manager(_ manager: FirebaseManager, didGetError error: Error) {
 
-        // TODO: Error handling
+        // MARK: Failed to get friend info.
 
-        print(error.localizedDescription)
+        UIAlertController(error: error).show()
 
     }
 
@@ -257,6 +263,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.friendName.text = self.englishFriends[indexPath.row].name
 
+            cell.backgroundColor = UIColor.clear
+
             return cell
 
         case 2:
@@ -273,6 +281,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.friendName.text = self.chineseFriends[indexPath.row].name
 
+            cell.backgroundColor = UIColor.clear
+
             return cell
 
         case 3:
@@ -287,6 +297,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             }
 
             cell.friendName.text = self.japaneseFriends[indexPath.row].name
+
+            cell.backgroundColor = UIColor.clear
 
             return cell
 
@@ -303,6 +315,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.friendName.text = self.koreanFriends[indexPath.row].name
 
+            cell.backgroundColor = UIColor.clear
+
             return cell
 
         default:
@@ -315,21 +329,15 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.userName.text = user.name
 
-            if user.intro == "null" {
-
-                cell.userIntroduction.text = "Add a comment to introduce yourself."
-
-            } else {
-
-                cell.userIntroduction.text = user.intro
-
-            }
+            cell.userIntroduction.text = user.intro
 
             if user.imageUrl != "null" {
 
                 cell.userImageView.sd_setImage(with: URL(string: user.imageUrl))
 
             }
+
+            cell.backgroundColor = UIColor.clear
 
             return cell
 

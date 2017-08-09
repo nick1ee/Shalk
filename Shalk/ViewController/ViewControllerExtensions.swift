@@ -38,37 +38,25 @@ extension UIViewController {
 
     }
 
-    func receivedEndCallwithFriendRequest(withInfo info: [String: String]) {
+    func receivedEndCallwithFriendRequest() {
 
         let alertController = UIAlertController.init(title: "Send a friend request?", message: "If you enjoy the time with \(UserManager.shared.opponent?.name ?? ""), send a friend request!", preferredStyle: .alert)
 
         let okAction = UIAlertAction.init(title: "Send", style: .default) { (_) in
 
-            UserManager.shared.isSendingFriendRequest = true
+            FirebaseManager().checkFriendRequest()
+
+            QBManager.shared.handUpCall()
 
             self.presentedViewController?.dismiss(animated: true, completion: nil)
-
-            QBManager.shared.leaveChannel()
-
-            if info["sendRequest"] == "yes" && UserManager.shared.isSendingFriendRequest! {
-
-                FirebaseManager().addFriend(withOpponent: UserManager.shared.opponent!)
-
-            }
-
-            UserManager.shared.isConnected = false
 
         }
 
         let cancelAction = UIAlertAction.init(title: "Cancel", style: .default) { (_) in
 
-            UserManager.shared.isSendingFriendRequest = false
+            QBManager.shared.handUpCall()
 
             self.presentedViewController?.dismiss(animated: true, completion: nil)
-
-            QBManager.shared.leaveChannel()
-
-            UserManager.shared.isConnected = false
 
         }
 
@@ -86,25 +74,19 @@ extension UIViewController {
 
         let okAction = UIAlertAction.init(title: "Send", style: .default) { (_) in
 
-            UserManager.shared.isSendingFriendRequest = true
+            FirebaseManager().checkFriendRequest()
+
+            QBManager.shared.handUpCall()
 
             self.dismiss(animated: true, completion: nil)
-
-            QBManager.shared.leaveChannel()
-
-            UserManager.shared.isConnected = false
 
         }
 
         let cancelAction = UIAlertAction.init(title: "Cancel", style: .default) { (_) in
 
-            UserManager.shared.isSendingFriendRequest = false
+            QBManager.shared.handUpCall()
 
             self.dismiss(animated: true, completion: nil)
-
-            QBManager.shared.leaveChannel()
-
-            UserManager.shared.isConnected = false
 
         }
 

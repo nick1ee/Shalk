@@ -16,27 +16,9 @@ class RandomCallViewController: UIViewController {
 
     var isSpeakerEnabled: Bool = false
 
-//    var selectedLang: String = ""
-
     var receivedUserName = ""
 
     let qbManager = QBManager.shared
-
-//    var session = QBManager.shared.session {
-//
-//        didSet {
-//
-//            print("value changed")
-//
-//            if session == nil {
-//
-//                self.dismiss(animated: true, completion: nil)
-//
-//            }
-//
-//        }
-//
-//    }
 
     let rtcManager = QBRTCClient.instance()
 

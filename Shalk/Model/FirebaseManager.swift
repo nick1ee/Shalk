@@ -10,42 +10,6 @@ import Firebase
 import FirebaseStorage
 import SVProgressHUD
 
-protocol FirebaseManagerFriendDelegate: class {
-
-    func manager (_ manager: FirebaseManager, didGetFriend friend: User, byLanguage: String)
-
-    func manager (_ manager: FirebaseManager, didGetError error: Error)
-
-}
-
-protocol FirebaseManagerChatRoomDelegate: class {
-
-    func manager (_ manager: FirebaseManager, didGetChatRooms rooms: [ChatRoom])
-
-    func manager (_ manager: FirebaseManager, didGetError error: Error)
-
-}
-
-protocol FirebaseManagerChatHistoryDelegate: class {
-
-    func manager (_ manager: FirebaseManager, didGetMessages messages: [Message])
-
-    func manager (_ manager: FirebaseManager, didGetError error: Error)
-
-}
-
-enum UserProfile {
-
-    case myself, opponent
-
-}
-
-enum CallType {
-
-    case audio, video, none
-
-}
-
 class FirebaseManager {
 
     weak var friendDelegate: FirebaseManagerFriendDelegate?
@@ -389,17 +353,52 @@ class FirebaseManager {
 
         ref?.child("channels").child(language).child(key).updateChildValues(["isFinished": true])
 
-    }
+        userManager.roomKey = nil
 
-    func addFriend(withOpponent opponent: User) {
-
-        guard let myUid = userManager.currentUser?.uid, let language = userManager.language else { return }
-
-        ref?.child("friendList").child(myUid).updateChildValues([opponent.uid: language])
-
-        ref?.child("friendList").child(opponent.uid).updateChildValues([myUid: language])
+        userManager.language = nil
 
     }
+
+    func checkFriendRequest() {
+
+        guard let roomId = userManager.roomKey else { return }
+
+        ref?.child("friendRequest").observeSingleEvent(of: .value, with: { (snapshot) in
+
+            if snapshot.hasChild(roomId) {
+
+                // MARK: We are friends now, update both data.
+
+                guard
+                    let myUid = UserManager.shared.currentUser?.uid,
+                    let language = UserManager.shared.language,
+                    let opponent = UserManager.shared.opponent else { return }
+
+                self.ref?.child("friendList").child(myUid).updateChildValues([opponent.uid: language])
+
+                self.ref?.child("friendList").child(opponent.uid).updateChildValues([myUid: language])
+
+            } else {
+
+                // MARK: Add myself into the queue.
+
+                self.ref?.child("friendRequest").setValue([roomId: true])
+
+            }
+
+        })
+
+    }
+
+//    func addFriend(withOpponent opponent: User) {
+//
+//        guard let myUid = userManager.currentUser?.uid, let language = userManager.language else { return }
+//
+//        ref?.child("friendList").child(myUid).updateChildValues([opponent.uid: language])
+//
+//        ref?.child("friendList").child(opponent.uid).updateChildValues([myUid: language])
+//
+//    }
 
     func fetchFriendList() {
 
@@ -437,18 +436,12 @@ class FirebaseManager {
 
             } catch let error {
 
-                // TODO: Error handling
-                print(error.localizedDescription)
+                // MARK: Failed to fetch friend info.
+                UIAlertController(error: error).show()
 
             }
 
         })
-
-    }
-
-    func startChat(to opponent: User) {
-
-        ref?.child("")
 
     }
 
@@ -488,8 +481,8 @@ class FirebaseManager {
 
             } catch let error {
 
-                // TODO: Error handlng
-                print(error.localizedDescription)
+                // MARK: Failed to fetch the list of chat rooms.
+                UIAlertController(error: error).show()
 
             }
 
@@ -533,8 +526,8 @@ class FirebaseManager {
 
             } catch let error {
 
-                // TODO: Error handling
-                print(error.localizedDescription)
+                // MARK: Failed to fetch hcat histroy
+                UIAlertController(error: error).show()
 
             }
 

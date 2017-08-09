@@ -27,7 +27,7 @@ class UserManager {
 
     var chatRoomId: String = ""
 
-    var isSendingFriendRequest: Bool?
+//    var isSendingFriendRequest: Bool?
 
     var friendsInfo: [User] = []
 
@@ -92,7 +92,9 @@ class UserManager {
 
     func closeChannel() {
 
-        FirebaseManager().closeChannel(withRoomKey: self.roomKey!, withLang: self.language!)
+        guard let roomId = roomKey, let lang = language else { return }
+
+        FirebaseManager().closeChannel(withRoomKey: roomId, withLang: lang)
 
     }
 

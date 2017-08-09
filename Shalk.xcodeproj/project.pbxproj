@@ -32,6 +32,7 @@
 		B872E63D1F29F046009BD763 /* AppDelegateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E63C1F29F046009BD763 /* AppDelegateExtensions.swift */; };
 		B872E63F1F29FBA4009BD763 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E63E1F29FBA4009BD763 /* UserManager.swift */; };
 		B89872871F306008007DEDA6 /* AudioChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89872861F306008007DEDA6 /* AudioChannel.swift */; };
+		B8AAB7FA1F3AE01300FFA58E /* FirebaseManagerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AAB7F91F3AE01300FFA58E /* FirebaseManagerProtocols.swift */; };
 		B8D9ECDD1F32F7BE00B9FEED /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D9ECDC1F32F7BE00B9FEED /* Message.swift */; };
 		B8DB3F101F2E2852006E5A58 /* RandomCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DB3F0F1F2E2852006E5A58 /* RandomCallViewController.swift */; };
 		B8DB3F191F2F0255006E5A58 /* QuickbloxWebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F171F2F0255006E5A58 /* QuickbloxWebRTC.framework */; };
@@ -102,6 +103,7 @@
 		B872E63C1F29F046009BD763 /* AppDelegateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateExtensions.swift; sourceTree = "<group>"; };
 		B872E63E1F29FBA4009BD763 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		B89872861F306008007DEDA6 /* AudioChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioChannel.swift; sourceTree = "<group>"; };
+		B8AAB7F91F3AE01300FFA58E /* FirebaseManagerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManagerProtocols.swift; sourceTree = "<group>"; };
 		B8D9ECDC1F32F7BE00B9FEED /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		B8DB3F0F1F2E2852006E5A58 /* RandomCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomCallViewController.swift; sourceTree = "<group>"; };
 		B8DB3F151F2F0237006E5A58 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				B872E6381F29EB7C009BD763 /* FirebaseManager.swift */,
+				B8AAB7F91F3AE01300FFA58E /* FirebaseManagerProtocols.swift */,
 				B872E63E1F29FBA4009BD763 /* UserManager.swift */,
 				B803313F1F2B377B00F89209 /* QBManager.swift */,
 				B80331471F2B3E5000F89209 /* Const.swift */,
@@ -454,6 +457,7 @@
 				B803313E1F2B338200F89209 /* User.swift in Sources */,
 				B872E6301F29C498009BD763 /* AppDelegate.swift in Sources */,
 				B8456F7C1F38483200641315 /* MainTabViewController.swift in Sources */,
+				B8AAB7FA1F3AE01300FFA58E /* FirebaseManagerProtocols.swift in Sources */,
 				B8F1D0561F3627F2003BACF8 /* SenderTableViewCell.swift in Sources */,
 				B8F1D0541F362063003BACF8 /* ChatViewController.swift in Sources */,
 				B82C6DA01F2BAC5A00C5948D /* ChatTableViewCell.swift in Sources */,

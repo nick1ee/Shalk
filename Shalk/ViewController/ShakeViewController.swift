@@ -26,11 +26,7 @@ class ShakeViewController: UIViewController {
 
     var selectedNode: Node?
 
-    var opponent: User?
-
-//    var selectedLanguage: String = ""
-
-//    var isDiscovering: Bool = false
+//    var opponent: User?
 
     @IBOutlet weak var loadingView: NVActivityIndicatorView!
 
@@ -59,8 +55,6 @@ class ShakeViewController: UIViewController {
 
         labelSearching.isHidden = true
 
-//        rtcManager.add(self)
-
         QBManager.shared.audioManager.initialize()
 
         QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
@@ -80,20 +74,24 @@ class ShakeViewController: UIViewController {
 
         UserManager.shared.isDiscovering = false
 
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
         userManager.isConnected = false
 
         userManager.opponent = nil
 
-        UserManager.shared.isDiscovering = false
-
-        FirebaseManager().fetchFriendList()
+        userManager.closeChannel()
 
     }
+//
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//
+//        userManager.isConnected = false
+//
+//        userManager.opponent = nil
+//
+//        UserManager.shared.isDiscovering = false
+//
+//    }
 
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
 
@@ -108,6 +106,8 @@ class ShakeViewController: UIViewController {
                     labelSearching.text = "Please select a preferred language."
 
                     labelSearching.isHidden = false
+
+                    UserManager.shared.isDiscovering = false
 
                     return
 
@@ -126,10 +126,6 @@ class ShakeViewController: UIViewController {
                 FirebaseManager().fetchChannel(withLang: selectedLanguage)
 
             }
-
-        } else {
-
-            labelSearching.text = "You are discovering the partner, please wait!"
 
         }
 
@@ -161,8 +157,6 @@ class ShakeViewController: UIViewController {
 
             let audioVC = destinationNavi?.viewControllers.first as? RandomCallViewController
 
-//            print(userManager.opponent?.name)
-
             guard let opponentName = userManager.opponent?.name else { return }
 
             audioVC?.receivedUserName = opponentName
@@ -173,92 +167,19 @@ class ShakeViewController: UIViewController {
 
 }
 
-//extension ShakeViewController: QBRTCClientDelegate {
-//
-//    func didReceiveNewSession(_ session: QBRTCSession, userInfo: [String : String]? = nil) {
-//
-//        if qbManager.session != nil {
-//
-//            let userInfo = ["key": "value"]
-//
-//            session.rejectCall(userInfo)
-//
-//        } else {
-//
-//            do {
-//
-//                qbManager.session = session
-//
-//                userManager.opponent = try User.init(json: userInfo!)
-//
-//                qbManager.acceptCall()
-//
-//                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-//
-//                self.performSegue(withIdentifier: "callDiscovered", sender: nil)
-//
-//            } catch let error {
-//
-//                // TODO: Error handling
-//
-//                print("=======================================", error.localizedDescription)
-//
-//            }
-//        }
-//    }
-//
-//    func session(_ session: QBRTCBaseSession, receivedRemoteAudioTrack audioTrack: QBRTCAudioTrack, fromUser userID: NSNumber) {
-//
-//        audioTrack.isEnabled = true
-//
-//    }
-//
-//    func session(_ session: QBRTCSession, acceptedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
-//
-//        userManager.isConnected = true
-//
-//        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-//
-//    }
-//
-//    func session(_ session: QBRTCBaseSession, connectedToUser userID: NSNumber) {
-//
-//        self.performSegue(withIdentifier: "callDiscovered", sender: nil)
-//
-//    }
-//
-//    func sessionDidClose(_ session: QBRTCSession) {
-//
-//        qbManager.session = nil
-//
-//    }
-//
-//    func session(_ session: QBRTCSession, rejectedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
-//
-//        FirebaseManager().fetchChannel(withLang: UserManager.shared.discoveredLanguage)
-//
-//    }
-//
-//    func session(_ session: QBRTCSession, hungUpByUser userID: NSNumber, userInfo: [String : String]? = nil) {
-//
-//        // MARK: Received a hung up signal from user.
-//
-//        guard let info = userInfo else { return }
-//
-////        print("-------------- user info -------------", userInfo)
-//
-//        self.receivedEndCallwithFriendRequest(withInfo: info)
-//
-//    }
-//
-//}
-
 // MARK: - MagneticDelegate
 extension ShakeViewController: MagneticDelegate {
 
     func magnetic(_ magnetic: Magnetic, didSelect node: Node) {
 
-        print("didSelect -> \(node)")
+        // MAKR: Bubble selected
+        userManager.closeChannel()
+
+        UserManager.shared.isDiscovering = false
+
+        labelSearching.isHidden = true
+
+        loadingView.stopAnimating()
 
         selectedNode?.isSelected = false
 
@@ -270,7 +191,7 @@ extension ShakeViewController: MagneticDelegate {
 
     func magnetic(_ magnetic: Magnetic, didDeselect node: Node) {
 
-        print("didDeselect -> \(node)")
+        // MARK: Bubble deselected.
 
     }
 

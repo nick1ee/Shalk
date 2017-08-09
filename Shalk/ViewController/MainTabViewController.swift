@@ -186,11 +186,7 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         // MARK: Received a hung up signal from user.
 
-        guard let info = userInfo else { return }
-
-        //        print("-------------- user info -------------", userInfo)
-
-        self.receivedEndCallwithFriendRequest(withInfo: info)
+        self.receivedEndCallwithFriendRequest()
 
     }
 
