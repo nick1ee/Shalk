@@ -46,8 +46,6 @@ extension UIViewController {
 
             FirebaseManager().checkFriendRequest()
 
-            QBManager.shared.handUpCall()
-
             self.presentedViewController?.dismiss(animated: true, completion: nil)
 
         }
@@ -76,9 +74,7 @@ extension UIViewController {
 
             FirebaseManager().checkFriendRequest()
 
-            QBManager.shared.handUpCall()
-
-            self.dismiss(animated: true, completion: nil)
+//            self.dismiss(animated: true, completion: nil)
 
         }
 

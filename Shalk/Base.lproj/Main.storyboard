@@ -437,34 +437,34 @@
                         <viewControllerLayoutGuide type="bottom" id="dSP-Ea-XoA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="g6D-2w-hSF">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audio Connected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jz3-gY-Acy">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audio Connected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jz3-gY-Acy">
                                 <rect key="frame" x="0.0" y="64" width="414" height="20"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gNG-sQ-jlz">
-                                <rect key="frame" x="0.0" y="84" width="414" height="603"/>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="gNG-sQ-jlz" userLabel="BackgroundImageView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOl-D8-VzJ">
-                                <rect key="frame" x="0.0" y="549.66666666666652" width="414" height="137.33333333333337"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOl-D8-VzJ">
+                                <rect key="frame" x="0.0" y="586" width="414" height="150"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WrG-4S-147">
-                                        <rect key="frame" x="0.0" y="61" width="414" height="1"/>
+                                        <rect key="frame" x="0.0" y="68.333333333333371" width="414" height="1"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="3Wo-sg-xwv"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wp0-6T-Y61">
-                                        <rect key="frame" x="182" y="72" width="50" height="50"/>
-                                        <color key="backgroundColor" red="0.9533242583" green="0.67907041310000005" blue="0.1825418174" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="182" y="89.333333333333371" width="50" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="2Gh-zn-LWw"/>
                                             <constraint firstAttribute="width" constant="50" id="4VY-6G-oxV"/>
@@ -487,8 +487,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="95G-Qe-oHC">
-                                        <rect key="frame" x="20" y="72" width="50" height="50"/>
-                                        <color key="backgroundColor" red="0.9533242583" green="0.67907041310000005" blue="0.1825418174" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="62" y="89.333333333333371" width="50" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="Vov-tk-fNE"/>
                                             <constraint firstAttribute="height" constant="50" id="igw-kW-QRT"/>
@@ -511,14 +511,14 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9En-QJ-LBd">
-                                        <rect key="frame" x="163.66666666666666" y="20" width="86" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="155.33333333333337" y="20" width="102.66666666666663" height="28.333333333333371"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKc-ll-7xp">
-                                        <rect key="frame" x="344" y="72" width="50" height="50"/>
-                                        <color key="backgroundColor" red="1" green="0.1531935036" blue="0.38967609409999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="302" y="89.333333333333371" width="50" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Y6W-TX-ktI"/>
                                             <constraint firstAttribute="width" constant="50" id="gDn-AQ-eUr"/>
@@ -541,58 +541,49 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.95332425832748413" green="0.67907041311264038" blue="0.18254181742668152" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.46529024299999999" green="0.35942899010000001" blue="0.58205107869999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="95G-Qe-oHC" firstAttribute="leading" secondItem="TOl-D8-VzJ" secondAttribute="leading" constant="20" id="2Yd-Mr-uk8"/>
-                                    <constraint firstItem="lKc-ll-7xp" firstAttribute="top" secondItem="WrG-4S-147" secondAttribute="bottom" constant="10" id="AAc-Wt-XiV"/>
+                                    <constraint firstAttribute="height" constant="150" id="6De-L7-n1e"/>
+                                    <constraint firstItem="lKc-ll-7xp" firstAttribute="top" secondItem="WrG-4S-147" secondAttribute="bottom" constant="20" id="AAc-Wt-XiV"/>
                                     <constraint firstItem="9En-QJ-LBd" firstAttribute="top" secondItem="TOl-D8-VzJ" secondAttribute="top" constant="20" id="GPA-Td-bR9"/>
+                                    <constraint firstItem="lKc-ll-7xp" firstAttribute="leading" secondItem="wp0-6T-Y61" secondAttribute="trailing" constant="70" id="GR7-3l-VE4"/>
                                     <constraint firstItem="9En-QJ-LBd" firstAttribute="centerX" secondItem="TOl-D8-VzJ" secondAttribute="centerX" id="Kfb-e9-uHS"/>
-                                    <constraint firstAttribute="trailing" secondItem="lKc-ll-7xp" secondAttribute="trailing" constant="20" id="O37-S1-Lil"/>
-                                    <constraint firstItem="95G-Qe-oHC" firstAttribute="top" secondItem="WrG-4S-147" secondAttribute="bottom" constant="10" id="ZuY-4S-0On"/>
+                                    <constraint firstItem="95G-Qe-oHC" firstAttribute="top" secondItem="WrG-4S-147" secondAttribute="bottom" constant="20" id="ZuY-4S-0On"/>
                                     <constraint firstItem="WrG-4S-147" firstAttribute="top" secondItem="9En-QJ-LBd" secondAttribute="bottom" constant="20" id="aXK-Ac-uhD"/>
                                     <constraint firstItem="wp0-6T-Y61" firstAttribute="centerX" secondItem="TOl-D8-VzJ" secondAttribute="centerX" id="asz-ZX-0DG"/>
                                     <constraint firstItem="WrG-4S-147" firstAttribute="leading" secondItem="TOl-D8-VzJ" secondAttribute="leading" id="e4P-rF-cIV"/>
+                                    <constraint firstItem="wp0-6T-Y61" firstAttribute="leading" secondItem="95G-Qe-oHC" secondAttribute="trailing" constant="70" id="fwB-QW-cAx"/>
                                     <constraint firstAttribute="trailing" secondItem="WrG-4S-147" secondAttribute="trailing" id="gcZ-JU-HdS"/>
-                                    <constraint firstItem="wp0-6T-Y61" firstAttribute="top" secondItem="WrG-4S-147" secondAttribute="bottom" constant="10" id="mre-Z1-CeI"/>
+                                    <constraint firstItem="wp0-6T-Y61" firstAttribute="top" secondItem="WrG-4S-147" secondAttribute="bottom" constant="20" id="mre-Z1-CeI"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-biguser" translatesAutoresizingMaskIntoConstraints="NO" id="KSo-7U-Gap">
-                                <rect key="frame" x="0.0" y="84" width="414" height="465.66666666666663"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" red="0.9533242583" green="0.67907041310000005" blue="0.1825418174" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="gNG-sQ-jlz" firstAttribute="width" secondItem="g6D-2w-hSF" secondAttribute="width" id="6BI-rZ-Ykn"/>
                             <constraint firstItem="TOl-D8-VzJ" firstAttribute="leading" secondItem="g6D-2w-hSF" secondAttribute="leading" id="7z2-ru-6Nj"/>
-                            <constraint firstItem="KSo-7U-Gap" firstAttribute="leading" secondItem="g6D-2w-hSF" secondAttribute="leading" id="9d6-Gr-ltg"/>
-                            <constraint firstAttribute="bottom" secondItem="gNG-sQ-jlz" secondAttribute="bottom" id="Aic-lL-4Bm"/>
-                            <constraint firstAttribute="trailing" secondItem="KSo-7U-Gap" secondAttribute="trailing" id="Dpq-Dt-pp2"/>
-                            <constraint firstItem="TOl-D8-VzJ" firstAttribute="height" secondItem="g6D-2w-hSF" secondAttribute="height" multiplier="1:5" id="H4p-dq-CDW"/>
+                            <constraint firstItem="gNG-sQ-jlz" firstAttribute="centerX" secondItem="g6D-2w-hSF" secondAttribute="centerX" id="GuR-7h-Y7L"/>
                             <constraint firstAttribute="trailing" secondItem="TOl-D8-VzJ" secondAttribute="trailing" id="I0u-rh-HX7"/>
-                            <constraint firstItem="KSo-7U-Gap" firstAttribute="top" secondItem="f3K-IZ-8S1" secondAttribute="bottom" constant="20" id="JjA-Zj-8NE"/>
-                            <constraint firstItem="dSP-Ea-XoA" firstAttribute="top" secondItem="TOl-D8-VzJ" secondAttribute="bottom" id="WAP-js-sbz"/>
-                            <constraint firstItem="gNG-sQ-jlz" firstAttribute="top" secondItem="f3K-IZ-8S1" secondAttribute="bottom" constant="20" id="YtX-Ox-BQv"/>
-                            <constraint firstItem="gNG-sQ-jlz" firstAttribute="leading" secondItem="g6D-2w-hSF" secondAttribute="leading" id="Zgf-OG-U9A"/>
                             <constraint firstItem="Jz3-gY-Acy" firstAttribute="top" secondItem="f3K-IZ-8S1" secondAttribute="bottom" id="aLm-mg-F4X"/>
+                            <constraint firstItem="gNG-sQ-jlz" firstAttribute="height" secondItem="g6D-2w-hSF" secondAttribute="height" id="cvd-W4-QBd"/>
                             <constraint firstAttribute="trailing" secondItem="Jz3-gY-Acy" secondAttribute="trailing" id="de8-Qp-BE6"/>
-                            <constraint firstAttribute="trailing" secondItem="gNG-sQ-jlz" secondAttribute="trailing" id="eaD-i6-hPA"/>
+                            <constraint firstAttribute="bottom" secondItem="TOl-D8-VzJ" secondAttribute="bottom" id="ik6-2E-dXH"/>
                             <constraint firstItem="Jz3-gY-Acy" firstAttribute="leading" secondItem="g6D-2w-hSF" secondAttribute="leading" id="jNG-MW-KwF"/>
-                            <constraint firstItem="TOl-D8-VzJ" firstAttribute="top" secondItem="KSo-7U-Gap" secondAttribute="bottom" id="tqy-1Z-neF"/>
+                            <constraint firstItem="gNG-sQ-jlz" firstAttribute="centerY" secondItem="g6D-2w-hSF" secondAttribute="centerY" id="wBi-nn-H1I"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Shalk." id="kzy-nF-U52"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="defaultUserImageView" destination="KSo-7U-Gap" id="e70-cV-La2"/>
                         <outlet property="outletMicrophone" destination="wp0-6T-Y61" id="2J2-mb-bbV"/>
                         <outlet property="outletSpeaker" destination="95G-Qe-oHC" id="DrK-mX-9z5"/>
-                        <outlet property="userImageView" destination="gNG-sQ-jlz" id="BSk-nu-SV3"/>
                         <outlet property="userNameLabel" destination="9En-QJ-LBd" id="72k-BM-DLZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x15-8b-NRr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="475" y="1750"/>
+            <point key="canvasLocation" x="473.91304347826093" y="1749.4565217391305"/>
         </scene>
         <!--Coming Call View Controller-->
         <scene sceneID="1iH-u7-ana">
@@ -1644,14 +1635,26 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XGa-g4-miM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="icon-user2" id="Zoj-L9-Jd7"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5Sq-to-EJ9">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5Sq-to-EJ9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.24398827549999999" green="0.18944382670000001" blue="0.29701077939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.24398827549999999" green="0.18944382670000001" blue="0.29701077939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="20"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                <size key="value" width="1" height="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <real key="value" value="0.5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1668,14 +1671,26 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mkS-HT-gtI" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Chat" image="icon-chat" id="wxM-Hv-sf2"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dKu-gw-DAY">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="dKu-gw-DAY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.24184587599999999" green="0.18653875589999999" blue="0.29894664879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.24398827549999999" green="0.18944382670000001" blue="0.29701077939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="20"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                <size key="value" width="1" height="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <real key="value" value="0.5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1692,14 +1707,26 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="osy-gO-RLA" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Shake" image="icon-shake" id="1Yc-1h-gVA"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GdU-fe-PRp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GdU-fe-PRp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.24398827549999999" green="0.18944382670000001" blue="0.29701077939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.24398827549999999" green="0.18944382670000001" blue="0.29701077939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="20"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                <size key="value" width="1" height="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <real key="value" value="0.5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1715,11 +1742,26 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ysa-3g-96l" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="21y-tc-tga">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="21y-tc-tga">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.24398827549999999" green="0.18944382670000001" blue="0.29701077939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.24398827549999999" green="0.18944382670000001" blue="0.29701077939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="20"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                <size key="value" width="1" height="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <real key="value" value="0.5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1732,10 +1774,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="background" width="500" height="750"/>
         <image name="icon-attach" width="25" height="25"/>
         <image name="icon-audio" width="25" height="25"/>
         <image name="icon-back" width="25" height="25"/>
-        <image name="icon-biguser" width="256" height="256"/>
         <image name="icon-camera" width="25" height="25"/>
         <image name="icon-chat" width="25" height="25"/>
         <image name="icon-email" width="25" height="25"/>

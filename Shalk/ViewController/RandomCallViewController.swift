@@ -16,15 +16,9 @@ class RandomCallViewController: UIViewController {
 
     var isSpeakerEnabled: Bool = false
 
-    var receivedUserName = ""
-
     let qbManager = QBManager.shared
 
     let rtcManager = QBRTCClient.instance()
-
-    @IBOutlet weak var userImageView: UIImageView!
-
-    @IBOutlet weak var defaultUserImageView: UIImageView!
 
     @IBOutlet weak var userNameLabel: UILabel!
 
@@ -93,11 +87,13 @@ class RandomCallViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        guard let opponent = UserManager.shared.opponent else { return }
+
         qbManager.session?.localMediaStream.audioTrack.isEnabled = true
 
         qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
 
-        userNameLabel.text = receivedUserName
+        userNameLabel.text = opponent.name
 
     }
 

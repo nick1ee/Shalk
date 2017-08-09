@@ -26,8 +26,6 @@ class ShakeViewController: UIViewController {
 
     var selectedNode: Node?
 
-//    var opponent: User?
-
     @IBOutlet weak var loadingView: NVActivityIndicatorView!
 
     @IBOutlet weak var labelSearching: UILabel!
@@ -60,6 +58,15 @@ class ShakeViewController: UIViewController {
         QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
 
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        userManager.opponent = nil
+        
+        UserManager.shared.isDiscovering = false
+        
+    }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -74,24 +81,9 @@ class ShakeViewController: UIViewController {
 
         UserManager.shared.isDiscovering = false
 
-        userManager.isConnected = false
-
-        userManager.opponent = nil
-
         userManager.closeChannel()
 
     }
-//
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//
-//        userManager.isConnected = false
-//
-//        userManager.opponent = nil
-//
-//        UserManager.shared.isDiscovering = false
-//
-//    }
 
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
 
@@ -149,21 +141,21 @@ class ShakeViewController: UIViewController {
 
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        if segue.identifier == "audioCall" {
-
-            let destinationNavi = segue.destination as? UINavigationController
-
-            let audioVC = destinationNavi?.viewControllers.first as? RandomCallViewController
-
-            guard let opponentName = userManager.opponent?.name else { return }
-
-            audioVC?.receivedUserName = opponentName
-
-        }
-
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//        if segue.identifier == "audioCall" {
+//
+//            let destinationNavi = segue.destination as? UINavigationController
+//
+//            let audioVC = destinationNavi?.viewControllers.first as? RandomCallViewController
+//
+//            guard let opponentName = userManager.opponent?.name else { return }
+//
+//            audioVC?.receivedUserName = opponentName
+//
+//        }
+//
+//    }
 
 }
 

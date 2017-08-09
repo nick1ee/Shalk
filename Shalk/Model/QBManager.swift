@@ -258,27 +258,5 @@ class QBManager {
         userManager.isConnected = false
 
     }
-//
-//    func leaveChannel() {
-//
-//        var info: [String: String] = [:]
-//
-//        if userManager.isSendingFriendRequest == true {
-//
-//            info = ["sendRequest": "yes"]
-//
-//        } else {
-//
-//            info = ["sendRequest": "no"]
-//
-//        }
-//
-//        self.session?.hangUp(info)
-//
-//        userManager.closeChannel()
-//
-//        userManager.isConnected = false
-//
-//    }
 
 }

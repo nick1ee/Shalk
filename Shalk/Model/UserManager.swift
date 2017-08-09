@@ -19,15 +19,21 @@ class UserManager {
 
     var opponent: User?
 
-    var roomKey: String?
+    var roomKey: String? {
+        
+        didSet {
+            
+            print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^", roomKey)
+            
+        }
+        
+    }
 
     var language: String?
 
     var chatRooms: [ChatRoom] = []
 
     var chatRoomId: String = ""
-
-//    var isSendingFriendRequest: Bool?
 
     var friendsInfo: [User] = []
 

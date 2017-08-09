@@ -260,8 +260,8 @@ class FirebaseManager {
 
             } catch let error {
 
-                // TODO: Error handling
-                print(error.localizedDescription)
+                // MARK: Failed to fetch user profile
+                UIAlertController(error: error).show()
             }
 
         })
@@ -282,9 +282,7 @@ class FirebaseManager {
 
             }
 
-            let roomkeys = object.keys
-
-            for roomkey in roomkeys {
+            for roomkey in object.keys {
 
                 do {
 
@@ -308,9 +306,9 @@ class FirebaseManager {
 
                 } catch let error {
 
-                    // TODO: Error handling
+                    // MARK: Failed to fetch channel.
 
-                    print(error.localizedDescription)
+                    UIAlertController(error: error).show()
                 }
 
             }
@@ -353,15 +351,21 @@ class FirebaseManager {
 
         ref?.child("channels").child(language).child(key).updateChildValues(["isFinished": true])
 
-        userManager.roomKey = nil
-
-        userManager.language = nil
+//        userManager.roomKey = nil
+//
+//        userManager.language = nil
 
     }
 
     func checkFriendRequest() {
 
-        guard let roomId = userManager.roomKey else { return }
+        guard let roomId = userManager.roomKey else {
+            
+            print("could not get room key")
+            
+            return
+        
+        }
 
         ref?.child("friendRequest").observeSingleEvent(of: .value, with: { (snapshot) in
 
@@ -372,7 +376,13 @@ class FirebaseManager {
                 guard
                     let myUid = UserManager.shared.currentUser?.uid,
                     let language = UserManager.shared.language,
-                    let opponent = UserManager.shared.opponent else { return }
+                    let opponent = UserManager.shared.opponent else {
+
+                        print("error is here!")
+
+                        return
+
+                }
 
                 self.ref?.child("friendList").child(myUid).updateChildValues([opponent.uid: language])
 
@@ -385,6 +395,8 @@ class FirebaseManager {
                 self.ref?.child("friendRequest").setValue([roomId: true])
 
             }
+            
+            QBManager.shared.handUpCall()
 
         })
 

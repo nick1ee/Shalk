@@ -135,19 +135,6 @@ extension MainTabViewController: QBRTCClientDelegate {
         audioTrack.isEnabled = true
 
     }
-//    
-//    // MARK: 收到遠端畫面
-//    func session(_ session: QBRTCSession, receivedRemoteVideoTrack videoTrack: QBRTCVideoTrack, fromUser userID: NSNumber) {
-//        
-//        print("Gotcha Video")
-//        
-//        // MARK: Received remote video track
-//        
-//        VideoCallViewController.remoteVideoView.setVideoTrack(videoTrack)
-//        
-//        videoTrack.isEnabled = true
-//        
-//    }
 
     // MARK: 電話被對方接起後
     func session(_ session: QBRTCSession, acceptedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
