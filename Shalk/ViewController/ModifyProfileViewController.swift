@@ -10,10 +10,6 @@ import UIKit
 
 class ModifyProfileViewController: UIViewController {
 
-    var receivedUserName = ""
-
-    var receivedUserIntro = ""
-
     var isImageChanged: Bool = false
 
     var isProfileChanged: Bool = false
@@ -30,29 +26,36 @@ class ModifyProfileViewController: UIViewController {
 
     @IBOutlet weak var userImageView: UIImageView!
 
-    @IBAction func btnBack(_ sender: UIBarButtonItem) {
-
-        self.navigationController?.popViewController(animated: true)
-
-    }
-
-    @IBAction func btnSave(_ sender: UIBarButtonItem) {
-
-        if isImageChanged == true {
-
-            self.uploadUserImage()
-
-        }
-
+    @IBAction func nameTextfield(_ sender: UITextField) {
+        
         guard let user = UserManager.shared.currentUser else { return }
-
-        if inputName.text != user.name || inputIntro.text != user.intro {
-
-            isProfileChanged = true
-
-            self.updateUserProfile()
-
+        
+        if inputName.isEmpty && inputName.text != user.name {
+            
+            let updatedName = inputName.text!
+            
+            FirebaseManager().updateUserName(name: updatedName)
+            
         }
+        
+    }
+    
+    
+    @IBAction func introTextfield(_ sender: UITextField) {
+        
+        guard let user = UserManager.shared.currentUser else { return }
+        
+        if inputIntro.isEmpty && inputIntro.text != user.intro {
+            
+            let updatedIntro = inputIntro.text!
+            
+            FirebaseManager().updateUserIntro(intro: updatedIntro)
+            
+        }
+        
+    }
+    
+    @IBAction func btnBack(_ sender: UIBarButtonItem) {
 
         self.navigationController?.popViewController(animated: true)
 
@@ -103,7 +106,11 @@ class ModifyProfileViewController: UIViewController {
 
         self.inputIntro.text = user.intro
 
-        self.userImageView.sd_setImage(with: URL(string: user.imageUrl))
+        if user.imageUrl != "null" {
+
+            self.userImageView.sd_setImage(with: URL(string: user.imageUrl))
+
+        }
 
     }
 
@@ -128,30 +135,6 @@ extension ModifyProfileViewController: UIImagePickerControllerDelegate, UINaviga
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 
         dismiss(animated: true, completion: nil)
-
-    }
-
-}
-
-extension ModifyProfileViewController {
-
-    func uploadUserImage() {
-
-        guard let data = UIImageJPEGRepresentation(userImageView.image!, 0.7) else { return }
-
-        FirebaseManager().uploadImage(withData: data)
-
-        self.isImageChanged = false
-
-    }
-
-    func updateUserProfile() {
-
-        guard let name = inputName.text, let intro = inputIntro.text else { return }
-
-        FirebaseManager().updateUserProfile(withName: name, withIntro: intro)
-
-        self.isProfileChanged = false
 
     }
 

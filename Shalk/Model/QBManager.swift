@@ -256,6 +256,8 @@ class QBManager {
         self.session?.hangUp(nil)
 
         userManager.isConnected = false
+        
+        userManager.closeChannel()
 
     }
 

@@ -81,8 +81,6 @@ class ShakeViewController: UIViewController {
 
         UserManager.shared.isDiscovering = false
 
-        userManager.closeChannel()
-
     }
 
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {

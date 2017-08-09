@@ -140,22 +140,20 @@ class FirebaseManager {
 
     }
 
-    func updateUserProfile(withName name: String, withIntro intro: String) {
-
+    func updateUserName(name: String) {
+        
         guard let user = UserManager.shared.currentUser else { return }
-
-        self.ref?.child("users").child(user.uid).child("name").setValue(name)
-
-        if intro == "" {
-
-            self.ref?.child("users").child(user.uid).child("intro").setValue("null")
-
-        } else {
-
-            self.ref?.child("users").child(user.uid).child("intro").setValue(intro)
-
-        }
-
+        
+        ref?.child("users").child(user.uid).child("name").setValue(name)
+        
+    }
+    
+    func updateUserIntro(intro: String) {
+        
+        guard let user = UserManager.shared.currentUser else { return }
+        
+        ref?.child("users").child(user.uid).child("intro").setValue(intro)
+        
     }
 
     func uploadImage(withData data: Data) {
@@ -296,7 +294,7 @@ class FirebaseManager {
 
                         self.userManager.language = language
 
-                        self.updateChannel(withRoomKey: roomkey, withLang: language)
+                        self.updateChannel()
 
                         self.fetchUserProfile(withUid: channel.owner, type: .opponent, call: .audio)
 
@@ -337,36 +335,35 @@ class FirebaseManager {
 
     }
 
-    func updateChannel(withRoomKey key: String, withLang language: String) {
+    func updateChannel() {
+        
+        guard
+            let uid = userManager.currentUser?.uid,
+            let roomId = userManager.roomKey,
+            let lang = userManager.language else { return }
 
-        guard let uid = userManager.currentUser?.uid else { return }
+        ref?.child("channels").child(lang).child(roomId).updateChildValues(["isLocked": true])
 
-        ref?.child("channels").child(language).child(key).updateChildValues(["isLocked": true])
-
-        ref?.child("channels").child(language).child(key).updateChildValues(["participant": uid])
+        ref?.child("channels").child(lang).child(roomId).updateChildValues(["participant": uid])
 
     }
 
-    func closeChannel(withRoomKey key: String, withLang language: String) {
+    func closeChannel() {
+        
+        guard let roomId = userManager.roomKey, let lang = userManager.language else { return }
 
-        ref?.child("channels").child(language).child(key).updateChildValues(["isFinished": true])
+        ref?.child("channels").child(lang).child(roomId).updateChildValues(["isFinished": true])
 
-//        userManager.roomKey = nil
-//
-//        userManager.language = nil
+        userManager.roomKey = nil
+
+        userManager.language = nil
 
     }
 
     func checkFriendRequest() {
 
-        guard let roomId = userManager.roomKey else {
-            
-            print("could not get room key")
-            
-            return
+        guard let roomId = userManager.roomKey else { return }
         
-        }
-
         ref?.child("friendRequest").observeSingleEvent(of: .value, with: { (snapshot) in
 
             if snapshot.hasChild(roomId) {
@@ -392,7 +389,7 @@ class FirebaseManager {
 
                 // MARK: Add myself into the queue.
 
-                self.ref?.child("friendRequest").setValue([roomId: true])
+                self.ref?.child("friendRequest").child(roomId).setValue(true)
 
             }
             

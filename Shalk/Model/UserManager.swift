@@ -98,9 +98,7 @@ class UserManager {
 
     func closeChannel() {
 
-        guard let roomId = roomKey, let lang = language else { return }
-
-        FirebaseManager().closeChannel(withRoomKey: roomId, withLang: lang)
+        FirebaseManager().closeChannel()
 
     }
 
