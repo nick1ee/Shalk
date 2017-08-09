@@ -224,6 +224,32 @@ class FirebaseManager {
 
     }
 
+    func fetchMyProfile(completion: @escaping () -> Void) {
+
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+
+        ref?.child("users").child(uid).observeSingleEvent(of: .value, with: {(snapshot) in
+
+        guard let object = snapshot.value as? [String: Any] else { return }
+
+        do {
+
+            let user = try User.init(json: object)
+
+            UserManager.shared.currentUser = user
+
+            completion()
+
+        } catch let error {
+
+            UIAlertController(error: error).show()
+
+            }
+
+        })
+
+    }
+
     func fetchUserProfile(withUid uid: String, type: UserProfile, call: CallType) {
 
         ref?.child("users").child(uid).observeSingleEvent(of: .value, with: {(snapshot) in
@@ -259,9 +285,9 @@ class FirebaseManager {
                         self.userManager.startVideoCall()
 
                         break
-                        
+
                     case .none:
-                        
+
                         break
 
                     }

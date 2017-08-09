@@ -91,12 +91,14 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return  messages.count
+        let showMessages = messages.filter { $0.text != "" }
+
+        return  showMessages.count
 
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         let showMessages = messages.filter { $0.text != "" }
 
         guard let myUid = UserManager.shared.currentUser?.uid else { return UITableViewCell() }
@@ -115,11 +117,15 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
         default:
 
+            let friend = UserManager.shared.friendsInfo.filter { $0.uid == showMessages[indexPath.row].senderId }
+
             let cell = tableView.dequeueReusableCell(withIdentifier: "receiverCell", for: indexPath) as! ReceiverTableViewCell
 
             cell.receivedMessage.text = showMessages[indexPath.row].text
 
             cell.receivedTime.text = showMessages[indexPath.row].time
+
+            cell.receiverImageView.sd_setImage(with: URL(string: friend[0].imageUrl))
 
             return cell
 

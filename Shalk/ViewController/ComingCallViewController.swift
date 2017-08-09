@@ -59,6 +59,12 @@ class ComingCallViewController: UIViewController {
 
         callType.text = callTypeString
 
+        if opponent?.imageUrl != "null" {
+
+            opponentImageView.sd_setImage(with: URL(string: (opponent?.imageUrl)!))
+
+        }
+
     }
 
     override func viewWillAppear(_ animated: Bool) {

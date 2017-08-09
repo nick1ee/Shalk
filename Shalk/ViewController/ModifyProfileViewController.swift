@@ -54,10 +54,6 @@ class ModifyProfileViewController: UIViewController {
 
         }
 
-        guard let myUid = UserManager.shared.currentUser?.uid else { return }
-
-        FirebaseManager().fetchUserProfile(withUid: myUid, type: .myself, call: .none)
-
         self.navigationController?.popViewController(animated: true)
 
     }
@@ -100,13 +96,13 @@ class ModifyProfileViewController: UIViewController {
         super.viewDidLoad()
 
         imagePicker.delegate = self
-        
+
         guard let user = UserManager.shared.currentUser else { return }
 
         self.inputName.text = user.name
 
         self.inputIntro.text = user.intro
-        
+
         self.userImageView.sd_setImage(with: URL(string: user.imageUrl))
 
     }

@@ -62,7 +62,11 @@ class ProfileViewController: UIViewController {
 
         fbManager.fetchFriendList()
 
-        self.tableView.reloadData()
+        FirebaseManager().fetchMyProfile {
+
+            self.tableView.reloadData()
+
+        }
 
     }
 
