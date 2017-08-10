@@ -235,6 +235,20 @@ class QBManager {
 
         captureVideo()
 
+        let event = QBMEvent()
+
+        event.notificationType = .push
+
+        event.usersIDs = qbID
+
+        event.type = .oneShot
+
+        QBRequest.createEvent(event, successBlock: { (_, _) in
+
+            print("success")
+
+        }, errorBlock: nil)
+
         session?.startCall(userInfo)
 
     }
@@ -256,8 +270,6 @@ class QBManager {
         self.session?.hangUp(nil)
 
         userManager.isConnected = false
-        
-        userManager.closeChannel()
 
     }
 

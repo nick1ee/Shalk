@@ -335,6 +335,11 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = EQ43V2KPAV;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};

@@ -22,14 +22,6 @@ protocol FirebaseManagerChatRoomDelegate: class {
 
 }
 
-protocol FirebaseManagerChatHistoryDelegate: class {
-
-    func manager (_ manager: FirebaseManager, didGetMessages messages: [Message])
-
-    func manager (_ manager: FirebaseManager, didGetError error: Error)
-
-}
-
 enum UserProfile {
 
     case myself, opponent

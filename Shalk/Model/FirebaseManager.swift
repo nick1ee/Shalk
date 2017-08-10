@@ -16,8 +16,6 @@ class FirebaseManager {
 
     weak var chatRoomDelegate: FirebaseManagerChatRoomDelegate?
 
-    weak var chatHistroyDelegate: FirebaseManagerChatHistoryDelegate?
-
     var ref: DatabaseReference? = Database.database().reference()
 
     var handle: DatabaseHandle?
@@ -141,19 +139,19 @@ class FirebaseManager {
     }
 
     func updateUserName(name: String) {
-        
+
         guard let user = UserManager.shared.currentUser else { return }
-        
+
         ref?.child("users").child(user.uid).child("name").setValue(name)
-        
+
     }
-    
+
     func updateUserIntro(intro: String) {
-        
+
         guard let user = UserManager.shared.currentUser else { return }
-        
+
         ref?.child("users").child(user.uid).child("intro").setValue(intro)
-        
+
     }
 
     func uploadImage(withData data: Data) {
@@ -336,7 +334,7 @@ class FirebaseManager {
     }
 
     func updateChannel() {
-        
+
         guard
             let uid = userManager.currentUser?.uid,
             let roomId = userManager.roomKey,
@@ -349,7 +347,7 @@ class FirebaseManager {
     }
 
     func closeChannel() {
-        
+
         guard let roomId = userManager.roomKey, let lang = userManager.language else { return }
 
         ref?.child("channels").child(lang).child(roomId).updateChildValues(["isFinished": true])
@@ -363,7 +361,7 @@ class FirebaseManager {
     func checkFriendRequest() {
 
         guard let roomId = userManager.roomKey else { return }
-        
+
         ref?.child("friendRequest").observeSingleEvent(of: .value, with: { (snapshot) in
 
             if snapshot.hasChild(roomId) {
@@ -392,22 +390,10 @@ class FirebaseManager {
                 self.ref?.child("friendRequest").child(roomId).setValue(true)
 
             }
-            
-            QBManager.shared.handUpCall()
 
         })
 
     }
-
-//    func addFriend(withOpponent opponent: User) {
-//
-//        guard let myUid = userManager.currentUser?.uid, let language = userManager.language else { return }
-//
-//        ref?.child("friendList").child(myUid).updateChildValues([opponent.uid: language])
-//
-//        ref?.child("friendList").child(opponent.uid).updateChildValues([myUid: language])
-//
-//    }
 
     func fetchFriendList() {
 
@@ -498,11 +484,11 @@ class FirebaseManager {
             self.ref?.removeObserver(withHandle: self.handle!)
 
             self.userManager.chatRooms = rooms
-            
+
             DispatchQueue.main.async {
-                
+
                 self.chatRoomDelegate?.manager(self, didGetChatRooms: rooms)
-                
+
             }
 
         })
@@ -551,8 +537,6 @@ class FirebaseManager {
             }
 
             completion(messages)
-
-//            self.chatHistroyDelegate?.manager(self, didGetMessages: messages)
 
         })
 

@@ -20,13 +20,13 @@ class UserManager {
     var opponent: User?
 
     var roomKey: String? {
-        
+
         didSet {
-            
+
             print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^", roomKey)
-            
+
         }
-        
+
     }
 
     var language: String?
@@ -96,7 +96,15 @@ class UserManager {
 
     }
 
+    func endCall() {
+
+        QBManager.shared.handUpCall()
+
+    }
+
     func closeChannel() {
+
+        QBManager.shared.handUpCall()
 
         FirebaseManager().closeChannel()
 

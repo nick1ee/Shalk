@@ -58,14 +58,14 @@ class ShakeViewController: UIViewController {
         QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
 
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         userManager.opponent = nil
-        
+
         UserManager.shared.isDiscovering = false
-        
+
     }
 
     override func viewWillDisappear(_ animated: Bool) {

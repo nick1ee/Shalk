@@ -72,9 +72,7 @@ extension MainTabViewController: QBRTCClientDelegate {
 
             // MARK: This device is on call
 
-            let userInfo = ["key": "value"]
-
-            session.rejectCall(userInfo)
+            session.rejectCall(nil)
 
         } else {
 
@@ -96,6 +94,8 @@ extension MainTabViewController: QBRTCClientDelegate {
                     AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
 
                     self.performSegue(withIdentifier: "callDiscovered", sender: nil)
+
+                    UserManager.shared.isDiscovering = false
 
                 } else {
 
@@ -141,16 +141,15 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         UserManager.shared.isConnected = true
 
-        UserManager.shared.isDiscovering = false
-
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
 
-    }
+        if UserManager.shared.isDiscovering == true {
 
-    // MARK: 連線確定與該使用者進行連接
-    func session(_ session: QBRTCBaseSession, connectedToUser userID: NSNumber) {
+            self.performSegue(withIdentifier: "callDiscovered", sender: nil)
 
-        self.performSegue(withIdentifier: "callDiscovered", sender: nil)
+            UserManager.shared.isDiscovering = false
+
+        }
 
     }
 
@@ -173,7 +172,22 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         // MARK: Received a hung up signal from user.
 
-        self.receivedEndCallwithFriendRequest()
+        let userString = String(describing: userID)
+
+        let friend = UserManager.shared.friendsInfo.filter { $0.quickbloxId == userString }
+
+        if friend.count == 0 {
+
+            // MARK: 非好友
+            self.receivedEndCallwithFriendRequest()
+
+            return
+
+        }
+
+        // MARK: 確定為好友
+
+        self.dismiss(animated: true, completion: nil)
 
     }
 

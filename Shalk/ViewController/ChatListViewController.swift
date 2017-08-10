@@ -32,7 +32,7 @@ class ChatListViewController: UIViewController {
         chatListTableView.backgroundView = bgImageView
 
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -65,13 +65,13 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
         cell.latestMessage.text = room.latestMessage
 
-        let friend = UserManager.shared.friendsInfo.filter { $0.uid == room.user2Id }
-
-        cell.opponentImageView.sd_setImage(with: URL(string: friend[0].imageUrl), placeholderImage: UIImage(named: "icon-user"))
-
         guard let myUid = UserManager.shared.currentUser?.uid else { return UITableViewCell() }
 
         if myUid == room.user1Id {
+
+            let friend = UserManager.shared.friendsInfo.filter { $0.uid == room.user2Id }
+
+            cell.opponentImageView.sd_setImage(with: URL(string: friend[0].imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
             cell.opponentName.text = friend[0].name
 
@@ -80,6 +80,8 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
 
             let friend = UserManager.shared.friendsInfo.filter { $0.uid == room.user1Id }
+
+            cell.opponentImageView.sd_setImage(with: URL(string: friend[0].imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
             cell.opponentName.text = friend[0].name
 

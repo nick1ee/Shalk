@@ -55,37 +55,26 @@ class ChatViewController: UIViewController {
 
         inputTextView.delegate = self
 
-//        fbManager.chatHistroyDelegate = self
-
         chatTableView.estimatedRowHeight = 300
 
         chatTableView.rowHeight = UITableViewAutomaticDimension
 
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         opponent = UserManager.shared.opponent
-        
+
+        self.navigationItem.title = opponent.name
+
         fbManager.fetchChatHistory { fetchMessages in
 
             self.messages = fetchMessages
-            
+
             self.chatTableView.reloadData()
 
         }
-        
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        self.opponent = nil
-
-        UserManager.shared.opponent = nil
-
-        UserManager.shared.chatRoomId = ""
 
     }
 
@@ -145,25 +134,6 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
 }
-//swiftlint:enable force_cast
-
-//extension ChatViewController: FirebaseManagerChatHistoryDelegate {
-//
-//    func manager(_ manager: FirebaseManager, didGetMessages messages: [Message]) {
-//
-//        self.messages = messages
-//
-//        chatTableView.reloadData()
-//
-//    }
-//
-//    func manager(_ manager: FirebaseManager, didGetError error: Error) {
-//
-//        print(error.localizedDescription)
-//
-//    }
-//
-//}
 
 extension ChatViewController: UITextViewDelegate {
 

@@ -46,13 +46,15 @@ extension UIViewController {
 
             FirebaseManager().checkFriendRequest()
 
+            UserManager.shared.closeChannel()
+
             self.presentedViewController?.dismiss(animated: true, completion: nil)
 
         }
 
         let cancelAction = UIAlertAction.init(title: "Cancel", style: .default) { (_) in
 
-            QBManager.shared.handUpCall()
+            UserManager.shared.closeChannel()
 
             self.presentedViewController?.dismiss(animated: true, completion: nil)
 
@@ -74,13 +76,15 @@ extension UIViewController {
 
             FirebaseManager().checkFriendRequest()
 
+            UserManager.shared.closeChannel()
+
             self.dismiss(animated: true, completion: nil)
 
         }
 
         let cancelAction = UIAlertAction.init(title: "Cancel", style: .default) { (_) in
 
-            QBManager.shared.handUpCall()
+            UserManager.shared.closeChannel()
 
             self.dismiss(animated: true, completion: nil)
 

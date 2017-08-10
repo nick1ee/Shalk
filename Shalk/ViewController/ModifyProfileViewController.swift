@@ -27,34 +27,33 @@ class ModifyProfileViewController: UIViewController {
     @IBOutlet weak var userImageView: UIImageView!
 
     @IBAction func nameTextfield(_ sender: UITextField) {
-        
+
         guard let user = UserManager.shared.currentUser else { return }
-        
+
         if inputName.isEmpty && inputName.text != user.name {
-            
+
             let updatedName = inputName.text!
-            
+
             FirebaseManager().updateUserName(name: updatedName)
-            
+
         }
-        
+
     }
-    
-    
+
     @IBAction func introTextfield(_ sender: UITextField) {
-        
+
         guard let user = UserManager.shared.currentUser else { return }
-        
+
         if inputIntro.isEmpty && inputIntro.text != user.intro {
-            
+
             let updatedIntro = inputIntro.text!
-            
+
             FirebaseManager().updateUserIntro(intro: updatedIntro)
-            
+
         }
-        
+
     }
-    
+
     @IBAction func btnBack(_ sender: UIBarButtonItem) {
 
         self.navigationController?.popViewController(animated: true)
@@ -107,9 +106,9 @@ class ModifyProfileViewController: UIViewController {
         self.inputIntro.text = user.intro
 
         DispatchQueue.global().async {
-            
+
             self.userImageView.sd_setImage(with: URL(string: user.imageUrl), placeholderImage: UIImage(named: "icon-user"))
-            
+
         }
 
     }

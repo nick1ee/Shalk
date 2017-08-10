@@ -22,6 +22,12 @@ class AudioCallViewController: UIViewController {
 
     let rtcManager = QBRTCClient.instance()
 
+    @IBOutlet weak var opponentImageView: UIImageView!
+
+    @IBOutlet weak var opponentName: UILabel!
+
+    @IBOutlet weak var connectionStatus: UILabel!
+
     @IBOutlet weak var outletMicrophone: UIButton!
 
     @IBOutlet weak var outletSpeaker: UIButton!
@@ -82,18 +88,40 @@ class AudioCallViewController: UIViewController {
 
         self.dismiss(animated: true, completion: nil)
 
-        QBManager.shared.handUpCall()
-
-        UserManager.shared.isConnected = false
+        UserManager.shared.endCall()
 
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        QBRTCClient.instance().add(self)
+
         qbManager.session?.localMediaStream.audioTrack.isEnabled = true
 
         qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
+
+        guard let opponent = UserManager.shared.opponent else { return }
+
+        opponentName.text = opponent.name
+
+        connectionStatus.text = "Connecting..."
+
+        DispatchQueue.global().async {
+
+            self.opponentImageView.sd_setImage(with: URL(string: opponent.imageUrl), placeholderImage: UIImage(named: "icon-user"))
+
+        }
     }
 
+}
+
+extension AudioCallViewController: QBRTCClientDelegate {
+
+    // MARK: 連線確定與該使用者進行連接
+    func session(_ session: QBRTCBaseSession, connectedToUser userID: NSNumber) {
+
+        connectionStatus.text = "Audio Connected"
+
+    }
 }
