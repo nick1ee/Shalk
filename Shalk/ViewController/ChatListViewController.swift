@@ -136,7 +136,9 @@ extension ChatListViewController: FirebaseManagerChatRoomDelegate {
 
     func manager(_ manager: FirebaseManager, didGetError error: Error) {
 
-        print(error.localizedDescription)
+        // MARK: Failed to fetch chat rooms
+
+        UIAlertController(error: error).show()
 
     }
 

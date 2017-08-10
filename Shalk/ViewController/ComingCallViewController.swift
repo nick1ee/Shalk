@@ -10,7 +10,7 @@ import UIKit
 
 class ComingCallViewController: UIViewController {
 
-    var isFinishCall: Bool = false
+    var isCallAccepted: Bool = false
 
     let opponent = UserManager.shared.opponent
 
@@ -26,19 +26,21 @@ class ComingCallViewController: UIViewController {
 
         QBManager.shared.acceptCall()
 
+        self.isCallAccepted = true
+
         switch callTypeString {
 
         case "Audio Call":
 
-            self.performSegue(withIdentifier: "acceptAudioCall", sender: nil)
+            UserManager.shared.callType = .audio
 
-            self.isFinishCall = true
+            self.performSegue(withIdentifier: "acceptAudioCall", sender: nil)
 
         default:
 
-            self.performSegue(withIdentifier: "acceptVideoCall", sender: nil)
+            UserManager.shared.callType = .video
 
-            self.isFinishCall = true
+            self.performSegue(withIdentifier: "acceptVideoCall", sender: nil)
 
         }
 
@@ -70,11 +72,11 @@ class ComingCallViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if isFinishCall == true {
+        if isCallAccepted == true {
 
             self.dismiss(animated: true, completion: nil)
 
-            isFinishCall = false
+            isCallAccepted = false
 
         }
 

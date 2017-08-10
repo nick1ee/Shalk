@@ -198,19 +198,19 @@ extension AudioCallViewController: QBRTCClientDelegate {
 }
 
 extension Int {
-    
+
     func addLeadingZero() -> String {
-        
+
         if self < 10 {
 
             return "0\(self)"
-            
-        }else {
-            
+
+        } else {
+
             return "\(self)"
-            
+
         }
-        
+
     }
-    
+
 }

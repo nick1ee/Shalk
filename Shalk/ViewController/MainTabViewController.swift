@@ -66,8 +66,6 @@ extension MainTabViewController: QBRTCClientDelegate {
     // MARK: 收到新的連線請求
     func didReceiveNewSession(_ session: QBRTCSession, userInfo: [String : String]? = nil) {
 
-        print("get in here~~~~~~~~~~~~~~~~~~~~~~")
-
         if qbManager.session != nil {
 
             // MARK: This device is on call
@@ -119,9 +117,9 @@ extension MainTabViewController: QBRTCClientDelegate {
 
             } catch let error {
 
-                // TODO: Error handling
+                // MARK: Failed to init a coming call.
 
-                print(error.localizedDescription)
+                UIAlertController(error: error).show()
 
             }
 
@@ -163,7 +161,11 @@ extension MainTabViewController: QBRTCClientDelegate {
     // MARK: 電話被使用者拒絕
     func session(_ session: QBRTCSession, rejectedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
 
-        FirebaseManager().fetchChannel(withLang: UserManager.shared.discoveredLanguage)
+        if UserManager.shared.isDiscovering == true {
+
+            FirebaseManager().fetchChannel(withLang: UserManager.shared.language!)
+
+        }
 
     }
 

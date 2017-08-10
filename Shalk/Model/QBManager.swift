@@ -196,7 +196,7 @@ class QBManager {
 
     }
 
-    func captureVideo() {
+    func videoPreparation() {
 
         let videoFormat = QBRTCVideoFormat.init()
 
@@ -212,11 +212,11 @@ class QBManager {
 
         self.session?.localMediaStream.videoTrack.videoCapture = self.videoCapture
 
-        //        self.videoCapture!.previewLayer.frame = self.localVideoView.bounds
-
         self.videoCapture!.startSession()
 
-        //        self.localVideoView.layer.insertSublayer(videoCapture!.previewLayer, at: 0)
+//        self.videoCapture!.previewLayer.frame = self.localVideoView.bounds
+//        
+//        self.localVideoView.layer.insertSublayer(videoCapture!.previewLayer, at: 0)
 
     }
 
@@ -224,30 +224,7 @@ class QBManager {
 
         userManager.isConnected = true
 
-        guard
-            let qbID = userManager.opponent?.quickbloxId,
-            let qbIDInteger = Int(qbID),
-            let opponentID = [qbIDInteger] as? [NSNumber] else { return }
-
-        let userInfo = userManager.currentUser?.toDictionary()
-
-        session = rtcManager.createNewSession(withOpponents: opponentID, with: .video)
-
-        captureVideo()
-
-        let event = QBMEvent()
-
-        event.notificationType = .push
-
-        event.usersIDs = qbID
-
-        event.type = .oneShot
-
-        QBRequest.createEvent(event, successBlock: { (_, _) in
-
-            print("success")
-
-        }, errorBlock: nil)
+        let userInfo = UserManager.shared.currentUser?.toDictionary()
 
         session?.startCall(userInfo)
 
@@ -258,6 +235,8 @@ class QBManager {
     }
 
     func acceptCall() {
+
+//        videoPreparation()
 
         self.session?.acceptCall(nil)
 

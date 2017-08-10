@@ -98,8 +98,8 @@ class FirebaseManager {
 
             if error != nil {
 
-                // TODO: Error handling
-                print(error?.localizedDescription ?? "No error data")
+                // MARK: Failed to reset password.
+                UIAlertController(error: error!).show()
 
             }
 

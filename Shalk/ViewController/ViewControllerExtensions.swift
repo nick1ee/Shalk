@@ -128,8 +128,6 @@ extension UIViewController {
 
         let okAction = UIAlertAction.init(title: "Confirm", style: .default) { (_) in
 
-            FirebaseManager().fetchUserProfile(withUid: uid, type: .opponent, call: .video)
-
             self.performSegue(withIdentifier: "videoCall", sender: nil)
 
         }

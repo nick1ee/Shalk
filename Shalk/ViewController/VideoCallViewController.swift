@@ -12,6 +12,20 @@ import QuickbloxWebRTC
 
 class VideoCallViewController: UIViewController {
 
+    var hour = 0
+
+    var minute = 0
+
+    var second = 0
+
+    var secondTimer = Timer()
+
+    var minuteTimer = Timer()
+
+    var hourTimer = Timer()
+
+    var location = CGPoint(x: 0, y: 0)
+
     var isCameraEnabled = true
 
     var isMicrophoneEnabled = true
@@ -22,9 +36,13 @@ class VideoCallViewController: UIViewController {
 
     let qbManager = QBManager.shared
 
+    @IBOutlet weak var timeLabel: UILabel!
+
     @IBOutlet weak var remoteVideoView: QBRTCRemoteVideoView!
 
     @IBOutlet weak var localVideoView: UIView!
+
+    @IBOutlet weak var connectionStatus: UILabel!
 
     @IBOutlet weak var outletCamera: UIButton!
 
@@ -73,13 +91,38 @@ class VideoCallViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        captureVideoAndAudio()
+        localVideoView.center = CGPoint(x: 0, y: 0)
 
         rtcManager.add(self)
 
+        if UserManager.shared.callType == .video {
+
+            videoPreparation()
+
+            QBManager.shared.acceptCall()
+
+        } else {
+
+            guard
+                let qbID = UserManager.shared.opponent?.quickbloxId,
+                let qbIDInteger = Int(qbID),
+                let opponentID = [qbIDInteger] as? [NSNumber] else { return }
+
+            QBManager.shared.session = QBRTCClient.instance().createNewSession(withOpponents: opponentID, with: .video)
+
+            videoPreparation()
+
+            UserManager.shared.startVideoCall()
+
+        }
+
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+
+        localVideoView.addGestureRecognizer(panGesture)
+
     }
 
-    func captureVideoAndAudio() {
+    func videoPreparation() {
 
         let videoFormat = QBRTCVideoFormat.init()
 
@@ -103,13 +146,91 @@ class VideoCallViewController: UIViewController {
 
     }
 
+    func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
+
+        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+
+            let translation = gestureRecognizer.translation(in: self.view)
+
+            gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x + translation.x, y: gestureRecognizer.view!.center.y + translation.y)
+            gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+        }
+
+    }
+
+}
+
+// MARK: Timer setting
+extension VideoCallViewController {
+
+    func enableTimer() {
+
+        secondTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateSecond), userInfo: nil, repeats: true)
+
+        minuteTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(updateMinute), userInfo: nil, repeats: true)
+
+        hourTimer = Timer.scheduledTimer(timeInterval: 3600, target: self, selector: #selector(updateHour), userInfo: nil, repeats: true)
+
+    }
+
+    func updateSecond() {
+
+        if second == 59 {
+
+            second = 0
+
+        } else {
+
+            second += 1
+
+        }
+
+        timeLabel.text = "\(hour.addLeadingZero()) : \(minute.addLeadingZero()) : \(second.addLeadingZero())"
+
+    }
+
+    func updateMinute() {
+
+        if minute == 59 {
+
+            minute = 0
+
+        } else {
+
+            minute += 1
+
+        }
+
+        timeLabel.text = "\(hour.addLeadingZero()) : \(minute.addLeadingZero()) : \(second.addLeadingZero())"
+
+    }
+
+    func updateHour() {
+
+        hour += 1
+
+        timeLabel.text = "\(hour.addLeadingZero()) : \(minute.addLeadingZero()) : \(second.addLeadingZero())"
+
+    }
+
 }
 
 extension VideoCallViewController: QBRTCClientDelegate {
 
-    func session(_ session: QBRTCSession, receivedRemoteVideoTrack videoTrack: QBRTCVideoTrack, fromUser userID: NSNumber) {
+    // MARK: 連線確定與該使用者進行連接
+    func session(_ session: QBRTCBaseSession, connectedToUser userID: NSNumber) {
 
-        print("Gotcha Video")
+        connectionStatus.text = "Video Connected"
+
+        DispatchQueue(label: "Timer", qos: .userInitiated).async {
+
+            self.enableTimer()
+
+        }
+
+    }
+
+    func session(_ session: QBRTCSession, receivedRemoteVideoTrack videoTrack: QBRTCVideoTrack, fromUser userID: NSNumber) {
 
         // MARK: Received remote video track
 

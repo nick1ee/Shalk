@@ -19,15 +19,7 @@ class UserManager {
 
     var opponent: User?
 
-    var roomKey: String? {
-
-        didSet {
-
-            print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^", roomKey)
-
-        }
-
-    }
+    var roomKey: String?
 
     var language: String?
 
@@ -42,6 +34,8 @@ class UserManager {
     var discoveredLanguage = ""
 
     var isConnected = false
+
+    var callType: CallType = .none
 
     func logIn(withEmail email: String, withPassword pwd: String) {
 
