@@ -138,78 +138,6 @@ class FirebaseManager {
 
     }
 
-    func updateUserName(name: String) {
-
-        guard let user = UserManager.shared.currentUser else { return }
-
-        ref?.child("users").child(user.uid).child("name").setValue(name)
-
-    }
-
-    func updateUserIntro(intro: String) {
-
-        guard let user = UserManager.shared.currentUser else { return }
-
-        ref?.child("users").child(user.uid).child("intro").setValue(intro)
-
-    }
-
-    func uploadImage(withData data: Data) {
-
-        let metaData = StorageMetadata()
-
-        guard let user = UserManager.shared.currentUser else { return }
-
-        metaData.contentType = "image/jpeg"
-
-        storageRef.child("userImage").child(user.uid).putData(data, metadata: metaData) { (metadata, error) in
-
-            if error != nil {
-
-                // MARK: Failed to upload image.
-
-                UIAlertController(error: error!).show()
-
-                return
-
-            }
-
-            // MARK: Upload image successfully, and updated user image url.
-
-            guard let imageUrlString = metadata?.downloadURL()?.absoluteString else { return }
-
-            self.ref?.child("users").child(user.uid).child("imageUrl").setValue(imageUrlString)
-
-        }
-
-    }
-
-    func fetchMyProfile(completion: @escaping () -> Void) {
-
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-
-        ref?.child("users").child(uid).observeSingleEvent(of: .value, with: {(snapshot) in
-
-        guard let object = snapshot.value as? [String: Any] else { return }
-
-        do {
-
-            let user = try User.init(json: object)
-
-            UserManager.shared.currentUser = user
-
-            completion()
-
-        } catch let error {
-
-            UIAlertController(error: error).show()
-
-            }
-
-        })
-
-    }
-
     func fetchUserProfile(withUid uid: String, type: UserProfile, call: CallType) {
 
         ref?.child("users").child(uid).observeSingleEvent(of: .value, with: {(snapshot) in
@@ -439,6 +367,64 @@ class FirebaseManager {
         })
 
     }
+
+}
+
+// MARK: Update user profile functions
+extension FirebaseManager {
+
+    func updateUserName(name: String) {
+
+        guard let user = UserManager.shared.currentUser else { return }
+
+        ref?.child("users").child(user.uid).child("name").setValue(name)
+
+    }
+
+    func updateUserIntro(intro: String) {
+
+        guard let user = UserManager.shared.currentUser else { return }
+
+        ref?.child("users").child(user.uid).child("intro").setValue(intro)
+
+    }
+
+    func uploadImage(withData data: Data) {
+
+        let metaData = StorageMetadata()
+
+        guard let user = UserManager.shared.currentUser else { return }
+
+        metaData.contentType = "image/jpeg"
+
+        storageRef.child("userImage").child(user.uid).putData(data, metadata: metaData) { (metadata, error) in
+
+            if error != nil {
+
+                // MARK: Failed to upload image.
+
+                UIAlertController(error: error!).show()
+
+                return
+
+            }
+
+            // MARK: Upload image successfully, and updated user image url.
+
+            guard let imageUrlString = metadata?.downloadURL()?.absoluteString else { return }
+
+            self.ref?.child("users").child(user.uid).child("imageUrl").setValue(imageUrlString)
+
+            UserManager.shared.currentUser?.imageUrl = imageUrlString
+
+        }
+
+    }
+
+}
+
+// MARK: Real-time chat functions
+extension FirebaseManager {
 
     func createChatRoom(to opponent: User) {
 

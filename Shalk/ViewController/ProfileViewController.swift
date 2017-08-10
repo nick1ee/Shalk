@@ -66,11 +66,9 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        fbManager.fetchFriendList()
+        DispatchQueue.global().async {
 
-        FirebaseManager().fetchMyProfile {
-
-            self.tableView.reloadData()
+            self.fbManager.fetchFriendList()
 
         }
 
@@ -255,11 +253,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
 
-            if englishFriends[indexPath.row].imageUrl != "null" {
-
-            cell.friendImageView.sd_setImage(with: URL(string: englishFriends[indexPath.row].imageUrl))
-
-            }
+            cell.friendImageView.sd_setImage(with: URL(string: englishFriends[indexPath.row].imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
             cell.friendName.text = self.englishFriends[indexPath.row].name
 
@@ -273,11 +267,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
 
-            if chineseFriends[indexPath.row].imageUrl != "null" {
-
-                cell.friendImageView.sd_setImage(with: URL(string: chineseFriends[indexPath.row].imageUrl))
-
-            }
+            cell.friendImageView.sd_setImage(with: URL(string: chineseFriends[indexPath.row].imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
             cell.friendName.text = self.chineseFriends[indexPath.row].name
 
@@ -291,10 +281,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
 
-            if japaneseFriends[indexPath.row].imageUrl != "null" {
-
-                cell.friendImageView.sd_setImage(with: URL(string: japaneseFriends[indexPath.row].imageUrl))
-            }
+            cell.friendImageView.sd_setImage(with: URL(string: japaneseFriends[indexPath.row].imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
             cell.friendName.text = self.japaneseFriends[indexPath.row].name
 
@@ -308,10 +295,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
 
-            if koreanFriends[indexPath.row].imageUrl != "null" {
-
-                cell.friendImageView.sd_setImage(with: URL(string: koreanFriends[indexPath.row].imageUrl))
-            }
+            cell.friendImageView.sd_setImage(with: URL(string: koreanFriends[indexPath.row].imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
             cell.friendName.text = self.koreanFriends[indexPath.row].name
 
@@ -331,11 +315,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.userIntroduction.text = user.intro
 
-            if user.imageUrl != "null" {
-
-                cell.userImageView.sd_setImage(with: URL(string: user.imageUrl))
-
-            }
+            cell.userImageView.sd_setImage(with: URL(string: user.imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
             cell.backgroundColor = UIColor.clear
 

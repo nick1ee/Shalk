@@ -10,10 +10,6 @@ import UIKit
 
 class ModifyProfileViewController: UIViewController {
 
-    var isImageChanged: Bool = false
-
-    var isProfileChanged: Bool = false
-
     let imagePicker = UIImagePickerController()
 
     @IBOutlet weak var iconUser: UIImageView!
@@ -121,9 +117,11 @@ extension ModifyProfileViewController: UIImagePickerControllerDelegate, UINaviga
 
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
 
-            self.isImageChanged = true
-
             userImageView.image = pickedImage
+
+            let imageData = UIImageJPEGRepresentation(userImageView.image!, 0.7)
+
+            FirebaseManager().uploadImage(withData: imageData!)
 
         }
 

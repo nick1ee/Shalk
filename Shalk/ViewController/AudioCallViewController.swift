@@ -16,6 +16,18 @@ class AudioCallViewController: UIViewController {
 
     var isSpeakerEnabled: Bool = false
 
+    var hour = 0
+
+    var minute = 0
+
+    var second = 0
+
+    var secondTimer = Timer()
+
+    var minuteTimer = Timer()
+
+    var hourTimer = Timer()
+
     let qbManager = QBManager.shared
 
     let userManager = UserManager.shared
@@ -31,6 +43,8 @@ class AudioCallViewController: UIViewController {
     @IBOutlet weak var outletMicrophone: UIButton!
 
     @IBOutlet weak var outletSpeaker: UIButton!
+
+    @IBOutlet weak var timeLabel: UILabel!
 
     @IBAction func btnMicrophone(_ sender: UIButton) {
 
@@ -116,6 +130,61 @@ class AudioCallViewController: UIViewController {
 
 }
 
+// MARK: Timer setting
+extension AudioCallViewController {
+
+    func enableTimer() {
+
+        secondTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateSecond), userInfo: nil, repeats: true)
+
+        minuteTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(updateMinute), userInfo: nil, repeats: true)
+
+        hourTimer = Timer.scheduledTimer(timeInterval: 3600, target: self, selector: #selector(updateHour), userInfo: nil, repeats: true)
+
+    }
+
+    func updateSecond() {
+
+        if second == 59 {
+
+            second = 0
+
+        } else {
+
+            second += 1
+
+        }
+
+        timeLabel.text = "\(hour.addLeadingZero()) : \(minute.addLeadingZero()) : \(second.addLeadingZero())"
+
+    }
+
+    func updateMinute() {
+
+        if minute == 59 {
+
+            minute = 0
+
+        } else {
+
+            minute += 1
+
+        }
+
+        timeLabel.text = "\(hour.addLeadingZero()) : \(minute.addLeadingZero()) : \(second.addLeadingZero())"
+
+    }
+
+    func updateHour() {
+
+        hour += 1
+
+        timeLabel.text = "\(hour.addLeadingZero()) : \(minute.addLeadingZero()) : \(second.addLeadingZero())"
+
+    }
+
+}
+
 extension AudioCallViewController: QBRTCClientDelegate {
 
     // MARK: 連線確定與該使用者進行連接
@@ -123,5 +192,25 @@ extension AudioCallViewController: QBRTCClientDelegate {
 
         connectionStatus.text = "Audio Connected"
 
+        self.enableTimer()
+
     }
+}
+
+extension Int {
+    
+    func addLeadingZero() -> String {
+        
+        if self < 10 {
+
+            return "0\(self)"
+            
+        }else {
+            
+            return "\(self)"
+            
+        }
+        
+    }
+    
 }
