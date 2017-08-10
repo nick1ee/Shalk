@@ -498,8 +498,12 @@ class FirebaseManager {
             self.ref?.removeObserver(withHandle: self.handle!)
 
             self.userManager.chatRooms = rooms
-
-            self.chatRoomDelegate?.manager(self, didGetChatRooms: rooms)
+            
+            DispatchQueue.main.async {
+                
+                self.chatRoomDelegate?.manager(self, didGetChatRooms: rooms)
+                
+            }
 
         })
 
@@ -509,15 +513,21 @@ class FirebaseManager {
 
         let roomId = userManager.chatRoomId
 
-        guard let messageId = ref?.childByAutoId().key else { return }
+        guard
+            let messageId = ref?.childByAutoId().key,
+            let myUid = userManager.currentUser?.uid,
+            let opponentUid = userManager.opponent?.uid else { return }
 
         let newMessage = Message.init(text: text)
 
         ref?.child("chatHistory").child(roomId).child(messageId).updateChildValues(newMessage.toDictionary())
+        ref?.child("chatRoomList").child(myUid).child(roomId).child("latestMessage").setValue(text)
+
+        ref?.child("chatRoomList").child(opponentUid).child(roomId).child("latestMessage").setValue(text)
 
     }
 
-    func fetchChatHistory() {
+    func fetchChatHistory(completion: @escaping ([Message]) -> Void) {
 
         var messages: [Message] = []
 
@@ -540,7 +550,9 @@ class FirebaseManager {
 
             }
 
-            self.chatHistroyDelegate?.manager(self, didGetMessages: messages)
+            completion(messages)
+
+//            self.chatHistroyDelegate?.manager(self, didGetMessages: messages)
 
         })
 

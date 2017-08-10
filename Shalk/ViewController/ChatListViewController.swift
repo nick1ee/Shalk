@@ -25,13 +25,22 @@ class ChatListViewController: UIViewController {
 
         fbManager.chatRoomDelegate = self
 
-        fbManager.fetchChatRoomList()
-
         let bgImageView = UIImageView(image: UIImage(named: "background"))
 
         chatListTableView.backgroundColor = UIColor.clear
 
         chatListTableView.backgroundView = bgImageView
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        DispatchQueue.global().async {
+
+            self.fbManager.fetchChatRoomList()
+
+        }
 
     }
 
@@ -50,23 +59,21 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "chatCell", for: indexPath) as! ChatTableViewCell
 
+        let room = rooms[indexPath.row]
+
         cell.backgroundColor = UIColor.clear
+
+        cell.latestMessage.text = room.latestMessage
+
+        let friend = UserManager.shared.friendsInfo.filter { $0.uid == room.user2Id }
+
+        cell.opponentImageView.sd_setImage(with: URL(string: friend[0].imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
         guard let myUid = UserManager.shared.currentUser?.uid else { return UITableViewCell() }
 
-        let room = rooms[indexPath.row]
-
         if myUid == room.user1Id {
 
-            let friend = UserManager.shared.friendsInfo.filter { $0.uid == room.user2Id }
-
             cell.opponentName.text = friend[0].name
-
-            if friend[0].imageUrl != "null" {
-
-                cell.opponentImageView.sd_setImage(with: URL(string: friend[0].imageUrl))
-
-            }
 
             return cell
 
@@ -75,12 +82,6 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
             let friend = UserManager.shared.friendsInfo.filter { $0.uid == room.user1Id }
 
             cell.opponentName.text = friend[0].name
-
-            if friend[0].imageUrl != "null" {
-
-                cell.opponentImageView.sd_setImage(with: URL(string: friend[0].imageUrl))
-
-            }
 
             return cell
 

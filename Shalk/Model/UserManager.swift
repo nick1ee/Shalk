@@ -112,6 +112,8 @@ class UserManager {
 
         let result = chatRooms.filter({ $0.user1Id == opponent.uid || $0.user2Id == opponent.uid })
 
+        self.opponent = opponent
+
         if result.count == 0 {
 
             FirebaseManager().createChatRoom(to: opponent)

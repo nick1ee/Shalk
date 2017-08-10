@@ -26,8 +26,6 @@ class ChatViewController: UIViewController {
 
         inputTextView.text = ""
 
-//        chatTableView.scrollToBottom(animated: true)
-
     }
 
     @IBAction func sendImage(_ sender: UIButton) {
@@ -55,22 +53,35 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        opponent = UserManager.shared.opponent
-
         inputTextView.delegate = self
 
-        fbManager.chatHistroyDelegate = self
-
-        fbManager.fetchChatHistory()
+//        fbManager.chatHistroyDelegate = self
 
         chatTableView.estimatedRowHeight = 300
 
         chatTableView.rowHeight = UITableViewAutomaticDimension
 
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        opponent = UserManager.shared.opponent
+        
+        fbManager.fetchChatHistory { fetchMessages in
+
+            self.messages = fetchMessages
+            
+            self.chatTableView.reloadData()
+
+        }
+        
+    }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
+        self.opponent = nil
 
         UserManager.shared.opponent = nil
 
@@ -136,23 +147,23 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 }
 //swiftlint:enable force_cast
 
-extension ChatViewController: FirebaseManagerChatHistoryDelegate {
-
-    func manager(_ manager: FirebaseManager, didGetMessages messages: [Message]) {
-
-        self.messages = messages
-
-        chatTableView.reloadData()
-
-    }
-
-    func manager(_ manager: FirebaseManager, didGetError error: Error) {
-
-        print(error.localizedDescription)
-
-    }
-
-}
+//extension ChatViewController: FirebaseManagerChatHistoryDelegate {
+//
+//    func manager(_ manager: FirebaseManager, didGetMessages messages: [Message]) {
+//
+//        self.messages = messages
+//
+//        chatTableView.reloadData()
+//
+//    }
+//
+//    func manager(_ manager: FirebaseManager, didGetError error: Error) {
+//
+//        print(error.localizedDescription)
+//
+//    }
+//
+//}
 
 extension ChatViewController: UITextViewDelegate {
 

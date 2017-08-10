@@ -106,10 +106,10 @@ class ModifyProfileViewController: UIViewController {
 
         self.inputIntro.text = user.intro
 
-        if user.imageUrl != "null" {
-
-            self.userImageView.sd_setImage(with: URL(string: user.imageUrl))
-
+        DispatchQueue.global().async {
+            
+            self.userImageView.sd_setImage(with: URL(string: user.imageUrl), placeholderImage: UIImage(named: "icon-user"))
+            
         }
 
     }
