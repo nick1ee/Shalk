@@ -48,7 +48,53 @@ class VideoCallViewController: UIViewController {
 
     @IBOutlet weak var outletMicrophone: UIButton!
 
+    @IBAction func btnRotateCamera(_ sender: UIButton) {
+
+        let position = self.videoCapture?.position
+
+        switch position! {
+
+        case .back:
+
+            self.videoCapture?.position = .front
+
+            break
+
+        case .front:
+
+            self.videoCapture?.position = .back
+
+            break
+
+        default: break
+
+        }
+
+    }
+
     @IBAction func btnCamera(_ sender: UIButton) {
+
+        if isCameraEnabled {
+
+            // MARK: User disabled the camera.
+
+            isCameraEnabled = false
+
+            outletCamera.setImage(UIImage(named: "icon-nocamera.png"), for: .normal)
+
+            QBManager.shared.session?.localMediaStream.videoTrack.isEnabled = false
+
+        } else {
+
+            // MARK: User enabled the camera.
+
+            isCameraEnabled = true
+
+            outletCamera.setImage(UIImage(named: "icon-camera.png"), for: .normal)
+
+            QBManager.shared.session?.localMediaStream.videoTrack.isEnabled = true
+
+        }
 
     }
 
@@ -222,11 +268,7 @@ extension VideoCallViewController: QBRTCClientDelegate {
 
         connectionStatus.text = "Video Connected"
 
-        DispatchQueue(label: "Timer", qos: .userInitiated).async {
-
-            self.enableTimer()
-
-        }
+        self.enableTimer()
 
     }
 

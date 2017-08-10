@@ -757,7 +757,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LMC-sy-cFR">
-                                <rect key="frame" x="138" y="276" width="138" height="184"/>
+                                <rect key="frame" x="20" y="20" width="138" height="184"/>
                                 <subviews>
                                     <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARg-EL-gc5">
                                         <rect key="frame" x="113" y="159" width="25" height="25"/>
@@ -773,6 +773,9 @@
                                                 <real key="value" value="12.5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="btnRotateCamera:" destination="M85-tE-XmL" eventType="touchUpInside" id="zz3-TM-L4S"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -813,9 +816,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="LMC-sy-cFR" firstAttribute="centerX" secondItem="gRs-r5-eXj" secondAttribute="centerX" id="7XS-4K-V7U"/>
                             <constraint firstItem="LMC-sy-cFR" firstAttribute="height" secondItem="gRs-r5-eXj" secondAttribute="height" multiplier="1:4" id="8zn-Ec-ub3"/>
                             <constraint firstItem="PCe-fA-FiJ" firstAttribute="top" secondItem="gbi-do-lfU" secondAttribute="bottom" id="G6W-bW-Hni"/>
+                            <constraint firstItem="LMC-sy-cFR" firstAttribute="top" secondItem="gbi-do-lfU" secondAttribute="bottom" constant="20" id="Ndf-2B-3X7"/>
                             <constraint firstItem="9tZ-eY-rZN" firstAttribute="top" secondItem="oea-DN-Ejj" secondAttribute="bottom" constant="30" id="QBC-Na-l2V"/>
                             <constraint firstItem="9tZ-eY-rZN" firstAttribute="top" secondItem="Il2-hh-VY3" secondAttribute="bottom" constant="30" id="U0u-vf-sOP"/>
                             <constraint firstItem="PCe-fA-FiJ" firstAttribute="height" secondItem="gRs-r5-eXj" secondAttribute="height" multiplier="4:5" id="X0A-2W-vYn"/>
@@ -828,7 +831,7 @@
                             <constraint firstItem="aga-Lh-WzX" firstAttribute="centerX" secondItem="gRs-r5-eXj" secondAttribute="centerX" id="qaO-7L-RZx"/>
                             <constraint firstItem="aga-Lh-WzX" firstAttribute="leading" secondItem="oea-DN-Ejj" secondAttribute="trailing" constant="50" id="t8u-sd-Zpf"/>
                             <constraint firstAttribute="trailing" secondItem="PCe-fA-FiJ" secondAttribute="trailing" id="vNN-XL-xXY"/>
-                            <constraint firstItem="LMC-sy-cFR" firstAttribute="centerY" secondItem="gRs-r5-eXj" secondAttribute="centerY" id="yhq-7s-Rob"/>
+                            <constraint firstItem="LMC-sy-cFR" firstAttribute="leading" secondItem="gRs-r5-eXj" secondAttribute="leading" constant="20" id="xhp-t8-DDU"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
