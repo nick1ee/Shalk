@@ -9,6 +9,7 @@
 import UIKit
 import Quickblox
 import QuickbloxWebRTC
+import AudioToolbox
 
 class AudioCallViewController: UIViewController {
 
@@ -189,6 +190,8 @@ extension AudioCallViewController: QBRTCClientDelegate {
 
     // MARK: 連線確定與該使用者進行連接
     func session(_ session: QBRTCBaseSession, connectedToUser userID: NSNumber) {
+
+        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
 
         connectionStatus.text = "Audio Connected"
 

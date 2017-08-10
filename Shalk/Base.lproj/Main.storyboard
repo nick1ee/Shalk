@@ -1065,7 +1065,7 @@
                                             <outlet property="userName" destination="DUQ-Lq-1Vl" id="RVA-z8-tjW"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendCell" rowHeight="71" id="1YY-Ds-5l1" customClass="FriendTableViewCell" customModule="Shalk" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="friendCell" rowHeight="71" id="1YY-Ds-5l1" customClass="FriendTableViewCell" customModule="Shalk" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="208" width="414" height="71"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1YY-Ds-5l1" id="wXO-LH-83M">

@@ -210,6 +210,13 @@ class FirebaseManager {
 
                 do {
 
+                    /*
+ 
+ 
+ 
+ 
+                     */
+
                     let channel = try AudioChannel.init(json: object[roomkey] as Any)
 
                     if channel.isLocked == false && channel.isFinished == false {

@@ -137,6 +137,10 @@ extension MainTabViewController: QBRTCClientDelegate {
     // MARK: 電話被對方接起後
     func session(_ session: QBRTCSession, acceptedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
 
+        UserManager.shared.isPlayingCallingSound = false
+
+        UserManager.shared.playCallingSound()
+
         UserManager.shared.isConnected = true
 
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
@@ -161,6 +165,10 @@ extension MainTabViewController: QBRTCClientDelegate {
     // MARK: 電話被使用者拒絕
     func session(_ session: QBRTCSession, rejectedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
 
+        UserManager.shared.isPlayingCallingSound = false
+
+        UserManager.shared.playCallingSound()
+
         if UserManager.shared.isDiscovering == true {
 
             FirebaseManager().fetchChannel(withLang: UserManager.shared.language!)
@@ -171,6 +179,10 @@ extension MainTabViewController: QBRTCClientDelegate {
 
     // MARK: 電話被使用者掛斷
     func session(_ session: QBRTCSession, hungUpByUser userID: NSNumber, userInfo: [String : String]? = nil) {
+
+        UserManager.shared.isPlayingCallingSound = false
+
+        UserManager.shared.playCallingSound()
 
         // MARK: Received a hung up signal from user.
 
@@ -190,6 +202,16 @@ extension MainTabViewController: QBRTCClientDelegate {
         // MARK: 確定為好友
 
         self.dismiss(animated: true, completion: nil)
+
+    }
+
+    func session(_ session: QBRTCSession, userDidNotRespond userID: NSNumber) {
+        
+        UserManager.shared.isPlayingCallingSound = false
+        
+        UserManager.shared.playCallingSound()
+
+        self.presentedViewController?.pushNoRespondMessage()
 
     }
 

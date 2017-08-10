@@ -58,7 +58,7 @@ class ModifyProfileViewController: UIViewController {
 
     @IBAction func btnPickImage(_ sender: UIButton) {
 
-        let alertController = UIAlertController.init(title: "Hint", message: "Choose a photo from .. ?", preferredStyle: .actionSheet)
+        let alertController = UIAlertController.init(title: "Hint", message: "Send a image from..?", preferredStyle: .actionSheet)
 
         let cameraAction = UIAlertAction.init(title: "Camera", style: .default, handler: { (_) in
 

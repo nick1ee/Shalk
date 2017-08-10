@@ -179,6 +179,11 @@ class QBManager {
 
     }
 
+}
+
+// MARK: Call functions
+extension QBManager {
+
     func startAudioCall() {
 
         userManager.isConnected = true
@@ -196,30 +201,6 @@ class QBManager {
 
     }
 
-    func videoPreparation() {
-
-        let videoFormat = QBRTCVideoFormat.init()
-
-        videoFormat.frameRate = 30
-
-        videoFormat.pixelFormat = QBRTCPixelFormat.format420f
-
-        videoFormat.width = 640
-
-        videoFormat.height = 480
-
-        self.videoCapture = QBRTCCameraCapture.init(videoFormat: videoFormat, position: AVCaptureDevicePosition.front)
-
-        self.session?.localMediaStream.videoTrack.videoCapture = self.videoCapture
-
-        self.videoCapture!.startSession()
-
-//        self.videoCapture!.previewLayer.frame = self.localVideoView.bounds
-//        
-//        self.localVideoView.layer.insertSublayer(videoCapture!.previewLayer, at: 0)
-
-    }
-
     func startVideoCall() {
 
         userManager.isConnected = true
@@ -230,13 +211,7 @@ class QBManager {
 
     }
 
-    func rejectCall() {
-
-    }
-
     func acceptCall() {
-
-//        videoPreparation()
 
         self.session?.acceptCall(nil)
 
@@ -246,9 +221,21 @@ class QBManager {
 
     func handUpCall() {
 
+        UserManager.shared.isPlayingCallingSound = false
+
+        UserManager.shared.playCallingSound()
+
         self.session?.hangUp(nil)
 
         userManager.isConnected = false
+
+    }
+
+}
+
+extension QBManager {
+
+    func pushNotificationAboutNewCall() {
 
     }
 

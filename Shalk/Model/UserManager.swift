@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import AudioToolbox
 
 class UserManager {
 
@@ -36,6 +37,10 @@ class UserManager {
     var isConnected = false
 
     var callType: CallType = .none
+
+    var isPlayingCallingSound = false
+
+    var timer: Timer?
 
     func logIn(withEmail email: String, withPassword pwd: String) {
 
@@ -81,10 +86,18 @@ class UserManager {
 
     func startAudioCall() {
 
+        self.isPlayingCallingSound = true
+
+        self.playCallingSound()
+
         QBManager.shared.startAudioCall()
     }
 
     func startVideoCall() {
+
+        self.isPlayingCallingSound = true
+
+        self.playCallingSound()
 
         QBManager.shared.startVideoCall()
 
@@ -129,6 +142,26 @@ class UserManager {
             withVC.performSegue(withIdentifier: "startChat", sender: nil)
 
         }
+
+    }
+
+    @objc func playCallingSound() {
+
+        if isPlayingCallingSound == true {
+
+            timer = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(playSound), userInfo: nil, repeats: true)
+
+        } else {
+
+            timer?.invalidate()
+            timer = nil
+        }
+
+    }
+
+    @objc func playSound() {
+
+         AudioServicesPlaySystemSound(1151)
 
     }
 
