@@ -110,6 +110,8 @@ class AudioCallViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configTimer()
+
         QBRTCClient.instance().add(self)
 
         qbManager.session?.localMediaStream.audioTrack.isEnabled = true
@@ -146,8 +148,6 @@ class AudioCallViewController: UIViewController {
 extension AudioCallViewController {
 
     func enableTimer() {
-        
-        configTimer()
 
         secondTimer.resume()
 
@@ -227,6 +227,7 @@ extension AudioCallViewController: QBRTCClientDelegate {
         self.enableTimer()
 
     }
+
 }
 
 extension Int {
