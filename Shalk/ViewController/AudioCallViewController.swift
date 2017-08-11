@@ -146,18 +146,30 @@ class AudioCallViewController: UIViewController {
 extension AudioCallViewController {
 
     func enableTimer() {
+        
+        configTimer()
+
+        secondTimer.resume()
+
+        minuteTimer.resume()
+
+        hourTimer.resume()
+
+    }
+
+    func configTimer() {
 
         secondTimer.setEventHandler { self.updateSecond() }
 
-        secondTimer.scheduleRepeating(deadline: .now() + 1.0, interval: 1.0, leeway: .microseconds(10))
+        secondTimer.scheduleRepeating(deadline: .now(), interval: 1.0, leeway: .microseconds(10))
 
         minuteTimer.setEventHandler { self.updateMinute() }
 
-        minuteTimer.scheduleRepeating(deadline: .now() + 1.0, interval: 60.0, leeway: .microseconds(10))
+        minuteTimer.scheduleRepeating(deadline: .now() + .seconds(60), interval: 60.0, leeway: .microseconds(10))
 
         hourTimer.setEventHandler { self.updateHour() }
 
-        hourTimer.scheduleRepeating(deadline: .now() + 1.0, interval: 3600.0, leeway: .microseconds(10))
+        hourTimer.scheduleRepeating(deadline: .now() + .seconds(3600), interval: 3600.0, leeway: .microseconds(10))
 
     }
 

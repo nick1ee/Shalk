@@ -101,6 +101,10 @@ class ModifyProfileViewController: UIViewController {
 
     func displayUserProfile() {
 
+        self.iconIntro.tintColor = UIColor.init(red: 255/255, green: 189/255, blue: 0/255, alpha: 1)
+
+        self.iconUser.tintColor = UIColor.init(red: 255/255, green: 189/255, blue: 0/255, alpha: 1)
+
         guard let user = UserManager.shared.currentUser else { return }
 
         self.inputName.text = user.name

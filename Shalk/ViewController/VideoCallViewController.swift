@@ -18,11 +18,11 @@ class VideoCallViewController: UIViewController {
 
     var second = 0
 
-    var secondTimer = Timer()
+    var secondTimer = DispatchSource.makeTimerSource()
 
-    var minuteTimer = Timer()
+    var minuteTimer = DispatchSource.makeTimerSource()
 
-    var hourTimer = Timer()
+    var hourTimer = DispatchSource.makeTimerSource()
 
     var location = CGPoint(x: 0, y: 0)
 
@@ -195,12 +195,27 @@ extension VideoCallViewController {
 
     func enableTimer() {
 
-        secondTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateSecond), userInfo: nil, repeats: true)
+        secondTimer.resume()
 
-        minuteTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(updateMinute), userInfo: nil, repeats: true)
+        minuteTimer.resume()
 
-        hourTimer = Timer.scheduledTimer(timeInterval: 3600, target: self, selector: #selector(updateHour), userInfo: nil, repeats: true)
+        hourTimer.resume()
 
+    }
+
+    func configTimer() {
+
+        secondTimer.setEventHandler { self.updateSecond() }
+
+        secondTimer.scheduleRepeating(deadline: .now() + 1.0, interval: 1.0, leeway: .microseconds(10))
+
+        minuteTimer.setEventHandler { self.updateMinute() }
+
+        minuteTimer.scheduleRepeating(deadline: .now() + 1.0, interval: 60.0, leeway: .microseconds(10))
+
+        hourTimer.setEventHandler { self.updateHour() }
+
+        hourTimer.scheduleRepeating(deadline: .now() + 1.0, interval: 3600.0, leeway: .microseconds(10))
     }
 
     func updateSecond() {

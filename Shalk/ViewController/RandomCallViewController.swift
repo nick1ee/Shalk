@@ -87,11 +87,11 @@ class RandomCallViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let opponent = UserManager.shared.opponent else { return }
-
         qbManager.session?.localMediaStream.audioTrack.isEnabled = true
 
         qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
+
+        guard let opponent = UserManager.shared.opponent else { return }
 
         userNameLabel.text = opponent.name
 
