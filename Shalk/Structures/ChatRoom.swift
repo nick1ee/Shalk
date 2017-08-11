@@ -42,7 +42,7 @@ extension ChatRoom {
 
         static let latestMessage = "latestMessage"
 
-        static let latestMessageTime = "lastestMessageTime"
+        static let latestMessageTime = "latestMessageTime"
 
     }
 

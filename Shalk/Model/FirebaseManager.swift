@@ -504,19 +504,7 @@ extension FirebaseManager {
 
             self.ref?.removeObserver(withHandle: self.handle!)
 
-            let sortedRooms = rooms.sorted(by: { (room1, room2) -> Bool in
-
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-
-                let room1Time = formatter.date(from: room1.latestMessageTime)
-                let room2Time = formatter.date(from: room2.latestMessageTime)
-
-                return room1Time!.compare(room2Time!) == .orderedDescending
-
-            })
-
-            self.userManager.chatRooms = sortedRooms
+            self.userManager.chatRooms = rooms
 
             DispatchQueue.main.async {
 

@@ -128,7 +128,21 @@ extension ChatListViewController: FirebaseManagerChatRoomDelegate {
 
     func manager(_ manager: FirebaseManager, didGetChatRooms rooms: [ChatRoom]) {
 
-        self.rooms = rooms
+        let sortedRooms = rooms.sorted(by: { (room1, room2) -> Bool in
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+            //                formatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
+            
+            let room1Time = formatter.date(from: room1.latestMessageTime)
+            
+            let room2Time = formatter.date(from: room2.latestMessageTime)
+            
+            return room1Time!.compare(room2Time!) == .orderedDescending
+            
+        })
+        
+        self.rooms = sortedRooms
 
         chatListTableView.reloadData()
 

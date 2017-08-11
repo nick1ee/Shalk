@@ -74,8 +74,6 @@ extension UIViewController {
 
             FirebaseManager().checkFriendRequest()
 
-            UserManager.shared.closeChannel()
-
             self.dismiss(animated: true, completion: nil)
 
         }
