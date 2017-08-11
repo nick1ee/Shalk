@@ -27,7 +27,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shalk." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIe-PW-cgp">
                                 <rect key="frame" x="50" y="70" width="314" height="87.666666666666657"/>
                                 <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="70"/>
-                                <color key="textColor" red="1" green="0.15319350361824036" blue="0.38967609405517578" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.9533242583" green="0.67907041310000005" blue="0.1825418174" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iGd-4Z-5IW" userLabel="inputView">
@@ -59,12 +59,12 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gEV-FD-Jpb">
                                         <rect key="frame" x="45" y="0.0" width="269" height="49.666666666666686"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1GZ-JH-XZ5">
                                         <rect key="frame" x="45" y="50.666666666666686" width="269" height="49.333333333333314"/>
-                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
@@ -90,11 +90,11 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4TY-v6-1Ua">
                                 <rect key="frame" x="50" y="556" width="314" height="40"/>
-                                <color key="backgroundColor" red="0.060827158391475677" green="0.80227190256118774" blue="0.75522011518478394" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.9533242583" green="0.67907041310000005" blue="0.1825418174" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="MJX-tY-g7P"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
                                 <size key="titleShadowOffset" width="1" height="1"/>
                                 <state key="normal" title="Log In">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -113,8 +113,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEg-n5-jPL">
-                                <rect key="frame" x="50" y="611" width="64" height="27"/>
-                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="15"/>
+                                <rect key="frame" x="50" y="611" width="51" height="34"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="15"/>
                                 <state key="normal" title="Sign up">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -123,8 +123,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dTh-8X-izs">
-                                <rect key="frame" x="219" y="611" width="145" height="27"/>
-                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="15"/>
+                                <rect key="frame" x="246" y="611" width="118" height="34"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="15"/>
                                 <state key="normal" title="Forget password?">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -133,7 +133,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.24709811810000001" green="0.26267260310000001" blue="0.30970364810000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.24398827549999999" green="0.18944382670000001" blue="0.29701077939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="4TY-v6-1Ua" firstAttribute="top" secondItem="iGd-4Z-5IW" secondAttribute="bottom" constant="20" id="5xx-n8-hi9"/>
                             <constraint firstItem="fEg-n5-jPL" firstAttribute="leading" secondItem="YNb-XY-9QR" secondAttribute="leading" constant="50" id="7y9-AP-ae3"/>
@@ -176,17 +176,17 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shalk." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vmx-m7-l2p">
                                 <rect key="frame" x="50" y="70" width="314" height="87.666666666666657"/>
                                 <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="70"/>
-                                <color key="textColor" red="1" green="0.1531935036" blue="0.38967609409999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.9533242583" green="0.67907041310000005" blue="0.1825418174" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbU-qS-x99">
                                 <rect key="frame" x="50" y="546" width="314" height="40"/>
-                                <color key="backgroundColor" red="0.060827158389999997" green="0.80227190260000003" blue="0.75522011519999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.9533242583" green="0.67907041310000005" blue="0.1825418174" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="5iV-vj-Imb"/>
                                     <constraint firstAttribute="height" constant="40" id="dQI-n8-UBt"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
                                 <size key="titleShadowOffset" width="1" height="1"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -245,19 +245,19 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="User Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MVi-bG-sYg">
                                         <rect key="frame" x="45" y="0.0" width="269" height="50"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wdd-Gl-kWd">
                                         <rect key="frame" x="45" y="51" width="269" height="50"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VMt-X7-OnC">
                                         <rect key="frame" x="45" y="102" width="269" height="48"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
@@ -291,8 +291,8 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J2n-yA-PdO">
-                                <rect key="frame" x="125.66666666666669" y="601" width="163" height="27"/>
-                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="15"/>
+                                <rect key="frame" x="144.33333333333331" y="601" width="125.99999999999994" height="34"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="15"/>
                                 <state key="normal" title="Back to login page">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -301,7 +301,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.24709811810000001" green="0.26267260310000001" blue="0.30970364810000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.24398827549999999" green="0.18944382670000001" blue="0.29701077939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Vmx-m7-l2p" firstAttribute="top" secondItem="Dn0-Mc-qBd" secondAttribute="bottom" constant="50" id="3hP-Oa-XhN"/>
                             <constraint firstItem="Vmx-m7-l2p" firstAttribute="leading" secondItem="IeW-4l-MGK" secondAttribute="leadingMargin" constant="30" id="405-XH-EFh"/>
@@ -1562,19 +1562,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TMO-bM-qVv">
                                 <rect key="frame" x="0.0" y="676" width="414" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="paq-8C-Ajy">
-                                        <rect key="frame" x="10" y="17.666666666666629" width="25" height="25"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="icon-attach"/>
-                                        <connections>
-                                            <action selector="sendImage:" destination="qrV-HA-xDB" eventType="touchUpInside" id="YoD-e8-wVg"/>
-                                        </connections>
-                                    </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="write something.." translatesAutoresizingMaskIntoConstraints="NO" id="mTn-mZ-D9l">
-                                        <rect key="frame" x="45" y="10" width="300" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="300" id="a8m-Mb-gTm"/>
-                                        </constraints>
+                                        <rect key="frame" x="10" y="10" width="359" height="40"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1590,12 +1579,11 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.2439882755279541" green="0.18944382667541504" blue="0.29701077938079834" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="ZqD-5w-X1Q" firstAttribute="leading" secondItem="mTn-mZ-D9l" secondAttribute="trailing" constant="10" id="4wM-f5-xbU"/>
                                     <constraint firstItem="ZqD-5w-X1Q" firstAttribute="centerY" secondItem="TMO-bM-qVv" secondAttribute="centerY" id="8it-R7-h5d"/>
-                                    <constraint firstItem="paq-8C-Ajy" firstAttribute="centerY" secondItem="TMO-bM-qVv" secondAttribute="centerY" id="BQd-NN-UDh"/>
                                     <constraint firstItem="mTn-mZ-D9l" firstAttribute="top" secondItem="TMO-bM-qVv" secondAttribute="top" constant="10" id="G2Z-On-vkK"/>
-                                    <constraint firstItem="paq-8C-Ajy" firstAttribute="leading" secondItem="TMO-bM-qVv" secondAttribute="leading" constant="10" id="HqY-wq-p4K"/>
                                     <constraint firstAttribute="trailing" secondItem="ZqD-5w-X1Q" secondAttribute="trailing" constant="10" id="MFc-hl-MI1"/>
-                                    <constraint firstItem="mTn-mZ-D9l" firstAttribute="leading" secondItem="paq-8C-Ajy" secondAttribute="trailing" constant="10" id="UvE-C4-wrG"/>
+                                    <constraint firstItem="mTn-mZ-D9l" firstAttribute="leading" secondItem="TMO-bM-qVv" secondAttribute="leading" constant="10" id="YVq-3k-ZHG"/>
                                     <constraint firstAttribute="bottom" secondItem="mTn-mZ-D9l" secondAttribute="bottom" constant="10" id="Zv2-sT-t47"/>
                                     <constraint firstAttribute="height" constant="60" id="qRP-WX-A76"/>
                                 </constraints>
@@ -1821,7 +1809,6 @@
     </scenes>
     <resources>
         <image name="background" width="500" height="750"/>
-        <image name="icon-attach" width="25" height="25"/>
         <image name="icon-audio" width="25" height="25"/>
         <image name="icon-back" width="25" height="25"/>
         <image name="icon-camera" width="25" height="25"/>
@@ -1845,7 +1832,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="M4q-bF-we2"/>
-        <segue reference="wBI-qr-d8x"/>
-        <segue reference="065-oc-QVO"/>
+        <segue reference="SQr-9W-W6x"/>
+        <segue reference="E0a-MG-Ga1"/>
     </inferredMetricsTieBreakers>
 </document>

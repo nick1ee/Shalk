@@ -46,8 +46,6 @@ extension UIViewController {
 
             FirebaseManager().checkFriendRequest()
 
-            UserManager.shared.closeChannel()
-
             self.presentedViewController?.dismiss(animated: true, completion: nil)
 
         }
@@ -104,7 +102,7 @@ extension UIViewController {
 
         let okAction = UIAlertAction.init(title: "Confirm", style: .default) { (_) in
 
-            FirebaseManager().fetchUserProfile(withUid: uid, type: .opponent, call: .audio)
+            FirebaseManager().fetchUserProfile(withUid: uid, call: .audio)
 
             self.performSegue(withIdentifier: "audioCall", sender: nil)
 

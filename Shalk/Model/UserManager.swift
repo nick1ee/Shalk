@@ -28,7 +28,7 @@ class UserManager {
 
     var chatRoomId: String = ""
 
-    var friendsInfo: [User] = []
+    var friends: [User] = []
 
     var isDiscovering: Bool = false
 
@@ -76,13 +76,9 @@ class UserManager {
 
     }
 
-    func fetchUserData() {
-
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-
-        FirebaseManager().fetchUserProfile(withUid: userID, type: .myself, call: CallType.audio)
-
-    }
+//    func fetchUserData() {
+//
+//    }
 
     func startAudioCall() {
 

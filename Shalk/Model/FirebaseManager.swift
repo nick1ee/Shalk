@@ -10,6 +10,17 @@ import Firebase
 import FirebaseStorage
 import SVProgressHUD
 
+enum LanguageType: String {
+
+    case english = "English"
+
+    case chinese = "Chinese"
+
+    case japanese = "Japanese"
+
+    case korean = "Korean"
+}
+
 class FirebaseManager {
 
     weak var friendDelegate: FirebaseManagerFriendDelegate?
@@ -138,7 +149,7 @@ class FirebaseManager {
 
     }
 
-    func fetchUserProfile(withUid uid: String, type: UserProfile, call: CallType) {
+    func fetchUserProfile(withUid uid: String, call: CallType) {
 
         ref?.child("users").child(uid).observeSingleEvent(of: .value, with: {(snapshot) in
 
@@ -148,37 +159,25 @@ class FirebaseManager {
 
                 let user = try User.init(json: object)
 
-                switch type {
+                self.userManager.opponent = user
 
-                case .myself:
+                switch call {
 
-                    self.userManager.currentUser = user
+                case .audio:
+
+                    self.userManager.startAudioCall()
 
                     break
 
-                case .opponent:
+                case .video:
 
-                    self.userManager.opponent = user
+                    self.userManager.startVideoCall()
 
-                    switch call {
+                    break
 
-                    case .audio:
+                case .none:
 
-                        self.userManager.startAudioCall()
-
-                        break
-
-                    case .video:
-
-                        self.userManager.startVideoCall()
-
-                        break
-
-                    case .none:
-
-                        break
-
-                    }
+                    break
 
                 }
 
@@ -192,9 +191,39 @@ class FirebaseManager {
 
     }
 
-    func fetchChannel(withLang language: String) {
+    func fetchUserProfile(completion: @escaping () -> Void) {
 
-        ref?.child("channels").child(language).observeSingleEvent(of: .value, with: { (snapshot) in
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+
+        ref?.child("users").child(userId).observeSingleEvent(of: .value, with: {(snapshot) in
+
+            guard let object = snapshot.value as? [String: Any] else { return }
+
+            do {
+
+                let user = try User.init(json: object)
+
+                UserManager.shared.currentUser = user
+
+                DispatchQueue.main.async {
+
+                    completion()
+
+                }
+
+            } catch let error {
+
+                // MARK: Failed to fetch user profile
+                UIAlertController(error: error).show()
+            }
+
+        })
+
+    }
+
+    func fetchChannel(withLanguage language: String) {
+
+        ref?.child("channels").child(language).queryOrdered(byChild: "isLocked").queryEqual(toValue: false).queryLimited(toLast: 1).observeSingleEvent(of: .value, with: { (snapshot) in
 
             guard let object = snapshot.value as? [String: Any] else {
 
@@ -206,47 +235,28 @@ class FirebaseManager {
 
             }
 
-            for roomkey in object.keys {
+            do {
 
-                do {
+                // MARK: Find an available to join
 
-                    /*
- 
- 
- 
- 
-                     */
+                let channel = try AudioChannel.init(json: Array(object.values)[0])
 
-                    let channel = try AudioChannel.init(json: object[roomkey] as Any)
+                self.userManager.roomKey = channel.roomID
 
-                    if channel.isLocked == false && channel.isFinished == false {
+                self.userManager.language = language
 
-                        // MARK: Find an available to join
+                self.updateChannel()
 
-                        self.userManager.roomKey = roomkey
+                self.fetchUserProfile(withUid: channel.owner, call: .audio)
 
-                        self.userManager.language = language
+                return
 
-                        self.updateChannel()
+            } catch let error {
 
-                        self.fetchUserProfile(withUid: channel.owner, type: .opponent, call: .audio)
+                // MARK: Failed to fetch channel.
 
-                        return
-
-                    }
-
-                } catch let error {
-
-                    // MARK: Failed to fetch channel.
-
-                    UIAlertController(error: error).show()
-                }
-
+                UIAlertController(error: error).show()
             }
-
-            // MARK: No available rooms, create a new one.
-
-            self.createNewChannel(withLanguage: language)
 
         })
 
@@ -314,9 +324,17 @@ class FirebaseManager {
 
                 }
 
-                self.ref?.child("friendList").child(myUid).updateChildValues([opponent.uid: language])
+                let formatter = DateFormatter()
 
-                self.ref?.child("friendList").child(opponent.uid).updateChildValues([myUid: language])
+                formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+
+                let timestamp = formatter.string(from: Date())
+
+                self.ref?.child("friendList").child(myUid).child(language).updateChildValues([opponent.uid: timestamp])
+
+                self.ref?.child("friendList").child(opponent.uid).child(language).updateChildValues([myUid: timestamp])
+
+                UserManager.shared.closeChannel()
 
             } else {
 
@@ -324,54 +342,64 @@ class FirebaseManager {
 
                 self.ref?.child("friendRequest").child(roomId).setValue(true)
 
+                UserManager.shared.closeChannel()
+
             }
 
         })
 
     }
 
-    func fetchFriendList() {
+    func fetchFriendList(languageType: LanguageType) {
 
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
-        ref?.child("friendList").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref?.child("friendList").child(uid).child(languageType.rawValue).observeSingleEvent(of: .value, with: { (snapshot) in
 
-            for object in snapshot.children {
+            guard let friendList = snapshot.value as? [String: Any] else { return }
 
-                guard let userObject = object as? DataSnapshot else { return }
+            let friendsUids = Array(friendList.keys)
 
-                let uid = userObject.key
-
-                guard let language = userObject.value as? String else { return }
-
-                self.fetchFriendInfo(withUser: uid, withLang: language)
-
-            }
+            self.fetchFriendInfo(withFriends: friendsUids, languageType: languageType)
 
         })
 
     }
 
-    func fetchFriendInfo(withUser uid: String, withLang language: String) {
+    func fetchFriendInfo(withFriends friendUids: [String], languageType: LanguageType) {
 
-        ref?.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+        for friendUid in friendUids {
 
-            guard let object = snapshot.value else { return }
+            ref?.child("users").child(friendUid).observeSingleEvent(of: .value, with: { (snapshot) in
 
-            do {
+                guard let object = snapshot.value else { return }
 
-                let user = try User.init(json: object)
+                do {
 
-                self.friendDelegate?.manager(self, didGetFriend: user, byLanguage: language)
+                    let user = try User.init(json: object)
 
-            } catch let error {
+                    var friends = UserManager.shared.friends.filter { $0.uid != user.uid }
 
-                // MARK: Failed to fetch friend info.
-                UIAlertController(error: error).show()
+                    friends.append(user)
 
-            }
+                    UserManager.shared.friends = friends
 
-        })
+                    DispatchQueue.main.async {
+
+                        self.friendDelegate?.manager(self, didGetFriend: user, byType: languageType)
+
+                    }
+
+                } catch let error {
+
+                    // MARK: Failed to fetch friend info.
+                    UIAlertController(error: error).show()
+
+                }
+
+            })
+
+        }
 
     }
 
@@ -476,7 +504,19 @@ extension FirebaseManager {
 
             self.ref?.removeObserver(withHandle: self.handle!)
 
-            self.userManager.chatRooms = rooms
+            let sortedRooms = rooms.sorted(by: { (room1, room2) -> Bool in
+
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+
+                let room1Time = formatter.date(from: room1.latestMessageTime)
+                let room2Time = formatter.date(from: room2.latestMessageTime)
+
+                return room1Time!.compare(room2Time!) == .orderedDescending
+
+            })
+
+            self.userManager.chatRooms = sortedRooms
 
             DispatchQueue.main.async {
 
@@ -497,12 +537,21 @@ extension FirebaseManager {
             let myUid = userManager.currentUser?.uid,
             let opponentUid = userManager.opponent?.uid else { return }
 
+        let formatter = DateFormatter()
+
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+
+        let timestamp = formatter.string(from: Date())
+
         let newMessage = Message.init(text: text)
 
         ref?.child("chatHistory").child(roomId).child(messageId).updateChildValues(newMessage.toDictionary())
+
         ref?.child("chatRoomList").child(myUid).child(roomId).child("latestMessage").setValue(text)
+        ref?.child("chatRoomList").child(myUid).child(roomId).child("latestMessageTime").setValue(timestamp)
 
         ref?.child("chatRoomList").child(opponentUid).child(roomId).child("latestMessage").setValue(text)
+        ref?.child("chatRoomList").child(opponentUid).child(roomId).child("latestMessageTime").setValue(timestamp)
 
     }
 

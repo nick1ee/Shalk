@@ -8,7 +8,7 @@
 
 protocol FirebaseManagerFriendDelegate: class {
 
-    func manager (_ manager: FirebaseManager, didGetFriend friend: User, byLanguage: String)
+    func manager (_ manager: FirebaseManager, didGetFriend friend: User, byType: LanguageType)
 
     func manager (_ manager: FirebaseManager, didGetError error: Error)
 

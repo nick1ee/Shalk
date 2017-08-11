@@ -18,6 +18,8 @@ struct ChatRoom {
 
     var latestMessage: String
 
+    var latestMessageTime: String
+
 }
 
 extension ChatRoom {
@@ -26,7 +28,7 @@ extension ChatRoom {
 
     enum FetchChatRoomError: Error {
 
-        case invalidChatRoomObject, missingRoomId, missingUser1Id, missingUser2Id, missingLatestMessage
+        case invalidChatRoomObject, missingRoomId, missingUser1Id, missingUser2Id, missingLatestMessage, missingLatestMessageTime
 
     }
 
@@ -39,6 +41,9 @@ extension ChatRoom {
         static let user2Id = "user2Id"
 
         static let latestMessage = "latestMessage"
+
+        static let latestMessageTime = "lastestMessageTime"
+
     }
 
     init(json: Any) throws {
@@ -81,6 +86,14 @@ extension ChatRoom {
 
         self.latestMessage = text
 
+        guard let time = jsonObject[Schema.latestMessageTime] else {
+
+            throw FetchChatRoomError.missingLatestMessageTime
+
+        }
+
+        self.latestMessageTime = time
+
     }
 
     init(roomId: String, opponent: User) {
@@ -95,6 +108,14 @@ extension ChatRoom {
 
         self.latestMessage = ""
 
+        let formatter = DateFormatter()
+
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+
+        let timestamp = formatter.string(from: Date())
+
+        self.latestMessageTime = timestamp
+
     }
 
     func toDictionary() -> RoomObject {
@@ -105,7 +126,9 @@ extension ChatRoom {
 
                         Schema.user2Id: self.user2Id,
 
-                        Schema.latestMessage: self.latestMessage]
+                        Schema.latestMessage: self.latestMessage,
+
+                        Schema.latestMessageTime: self.latestMessageTime]
 
         return roomInfo
 

@@ -26,7 +26,7 @@ class ModifyProfileViewController: UIViewController {
 
         guard let user = UserManager.shared.currentUser else { return }
 
-        if inputName.isEmpty && inputName.text != user.name {
+        if !inputName.isEmpty && inputName.text != user.name {
 
             let updatedName = inputName.text!
 
@@ -40,7 +40,7 @@ class ModifyProfileViewController: UIViewController {
 
         guard let user = UserManager.shared.currentUser else { return }
 
-        if inputIntro.isEmpty && inputIntro.text != user.intro {
+        if !inputIntro.isEmpty && inputIntro.text != user.intro {
 
             let updatedIntro = inputIntro.text!
 

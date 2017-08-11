@@ -113,7 +113,7 @@ class ShakeViewController: UIViewController {
 
                 labelSearching.isHidden = false
 
-                FirebaseManager().fetchChannel(withLang: selectedLanguage)
+                FirebaseManager().fetchChannel(withLanguage: selectedLanguage)
 
             }
 

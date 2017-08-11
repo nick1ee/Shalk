@@ -66,16 +66,32 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        SVProgressHUD.show()
+
         DispatchQueue.global().async {
 
-            self.fbManager.fetchFriendList()
+            self.fbManager.fetchFriendList(languageType: .english)
+
+            self.fbManager.fetchFriendList(languageType: .chinese)
+
+            self.fbManager.fetchFriendList(languageType: .japanese)
+
+            self.fbManager.fetchFriendList(languageType: .korean)
+
+            FirebaseManager().fetchUserProfile {
+
+                self.tableView.reloadData()
+
+                SVProgressHUD.dismiss()
+
+            }
 
         }
 
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
 
         self.englishFriends = []
 
@@ -84,6 +100,7 @@ class ProfileViewController: UIViewController {
         self.japaneseFriends = []
 
         self.koreanFriends = []
+
     }
 
 }
@@ -92,23 +109,21 @@ extension ProfileViewController: FirebaseManagerFriendDelegate {
 
     func manager(_ manager: FirebaseManager, didGetError error: Error) {
 
+        SVProgressHUD.dismiss()
+
         // MARK: Failed to get friend info.
 
         UIAlertController(error: error).show()
 
     }
 
-    func manager(_ manager: FirebaseManager, didGetFriend friend: User, byLanguage: String) {
+    func manager(_ manager: FirebaseManager, didGetFriend friend: User, byType: LanguageType) {
 
-        var tempFriends = UserManager.shared.friendsInfo.filter { $0.uid != friend.uid }
+        SVProgressHUD.dismiss()
 
-        tempFriends.append(friend)
+        switch byType {
 
-        UserManager.shared.friendsInfo = tempFriends
-
-        switch byLanguage {
-
-        case "English":
+        case .english:
 
             self.englishFriends.append(friend)
 
@@ -116,7 +131,7 @@ extension ProfileViewController: FirebaseManagerFriendDelegate {
 
             break
 
-        case "Chinese":
+        case .chinese:
 
             self.chineseFriends.append(friend)
 
@@ -124,7 +139,7 @@ extension ProfileViewController: FirebaseManagerFriendDelegate {
 
             break
 
-        case "Japanese":
+        case .japanese:
 
             self.japaneseFriends.append(friend)
 
@@ -132,15 +147,13 @@ extension ProfileViewController: FirebaseManagerFriendDelegate {
 
             break
 
-        case "Korean":
+        case .korean:
 
             self.koreanFriends.append(friend)
 
             self.tableView.reloadData()
 
             break
-
-        default: break
 
         }
 

@@ -9,7 +9,7 @@
 import UIKit
 
 class ChatViewController: UIViewController {
-    
+
     let imagePicker = UIImagePickerController()
 
     var messages: [Message] = []
@@ -27,43 +27,7 @@ class ChatViewController: UIViewController {
         fbManager.sendMessage(text: inputTextView.text)
 
         inputTextView.text = ""
-        
-        self.chatTableView.scrollToBottom(animated: true)
 
-    }
-
-    @IBAction func sendImage(_ sender: UIButton) {
-        
-        let alertController = UIAlertController.init(title: "Hint", message: "Send a image from..?", preferredStyle: .actionSheet)
-        
-        let cameraAction = UIAlertAction.init(title: "Camera", style: .default, handler: { (_) in
-            
-            self.imagePicker.sourceType = .camera
-            
-            self.present(self.imagePicker, animated: true, completion: nil)
-            
-        })
-        
-        let phoneLibraryAction = UIAlertAction.init(title: "Photo Library", style: .default, handler: {(_) in
-            
-            self.imagePicker.sourceType = .photoLibrary
-            
-            self.present(self.imagePicker, animated: true, completion: nil)
-            
-        })
-        
-        let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel, handler: {(_) in
-            
-        })
-        
-        alertController.addAction(cameraAction)
-        
-        alertController.addAction(phoneLibraryAction)
-        
-        alertController.addAction(cancelAction)
-        
-        self.present(alertController, animated: true, completion: nil)
-        
     }
 
     @IBAction func btnBack(_ sender: UIBarButtonItem) {
@@ -97,7 +61,7 @@ class ChatViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         self.chatTableView.scrollToBottom(animated: true)
 
         opponent = UserManager.shared.opponent
@@ -153,7 +117,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
         default:
 
-            let friend = UserManager.shared.friendsInfo.filter { $0.uid == showMessages[indexPath.row].senderId }
+            let friend = UserManager.shared.friends.filter { $0.uid == showMessages[indexPath.row].senderId }
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "receiverCell", for: indexPath) as! ReceiverTableViewCell
 
@@ -192,30 +156,4 @@ extension ChatViewController: UITextViewDelegate {
         }
     }
 
-}
-
-extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            
-            userImageView.image = pickedImage
-            
-            let imageData = UIImageJPEGRepresentation(userImageView.image!, 0.7)
-            
-            FirebaseManager().uploadImage(withData: imageData!)
-            
-        }
-        
-        dismiss(animated: true, completion: nil)
-        
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        
-        dismiss(animated: true, completion: nil)
-        
-    }
-    
 }

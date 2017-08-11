@@ -171,7 +171,7 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         if UserManager.shared.isDiscovering == true {
 
-            FirebaseManager().fetchChannel(withLang: UserManager.shared.language!)
+            FirebaseManager().fetchChannel(withLanguage: UserManager.shared.language!)
 
         }
 
@@ -188,7 +188,7 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         let userString = String(describing: userID)
 
-        let friend = UserManager.shared.friendsInfo.filter { $0.quickbloxId == userString }
+        let friend = UserManager.shared.friends.filter { $0.quickbloxId == userString }
 
         if friend.count == 0 {
 
@@ -206,9 +206,9 @@ extension MainTabViewController: QBRTCClientDelegate {
     }
 
     func session(_ session: QBRTCSession, userDidNotRespond userID: NSNumber) {
-        
+
         UserManager.shared.isPlayingCallingSound = false
-        
+
         UserManager.shared.playCallingSound()
 
         self.presentedViewController?.pushNoRespondMessage()

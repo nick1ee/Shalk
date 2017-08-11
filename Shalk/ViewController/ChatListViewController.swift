@@ -69,7 +69,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
         if myUid == room.user1Id {
 
-            let friend = UserManager.shared.friendsInfo.filter { $0.uid == room.user2Id }
+            let friend = UserManager.shared.friends.filter { $0.uid == room.user2Id }
 
             cell.opponentImageView.sd_setImage(with: URL(string: friend[0].imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
@@ -79,7 +79,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
         } else {
 
-            let friend = UserManager.shared.friendsInfo.filter { $0.uid == room.user1Id }
+            let friend = UserManager.shared.friends.filter { $0.uid == room.user1Id }
 
             cell.opponentImageView.sd_setImage(with: URL(string: friend[0].imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
@@ -101,7 +101,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
             UserManager.shared.chatRoomId = room.roomId
 
-            let friend = UserManager.shared.friendsInfo.filter { $0.uid == room.user2Id }
+            let friend = UserManager.shared.friends.filter { $0.uid == room.user2Id }
 
             UserManager.shared.opponent = friend[0]
 
@@ -111,7 +111,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
             UserManager.shared.chatRoomId = room.roomId
 
-            let friend = UserManager.shared.friendsInfo.filter { $0.uid == room.user1Id }
+            let friend = UserManager.shared.friends.filter { $0.uid == room.user1Id }
 
             UserManager.shared.opponent = friend[0]
 

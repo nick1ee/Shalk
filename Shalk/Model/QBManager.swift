@@ -44,8 +44,6 @@ class QBManager {
 
                     UIApplication.shared.endIgnoringInteractionEvents()
 
-                    UserManager.shared.fetchUserData()
-
                     UserDefaults.standard.set(email, forKey: "email")
 
                     UserDefaults.standard.set(password, forKey: "password")
