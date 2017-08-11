@@ -26,7 +26,7 @@ class ProfileViewController: UIViewController {
 
     @IBAction func btnModifyProfile(_ sender: UIBarButtonItem) {
 
-        self.performSegue(withIdentifier: "ModifyProfile", sender: nil)
+        self.navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ModifyProfile"))
 
     }
 
@@ -47,19 +47,9 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.estimatedRowHeight = 200
-
-        tableView.rowHeight = UITableViewAutomaticDimension
-
         fbManager.friendDelegate = self
 
-        UserManager.shared.fetchChatRoomList()
-
-        let bgImageView = UIImageView(image: UIImage(named: "background"))
-
-        tableView.backgroundColor = UIColor.clear
-
-        tableView.backgroundView = bgImageView
+        prepareTableView()
 
     }
 
@@ -77,6 +67,8 @@ class ProfileViewController: UIViewController {
             self.fbManager.fetchFriendList(languageType: .japanese)
 
             self.fbManager.fetchFriendList(languageType: .korean)
+
+            UserManager.shared.fetchChatRoomList()
 
             FirebaseManager().fetchUserProfile {
 
@@ -100,6 +92,20 @@ class ProfileViewController: UIViewController {
         self.japaneseFriends = []
 
         self.koreanFriends = []
+
+    }
+
+    func prepareTableView() {
+
+        tableView.estimatedRowHeight = 200
+
+        tableView.rowHeight = UITableViewAutomaticDimension
+
+        let bgImageView = UIImageView(image: UIImage(named: "background"))
+
+        tableView.backgroundColor = UIColor.clear
+
+        tableView.backgroundView = bgImageView
 
     }
 

@@ -23,11 +23,11 @@ class AudioCallViewController: UIViewController {
 
     var second = 0
 
-    var secondTimer = Timer()
+    var secondTimer = DispatchSource.makeTimerSource()
 
-    var minuteTimer = Timer()
+    var minuteTimer = DispatchSource.makeTimerSource()
 
-    var hourTimer = Timer()
+    var hourTimer = DispatchSource.makeTimerSource()
 
     let qbManager = QBManager.shared
 
@@ -129,6 +129,17 @@ class AudioCallViewController: UIViewController {
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        secondTimer.cancel()
+
+        minuteTimer.cancel()
+
+        hourTimer.cancel()
+
+    }
+
 }
 
 // MARK: Timer setting
@@ -136,11 +147,17 @@ extension AudioCallViewController {
 
     func enableTimer() {
 
-        secondTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateSecond), userInfo: nil, repeats: true)
+        secondTimer.setEventHandler { self.updateSecond() }
 
-        minuteTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(updateMinute), userInfo: nil, repeats: true)
+        secondTimer.scheduleRepeating(deadline: .now() + 1.0, interval: 1.0, leeway: .microseconds(10))
 
-        hourTimer = Timer.scheduledTimer(timeInterval: 3600, target: self, selector: #selector(updateHour), userInfo: nil, repeats: true)
+        minuteTimer.setEventHandler { self.updateMinute() }
+
+        minuteTimer.scheduleRepeating(deadline: .now() + 1.0, interval: 60.0, leeway: .microseconds(10))
+
+        hourTimer.setEventHandler { self.updateHour() }
+
+        hourTimer.scheduleRepeating(deadline: .now() + 1.0, interval: 3600.0, leeway: .microseconds(10))
 
     }
 

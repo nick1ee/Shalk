@@ -95,6 +95,12 @@ class ModifyProfileViewController: UIViewController {
 
         imagePicker.delegate = self
 
+        displayUserProfile()
+
+    }
+
+    func displayUserProfile() {
+
         guard let user = UserManager.shared.currentUser else { return }
 
         self.inputName.text = user.name
