@@ -43,7 +43,7 @@ class QBManager {
                     SVProgressHUD.dismiss()
 
                     UIApplication.shared.endIgnoringInteractionEvents()
-
+                    
 //                    UserManager.shared.saveToken(email: email, password: password)
 
                     //swiftlint:disable force_cast
