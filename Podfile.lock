@@ -42,6 +42,7 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.11)
   - IQKeyboardManagerSwift (4.0.10)
+  - KeychainAccess (3.0.2)
   - Magnetic (1.0.7)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -66,6 +67,7 @@ PODS:
   - SwifterSwift/Foundation (3.1.0)
   - SwifterSwift/UIKit (3.1.0)
   - SwiftLint (0.20.1)
+  - Unbox (2.5.0)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -73,6 +75,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - IQKeyboardManagerSwift
+  - KeychainAccess (= 3.0.2)
   - Magnetic
   - NVActivityIndicatorView
   - QuickBlox (~> 2.9.2)
@@ -81,6 +84,7 @@ DEPENDENCIES:
   - SVProgressHUD
   - SwifterSwift
   - SwiftLint
+  - Unbox (= 2.5.0)
 
 SPEC CHECKSUMS:
   Firebase: 1492bf04e1b73a7353b4fb2cf5a20bac9692f341
@@ -93,6 +97,7 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   IQKeyboardManagerSwift: 75ba21a23794a1e6b6fe6d9a267ea17f80e06771
+  KeychainAccess: a986406022dfc7c634c691ad3bec670cc6a32002
   Magnetic: f74297dd1797b35d9bebf7a768d91cadf71bb1cb
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
@@ -102,7 +107,8 @@ SPEC CHECKSUMS:
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwifterSwift: f84eb7308f7742724b3cbf84283ce00f7c06d7fc
   SwiftLint: f60095dc173a3f3ec505bb34f5229c3dfd779a54
+  Unbox: 30e437e6151a6de16139375fd4e8dd9a664cfbf7
 
-PODFILE CHECKSUM: f76c5c52f10f197d8eb640c0975acbefc8411273
+PODFILE CHECKSUM: 35f18751038c5c2fab64bdfb61e2d2dc25d56062
 
 COCOAPODS: 1.2.0

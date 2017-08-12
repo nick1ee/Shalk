@@ -40,14 +40,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
-        guard
-            let userToken = self.checkUserToken(),
-            let email = userToken["email"],
-            let password = userToken["password"] else { return true }
+        do {
 
-        UserManager.shared.logIn(withEmail: email, withPassword: password)
+            try UserManager.shared.restore(from: .appToken)
 
-        SVProgressHUD.show(withStatus: "Token loadded successfully, start to log in.")
+        } catch {
+
+        }
+
+//        guard
+//            let userToken = UserManager.shared.fetchToken(),
+//            let email = userToken["email"],
+//            let password = userToken["password"] else { return true }
+
+//        UserManager.shared.logIn(withEmail: email, withPassword: password)
+
+        SVProgressHUD.show(withStatus: "Token loaded, continute to log in.")
 
         return true
     }

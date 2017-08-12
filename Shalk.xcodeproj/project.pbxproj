@@ -15,6 +15,8 @@
 		B80331401F2B377B00F89209 /* QBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B803313F1F2B377B00F89209 /* QBManager.swift */; };
 		B80331461F2B388F00F89209 /* MagneticExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331441F2B388F00F89209 /* MagneticExtensions.swift */; };
 		B80331481F2B3E5000F89209 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80331471F2B3E5000F89209 /* Const.swift */; };
+		B82078421F3ED0F50095861D /* AppToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82078411F3ED0F50095861D /* AppToken.swift */; };
+		B82078441F3ED4480095861D /* KeychainConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82078431F3ED4480095861D /* KeychainConvertible.swift */; };
 		B82C6DA01F2BAC5A00C5948D /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82C6D9F1F2BAC5A00C5948D /* ChatTableViewCell.swift */; };
 		B8456F7C1F38483200641315 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8456F7B1F38483200641315 /* MainTabViewController.swift */; };
 		B8456F7E1F384D1A00641315 /* ComingCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8456F7D1F384D1A00641315 /* ComingCallViewController.swift */; };
@@ -84,6 +86,9 @@
 		B803313F1F2B377B00F89209 /* QBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QBManager.swift; sourceTree = "<group>"; };
 		B80331441F2B388F00F89209 /* MagneticExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagneticExtensions.swift; sourceTree = "<group>"; };
 		B80331471F2B3E5000F89209 /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		B82078401F3EC77D0095861D /* Shalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shalk.entitlements; sourceTree = "<group>"; };
+		B82078411F3ED0F50095861D /* AppToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppToken.swift; sourceTree = "<group>"; };
+		B82078431F3ED4480095861D /* KeychainConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainConvertible.swift; sourceTree = "<group>"; };
 		B82C6D9F1F2BAC5A00C5948D /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		B8456F7B1F38483200641315 /* MainTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		B8456F7D1F384D1A00641315 /* ComingCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComingCallViewController.swift; sourceTree = "<group>"; };
@@ -192,6 +197,8 @@
 				B89872861F306008007DEDA6 /* AudioChannel.swift */,
 				B8D9ECDC1F32F7BE00B9FEED /* Message.swift */,
 				B8F1CFEB1F35E0A5003BACF8 /* ChatRoom.swift */,
+				B82078411F3ED0F50095861D /* AppToken.swift */,
+				B82078431F3ED4480095861D /* KeychainConvertible.swift */,
 			);
 			name = Structures;
 			path = Shalk/Structures;
@@ -229,6 +236,7 @@
 		B872E6161F29BF91009BD763 /* Shalk */ = {
 			isa = PBXGroup;
 			children = (
+				B82078401F3EC77D0095861D /* Shalk.entitlements */,
 				B872E62A1F29C498009BD763 /* AppDelegate */,
 				B872E62C1F29C498009BD763 /* Model */,
 				B872E62D1F29C498009BD763 /* View */,
@@ -337,6 +345,9 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.Keychain = {
 								enabled = 0;
 							};
 						};
@@ -471,7 +482,9 @@
 				B80331401F2B377B00F89209 /* QBManager.swift in Sources */,
 				B80331481F2B3E5000F89209 /* Const.swift in Sources */,
 				B80331061F2A374F00F89209 /* ShakeViewController.swift in Sources */,
+				B82078441F3ED4480095861D /* KeychainConvertible.swift in Sources */,
 				B80331461F2B388F00F89209 /* MagneticExtensions.swift in Sources */,
+				B82078421F3ED0F50095861D /* AppToken.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

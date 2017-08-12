@@ -9,12 +9,21 @@
 import Foundation
 import Firebase
 import AudioToolbox
+import KeychainAccess
 
 class UserManager {
+
+    enum RestoreError: Error {
+
+        case missingValue(key: String)
+
+    }
 
     let ref = Database.database().reference()
 
     static let shared = UserManager()
+
+    private(set) var appToken: AppToken?
 
     var currentUser: User?
 
@@ -58,6 +67,25 @@ class UserManager {
 
     }
 
+    func restore(from keychain: Keychain) throws {
+
+        typealias  Schema = AppToken.Schema
+
+        guard let emailTokenString = try keychain.get(Schema.email) else {
+
+            throw RestoreError.missingValue(key: Schema.email)
+
+        }
+
+        guard let pwdTokenString = try keychain.get(Schema.password) else {
+
+            throw RestoreError.missingValue(key: Schema.password)
+        }
+
+        appToken = try AppToken(email: emailTokenString, password: pwdTokenString)
+
+    }
+
     func registerProfile() {
 
         let userDict = currentUser?.toDictionary()
@@ -75,10 +103,6 @@ class UserManager {
         FirebaseManager().logOut()
 
     }
-
-//    func fetchUserData() {
-//
-//    }
 
     func startAudioCall() {
 
