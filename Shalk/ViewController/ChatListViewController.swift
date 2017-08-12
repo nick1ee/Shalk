@@ -131,8 +131,8 @@ extension ChatListViewController: FirebaseManagerChatRoomDelegate {
         let sortedRooms = rooms.sorted(by: { (room1, room2) -> Bool in
 
             let formatter = DateFormatter()
+
             formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-            //                formatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
 
             let room1Time = formatter.date(from: room1.latestMessageTime)
 

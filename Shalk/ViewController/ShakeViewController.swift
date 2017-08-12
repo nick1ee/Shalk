@@ -26,6 +26,8 @@ class ShakeViewController: UIViewController {
 
     var selectedNode: Node?
 
+    @IBOutlet weak var iconShake: UIImageView!
+
     @IBOutlet weak var loadingView: NVActivityIndicatorView!
 
     @IBOutlet weak var labelSearching: UILabel!
@@ -49,9 +51,13 @@ class ShakeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addLangBubbles(nil)
+        magnetic.allowsMultipleSelection = false
 
-        labelSearching.isHidden = true
+        magnetic.backgroundColor = UIColor.clear
+
+        iconShake.tintColor = UIColor.white
+
+        addLangBubbles(nil)
 
         QBManager.shared.audioManager.initialize()
 
@@ -71,13 +77,13 @@ class ShakeViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        selectedNode?.isSelected = false
-
         selectedNode = nil
 
         loadingView.stopAnimating()
 
-        labelSearching.isHidden = true
+        labelSearching.text = "Shake your mobile to find the partner!"
+
+        iconShake.isHidden = false
 
         UserManager.shared.isDiscovering = false
 
@@ -97,8 +103,6 @@ class ShakeViewController: UIViewController {
 
                     labelSearching.text = "Please select a preferred language."
 
-                    labelSearching.isHidden = false
-
                     UserManager.shared.isDiscovering = false
 
                     return
@@ -109,11 +113,11 @@ class ShakeViewController: UIViewController {
 
                 // MARK: Start pairing...
 
+                iconShake.isHidden = true
+
                 loadingView.startAnimating()
 
                 labelSearching.text = "Discovering, please wait!"
-
-                labelSearching.isHidden = false
 
                 FirebaseManager().fetchChannel(withLanguage: selectedLanguage)
 
@@ -151,17 +155,13 @@ extension ShakeViewController: MagneticDelegate {
         // MAKR: Bubble selected
         userManager.closeChannel()
 
-        UserManager.shared.isDiscovering = false
+        labelSearching.text = "Shake your mobile to find the partner!"
 
-        labelSearching.isHidden = true
+        UserManager.shared.isDiscovering = false
 
         loadingView.stopAnimating()
 
-        selectedNode?.isSelected = false
-
         selectedNode = node
-
-        selectedNode?.isSelected = true
 
     }
 

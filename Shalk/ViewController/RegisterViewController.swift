@@ -11,12 +11,6 @@ import SVProgressHUD
 
 class RegisterViewController: UIViewController {
 
-    @IBOutlet weak var iconUser: UIImageView!
-
-    @IBOutlet weak var iconEmail: UIImageView!
-
-    @IBOutlet weak var iconKey: UIImageView!
-
     @IBOutlet weak var inputUserName: UITextField!
 
     @IBOutlet weak var inputEmail: UITextField!
@@ -43,8 +37,6 @@ class RegisterViewController: UIViewController {
 
                     // MARK: Invalid password.
 
-                    iconKey.tintColor = UIColor.red
-
                     let alert = UIAlertController(title: "Error!", message: "Password should have 8 characters at least.", preferredStyle: .alert)
 
                     alert.addAction(title: "OK")
@@ -57,8 +49,6 @@ class RegisterViewController: UIViewController {
 
                 // MARK: Invalid email format.
 
-                iconEmail.tintColor = UIColor.red
-
                 let alert = UIAlertController(title: "Error!", message: "Please enter a valid email account", preferredStyle: .alert)
 
                 alert.addAction(title: "OK")
@@ -68,36 +58,6 @@ class RegisterViewController: UIViewController {
             }
 
         } else {
-
-            if inputUserName.isEmpty {
-
-                iconUser.tintColor = UIColor.red
-
-            } else {
-
-                iconUser.tintColor = UIColor.init(red: 255/255, green: 189/255, blue: 0/255, alpha: 1)
-
-            }
-
-            if inputEmail.isEmpty {
-
-                iconEmail.tintColor = UIColor.red
-
-            } else {
-
-                iconEmail.tintColor = UIColor.init(red: 255/255, green: 189/255, blue: 0/255, alpha: 1)
-
-            }
-
-            if inputPassword.isEmpty {
-
-                iconKey.tintColor = UIColor.red
-
-            } else {
-
-                iconKey.tintColor = UIColor.init(red: 255/255, green: 189/255, blue: 0/255, alpha: 1)
-
-            }
 
             let alert = UIAlertController(title: "Error!", message: "Please fullfill all required fileds to apply a new account", preferredStyle: .alert)
 
@@ -118,11 +78,11 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        iconUser.tintColor = UIColor.lightGray
+        inputUserName.layer.sublayerTransform = CATransform3DMakeTranslation(20, 0, 30)
 
-        iconEmail.tintColor = UIColor.lightGray
+        inputEmail.layer.sublayerTransform = CATransform3DMakeTranslation(20, 0, 30)
 
-        iconKey.tintColor = UIColor.lightGray
+        inputPassword.layer.sublayerTransform = CATransform3DMakeTranslation(20, 0, 30)
 
     }
 

@@ -82,6 +82,8 @@ class VideoCallViewController: UIViewController {
 
             QBManager.shared.session?.localMediaStream.videoTrack.isEnabled = false
 
+            self.localVideoView.isHidden = true
+
         } else {
 
             // MARK: User enabled the camera.
@@ -91,6 +93,8 @@ class VideoCallViewController: UIViewController {
             outletCamera.setImage(UIImage(named: "icon-camera.png"), for: .normal)
 
             QBManager.shared.session?.localMediaStream.videoTrack.isEnabled = true
+
+            self.localVideoView.isHidden = false
 
         }
 

@@ -12,9 +12,6 @@ import SVProgressHUD
 
 class LoginViewController: UIViewController {
 
-    @IBOutlet weak var iconEmail: UIImageView!
-    @IBOutlet weak var iconKey: UIImageView!
-
     @IBOutlet weak var inputEmail: UITextField!
     @IBOutlet weak var inputPassword: UITextField!
 
@@ -32,28 +29,11 @@ class LoginViewController: UIViewController {
 
         } else {
 
-            if inputEmail.isEmpty {
-
-                iconEmail.tintColor = UIColor.red
-
-            } else {
-
-                iconEmail.tintColor = UIColor.init(red: 255/255, green: 189/255, blue: 0/255, alpha: 1)
-            }
-
-            if inputPassword.isEmpty {
-
-                iconKey.tintColor = UIColor.red
-
-            } else {
-
-                iconKey.tintColor = UIColor.init(red: 255/255, green: 189/255, blue: 0/255, alpha: 1)
-
-            }
-
             let alert = UIAlertController(title: "Error!", message: "Please fullfill all required fileds", preferredStyle: .alert)
+
             alert.addAction(title: "OK")
-            alert.show()
+
+            self.present(alert, animated: true, completion: nil)
 
         }
 
@@ -77,14 +57,11 @@ class LoginViewController: UIViewController {
 
         } else {
 
-            if inputEmail.isEmpty {
-
-                iconEmail.tintColor = UIColor.red
-            }
-
             let alert = UIAlertController(title: "Error!", message: "Enter your email, we will send you a link to reset password1", preferredStyle: .alert)
+
             alert.addAction(title: "OK")
-            alert.show()
+
+            self.present(alert, animated: true, completion: nil)
 
         }
 
@@ -93,9 +70,11 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        iconEmail.tintColor = UIColor.lightGray
+        // MARK: Add padding for textfields.
 
-        iconKey.tintColor = UIColor.lightGray
+        inputEmail.layer.sublayerTransform = CATransform3DMakeTranslation(20, 0, 30)
+
+        inputPassword.layer.sublayerTransform = CATransform3DMakeTranslation(20, 0, 30)
 
     }
 
