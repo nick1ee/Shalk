@@ -18,11 +18,11 @@ class VideoCallViewController: UIViewController {
 
     var second = 0
 
-    var secondTimer = DispatchSource.makeTimerSource()
+    var secondTimer: DispatchSourceTimer?
 
-    var minuteTimer = DispatchSource.makeTimerSource()
+    var minuteTimer: DispatchSourceTimer?
 
-    var hourTimer = DispatchSource.makeTimerSource()
+    var hourTimer: DispatchSourceTimer?
 
     var location = CGPoint(x: 0, y: 0)
 
@@ -164,6 +164,13 @@ class VideoCallViewController: UIViewController {
 
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.stopTimer()
+
+    }
+
     func videoPreparation() {
 
         let videoFormat = QBRTCVideoFormat.init()
@@ -193,71 +200,94 @@ class VideoCallViewController: UIViewController {
 // MARK: Timer setting
 extension VideoCallViewController {
 
-    func enableTimer() {
-
-        secondTimer.resume()
-
-        minuteTimer.resume()
-
-        hourTimer.resume()
-
-    }
-
     func configTimer() {
 
-        secondTimer.setEventHandler { self.updateSecond() }
+        let timerQueue = DispatchQueue(label: "timer", attributes: .concurrent)
 
-        secondTimer.scheduleRepeating(deadline: .now() + 1.0, interval: 1.0, leeway: .microseconds(10))
+        secondTimer?.cancel()
 
-        minuteTimer.setEventHandler { self.updateMinute() }
+        secondTimer = DispatchSource.makeTimerSource(queue: timerQueue)
 
-        minuteTimer.scheduleRepeating(deadline: .now() + 1.0, interval: 60.0, leeway: .microseconds(10))
+        secondTimer?.scheduleRepeating(deadline: .now(), interval: 1.0, leeway: .microseconds(10))
 
-        hourTimer.setEventHandler { self.updateHour() }
+        secondTimer?.setEventHandler {
 
-        hourTimer.scheduleRepeating(deadline: .now() + 1.0, interval: 3600.0, leeway: .microseconds(10))
-    }
+            if self.second == 59 {
 
-    func updateSecond() {
+                self.second = 0
 
-        if second == 59 {
+            } else {
 
-            second = 0
+                self.second += 1
 
-        } else {
+            }
 
-            second += 1
-
-        }
-
-        timeLabel.text = "\(hour.addLeadingZero()) : \(minute.addLeadingZero()) : \(second.addLeadingZero())"
-
-    }
-
-    func updateMinute() {
-
-        if minute == 59 {
-
-            minute = 0
-
-        } else {
-
-            minute += 1
+            self.timeLabel.text = "\(self.hour.addLeadingZero()) : \(self.minute.addLeadingZero()) : \(self.second.addLeadingZero())"
 
         }
 
-        timeLabel.text = "\(hour.addLeadingZero()) : \(minute.addLeadingZero()) : \(second.addLeadingZero())"
+        secondTimer?.resume()
 
+        minuteTimer?.cancel()
+
+        minuteTimer = DispatchSource.makeTimerSource(queue: timerQueue)
+
+        minuteTimer?.scheduleRepeating(deadline: .now(), interval: 60.0, leeway: .microseconds(10))
+
+        minuteTimer?.setEventHandler {
+
+            if self.minute == 59 {
+
+                self.minute = 0
+
+            } else {
+
+                self.minute += 1
+
+            }
+
+            self.timeLabel.text = "\(self.hour.addLeadingZero()) : \(self.minute.addLeadingZero()) : \(self.second.addLeadingZero())"
+
+        }
+
+        minuteTimer?.resume()
+
+        hourTimer?.cancel()
+
+        hourTimer = DispatchSource.makeTimerSource(queue: timerQueue)
+
+        hourTimer?.scheduleRepeating(deadline: .now(), interval: 3600.0, leeway: .microseconds(10))
+
+        hourTimer?.setEventHandler {
+
+            self.hour += 1
+
+            self.timeLabel.text = "\(self.hour.addLeadingZero()) : \(self.minute.addLeadingZero()) : \(self.second.addLeadingZero())"
+
+        }
     }
 
-    func updateHour() {
+    func stopTimer() {
 
-        hour += 1
+        secondTimer?.cancel()
 
-        timeLabel.text = "\(hour.addLeadingZero()) : \(minute.addLeadingZero()) : \(second.addLeadingZero())"
+        secondTimer = nil
+
+        minuteTimer?.cancel()
+
+        minuteTimer = nil
+
+        hourTimer?.cancel()
+
+        hourTimer = nil
+
+        second = 0
+
+        minute = 0
+
+        hour = 0
 
     }
-
 }
 
 extension VideoCallViewController: QBRTCClientDelegate {
@@ -267,7 +297,7 @@ extension VideoCallViewController: QBRTCClientDelegate {
 
         connectionStatus.text = "Video Connected"
 
-        self.enableTimer()
+        self.configTimer()
 
     }
 

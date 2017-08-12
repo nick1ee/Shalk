@@ -23,11 +23,11 @@ class AudioCallViewController: UIViewController {
 
     var second = 0
 
-    var secondTimer = DispatchSource.makeTimerSource()
+    var secondTimer: DispatchSourceTimer?
 
-    var minuteTimer = DispatchSource.makeTimerSource()
+    var minuteTimer: DispatchSourceTimer?
 
-    var hourTimer = DispatchSource.makeTimerSource()
+    var hourTimer: DispatchSourceTimer?
 
     let qbManager = QBManager.shared
 
@@ -110,8 +110,6 @@ class AudioCallViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configTimer()
-
         QBRTCClient.instance().add(self)
 
         qbManager.session?.localMediaStream.audioTrack.isEnabled = true
@@ -134,11 +132,7 @@ class AudioCallViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        secondTimer.cancel()
-
-        minuteTimer.cancel()
-
-        hourTimer.cancel()
+        self.stopTimer()
 
     }
 
@@ -147,72 +141,94 @@ class AudioCallViewController: UIViewController {
 // MARK: Timer setting
 extension AudioCallViewController {
 
-    func enableTimer() {
-
-        secondTimer.resume()
-
-        minuteTimer.resume()
-
-        hourTimer.resume()
-
-    }
-
     func configTimer() {
 
-        secondTimer.setEventHandler { self.updateSecond() }
+        let timerQueue = DispatchQueue(label: "timer", attributes: .concurrent)
 
-        secondTimer.scheduleRepeating(deadline: .now(), interval: 1.0, leeway: .microseconds(10))
+        secondTimer?.cancel()
 
-        minuteTimer.setEventHandler { self.updateMinute() }
+        secondTimer = DispatchSource.makeTimerSource(queue: timerQueue)
 
-        minuteTimer.scheduleRepeating(deadline: .now() + .seconds(60), interval: 60.0, leeway: .microseconds(10))
+        secondTimer?.scheduleRepeating(deadline: .now(), interval: 1.0, leeway: .microseconds(10))
 
-        hourTimer.setEventHandler { self.updateHour() }
+        secondTimer?.setEventHandler {
 
-        hourTimer.scheduleRepeating(deadline: .now() + .seconds(3600), interval: 3600.0, leeway: .microseconds(10))
+            if self.second == 59 {
 
-    }
+                self.second = 0
 
-    func updateSecond() {
+            } else {
 
-        if second == 59 {
+                self.second += 1
 
-            second = 0
+            }
 
-        } else {
-
-            second += 1
+            self.timeLabel.text = "\(self.hour.addLeadingZero()) : \(self.minute.addLeadingZero()) : \(self.second.addLeadingZero())"
 
         }
 
-        timeLabel.text = "\(hour.addLeadingZero()) : \(minute.addLeadingZero()) : \(second.addLeadingZero())"
+        secondTimer?.resume()
 
-    }
+        minuteTimer?.cancel()
 
-    func updateMinute() {
+        minuteTimer = DispatchSource.makeTimerSource(queue: timerQueue)
 
-        if minute == 59 {
+        minuteTimer?.scheduleRepeating(deadline: .now(), interval: 60.0, leeway: .microseconds(10))
 
-            minute = 0
+        minuteTimer?.setEventHandler {
 
-        } else {
+            if self.minute == 59 {
 
-            minute += 1
+                self.minute = 0
+
+            } else {
+
+                self.minute += 1
+
+            }
+
+            self.timeLabel.text = "\(self.hour.addLeadingZero()) : \(self.minute.addLeadingZero()) : \(self.second.addLeadingZero())"
 
         }
 
-        timeLabel.text = "\(hour.addLeadingZero()) : \(minute.addLeadingZero()) : \(second.addLeadingZero())"
+        minuteTimer?.resume()
 
+        hourTimer?.cancel()
+
+        hourTimer = DispatchSource.makeTimerSource(queue: timerQueue)
+
+        hourTimer?.scheduleRepeating(deadline: .now(), interval: 3600.0, leeway: .microseconds(10))
+
+        hourTimer?.setEventHandler {
+
+            self.hour += 1
+
+            self.timeLabel.text = "\(self.hour.addLeadingZero()) : \(self.minute.addLeadingZero()) : \(self.second.addLeadingZero())"
+
+        }
     }
 
-    func updateHour() {
+    func stopTimer() {
 
-        hour += 1
+        secondTimer?.cancel()
 
-        timeLabel.text = "\(hour.addLeadingZero()) : \(minute.addLeadingZero()) : \(second.addLeadingZero())"
+        secondTimer = nil
+
+        minuteTimer?.cancel()
+
+        minuteTimer = nil
+
+        hourTimer?.cancel()
+
+        hourTimer = nil
+
+        second = 0
+
+        minute = 0
+
+        hour = 0
 
     }
-
 }
 
 extension AudioCallViewController: QBRTCClientDelegate {
@@ -224,7 +240,7 @@ extension AudioCallViewController: QBRTCClientDelegate {
 
         connectionStatus.text = "Audio Connected"
 
-        self.enableTimer()
+        self.configTimer()
 
     }
 
