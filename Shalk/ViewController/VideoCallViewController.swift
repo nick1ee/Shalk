@@ -42,8 +42,6 @@ class VideoCallViewController: UIViewController {
 
     @IBOutlet weak var localVideoView: UIView!
 
-    @IBOutlet weak var connectionStatus: UILabel!
-
     @IBOutlet weak var outletCamera: UIButton!
 
     @IBOutlet weak var outletMicrophone: UIButton!
@@ -161,6 +159,18 @@ class VideoCallViewController: UIViewController {
             UserManager.shared.startVideoCall()
 
         }
+
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+
+        localVideoView.addGestureRecognizer(pan)
+
+    }
+
+    func handlePan(_ recognizer: UIPanGestureRecognizer) {
+
+        let point = recognizer.location(in: self.view)
+
+        localVideoView.center = point
 
     }
 
@@ -295,9 +305,7 @@ extension VideoCallViewController: QBRTCClientDelegate {
     // MARK: 連線確定與該使用者進行連接
     func session(_ session: QBRTCBaseSession, connectedToUser userID: NSNumber) {
 
-        connectionStatus.text = "Video Connected"
-
-        self.configTimer()
+//        self.configTimer()
 
     }
 
