@@ -81,6 +81,8 @@ class ShakeViewController: UIViewController {
 
         UserManager.shared.isDiscovering = false
 
+        FirebaseManager().leaveChannel()
+
     }
 
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
@@ -138,22 +140,6 @@ class ShakeViewController: UIViewController {
         }
 
     }
-
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//        if segue.identifier == "audioCall" {
-//
-//            let destinationNavi = segue.destination as? UINavigationController
-//
-//            let audioVC = destinationNavi?.viewControllers.first as? RandomCallViewController
-//
-//            guard let opponentName = userManager.opponent?.name else { return }
-//
-//            audioVC?.receivedUserName = opponentName
-//
-//        }
-//
-//    }
 
 }
 

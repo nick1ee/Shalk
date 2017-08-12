@@ -53,7 +53,7 @@ class UserManager {
 
     }
 
-    func signUP(name: String, withEmail email: String, withPassword pwd: String) {
+    func signUp(name: String, withEmail email: String, withPassword pwd: String) {
 
         UIApplication.shared.beginIgnoringInteractionEvents()
 

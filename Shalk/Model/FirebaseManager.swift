@@ -91,15 +91,21 @@ class FirebaseManager {
 
             QBManager().signUp(name: name, uid: okUser.uid, withEmail: email, withPassword: pwd)
 
-                self.logIn(withEmail: email, withPassword: pwd)
-
-            }
+            self.logIn(withEmail: email, withPassword: pwd)
 
         }
+
+    }
 
     func registerProfile(uid: String, userDict: [String: String]) {
 
         ref?.child("users").child(uid).setValue(userDict)
+
+    }
+
+    func removeAllObserver() {
+
+        ref?.removeAllObservers()
 
     }
 
@@ -300,6 +306,18 @@ class FirebaseManager {
         userManager.roomKey = nil
 
         userManager.language = nil
+
+    }
+
+    func leaveChannel() {
+
+        guard
+            let roomId = userManager.roomKey,
+            let lang = userManager.language else { return }
+
+        ref?.child("channels").child(lang).child(roomId).updateChildValues(["isLocked": true])
+
+        ref?.child("channels").child(lang).child(roomId).updateChildValues(["isFinished": true])
 
     }
 

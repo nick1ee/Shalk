@@ -30,6 +30,31 @@ class LoginViewController: UIViewController {
 
             UserManager.shared.logIn(withEmail: email, withPassword: pwd)
 
+        } else {
+
+            if inputEmail.isEmpty {
+
+                iconEmail.tintColor = UIColor.red
+
+            } else {
+
+                iconEmail.tintColor = UIColor.init(red: 255/255, green: 189/255, blue: 0/255, alpha: 1)
+            }
+
+            if inputPassword.isEmpty {
+
+                iconKey.tintColor = UIColor.red
+
+            } else {
+
+                iconKey.tintColor = UIColor.init(red: 255/255, green: 189/255, blue: 0/255, alpha: 1)
+
+            }
+
+            let alert = UIAlertController(title: "Error!", message: "Please fullfill all required fileds", preferredStyle: .alert)
+            alert.addAction(title: "OK")
+            alert.show()
+
         }
 
     }
@@ -49,6 +74,17 @@ class LoginViewController: UIViewController {
             guard let email = inputEmail.text else { return }
 
             FirebaseManager().resetPassword(self, withEmail: email)
+
+        } else {
+
+            if inputEmail.isEmpty {
+
+                iconEmail.tintColor = UIColor.red
+            }
+
+            let alert = UIAlertController(title: "Error!", message: "Enter your email, we will send you a link to reset password1", preferredStyle: .alert)
+            alert.addAction(title: "OK")
+            alert.show()
 
         }
 

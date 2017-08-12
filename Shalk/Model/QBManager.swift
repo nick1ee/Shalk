@@ -57,13 +57,19 @@ class QBManager {
 
                     // MARK: Failed to connect chat service.
 
+                    let alert = UIAlertController(title: "Error!", message: "Can't log in chat service right now, please close this app and try again!", preferredStyle: .alert)
+
+                    alert.addAction(title: "OK")
+
+                    alert.show()
+
                 }
 
             })
 
         }) { (response) in
 
-            // MARK: User failed to login.
+            // MARK: User failed to login, suspect to
 
             SVProgressHUD.dismiss()
 

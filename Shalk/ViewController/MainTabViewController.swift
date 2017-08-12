@@ -9,6 +9,7 @@
 import UIKit
 import Quickblox
 import QuickbloxWebRTC
+import IQKeyboardManagerSwift
 
 class MainTabViewController: UITabBarController {
 
@@ -26,6 +27,8 @@ class MainTabViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
         self.tabBarController?.selectedIndex = 2
 
