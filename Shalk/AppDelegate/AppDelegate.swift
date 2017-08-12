@@ -42,13 +42,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         guard let userToken = UserManager.shared.restore() else { return true }
 
+        // MARK: Fetched token successfully, log in directly.
+        //swiftlint:disable force_cast
         UserManager.shared.logIn(withEmail: userToken["email"]!, withPassword: userToken["password"]!)
 
-        SVProgressHUD.show(withStatus: "Token loaded, continute to log in.")
+        SVProgressHUD.show(withStatus: "Fetching data, please wait!")
+        
+        let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainTabVC") as! MainTabViewController
+        
+        mainTabVC.selectedIndex = 2
+        
+        AppDelegate.shared.window?.rootViewController = mainTabVC
 
         return true
     }
-
+    //swiftlint:enable force_cast
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
