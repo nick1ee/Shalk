@@ -17,6 +17,7 @@ target 'Shalk' do
   pod 'NVActivityIndicatorView'
   pod 'Firebase/Storage'
   pod 'SDWebImage'
+  pod 'KeychainSwift'
   
   source 'https://github.com/CocoaPods/Specs.git'
   pod 'Quickblox-WebRTC', '~> 2.6.1'

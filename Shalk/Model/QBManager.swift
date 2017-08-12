@@ -43,8 +43,8 @@ class QBManager {
                     SVProgressHUD.dismiss()
 
                     UIApplication.shared.endIgnoringInteractionEvents()
-                    
-//                    UserManager.shared.saveToken(email: email, password: password)
+
+                    UserManager.shared.saveToken(email: email, pwd: password)
 
                     //swiftlint:disable force_cast
                     let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainTabVC") as! UITabBarController
@@ -93,7 +93,7 @@ class QBManager {
 
                     UIApplication.shared.endIgnoringInteractionEvents()
 
-//                    UserManager.shared.deleteToken()
+                    UserManager.shared.deleteToken()
 
                     let loginVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginVC")
 

@@ -84,6 +84,7 @@
 		B803313F1F2B377B00F89209 /* QBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QBManager.swift; sourceTree = "<group>"; };
 		B80331441F2B388F00F89209 /* MagneticExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagneticExtensions.swift; sourceTree = "<group>"; };
 		B80331471F2B3E5000F89209 /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		B82078451F3ED79B0095861D /* Shalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shalk.entitlements; sourceTree = "<group>"; };
 		B82C6D9F1F2BAC5A00C5948D /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		B8456F7B1F38483200641315 /* MainTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		B8456F7D1F384D1A00641315 /* ComingCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComingCallViewController.swift; sourceTree = "<group>"; };
@@ -229,6 +230,7 @@
 		B872E6161F29BF91009BD763 /* Shalk */ = {
 			isa = PBXGroup;
 			children = (
+				B82078451F3ED79B0095861D /* Shalk.entitlements */,
 				B872E62A1F29C498009BD763 /* AppDelegate */,
 				B872E62C1F29C498009BD763 /* Model */,
 				B872E62D1F29C498009BD763 /* View */,
@@ -340,7 +342,7 @@
 								enabled = 0;
 							};
 							com.apple.Keychain = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -598,6 +600,7 @@
 			baseConfigurationReference = 62B84D84F08A0D2A952A2A78 /* Pods-Shalk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Shalk/Shalk.entitlements;
 				DEVELOPMENT_TEAM = EQ43V2KPAV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -617,6 +620,7 @@
 			baseConfigurationReference = 714FEE4C1D66F84E19F1666C /* Pods-Shalk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Shalk/Shalk.entitlements;
 				DEVELOPMENT_TEAM = EQ43V2KPAV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
