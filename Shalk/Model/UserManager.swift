@@ -100,7 +100,7 @@ class UserManager {
     }
 
     func logOut() {
-        
+
         self.deleteToken()
 
         UIApplication.shared.beginIgnoringInteractionEvents()
