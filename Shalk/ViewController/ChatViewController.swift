@@ -78,6 +78,13 @@ class ChatViewController: UIViewController {
 
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        FirebaseManager().updateChatRoom()
+
+    }
+
 }
 
 //swiftlint:disable force_cast
@@ -101,6 +108,8 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
         let showMessages = messages.filter { $0.text != "" }
 
+        let gradientLayer = CAGradientLayer()
+
         guard let myUid = UserManager.shared.currentUser?.uid else { return UITableViewCell() }
 
         switch showMessages[indexPath.row].senderId {
@@ -112,6 +121,20 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             cell.sendedMessage.text = showMessages[indexPath.row].text
 
             cell.sendedTime.text = showMessages[indexPath.row].time
+
+            gradientLayer.frame = cell.bounds
+
+            let color1 = UIColor.init(red: 44/255, green: 33/255, blue: 76/255, alpha: 1).cgColor
+
+            let color2 = UIColor.init(red: 62/255, green: 47/255, blue: 75/255, alpha: 1).cgColor
+
+            gradientLayer.colors = [color1, color2]
+
+            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+
+            gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+
+            cell.layer.insertSublayer(gradientLayer, at: 0)
 
             return cell
 

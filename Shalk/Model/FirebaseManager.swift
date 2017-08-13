@@ -157,7 +157,7 @@ class FirebaseManager {
 
     }
 
-    func fetchUserProfile(withUid uid: String, call: CallType) {
+    func fetchOpponentInfo(withUid uid: String, call: CallType) {
 
         ref?.child("users").child(uid).observeSingleEvent(of: .value, with: {(snapshot) in
 
@@ -199,7 +199,7 @@ class FirebaseManager {
 
     }
 
-    func fetchUserProfile(completion: @escaping () -> Void) {
+    func fetchMyProfile(completion: @escaping () -> Void) {
 
         guard let userId = Auth.auth().currentUser?.uid else { return }
 
@@ -255,7 +255,7 @@ class FirebaseManager {
 
                 self.updateChannel()
 
-                self.fetchUserProfile(withUid: channel.owner, call: .audio)
+                self.fetchOpponentInfo(withUid: channel.owner, call: .audio)
 
                 return
 
@@ -308,18 +308,16 @@ class FirebaseManager {
         UserManager.shared.language = nil
 
     }
-//
-//    func leaveChannel() {
-//
-//        guard
-//            let roomId = userManager.roomKey,
-//            let lang = userManager.language else { return }
-//
-//        ref?.child("channels").child(lang).child(roomId).updateChildValues(["isLocked": true])
-//
-//        ref?.child("channels").child(lang).child(roomId).updateChildValues(["isFinished": true])
-//
-//    }
+
+    func leaveChannel() {
+
+        guard
+            let roomId = userManager.roomKey,
+            let lang = userManager.language else { return }
+
+        ref?.child("channels").child(lang).child(roomId).updateChildValues(["isLocked": true, "isFinished": true])
+
+    }
 
     func checkFriendRequest() {
 
@@ -505,7 +503,7 @@ extension FirebaseManager {
 
         handle = ref?.child("chatRoomList").child(myUid).observe(.childAdded, with: { (snapshot) in
 
-            guard let obejct = snapshot.value as? [String: String] else { return }
+            guard let obejct = snapshot.value as? [String: Any] else { return }
 
             do {
 
@@ -520,8 +518,6 @@ extension FirebaseManager {
 
             }
 
-            self.ref?.removeObserver(withHandle: self.handle!)
-
             self.userManager.chatRooms = rooms
 
             DispatchQueue.main.async {
@@ -531,6 +527,16 @@ extension FirebaseManager {
             }
 
         })
+
+    }
+
+    func updateChatRoom() {
+
+        guard let myUid = Auth.auth().currentUser?.uid else { return }
+
+        let roomId = UserManager.shared.chatRoomId
+
+        ref?.child("chatRoomList").child(myUid).child(roomId).updateChildValues(["isRead": true])
 
     }
 
@@ -556,12 +562,6 @@ extension FirebaseManager {
     ref?.child("chatRoomList").child(myUid).child(roomId).updateChildValues(["latestMessage": text, "latestMessageTime": timestamp])
 
     ref?.child("chatRoomList").child(opponentUid).child(roomId).updateChildValues(["latestMessage": text, "latestMessageTime": timestamp, "isRead": false])
-
-//        ref?.child("chatRoomList").child(myUid).child(roomId).child("latestMessage").setValue(text)
-//        ref?.child("chatRoomList").child(myUid).child(roomId).child("latestMessageTime").setValue(timestamp)
-//
-//        ref?.child("chatRoomList").child(opponentUid).child(roomId).child("latestMessage").setValue(text)
-//        ref?.child("chatRoomList").child(opponentUid).child(roomId).child("latestMessageTime").setValue(timestamp)
 
     }
 

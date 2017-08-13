@@ -142,12 +142,6 @@ class UserManager {
 
     }
 
-    func fetchChatRoomList() {
-
-        FirebaseManager().fetchChatRoomList()
-
-    }
-
     func startChat(withVC: UIViewController, to opponent: User) {
 
         let result = chatRooms.filter({ $0.user1Id == opponent.uid || $0.user2Id == opponent.uid })

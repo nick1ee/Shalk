@@ -16,6 +16,8 @@ class ChatTableViewCell: UITableViewCell {
 
     @IBOutlet weak var latestMessage: UILabel!
 
+    @IBOutlet weak var newMessageBubble: UIView!
+
     override func awakeFromNib() {
         super.awakeFromNib()
 

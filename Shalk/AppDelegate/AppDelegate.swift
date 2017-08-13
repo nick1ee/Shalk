@@ -38,25 +38,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // MARK: Init IQKeyboardManager
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
-//        IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
         guard let userToken = UserManager.shared.restore() else { return true }
 
         // MARK: Fetched token successfully, log in directly.
-        //swiftlint:disable force_cast
         UserManager.shared.logIn(withEmail: userToken["email"]!, withPassword: userToken["password"]!)
 
         SVProgressHUD.show(withStatus: "Fetching data, please wait!")
 
-        let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainTabVC") as! MainTabViewController
-
-        mainTabVC.selectedIndex = 2
-
-        AppDelegate.shared.window?.rootViewController = mainTabVC
-
         return true
     }
-    //swiftlint:enable force_cast
 
     func applicationDidEnterBackground(_ application: UIApplication) {
 

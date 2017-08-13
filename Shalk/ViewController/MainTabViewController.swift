@@ -40,6 +40,8 @@ class MainTabViewController: UITabBarController {
 
         self.tabBarController?.tabBar.tintColor = UIColor.init(red: 62/255, green: 48/255, blue: 76/255, alpha: 1)
 
+        FirebaseManager().fetchChatRoomList()
+
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

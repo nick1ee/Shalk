@@ -91,7 +91,7 @@ class ShakeViewController: UIViewController {
 
         UserManager.shared.isDiscovering = false
 
-        FirebaseManager().closeChannel()
+        FirebaseManager().leaveChannel()
 
     }
 

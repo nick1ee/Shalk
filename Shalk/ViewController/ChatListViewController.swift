@@ -65,6 +65,16 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
         cell.latestMessage.text = room.latestMessage
 
+        if room.isRead == false {
+
+            cell.newMessageBubble.isHidden = false
+
+        } else {
+
+            cell.newMessageBubble.isHidden = true
+
+        }
+
         guard let myUid = UserManager.shared.currentUser?.uid else { return UITableViewCell() }
 
         if myUid == room.user1Id {

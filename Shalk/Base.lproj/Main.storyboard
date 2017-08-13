@@ -352,7 +352,7 @@
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                                <color key="value" red="0.46529024299999999" green="0.35942899010000001" blue="0.58205107869999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballScaleMultiple"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="padding">
@@ -360,8 +360,8 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shake you mobile ot find the partner!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ud4-SZ-7yg">
-                                        <rect key="frame" x="68" y="169" width="278" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shake your mobile ot find the partner!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ud4-SZ-7yg">
+                                        <rect key="frame" x="65" y="169" width="284" height="20"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1388,15 +1388,30 @@
                                                         <constraint firstAttribute="height" constant="0.5" id="s3g-Nn-4o2"/>
                                                     </constraints>
                                                 </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ihA-X2-0Nh">
+                                                    <rect key="frame" x="384" y="25" width="20" height="20"/>
+                                                    <color key="backgroundColor" red="1" green="0.74212950470000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="VEg-Ki-fFM"/>
+                                                        <constraint firstAttribute="height" constant="20" id="d2S-Pg-tn5"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Usb-oL-IhY" secondAttribute="trailing" id="4U2-My-ROi"/>
+                                                <constraint firstItem="ihA-X2-0Nh" firstAttribute="centerY" secondItem="6Jm-GR-Ngv" secondAttribute="centerY" id="5xn-Sd-8oX"/>
                                                 <constraint firstItem="oOL-jW-6TO" firstAttribute="leading" secondItem="6Jm-GR-Ngv" secondAttribute="leadingMargin" constant="10" id="Atf-vA-5we"/>
                                                 <constraint firstItem="oOL-jW-6TO" firstAttribute="centerY" secondItem="6Jm-GR-Ngv" secondAttribute="centerY" id="Gci-Gl-jv5"/>
                                                 <constraint firstItem="U0a-Ic-iEE" firstAttribute="top" secondItem="6Jm-GR-Ngv" secondAttribute="top" constant="10" id="Q4v-9F-SKM"/>
                                                 <constraint firstItem="P6U-80-MBA" firstAttribute="top" secondItem="U0a-Ic-iEE" secondAttribute="bottom" constant="3" id="Snl-kL-OL3"/>
                                                 <constraint firstAttribute="bottom" secondItem="Usb-oL-IhY" secondAttribute="bottom" id="TRH-ey-FiO"/>
                                                 <constraint firstItem="Usb-oL-IhY" firstAttribute="leading" secondItem="6Jm-GR-Ngv" secondAttribute="leading" id="aSq-1L-ZkI"/>
+                                                <constraint firstAttribute="trailing" secondItem="ihA-X2-0Nh" secondAttribute="trailing" constant="10" id="cSc-CI-O87"/>
                                                 <constraint firstItem="U0a-Ic-iEE" firstAttribute="leading" secondItem="oOL-jW-6TO" secondAttribute="trailing" constant="10" id="g0Y-Dw-dRF"/>
                                                 <constraint firstItem="P6U-80-MBA" firstAttribute="leading" secondItem="oOL-jW-6TO" secondAttribute="trailing" constant="10" id="kxY-1b-gU6"/>
                                             </constraints>
@@ -1404,6 +1419,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="latestMessage" destination="P6U-80-MBA" id="4cu-Zu-hDO"/>
+                                            <outlet property="newMessageBubble" destination="ihA-X2-0Nh" id="Q4n-SK-0j3"/>
                                             <outlet property="opponentImageView" destination="oOL-jW-6TO" id="OyB-lA-dwZ"/>
                                             <outlet property="opponentName" destination="U0a-Ic-iEE" id="L6A-3E-dtm"/>
                                         </connections>
@@ -1561,7 +1577,7 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="write something.." translatesAutoresizingMaskIntoConstraints="NO" id="mTn-mZ-D9l">
                                         <rect key="frame" x="10" y="10" width="359" height="40"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZqD-5w-X1Q">
@@ -1834,7 +1850,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="SQr-9W-W6x"/>
-        <segue reference="M4q-bF-we2"/>
+        <segue reference="xxV-J9-TX2"/>
         <segue reference="E0a-MG-Ga1"/>
     </inferredMetricsTieBreakers>
 </document>
