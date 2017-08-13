@@ -131,6 +131,33 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
     }
 
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+
+        return true
+
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+
+        if editingStyle == .delete {
+
+            // MARK: Delete chat room.
+
+            tableView.beginUpdates()
+
+            tableView.deleteRows(at: [indexPath], with: .left)
+
+            FirebaseManager().deleteChatRoom(roomId: self.rooms[indexPath.row].roomId)
+
+            self.rooms.remove(at: indexPath.row)
+
+            UserManager.shared.chatRooms.remove(at: indexPath.row)
+
+            tableView.endUpdates()
+
+        }
+    }
+
 }
 //swiftlint:enable force_cast
 
@@ -138,21 +165,7 @@ extension ChatListViewController: FirebaseManagerChatRoomDelegate {
 
     func manager(_ manager: FirebaseManager, didGetChatRooms rooms: [ChatRoom]) {
 
-        let sortedRooms = rooms.sorted(by: { (room1, room2) -> Bool in
-
-            let formatter = DateFormatter()
-
-            formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-
-            let room1Time = formatter.date(from: room1.latestMessageTime)
-
-            let room2Time = formatter.date(from: room2.latestMessageTime)
-
-            return room1Time!.compare(room2Time!) == .orderedDescending
-
-        })
-
-        self.rooms = sortedRooms
+        self.rooms = rooms
 
         chatListTableView.reloadData()
 

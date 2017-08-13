@@ -518,11 +518,25 @@ extension FirebaseManager {
 
             }
 
-            self.userManager.chatRooms = rooms
+            let sortedRooms = rooms.sorted(by: { (room1, room2) -> Bool in
+
+                let formatter = DateFormatter()
+
+                formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+
+                let room1Time = formatter.date(from: room1.latestMessageTime)
+
+                let room2Time = formatter.date(from: room2.latestMessageTime)
+
+                return room1Time!.compare(room2Time!) == .orderedDescending
+
+            })
+
+            UserManager.shared.chatRooms = sortedRooms
 
             DispatchQueue.main.async {
 
-                self.chatRoomDelegate?.manager(self, didGetChatRooms: rooms)
+                self.chatRoomDelegate?.manager(self, didGetChatRooms: sortedRooms)
 
             }
 
@@ -537,6 +551,14 @@ extension FirebaseManager {
         let roomId = UserManager.shared.chatRoomId
 
         ref?.child("chatRoomList").child(myUid).child(roomId).updateChildValues(["isRead": true])
+
+    }
+
+    func deleteChatRoom(roomId: String) {
+
+        guard let myUid = Auth.auth().currentUser?.uid else { return }
+
+        ref?.child("chatRoomList").child(myUid).child(roomId).removeValue()
 
     }
 
