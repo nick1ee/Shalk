@@ -35,7 +35,7 @@ class UserManager {
 
     var isDiscovering: Bool = false
 
-    var discoveredLanguage = ""
+//    var discoveredLanguage = ""
 
     var isConnected = false
 

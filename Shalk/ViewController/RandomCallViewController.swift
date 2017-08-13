@@ -80,7 +80,19 @@ class RandomCallViewController: UIViewController {
 
     @IBAction func btnEndCall(_ sender: UIButton) {
 
-        self.endCallWithFriendRequest()
+        let friend = UserManager.shared.friends.filter { $0.uid == UserManager.shared.opponent?.uid }
+
+        if friend.count == 0 {
+
+            self.endCallWithFriendRequest()
+
+        } else {
+
+            UserManager.shared.closeChannel()
+
+            self.dismiss(animated: true, completion: nil)
+
+        }
 
     }
 

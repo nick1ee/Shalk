@@ -51,11 +51,13 @@ class ShakeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        magnetic.allowsMultipleSelection = false
-
-        magnetic.backgroundColor = UIColor.clear
+        iconShake.image!.withRenderingMode(.alwaysTemplate)
 
         iconShake.tintColor = UIColor.white
+
+        magnetic.allowsMultipleSelection = false
+
+        magnetic.backgroundColor = UIColor.init(red: 62/255, green: 48/255, blue: 76/255, alpha: 1)
 
         addLangBubbles(nil)
 
@@ -77,6 +79,8 @@ class ShakeViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
+        selectedNode?.isSelected = false
+
         selectedNode = nil
 
         loadingView.stopAnimating()
@@ -87,39 +91,43 @@ class ShakeViewController: UIViewController {
 
         UserManager.shared.isDiscovering = false
 
-        FirebaseManager().leaveChannel()
+        FirebaseManager().closeChannel()
 
     }
 
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
 
-        if UserManager.shared.isDiscovering == false {
+        if selectedNode == nil {
 
-            UserManager.shared.isDiscovering = true
+            labelSearching.text = "Please select a preferred language."
 
-            if motion == .motionShake {
+            return
 
-                guard let selectedLanguage = selectedNode?.text else {
+        } else {
 
-                    labelSearching.text = "Please select a preferred language."
-
-                    UserManager.shared.isDiscovering = false
-
-                    return
-
-                }
-
-                UserManager.shared.discoveredLanguage = selectedLanguage
+            if UserManager.shared.isDiscovering == false {
 
                 // MARK: Start pairing...
 
-                iconShake.isHidden = true
+                UserManager.shared.isDiscovering = true
 
-                loadingView.startAnimating()
+                if motion == .motionShake {
 
-                labelSearching.text = "Discovering, please wait!"
+                    UserManager.shared.language = (selectedNode?.text)!
 
-                FirebaseManager().fetchChannel(withLanguage: selectedLanguage)
+                    iconShake.isHidden = true
+
+                    loadingView.startAnimating()
+
+                    labelSearching.text = "Discovering, please wait!"
+
+                    FirebaseManager().fetchChannel()
+
+                }
+
+            } else {
+
+                labelSearching.text = "Please wait, you will find your partner very soon!"
 
             }
 
@@ -153,13 +161,8 @@ extension ShakeViewController: MagneticDelegate {
     func magnetic(_ magnetic: Magnetic, didSelect node: Node) {
 
         // MAKR: Bubble selected
-        userManager.closeChannel()
 
         labelSearching.text = "Shake your mobile to find the partner!"
-
-        UserManager.shared.isDiscovering = false
-
-        loadingView.stopAnimating()
 
         selectedNode = node
 
@@ -167,7 +170,13 @@ extension ShakeViewController: MagneticDelegate {
 
     func magnetic(_ magnetic: Magnetic, didDeselect node: Node) {
 
-        // MARK: Bubble deselected.
+        selectedNode = nil
+
+        FirebaseManager().closeChannel()
+
+        UserManager.shared.isDiscovering = false
+
+        loadingView.stopAnimating()
 
     }
 

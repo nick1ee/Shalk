@@ -166,7 +166,7 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         if UserManager.shared.isDiscovering == true {
 
-            FirebaseManager().fetchChannel(withLanguage: UserManager.shared.language!)
+            FirebaseManager().fetchChannel()
 
         }
 

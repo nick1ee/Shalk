@@ -227,7 +227,9 @@ class FirebaseManager {
 
     }
 
-    func fetchChannel(withLanguage language: String) {
+    func fetchChannel() {
+
+        guard let language = UserManager.shared.language else { return }
 
         ref?.child("channels").child(language).queryOrdered(byChild: "isLocked").queryEqual(toValue: false).queryLimited(toLast: 1).observeSingleEvent(of: .value, with: { (snapshot) in
 
@@ -247,9 +249,7 @@ class FirebaseManager {
 
                 let channel = try AudioChannel.init(json: Array(object.values)[0])
 
-                self.userManager.roomKey = channel.roomID
-
-                self.userManager.language = language
+                UserManager.shared.roomKey = channel.roomID
 
                 self.updateChannel()
 
@@ -276,9 +276,7 @@ class FirebaseManager {
 
         let newChannel = AudioChannel.init(roomID: roomId, owner: uid)
 
-        userManager.roomKey = roomId
-
-        userManager.language = language
+        UserManager.shared.roomKey = roomId
 
         self.ref?.child("channels").child(language).child(roomId).setValue(newChannel.toDictionary())
 
@@ -301,25 +299,25 @@ class FirebaseManager {
 
         guard let roomId = userManager.roomKey, let lang = userManager.language else { return }
 
-        ref?.child("channels").child(lang).child(roomId).updateChildValues(["isFinished": true])
+        ref?.child("channels").child(lang).child(roomId).updateChildValues(["isFinished": true, "isLocked": true])
 
-        userManager.roomKey = nil
+        UserManager.shared.roomKey = nil
 
-        userManager.language = nil
-
-    }
-
-    func leaveChannel() {
-
-        guard
-            let roomId = userManager.roomKey,
-            let lang = userManager.language else { return }
-
-        ref?.child("channels").child(lang).child(roomId).updateChildValues(["isLocked": true])
-
-        ref?.child("channels").child(lang).child(roomId).updateChildValues(["isFinished": true])
+        UserManager.shared.language = nil
 
     }
+//
+//    func leaveChannel() {
+//
+//        guard
+//            let roomId = userManager.roomKey,
+//            let lang = userManager.language else { return }
+//
+//        ref?.child("channels").child(lang).child(roomId).updateChildValues(["isLocked": true])
+//
+//        ref?.child("channels").child(lang).child(roomId).updateChildValues(["isFinished": true])
+//
+//    }
 
     func checkFriendRequest() {
 
