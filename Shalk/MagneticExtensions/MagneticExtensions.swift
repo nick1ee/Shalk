@@ -30,15 +30,11 @@ extension UIColor {
         return UIColor(red: 0, green: 122, blue: 255)
     }
 
-    static var purple: UIColor {
-        return UIColor(red: 88, green: 86, blue: 214)
-    }
-
     static var pink: UIColor {
         return UIColor(red: 255, green: 45, blue: 85)
     }
 
-    static let colors: [UIColor] = [.red, .orange, .yellow, .green, .tealBlue, .blue, .purple, .pink]
+    static let colors: [UIColor] = [.red, .orange, .yellow, .green, .tealBlue, .blue, .pink]
 
 }
 

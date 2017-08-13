@@ -104,19 +104,26 @@ class ModifyProfileViewController: UIViewController {
         self.iconIntro.tintColor = UIColor.init(red: 255/255, green: 189/255, blue: 0/255, alpha: 1)
 
         self.iconUser.tintColor = UIColor.init(red: 255/255, green: 189/255, blue: 0/255, alpha: 1)
-
+        
+        self.userImageView.tintColor = UIColor.white
+        
+        
         guard let user = UserManager.shared.currentUser else { return }
-
+        
         self.inputName.text = user.name
-
+        
         self.inputIntro.text = user.intro
-
-        DispatchQueue.global().async {
-
-            self.userImageView.sd_setImage(with: URL(string: user.imageUrl), placeholderImage: UIImage(named: "icon-user"))
-
+        
+        if user.imageUrl != "null" {
+            
+            DispatchQueue.global().async {
+                
+                self.userImageView.sd_setImage(with: URL(string: user.imageUrl))
+                
+            }
+            
         }
-
+        
     }
 
 }

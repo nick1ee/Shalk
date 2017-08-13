@@ -68,8 +68,6 @@ class ProfileViewController: UIViewController {
 
             self.fbManager.fetchFriendList(languageType: .korean)
 
-            UserManager.shared.fetchChatRoomList()
-
             FirebaseManager().fetchUserProfile {
 
                 self.tableView.reloadData()
@@ -77,6 +75,8 @@ class ProfileViewController: UIViewController {
                 SVProgressHUD.dismiss()
 
             }
+
+            UserManager.shared.fetchChatRoomList()
 
         }
 

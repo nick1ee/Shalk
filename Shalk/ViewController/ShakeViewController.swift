@@ -57,7 +57,7 @@ class ShakeViewController: UIViewController {
 
         magnetic.allowsMultipleSelection = false
 
-        magnetic.backgroundColor = UIColor.init(red: 62/255, green: 48/255, blue: 76/255, alpha: 1)
+        magnetic.backgroundColor = UIColor.init(red: 44/255, green: 33/255, blue: 76/255, alpha: 1)
 
         addLangBubbles(nil)
 

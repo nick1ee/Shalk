@@ -55,11 +55,13 @@ class FirebaseManager {
 
             }
 
-            if user != nil {
+            if let okUser = user {
 
                 // MARK: User Signed in Firebase successfully, start sign in with Quickblox.
 
-                QBManager().logIn(withEmail: email, withPassword: pwd)
+                UserManager.shared.saveToken(email: email, pwd: pwd)
+
+                QBManager().logIn(withEmail: email, withPassword: okUser.uid)
 
             }
 
@@ -89,7 +91,7 @@ class FirebaseManager {
 
             SVProgressHUD.show(withStatus: "Registering on chat service.")
 
-            QBManager().signUp(name: name, uid: okUser.uid, withEmail: email, withPassword: pwd)
+            QBManager().signUp(name: name, uid: okUser.uid, withEmail: email, withPassword: okUser.uid)
 
             self.logIn(withEmail: email, withPassword: pwd)
 
@@ -346,7 +348,7 @@ class FirebaseManager {
 
                 let timestamp = formatter.string(from: Date())
 
-                self.ref?.child("friendList").child(myUid).child(language).updateChildValues([opponent.uid: timestamp])
+            self.ref?.child("friendList").child(myUid).child(language).updateChildValues([opponent.uid: timestamp])
 
                 self.ref?.child("friendList").child(opponent.uid).child(language).updateChildValues([myUid: timestamp])
 
@@ -551,11 +553,15 @@ extension FirebaseManager {
 
         ref?.child("chatHistory").child(roomId).child(messageId).updateChildValues(newMessage.toDictionary())
 
-        ref?.child("chatRoomList").child(myUid).child(roomId).child("latestMessage").setValue(text)
-        ref?.child("chatRoomList").child(myUid).child(roomId).child("latestMessageTime").setValue(timestamp)
+    ref?.child("chatRoomList").child(myUid).child(roomId).updateChildValues(["latestMessage": text, "latestMessageTime": timestamp])
 
-        ref?.child("chatRoomList").child(opponentUid).child(roomId).child("latestMessage").setValue(text)
-        ref?.child("chatRoomList").child(opponentUid).child(roomId).child("latestMessageTime").setValue(timestamp)
+    ref?.child("chatRoomList").child(opponentUid).child(roomId).updateChildValues(["latestMessage": text, "latestMessageTime": timestamp, "isRead": false])
+
+//        ref?.child("chatRoomList").child(myUid).child(roomId).child("latestMessage").setValue(text)
+//        ref?.child("chatRoomList").child(myUid).child(roomId).child("latestMessageTime").setValue(timestamp)
+//
+//        ref?.child("chatRoomList").child(opponentUid).child(roomId).child("latestMessage").setValue(text)
+//        ref?.child("chatRoomList").child(opponentUid).child(roomId).child("latestMessageTime").setValue(timestamp)
 
     }
 

@@ -20,15 +20,17 @@ struct ChatRoom {
 
     var latestMessageTime: String
 
+    var isRead: Bool
+
 }
 
 extension ChatRoom {
 
-    typealias RoomObject = [String: String]
+    typealias RoomObject = [String: Any]
 
     enum FetchChatRoomError: Error {
 
-        case invalidChatRoomObject, missingRoomId, missingUser1Id, missingUser2Id, missingLatestMessage, missingLatestMessageTime
+        case invalidChatRoomObject, missingRoomId, missingUser1Id, missingUser2Id, missingLatestMessage, missingLatestMessageTime, missingIsRead
 
     }
 
@@ -44,17 +46,19 @@ extension ChatRoom {
 
         static let latestMessageTime = "latestMessageTime"
 
+        static let isRead = "isRead"
+
     }
 
     init(json: Any) throws {
 
-        guard let jsonObject = json as? [String: String] else {
+        guard let jsonObject = json as? RoomObject else {
 
             throw FetchChatRoomError.invalidChatRoomObject
 
         }
 
-        guard let roomId = jsonObject[Schema.roomId] else {
+        guard let roomId = jsonObject[Schema.roomId] as? String else {
 
             throw FetchChatRoomError.missingRoomId
 
@@ -62,7 +66,7 @@ extension ChatRoom {
 
         self.roomId = roomId
 
-        guard let user1Id = jsonObject[Schema.user1Id] else {
+        guard let user1Id = jsonObject[Schema.user1Id] as? String else {
 
             throw FetchChatRoomError.missingUser1Id
 
@@ -70,7 +74,7 @@ extension ChatRoom {
 
         self.user1Id = user1Id
 
-        guard let user2Id = jsonObject[Schema.user2Id] else {
+        guard let user2Id = jsonObject[Schema.user2Id] as? String else {
 
             throw FetchChatRoomError.missingUser2Id
 
@@ -78,7 +82,7 @@ extension ChatRoom {
 
         self.user2Id = user2Id
 
-        guard let text = jsonObject[Schema.latestMessage] else {
+        guard let text = jsonObject[Schema.latestMessage] as? String else {
 
             throw FetchChatRoomError.missingLatestMessage
 
@@ -86,13 +90,21 @@ extension ChatRoom {
 
         self.latestMessage = text
 
-        guard let time = jsonObject[Schema.latestMessageTime] else {
+        guard let time = jsonObject[Schema.latestMessageTime] as? String else {
 
             throw FetchChatRoomError.missingLatestMessageTime
 
         }
 
         self.latestMessageTime = time
+
+        guard let isRead = jsonObject[Schema.isRead] as? Bool else {
+
+            throw FetchChatRoomError.missingIsRead
+
+        }
+
+        self.isRead = isRead
 
     }
 
@@ -116,19 +128,23 @@ extension ChatRoom {
 
         self.latestMessageTime = timestamp
 
+        self.isRead = true
+
     }
 
     func toDictionary() -> RoomObject {
 
-        let roomInfo = [Schema.roomId: self.roomId,
+        let roomInfo: RoomObject = [Schema.roomId: self.roomId,
 
-                        Schema.user1Id: self.user1Id,
+                                    Schema.user1Id: self.user1Id,
 
-                        Schema.user2Id: self.user2Id,
+                                    Schema.user2Id: self.user2Id,
 
-                        Schema.latestMessage: self.latestMessage,
+                                    Schema.latestMessage: self.latestMessage,
 
-                        Schema.latestMessageTime: self.latestMessageTime]
+                                    Schema.latestMessageTime: self.latestMessageTime,
+
+                                    Schema.isRead: self.isRead]
 
         return roomInfo
 

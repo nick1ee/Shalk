@@ -44,8 +44,6 @@ class QBManager {
 
                     UIApplication.shared.endIgnoringInteractionEvents()
 
-                    UserManager.shared.saveToken(email: email, pwd: password)
-
                     //swiftlint:disable force_cast
                     let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainTabVC") as! UITabBarController
 
@@ -168,8 +166,6 @@ class QBManager {
         }) { (response) in
 
             // MARK: User failed to sign up a new account.
-
-            SVProgressHUD.dismiss()
 
             UIApplication.shared.endIgnoringInteractionEvents()
 
