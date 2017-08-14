@@ -573,9 +573,9 @@ extension FirebaseManager {
 
         ref?.child("chatHistory").child(roomId).child(messageId).updateChildValues(newMessage.toDictionary())
 
-    ref?.child("chatRoomList").child(myUid).child(roomId).updateChildValues(["latestMessage": text, "latestMessageTime": timestamp])
+        ref?.child("chatRoomList").child(myUid).child(roomId).updateChildValues(["latestMessage": text, "latestMessageTime": timestamp])
 
-    ref?.child("chatRoomList").child(opponentUid).child(roomId).updateChildValues(["latestMessage": text, "latestMessageTime": timestamp, "isRead": false])
+        ref?.child("chatRoomList").child(opponentUid).child(roomId).updateChildValues(["latestMessage": text, "latestMessageTime": timestamp, "isRead": false])
 
     }
 
@@ -621,6 +621,16 @@ extension FirebaseManager {
             completion(messages)
 
         })
+
+    }
+
+}
+
+extension FirebaseManager {
+
+    func logEvent(_ eventName: String) {
+
+        Analytics.logEvent(eventName, parameters: nil)
 
     }
 

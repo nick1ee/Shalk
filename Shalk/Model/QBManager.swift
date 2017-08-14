@@ -184,6 +184,8 @@ extension QBManager {
 
     func startAudioCall() {
 
+        FirebaseManager().logEvent("start_audio_call")
+
         userManager.isConnected = true
 
         guard
@@ -200,6 +202,8 @@ extension QBManager {
     }
 
     func startVideoCall() {
+
+        FirebaseManager().logEvent("start_video_call")
 
         userManager.isConnected = true
 

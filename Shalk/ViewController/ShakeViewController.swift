@@ -113,6 +113,8 @@ class ShakeViewController: UIViewController {
 
                 if motion == .motionShake {
 
+                    FirebaseManager().logEvent("shake_mobile")
+
                     UserManager.shared.language = (selectedNode?.text)!
 
                     iconShake.isHidden = true

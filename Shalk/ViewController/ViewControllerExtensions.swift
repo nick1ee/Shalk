@@ -100,8 +100,6 @@ extension UIViewController {
 
         let okAction = UIAlertAction.init(title: "Confirm", style: .default) { (_) in
 
-//            FirebaseManager().fetchUserProfile(withUid: uid, call: .audio)
-
             UserManager.shared.startAudioCall()
 
             self.performSegue(withIdentifier: "audioCall", sender: nil)
