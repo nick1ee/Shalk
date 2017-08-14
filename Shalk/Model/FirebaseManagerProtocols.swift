@@ -33,3 +33,14 @@ enum CallType {
     case audio, video, none
 
 }
+
+enum LanguageType: String {
+
+    case english = "English"
+
+    case chinese = "Chinese"
+
+    case japanese = "Japanese"
+
+    case korean = "Korean"
+}
