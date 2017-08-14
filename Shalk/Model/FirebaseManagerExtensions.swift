@@ -46,6 +46,8 @@ extension FirebaseManager {
             } catch let error {
 
                 // MARK: Failed to fetch channel.
+                
+                FirebaseCrashMessage("fetch_channel_error")
 
                 UIAlertController(error: error).show()
             }
@@ -121,11 +123,7 @@ extension FirebaseManager {
                 guard
                     let myUid = UserManager.shared.currentUser?.uid,
                     let language = UserManager.shared.language,
-                    let opponent = UserManager.shared.opponent else {
-
-                        return
-
-                }
+                    let opponent = UserManager.shared.opponent else { return }
 
                 let formatter = DateFormatter()
 
@@ -157,23 +155,19 @@ extension FirebaseManager {
 
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
-        ref?.child("friendList").child(uid).child(languageType.rawValue).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref?.child("friendList").child(uid).child(languageType.rawValue).observe(.childAdded, with: { (snapshot) in
 
-            guard let friendList = snapshot.value as? [String: Any] else { return }
+            let friendUid = snapshot.key
 
-            let friendsUids = Array(friendList.keys)
-
-            self.fetchFriendInfo(withFriends: friendsUids, languageType: languageType)
+            self.fetchFriendInfo(friendUid, languageType: languageType)
 
         })
 
     }
 
-    func fetchFriendInfo(withFriends friendUids: [String], languageType: LanguageType) {
+    func fetchFriendInfo(_ friendUid: String, languageType: LanguageType) {
 
-        for friendUid in friendUids {
-
-            ref?.child("users").child(friendUid).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref?.child("users").child(friendUid).observeSingleEvent(of: .value, with: { (snapshot) in
 
                 guard let object = snapshot.value else { return }
 
@@ -181,11 +175,7 @@ extension FirebaseManager {
 
                     let user = try User.init(json: object)
 
-                    var friends = UserManager.shared.friends.filter { $0.uid != user.uid }
-
-                    friends.append(user)
-
-                    UserManager.shared.friends = friends
+                    UserManager.shared.friends.append(user)
 
                     DispatchQueue.main.async {
 
@@ -196,13 +186,13 @@ extension FirebaseManager {
                 } catch let error {
 
                     // MARK: Failed to fetch friend info.
+                    FirebaseCrashMessage("fetch_friend_info_error")
+                    
                     UIAlertController(error: error).show()
 
                 }
 
             })
-
-        }
 
     }
 
@@ -252,6 +242,8 @@ extension FirebaseManager {
             } catch let error {
 
                 // MARK: Failed to fetch user profile
+                FirebaseCrashMessage("fetch_opponent_profile_error")
+                
                 UIAlertController(error: error).show()
             }
 
@@ -282,6 +274,8 @@ extension FirebaseManager {
             } catch let error {
 
                 // MARK: Failed to fetch user profile
+                FirebaseCrashMessage("fetch_my_profile_error")
+                
                 UIAlertController(error: error).show()
             }
 
@@ -349,12 +343,11 @@ extension FirebaseManager {
             let roomId = ref?.childByAutoId().key else { return }
 
         let room = ChatRoom.init(roomId: roomId, opponent: opponent)
+        ref?.child("chatRoomList").child(myUid).child(roomId).setValue(room.toDictionary())
 
-        ref?.child("chatRoomList").child(myUid).child(roomId).updateChildValues(room.toDictionary())
+        ref?.child("chatRoomList").child(opponent.uid).child(roomId).setValue(room.toDictionary())
 
-        ref?.child("chatRoomList").child(opponent.uid).child(roomId).updateChildValues(room.toDictionary())
-
-        ref?.child("chatHistory").child(roomId).child("init").updateChildValues(Message.init(text: "").toDictionary())
+        ref?.child("chatHistory").child(roomId).child("init").setValue(Message.init(text: "").toDictionary())
 
         userManager.chatRoomId = roomId
 
@@ -379,6 +372,8 @@ extension FirebaseManager {
             } catch let error {
 
                 // MARK: Failed to fetch the list of chat rooms.
+                FirebaseCrashMessage("fetch_chat_room_error")
+                
                 UIAlertController(error: error).show()
 
             }
@@ -479,6 +474,8 @@ extension FirebaseManager {
             } catch let error {
 
                 // MARK: Failed to fetch hcat histroy
+                FirebaseCrashMessage("fetch_chat_history_error")
+                
                 UIAlertController(error: error).show()
 
             }

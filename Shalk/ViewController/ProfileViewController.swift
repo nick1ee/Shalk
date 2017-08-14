@@ -51,13 +51,6 @@ class ProfileViewController: UIViewController {
 
         prepareTableView()
 
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        SVProgressHUD.show()
-
         DispatchQueue.global().async {
 
             self.fbManager.fetchFriendList(languageType: .english)
@@ -68,6 +61,17 @@ class ProfileViewController: UIViewController {
 
             self.fbManager.fetchFriendList(languageType: .korean)
 
+        }
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        SVProgressHUD.show()
+
+        DispatchQueue.global().async {
+
             FirebaseManager().fetchMyProfile {
 
                 self.tableView.reloadData()
@@ -77,19 +81,6 @@ class ProfileViewController: UIViewController {
             }
 
         }
-
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        self.englishFriends = []
-
-        self.chineseFriends = []
-
-        self.japaneseFriends = []
-
-        self.koreanFriends = []
 
     }
 
