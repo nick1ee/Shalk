@@ -50,7 +50,7 @@ class ComingCallViewController: UIViewController {
 
     @IBAction func btnEndCall(_ sender: UIButton) {
 
-        QBManager.shared.handUpCall()
+        QBManager.shared.handUpCall(nil)
 
         self.dismiss(animated: true, completion: nil)
 

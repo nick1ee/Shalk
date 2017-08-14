@@ -138,6 +138,30 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
             return cell
 
+        case "Audio Call":
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: "callCell", for: indexPath) as! CallTableViewCell
+
+            cell.iconCallType.image = UIImage(named: "icon-audio")
+
+            cell.callDuration.text = showMessages[indexPath.row].text
+
+            cell.time.text = showMessages[indexPath.row].time
+
+            return cell
+
+        case "Video Call":
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: "callCell", for: indexPath) as! CallTableViewCell
+
+            cell.iconCallType.image = UIImage(named: "icon-camera")
+
+            cell.callDuration.text = showMessages[indexPath.row].text
+
+            cell.time.text = showMessages[indexPath.row].time
+
+            return cell
+
         default:
 
             let friend = UserManager.shared.friends.filter { $0.uid == showMessages[indexPath.row].senderId }

@@ -23,11 +23,11 @@ class AudioCallViewController: UIViewController {
 
     var second = 0
 
-    let secondTimer = Timer()
+    var secondTimer: Timer?
 
-    let minuteTimer = Timer()
+    var minuteTimer: Timer?
 
-    let hourTimer = Timer()
+    var hourTimer: Timer?
 
     let qbManager = QBManager.shared
 
@@ -101,9 +101,11 @@ class AudioCallViewController: UIViewController {
 
     @IBAction func btnHungUp(_ sender: UIButton) {
 
-        self.dismiss(animated: true, completion: nil)
+        let duration = "\(self.hour.addLeadingZero()) : \(self.minute.addLeadingZero()) : \(self.second.addLeadingZero())"
 
-        UserManager.shared.endCall()
+        QBManager.shared.handUpCall(["call": "Audio Call", "duration": duration])
+
+        self.dismiss(animated: true, completion: nil)
 
     }
 
@@ -143,7 +145,13 @@ extension AudioCallViewController {
 
     func configTimer() {
 
-        secondTimer.start(DispatchTime.now(), interval: 1, repeats: true) {
+        secondTimer = Timer()
+
+        minuteTimer = Timer()
+
+        hourTimer = Timer()
+
+        secondTimer?.start(DispatchTime.now(), interval: 1, repeats: true) {
 
             if self.second == 59 {
 
@@ -158,7 +166,7 @@ extension AudioCallViewController {
             self.timeLabel.text = "\(self.hour.addLeadingZero()) : \(self.minute.addLeadingZero()) : \(self.second.addLeadingZero())"
         }
 
-        minuteTimer.start(DispatchTime.now() + 60.0, interval: 60, repeats: true) {
+        minuteTimer?.start(DispatchTime.now() + 60.0, interval: 60, repeats: true) {
 
             if self.minute == 59 {
 
@@ -174,7 +182,7 @@ extension AudioCallViewController {
 
         }
 
-        hourTimer.start(DispatchTime.now() + 3600.0, interval: 3600, repeats: true) {
+        hourTimer?.start(DispatchTime.now() + 3600.0, interval: 3600, repeats: true) {
 
             self.hour += 1
 
@@ -186,11 +194,11 @@ extension AudioCallViewController {
 
     func stopTimer() {
 
-        secondTimer.cancel()
+        secondTimer?.cancel()
 
-        minuteTimer.cancel()
+        minuteTimer?.cancel()
 
-        hourTimer.cancel()
+        hourTimer?.cancel()
 
         second = 0
 

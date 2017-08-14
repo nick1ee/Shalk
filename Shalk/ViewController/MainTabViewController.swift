@@ -194,6 +194,12 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         self.dismiss(animated: true, completion: nil)
 
+        guard
+            let callType = userInfo?["call"],
+            let duration = userInfo?["duration"] else { return }
+
+        FirebaseManager().sendCallRecord(callType, duration: duration)
+
     }
 
     func session(_ session: QBRTCSession, userDidNotRespond userID: NSNumber) {

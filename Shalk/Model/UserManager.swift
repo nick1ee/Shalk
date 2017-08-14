@@ -126,15 +126,9 @@ class UserManager {
 
     }
 
-    func endCall() {
-
-        QBManager.shared.handUpCall()
-
-    }
-
     func closeChannel() {
 
-        QBManager.shared.handUpCall()
+        QBManager.shared.handUpCall(nil)
 
         FirebaseManager().closeChannel()
 

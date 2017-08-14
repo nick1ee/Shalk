@@ -217,11 +217,11 @@ extension QBManager {
 
     }
 
-    func handUpCall() {
+    func handUpCall(_ userInfo: [String: String]?) {
 
         UserManager.shared.stopPlayingSound()
 
-        self.session?.hangUp(nil)
+        self.session?.hangUp(userInfo)
 
         userManager.isConnected = false
 

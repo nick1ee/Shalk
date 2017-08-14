@@ -554,14 +554,6 @@ extension FirebaseManager {
 
     }
 
-//    func deleteChatRoom(roomId: String) {
-//
-//        guard let myUid = Auth.auth().currentUser?.uid else { return }
-//
-//        ref?.child("chatRoomList").child(myUid).child(roomId).removeValue()
-//
-//    }
-
     func sendMessage(text: String) {
 
         let roomId = userManager.chatRoomId
@@ -584,6 +576,22 @@ extension FirebaseManager {
     ref?.child("chatRoomList").child(myUid).child(roomId).updateChildValues(["latestMessage": text, "latestMessageTime": timestamp])
 
     ref?.child("chatRoomList").child(opponentUid).child(roomId).updateChildValues(["latestMessage": text, "latestMessageTime": timestamp, "isRead": false])
+
+    }
+
+    func sendCallRecord(_ call: String, duration: String) {
+
+        guard let messageId = ref?.childByAutoId().key else { return }
+
+        let formatter = DateFormatter()
+
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+
+        let timestamp = formatter.string(from: Date())
+
+        let newMessage = Message.init(text: duration, senderId: call, time: timestamp)
+
+        ref?.child("chatHistory").child(UserManager.shared.chatRoomId).child(messageId).updateChildValues(newMessage.toDictionary())
 
     }
 
