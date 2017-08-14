@@ -123,8 +123,6 @@ extension FirebaseManager {
                     let language = UserManager.shared.language,
                     let opponent = UserManager.shared.opponent else {
 
-                        print("error is here!")
-
                         return
 
                 }
@@ -370,11 +368,11 @@ extension FirebaseManager {
 
         handle = ref?.child("chatRoomList").child(myUid).observe(.childAdded, with: { (snapshot) in
 
-            guard let obejct = snapshot.value as? [String: Any] else { return }
+            guard let object = snapshot.value as? [String: Any] else { return }
 
             do {
 
-                let room = try ChatRoom.init(json: obejct)
+                let room = try ChatRoom.init(json: object)
 
                 rooms.append(room)
 
@@ -485,7 +483,11 @@ extension FirebaseManager {
 
             }
 
-            completion(messages)
+            DispatchQueue.main.async {
+
+                completion(messages)
+
+            }
 
         })
 

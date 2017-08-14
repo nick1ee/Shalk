@@ -155,4 +155,19 @@ extension UIViewController {
 
     }
 
+    func pushRejctedCallMessage() {
+
+        guard let opponent = UserManager.shared.opponent else { return }
+
+        let alertController = UIAlertController.init(title: "Oops!", message: "\(opponent.name) rejected the call.", preferredStyle: .alert)
+
+        alertController.addAction(title: "OK", style: .default, isEnabled: true) { (_) in
+
+            self.dismiss(animated: true, completion: nil)
+        }
+
+        self.present(alertController, animated: true, completion: nil)
+
+    }
+
 }

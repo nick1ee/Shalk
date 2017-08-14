@@ -5,8 +5,8 @@
 ## Build generated
 build/
 DerivedData/
-Shalk/GoogleService-Info.plist
-Shalk/Model/Const.swift
+Key/
+Shalk/Key/
 
 ## Various settings
 *.pbxuser

@@ -376,4 +376,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
     }
 
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+
+        let dismissCell = cell as? FriendTableViewCell
+
+        dismissCell?.friendImageView.image = nil
+
+        dismissCell?.friendName.text = ""
+
+    }
+
 }

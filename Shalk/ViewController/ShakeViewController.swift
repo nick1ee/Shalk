@@ -51,7 +51,11 @@ class ShakeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        iconShake.image!.withRenderingMode(.alwaysTemplate)
+        let shakeImage = UIImage(named: "icon-shake")
+
+        iconShake.image = shakeImage
+
+        iconShake.image = iconShake.image?.withRenderingMode(.alwaysTemplate)
 
         iconShake.tintColor = UIColor.white
 
@@ -60,10 +64,6 @@ class ShakeViewController: UIViewController {
         magnetic.backgroundColor = UIColor.init(red: 44/255, green: 33/255, blue: 76/255, alpha: 1)
 
         addLangBubbles(nil)
-
-        QBManager.shared.audioManager.initialize()
-
-        QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
 
     }
 

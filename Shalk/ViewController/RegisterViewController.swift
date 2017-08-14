@@ -21,13 +21,13 @@ class RegisterViewController: UIViewController {
 
         if !inputUserName.isEmpty && !inputEmail.isEmpty && !inputPassword.isEmpty {
 
-            // MARK: 1. Check email format and password should have 8 character at least.
+            // MARK: 1. Check email format and password should have 6 character at least.
 
             guard let name = inputUserName.text, let email = inputEmail.text, let pwd = inputPassword.text else { return }
 
             if email.isValidEmail() == true {
 
-                if  pwd.characters.count >= 8 {
+                if  pwd.characters.count >= 6 {
 
                     SVProgressHUD.show(withStatus: "Registering a new account")
 
@@ -37,7 +37,7 @@ class RegisterViewController: UIViewController {
 
                     // MARK: Invalid password.
 
-                    let alert = UIAlertController(title: "Error!", message: "Password should have 8 characters at least.", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Error!", message: "Password should have 6 characters at least.", preferredStyle: .alert)
 
                     alert.addAction(title: "OK")
 

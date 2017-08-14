@@ -5,6 +5,9 @@ PODS:
   - Firebase/Core (4.0.4):
     - FirebaseAnalytics (= 4.0.2)
     - FirebaseCore (= 4.0.4)
+  - Firebase/Crash (4.0.4):
+    - Firebase/Core
+    - FirebaseCrash (= 2.0.0)
   - Firebase/Database (4.0.4):
     - Firebase/Core
     - FirebaseDatabase (= 4.0.0)
@@ -22,6 +25,12 @@ PODS:
   - FirebaseCore (4.0.4):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
+  - FirebaseCrash (2.0.0):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - Protobuf (~> 3.1)
   - FirebaseDatabase (4.0.0):
     - FirebaseAnalytics (~> 4.0)
   - FirebaseInstanceID (2.0.0):
@@ -33,6 +42,8 @@ PODS:
   - GoogleToolboxForMac/DebugUtils (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/Logger (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
@@ -52,6 +63,7 @@ PODS:
   - NVActivityIndicatorView (3.7.0):
     - NVActivityIndicatorView/Presenter (= 3.7.0)
   - NVActivityIndicatorView/Presenter (3.7.0)
+  - Protobuf (3.3.0)
   - QuickBlox (2.9.2)
   - Quickblox-WebRTC (2.6.1):
     - QuickBlox (>= 2.7)
@@ -71,6 +83,7 @@ PODS:
 DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
+  - Firebase/Crash
   - Firebase/Database
   - Firebase/Storage
   - IQKeyboardManagerSwift
@@ -89,6 +102,7 @@ SPEC CHECKSUMS:
   FirebaseAnalytics: ad41720e3e67fc63fbe3d2948d3e26932a8de311
   FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
   FirebaseCore: cfc042628ef9f20debe09c0eb683135fcd404cb4
+  FirebaseCrash: 600ec2cbd8e10c3064a42de2c6ee7687bd02a076
   FirebaseDatabase: d829b3a8c3e2ac7a16773c5df226966b0805dfc2
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   FirebaseStorage: 8110a1ed2034c8fbfd83890d2acc9cdbbd99afec
@@ -99,6 +113,7 @@ SPEC CHECKSUMS:
   Magnetic: f74297dd1797b35d9bebf7a768d91cadf71bb1cb
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
+  Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
   QuickBlox: 67cafa5d7b237db7344c506ca5dc38365180cacb
   Quickblox-WebRTC: 496447d228663836d6372cdb8e63affa46fe5039
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
@@ -106,6 +121,6 @@ SPEC CHECKSUMS:
   SwifterSwift: f84eb7308f7742724b3cbf84283ce00f7c06d7fc
   SwiftLint: f60095dc173a3f3ec505bb34f5229c3dfd779a54
 
-PODFILE CHECKSUM: a099c424d69cbc2cabfff3d8d13a17f439806b0d
+PODFILE CHECKSUM: bb6410366735580da6c24b267e891445737ce390
 
 COCOAPODS: 1.2.0

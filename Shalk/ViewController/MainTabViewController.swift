@@ -30,8 +30,6 @@ class MainTabViewController: UITabBarController {
 
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
-        self.tabBarController?.selectedIndex = 2
-
         rtcManager.add(self)
 
         QBRTCAudioSession.instance().initialize()
@@ -162,6 +160,8 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         UserManager.shared.stopPlayingSound()
 
+        self.presentedViewController?.pushRejctedCallMessage()
+
         if UserManager.shared.isDiscovering == true {
 
             FirebaseManager().fetchChannel()
@@ -202,6 +202,7 @@ extension MainTabViewController: QBRTCClientDelegate {
 
     }
 
+    // MARK: 使用者沒有回應
     func session(_ session: QBRTCSession, userDidNotRespond userID: NSNumber) {
 
         UserManager.shared.stopPlayingSound()

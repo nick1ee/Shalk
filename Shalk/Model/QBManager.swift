@@ -229,13 +229,15 @@ extension QBManager {
 
         userManager.isConnected = false
 
+        self.session = nil
+
     }
 
-}
+    func rejectCall(_ userInfo: [String: String]?) {
 
-extension QBManager {
+        self.session?.rejectCall(nil)
 
-    func pushNotificationAboutNewCall() {
+        self.session = nil
 
     }
 

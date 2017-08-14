@@ -366,7 +366,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-shake" translatesAutoresizingMaskIntoConstraints="NO" id="LY4-cU-geX">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LY4-cU-geX">
                                         <rect key="frame" x="182" y="99" width="50" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -857,7 +857,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nick Lee" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HeC-Bb-y32">
-                                <rect key="frame" x="0.0" y="501" width="414" height="46"/>
+                                <rect key="frame" x="30" y="501" width="354" height="46"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="40"/>
                                 <color key="textColor" red="0.46529024299999999" green="0.35942899010000001" blue="0.58205107869999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -942,9 +942,9 @@
                         <constraints>
                             <constraint firstItem="lY9-rW-OWW" firstAttribute="height" secondItem="02k-Ph-JMk" secondAttribute="height" multiplier="2:3" id="3aT-Ao-iQ9"/>
                             <constraint firstItem="vQq-sH-PwK" firstAttribute="top" secondItem="HeC-Bb-y32" secondAttribute="bottom" constant="50" id="8RN-KK-LTS"/>
+                            <constraint firstAttribute="trailing" secondItem="HeC-Bb-y32" secondAttribute="trailing" constant="30" id="Ep6-1Q-Uzz"/>
                             <constraint firstItem="IUC-3g-6Zl" firstAttribute="leading" secondItem="QR0-zb-SKi" secondAttribute="trailing" constant="50" id="HpO-De-iub"/>
-                            <constraint firstAttribute="trailing" secondItem="HeC-Bb-y32" secondAttribute="trailing" id="MKR-eG-Vqh"/>
-                            <constraint firstItem="HeC-Bb-y32" firstAttribute="centerX" secondItem="02k-Ph-JMk" secondAttribute="centerX" id="QUa-kI-IYe"/>
+                            <constraint firstItem="HeC-Bb-y32" firstAttribute="leading" secondItem="02k-Ph-JMk" secondAttribute="leading" constant="30" id="OTk-ja-bFY"/>
                             <constraint firstItem="AVN-D5-Jkf" firstAttribute="leading" secondItem="02k-Ph-JMk" secondAttribute="leading" id="T5e-8q-R44"/>
                             <constraint firstItem="QR0-zb-SKi" firstAttribute="top" secondItem="HeC-Bb-y32" secondAttribute="bottom" constant="50" id="VIA-j6-r2P"/>
                             <constraint firstAttribute="trailing" secondItem="lY9-rW-OWW" secondAttribute="trailing" id="Xb1-8Z-ZKX"/>
@@ -958,7 +958,6 @@
                             <constraint firstItem="lY9-rW-OWW" firstAttribute="top" secondItem="02k-Ph-JMk" secondAttribute="top" id="lRp-xN-gY4"/>
                             <constraint firstItem="IUC-3g-6Zl" firstAttribute="top" secondItem="HeC-Bb-y32" secondAttribute="bottom" constant="50" id="nCj-bQ-peV"/>
                             <constraint firstItem="QR0-zb-SKi" firstAttribute="leading" secondItem="vQq-sH-PwK" secondAttribute="trailing" constant="50" id="tzU-LL-YPq"/>
-                            <constraint firstItem="HeC-Bb-y32" firstAttribute="leading" secondItem="02k-Ph-JMk" secondAttribute="leading" id="wKw-1S-JCC"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1714,9 +1713,6 @@
                         <color key="barTintColor" red="0.24398827549999999" green="0.18944382670000001" blue="0.29701077939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="selectedIndex">
-                                <integer key="value" value="2"/>
-                            </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                                 <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </userDefinedRuntimeAttribute>
