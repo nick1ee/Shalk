@@ -131,32 +131,32 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
     }
 
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-
-        return true
-
-    }
-
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-
-        if editingStyle == .delete {
-
-            // MARK: Delete chat room.
-
-            tableView.beginUpdates()
-
-            tableView.deleteRows(at: [indexPath], with: .left)
-
-            FirebaseManager().deleteChatRoom(roomId: self.rooms[indexPath.row].roomId)
-
-            self.rooms.remove(at: indexPath.row)
-
-            UserManager.shared.chatRooms.remove(at: indexPath.row)
-
-            tableView.endUpdates()
-
-        }
-    }
+//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//
+//        return true
+//
+//    }
+//
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//
+//        if editingStyle == .delete {
+//
+//            // MARK: Delete chat room.
+//
+//            tableView.beginUpdates()
+//
+//            tableView.deleteRows(at: [indexPath], with: .left)
+//
+//            FirebaseManager().deleteChatRoom(roomId: self.rooms[indexPath.row].roomId)
+//
+//            self.rooms.remove(at: indexPath.row)
+//
+//            UserManager.shared.chatRooms.remove(at: indexPath.row)
+//
+//            tableView.endUpdates()
+//
+//        }
+//    }
 
 }
 //swiftlint:enable force_cast

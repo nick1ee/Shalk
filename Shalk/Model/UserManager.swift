@@ -35,15 +35,13 @@ class UserManager {
 
     var isDiscovering: Bool = false
 
-//    var discoveredLanguage = ""
-
     var isConnected = false
 
     var callType: CallType = .none
 
     var isPlayingCallingSound = false
 
-    var timer: Timer?
+    var playingSoundTimer: Timer?
 
     func logIn(withEmail email: String, withPassword pwd: String) {
 
@@ -113,7 +111,7 @@ class UserManager {
 
         self.isPlayingCallingSound = true
 
-        self.playCallingSound()
+        self.playingSound()
 
         QBManager.shared.startAudioCall()
     }
@@ -122,7 +120,7 @@ class UserManager {
 
         self.isPlayingCallingSound = true
 
-        self.playCallingSound()
+        self.playingSound()
 
         QBManager.shared.startVideoCall()
 
@@ -164,23 +162,21 @@ class UserManager {
 
     }
 
-    @objc func playCallingSound() {
+    func playingSound() {
 
-        if isPlayingCallingSound == true {
+        playingSoundTimer = Timer()
 
-            timer = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(playSound), userInfo: nil, repeats: true)
+        playingSoundTimer?.start(DispatchTime.now(), interval: 4, repeats: true) {
 
-        } else {
+            AudioServicesPlaySystemSound(1151)
 
-            timer?.invalidate()
-            timer = nil
         }
 
     }
 
-    @objc func playSound() {
+    func stopPlayingSound() {
 
-         AudioServicesPlaySystemSound(1151)
+        playingSoundTimer?.cancel()
 
     }
 

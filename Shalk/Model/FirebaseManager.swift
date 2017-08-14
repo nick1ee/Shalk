@@ -554,13 +554,13 @@ extension FirebaseManager {
 
     }
 
-    func deleteChatRoom(roomId: String) {
-
-        guard let myUid = Auth.auth().currentUser?.uid else { return }
-
-        ref?.child("chatRoomList").child(myUid).child(roomId).removeValue()
-
-    }
+//    func deleteChatRoom(roomId: String) {
+//
+//        guard let myUid = Auth.auth().currentUser?.uid else { return }
+//
+//        ref?.child("chatRoomList").child(myUid).child(roomId).removeValue()
+//
+//    }
 
     func sendMessage(text: String) {
 

@@ -23,11 +23,11 @@ class AudioCallViewController: UIViewController {
 
     var second = 0
 
-    var secondTimer: DispatchSourceTimer?
+    let secondTimer = Timer()
 
-    var minuteTimer: DispatchSourceTimer?
+    let minuteTimer = Timer()
 
-    var hourTimer: DispatchSourceTimer?
+    let hourTimer = Timer()
 
     let qbManager = QBManager.shared
 
@@ -143,15 +143,7 @@ extension AudioCallViewController {
 
     func configTimer() {
 
-        let timerQueue = DispatchQueue(label: "timer", attributes: .concurrent)
-
-        secondTimer?.cancel()
-
-        secondTimer = DispatchSource.makeTimerSource(queue: timerQueue)
-
-        secondTimer?.scheduleRepeating(deadline: .now(), interval: 1.0, leeway: .microseconds(10))
-
-        secondTimer?.setEventHandler {
+        secondTimer.start(DispatchTime.now(), interval: 1, repeats: true) {
 
             if self.second == 59 {
 
@@ -164,18 +156,9 @@ extension AudioCallViewController {
             }
 
             self.timeLabel.text = "\(self.hour.addLeadingZero()) : \(self.minute.addLeadingZero()) : \(self.second.addLeadingZero())"
-
         }
 
-        secondTimer?.resume()
-
-        minuteTimer?.cancel()
-
-        minuteTimer = DispatchSource.makeTimerSource(queue: timerQueue)
-
-        minuteTimer?.scheduleRepeating(deadline: .now(), interval: 60.0, leeway: .microseconds(10))
-
-        minuteTimer?.setEventHandler {
+        minuteTimer.start(DispatchTime.now() + 60.0, interval: 60, repeats: true) {
 
             if self.minute == 59 {
 
@@ -191,36 +174,23 @@ extension AudioCallViewController {
 
         }
 
-        minuteTimer?.resume()
-
-        hourTimer?.cancel()
-
-        hourTimer = DispatchSource.makeTimerSource(queue: timerQueue)
-
-        hourTimer?.scheduleRepeating(deadline: .now(), interval: 3600.0, leeway: .microseconds(10))
-
-        hourTimer?.setEventHandler {
+        hourTimer.start(DispatchTime.now() + 3600.0, interval: 3600, repeats: true) {
 
             self.hour += 1
 
             self.timeLabel.text = "\(self.hour.addLeadingZero()) : \(self.minute.addLeadingZero()) : \(self.second.addLeadingZero())"
 
         }
+
     }
 
     func stopTimer() {
 
-        secondTimer?.cancel()
+        secondTimer.cancel()
 
-        secondTimer = nil
+        minuteTimer.cancel()
 
-        minuteTimer?.cancel()
-
-        minuteTimer = nil
-
-        hourTimer?.cancel()
-
-        hourTimer = nil
+        hourTimer.cancel()
 
         second = 0
 

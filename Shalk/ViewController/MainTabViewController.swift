@@ -134,9 +134,7 @@ extension MainTabViewController: QBRTCClientDelegate {
     // MARK: 電話被對方接起後
     func session(_ session: QBRTCSession, acceptedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
 
-        UserManager.shared.isPlayingCallingSound = false
-
-        UserManager.shared.playCallingSound()
+        UserManager.shared.stopPlayingSound()
 
         UserManager.shared.isConnected = true
 
@@ -162,9 +160,7 @@ extension MainTabViewController: QBRTCClientDelegate {
     // MARK: 電話被使用者拒絕
     func session(_ session: QBRTCSession, rejectedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
 
-        UserManager.shared.isPlayingCallingSound = false
-
-        UserManager.shared.playCallingSound()
+        UserManager.shared.stopPlayingSound()
 
         if UserManager.shared.isDiscovering == true {
 
@@ -177,9 +173,7 @@ extension MainTabViewController: QBRTCClientDelegate {
     // MARK: 電話被使用者掛斷
     func session(_ session: QBRTCSession, hungUpByUser userID: NSNumber, userInfo: [String : String]? = nil) {
 
-        UserManager.shared.isPlayingCallingSound = false
-
-        UserManager.shared.playCallingSound()
+        UserManager.shared.stopPlayingSound()
 
         // MARK: Received a hung up signal from user.
 
@@ -204,9 +198,7 @@ extension MainTabViewController: QBRTCClientDelegate {
 
     func session(_ session: QBRTCSession, userDidNotRespond userID: NSNumber) {
 
-        UserManager.shared.isPlayingCallingSound = false
-
-        UserManager.shared.playCallingSound()
+        UserManager.shared.stopPlayingSound()
 
         self.presentedViewController?.pushNoRespondMessage()
 
