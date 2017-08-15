@@ -864,7 +864,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QR0-zb-SKi">
-                                <rect key="frame" x="182" y="597" width="50" height="50"/>
+                                <rect key="frame" x="182" y="666" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="AEY-I6-BP4"/>
                                     <constraint firstAttribute="width" constant="50" id="oah-uS-Nbe"/>
@@ -887,7 +887,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQq-sH-PwK">
-                                <rect key="frame" x="82" y="597" width="50" height="50"/>
+                                <rect key="frame" x="82" y="666" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ggb-gw-ng9"/>
                                     <constraint firstAttribute="width" constant="50" id="x58-6Q-ku8"/>
@@ -910,7 +910,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUC-3g-6Zl">
-                                <rect key="frame" x="282" y="597" width="50" height="50"/>
+                                <rect key="frame" x="282" y="666" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="5P8-jS-jCf"/>
                                     <constraint firstAttribute="height" constant="50" id="eUU-7w-LrF"/>
@@ -942,12 +942,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lY9-rW-OWW" firstAttribute="height" secondItem="02k-Ph-JMk" secondAttribute="height" multiplier="2:3" id="3aT-Ao-iQ9"/>
-                            <constraint firstItem="vQq-sH-PwK" firstAttribute="top" secondItem="HeC-Bb-y32" secondAttribute="bottom" constant="50" id="8RN-KK-LTS"/>
                             <constraint firstAttribute="trailing" secondItem="HeC-Bb-y32" secondAttribute="trailing" constant="30" id="Ep6-1Q-Uzz"/>
                             <constraint firstItem="IUC-3g-6Zl" firstAttribute="leading" secondItem="QR0-zb-SKi" secondAttribute="trailing" constant="50" id="HpO-De-iub"/>
+                            <constraint firstItem="rTR-La-fic" firstAttribute="top" secondItem="vQq-sH-PwK" secondAttribute="bottom" constant="20" id="Jae-Fe-l3u"/>
                             <constraint firstItem="HeC-Bb-y32" firstAttribute="leading" secondItem="02k-Ph-JMk" secondAttribute="leading" constant="30" id="OTk-ja-bFY"/>
+                            <constraint firstItem="rTR-La-fic" firstAttribute="top" secondItem="IUC-3g-6Zl" secondAttribute="bottom" constant="20" id="SpY-8F-y3u"/>
                             <constraint firstItem="AVN-D5-Jkf" firstAttribute="leading" secondItem="02k-Ph-JMk" secondAttribute="leading" id="T5e-8q-R44"/>
-                            <constraint firstItem="QR0-zb-SKi" firstAttribute="top" secondItem="HeC-Bb-y32" secondAttribute="bottom" constant="50" id="VIA-j6-r2P"/>
                             <constraint firstAttribute="trailing" secondItem="lY9-rW-OWW" secondAttribute="trailing" id="Xb1-8Z-ZKX"/>
                             <constraint firstItem="IT3-OI-iNJ" firstAttribute="centerX" secondItem="02k-Ph-JMk" secondAttribute="centerX" id="Xcx-uv-kXN"/>
                             <constraint firstItem="IT3-OI-iNJ" firstAttribute="top" secondItem="HeC-Bb-y32" secondAttribute="bottom" constant="10" id="YCf-QH-brE"/>
@@ -957,7 +957,7 @@
                             <constraint firstItem="AVN-D5-Jkf" firstAttribute="bottom" secondItem="lY9-rW-OWW" secondAttribute="bottom" id="dr4-aG-BLV"/>
                             <constraint firstItem="HeC-Bb-y32" firstAttribute="top" secondItem="AVN-D5-Jkf" secondAttribute="bottom" constant="10" id="jdD-IR-12t"/>
                             <constraint firstItem="lY9-rW-OWW" firstAttribute="top" secondItem="02k-Ph-JMk" secondAttribute="top" id="lRp-xN-gY4"/>
-                            <constraint firstItem="IUC-3g-6Zl" firstAttribute="top" secondItem="HeC-Bb-y32" secondAttribute="bottom" constant="50" id="nCj-bQ-peV"/>
+                            <constraint firstItem="rTR-La-fic" firstAttribute="top" secondItem="QR0-zb-SKi" secondAttribute="bottom" constant="20" id="qHY-Qq-c2f"/>
                             <constraint firstItem="QR0-zb-SKi" firstAttribute="leading" secondItem="vQq-sH-PwK" secondAttribute="trailing" constant="50" id="tzU-LL-YPq"/>
                         </constraints>
                     </view>
@@ -1743,7 +1743,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XGa-g4-miM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="icon-user2" id="Zoj-L9-Jd7"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5Sq-to-EJ9">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5Sq-to-EJ9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.24398827549999999" green="0.18944382670000001" blue="0.29701077939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

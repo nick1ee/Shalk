@@ -124,7 +124,7 @@ class FirebaseManager {
         } catch let error {
 
             // MARK: User failed to log out with Firebase.
-            
+
             Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "LogOut_Error"])
 
             SVProgressHUD.dismiss()

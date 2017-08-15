@@ -113,7 +113,7 @@ extension MainTabViewController: QBRTCClientDelegate {
 
             } catch let error {
                 // MARK: Failed to init a coming call.
-                
+
                 Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Init_ComingCall_Error"])
 
                 UIAlertController(error: error).show()
