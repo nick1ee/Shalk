@@ -24,12 +24,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Shalk.xcscheme</key>
+		<key>NVActivityIndicatorView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>RAMAnimatedTabBarController.xcscheme</key>
+		<key>Pods-Shalk.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -52,17 +52,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>13D55D801DDC2CABFB9A5E75DD182601</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>3EDFE4052B5DE7D509935AC0774CB135</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4C3E173E4EABAB65FBE1E886661D3186</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -73,16 +63,6 @@
 			<true/>
 		</dict>
 		<key>72C3B91DFA31848326FDE9E198A84028</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B1E603A7EB200CC335D15081EA5EDD35</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C005683B92B3B35ED696DAB3386CEBFA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -102,27 +82,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C7DCF2B547F7871B9BFD74DE93B0E173</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CE2191196151691D82D55B9C998A2877</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D0581AF7BF4A6DA140D280B19ECC7BFF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>E4DD95323C54A78F879DAB0F1508B8E7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>ED8A8806184B4578009BA3BB75C0DCE1</key>
 		<dict>
 			<key>primary</key>
 			<true/>

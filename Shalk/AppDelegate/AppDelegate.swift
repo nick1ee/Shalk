@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import Quickblox
+import QuickbloxWebRTC
 import IQKeyboardManagerSwift
 
 @UIApplicationMain
@@ -19,12 +21,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UIApplication.shared.statusBarStyle = .lightContent
 
-        // Init Firebase
+        // MARK: Init Firebase
         FirebaseApp.configure()
 
-        // IQKeyboardManager
+        // MARK: Init Quickblox
+        QBRTCClient.initializeRTC()
+
+        QBSettings.setApplicationID(QBAppID)
+        QBSettings.setAuthKey(QBAuthKey)
+        QBSettings.setAuthSecret(QBAuthSecret)
+        QBSettings.setAccountKey(QBAccountKey)
+
+        QBSettings.enableXMPPLogging()
+
+        // MARK: Init IQKeyboardManager
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
         return true
     }

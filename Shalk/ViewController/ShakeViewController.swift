@@ -9,12 +9,34 @@
 import UIKit
 import Magnetic
 import SpriteKit
+import Quickblox
+import AudioToolbox
+import QuickbloxWebRTC
+import NVActivityIndicatorView
 
 class ShakeViewController: UIViewController {
+
+    let rtcManager = QBRTCClient.instance()
+
+    let qbManager = QBManager.shared
+
+    let fbManager = FirebaseManager()
+
+    let userManager = UserManager.shared
 
     var names = UIImage.names
 
     var selectedNode: Node?
+
+    var opponent: User?
+
+    var selectedLanguage: String = ""
+
+    var isDiscovering: Bool = false
+
+    @IBOutlet weak var loadingView: NVActivityIndicatorView!
+
+    @IBOutlet weak var labelSearching: UILabel!
 
     @IBOutlet weak var magneticView: MagneticView! {
 
@@ -35,25 +57,197 @@ class ShakeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        for _ in 0...3 {
+        addLangBubbles(nil)
 
-            self.add(nil)
+        labelSearching.isHidden = true
+
+        rtcManager.add(self)
+
+        QBManager.shared.audioManager.initialize()
+
+        QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
+
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        selectedNode?.isSelected = false
+
+        selectedNode = nil
+
+        loadingView.stopAnimating()
+
+        labelSearching.isHidden = true
+
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        userManager.isConnected = false
+
+        userManager.opponent = nil
+
+        isDiscovering = false
+
+        FirebaseManager().fetchFriendList()
+
+    }
+
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+
+        if isDiscovering == false {
+
+            isDiscovering = true
+
+            if motion == .motionShake {
+
+                guard let selectedLanguage = selectedNode?.text else {
+
+                    labelSearching.text = "Please select a preferred language."
+
+                    labelSearching.isHidden = false
+
+                    return
+
+                }
+
+                self.selectedLanguage = selectedLanguage
+
+                // MARK: Start pairing...
+
+                loadingView.startAnimating()
+
+                labelSearching.text = "Discovering, please wait!"
+
+                labelSearching.isHidden = false
+
+                fbManager.fetchChannel(withLang: selectedLanguage)
+
+            }
+
+        } else {
+
+            labelSearching.text = "You are discovering the partner, please wait!"
 
         }
 
     }
 
-    @IBAction func add(_ sender: UIControl?) {
+    @IBAction func addLangBubbles(_ sender: UIControl?) {
 
-        let name = names.randomItem()
+        for _ in 0...3 {
 
-        names.removeAll(name)
+            let name = names.randomItem()
 
-        let color = UIColor.colors.randomItem()
+            names.removeAll(name)
 
-        let node = Node(text: name.capitalized, image: UIImage(named: name), color: color, radius: 40)
+            let color = UIColor.colors.randomItem()
 
-        magnetic.addChild(node)
+            let node = Node(text: name.capitalized, image: UIImage(named: name), color: color, radius: 40)
+
+            magnetic.addChild(node)
+
+        }
+
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == "audioCall" {
+
+            let destinationNavi = segue.destination as? UINavigationController
+
+            let audioVC = destinationNavi?.viewControllers.first as? RandomCallViewController
+
+//            print(userManager.opponent?.name)
+
+            guard let opponentName = userManager.opponent?.name else { return }
+
+            audioVC?.receivedUserName = opponentName
+
+        }
+
+    }
+
+}
+
+extension ShakeViewController: QBRTCClientDelegate {
+
+    func didReceiveNewSession(_ session: QBRTCSession, userInfo: [String : String]? = nil) {
+
+        if qbManager.session != nil {
+
+            let userInfo = ["key": "value"]
+
+            session.rejectCall(userInfo)
+
+        } else {
+
+            do {
+
+                qbManager.session = session
+
+                userManager.opponent = try User.init(json: userInfo!)
+
+                qbManager.acceptCall()
+
+                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+
+                self.performSegue(withIdentifier: "audioCall", sender: nil)
+
+            } catch let error {
+
+                // TODO: Error handling
+
+                print("=======================================", error.localizedDescription)
+
+            }
+        }
+    }
+
+    func session(_ session: QBRTCBaseSession, receivedRemoteAudioTrack audioTrack: QBRTCAudioTrack, fromUser userID: NSNumber) {
+
+        audioTrack.isEnabled = true
+
+    }
+
+    func session(_ session: QBRTCSession, acceptedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
+
+        userManager.isConnected = true
+
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+
+    }
+
+    func session(_ session: QBRTCBaseSession, connectedToUser userID: NSNumber) {
+
+        self.performSegue(withIdentifier: "audioCall", sender: nil)
+
+    }
+
+    func sessionDidClose(_ session: QBRTCSession) {
+
+        qbManager.session = nil
+
+    }
+
+    func session(_ session: QBRTCSession, rejectedByUser userID: NSNumber, userInfo: [String : String]? = nil) {
+
+        fbManager.fetchChannel(withLang: selectedLanguage)
+
+    }
+
+    func session(_ session: QBRTCSession, hungUpByUser userID: NSNumber, userInfo: [String : String]? = nil) {
+
+        // MARK: Received a hung up signal from user.
+
+        guard let info = userInfo else { return }
+
+//        print("-------------- user info -------------", userInfo)
+
+        self.receivedEndCallwithFriendRequest(withInfo: info)
 
     }
 
