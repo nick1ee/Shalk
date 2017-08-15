@@ -12,6 +12,8 @@ import Quickblox
 import QuickbloxWebRTC
 import SVProgressHUD
 import IQKeyboardManagerSwift
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // MARK: Init Firebase
         FirebaseApp.configure()
+        Fabric.with([Crashlytics.self])
 
         // MARK: Init Quickblox
         QBRTCClient.initializeRTC()

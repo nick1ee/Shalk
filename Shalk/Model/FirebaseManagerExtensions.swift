@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 import FirebaseStorage
+import Crashlytics
 
 // MARK: Functions for fetch and update channel.
 extension FirebaseManager {
@@ -46,8 +47,7 @@ extension FirebaseManager {
             } catch let error {
 
                 // MARK: Failed to fetch channel.
-
-                FirebaseCrashMessage("fetch_channel_error")
+                Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_Channel_Error"])
 
                 UIAlertController(error: error).show()
             }
@@ -186,7 +186,7 @@ extension FirebaseManager {
                 } catch let error {
 
                     // MARK: Failed to fetch friend info.
-                    FirebaseCrashMessage("fetch_friend_info_error")
+                    Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_FriendInfo_Error"])
 
                     UIAlertController(error: error).show()
 
@@ -242,7 +242,8 @@ extension FirebaseManager {
             } catch let error {
 
                 // MARK: Failed to fetch user profile
-                FirebaseCrashMessage("fetch_opponent_profile_error")
+                
+                Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_OpponentProfile_Error"])
 
                 UIAlertController(error: error).show()
             }
@@ -274,7 +275,8 @@ extension FirebaseManager {
             } catch let error {
 
                 // MARK: Failed to fetch user profile
-                FirebaseCrashMessage("fetch_my_profile_error")
+                
+                Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_MyProfile_Error"])
 
                 UIAlertController(error: error).show()
             }
@@ -372,7 +374,7 @@ extension FirebaseManager {
             } catch let error {
 
                 // MARK: Failed to fetch the list of chat rooms.
-                FirebaseCrashMessage("fetch_chat_room_error")
+                Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_ChatRoom_Error"])
 
                 UIAlertController(error: error).show()
 
@@ -474,7 +476,7 @@ extension FirebaseManager {
             } catch let error {
 
                 // MARK: Failed to fetch hcat histroy
-                FirebaseCrashMessage("fetch_chat_history_error")
+                Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_ChatHistory_Error"])
 
                 UIAlertController(error: error).show()
 

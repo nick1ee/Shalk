@@ -32,7 +32,6 @@
 		B872E63D1F29F046009BD763 /* AppDelegateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E63C1F29F046009BD763 /* AppDelegateExtensions.swift */; };
 		B872E63F1F29FBA4009BD763 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872E63E1F29FBA4009BD763 /* UserManager.swift */; };
 		B878FD901F419B900091AD4D /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = B878FD8D1F419B900091AD4D /* Const.swift */; };
-		B878FD911F419B900091AD4D /* crash-reporting.json in Resources */ = {isa = PBXBuildFile; fileRef = B878FD8E1F419B900091AD4D /* crash-reporting.json */; };
 		B878FD921F419B900091AD4D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B878FD8F1F419B900091AD4D /* GoogleService-Info.plist */; };
 		B878FD9B1F4281E70091AD4D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B878FD9D1F4281E70091AD4D /* Localizable.strings */; };
 		B89872871F306008007DEDA6 /* AudioChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89872861F306008007DEDA6 /* AudioChannel.swift */; };
@@ -108,7 +107,6 @@
 		B872E63C1F29F046009BD763 /* AppDelegateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateExtensions.swift; sourceTree = "<group>"; };
 		B872E63E1F29FBA4009BD763 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		B878FD8D1F419B900091AD4D /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Const.swift; path = Key/Const.swift; sourceTree = SOURCE_ROOT; };
-		B878FD8E1F419B900091AD4D /* crash-reporting.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "crash-reporting.json"; path = "Key/crash-reporting.json"; sourceTree = SOURCE_ROOT; };
 		B878FD8F1F419B900091AD4D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Key/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B878FD931F41E2270091AD4D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		B878FD941F41E2270091AD4D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -316,7 +314,6 @@
 			isa = PBXGroup;
 			children = (
 				B878FD8D1F419B900091AD4D /* Const.swift */,
-				B878FD8E1F419B900091AD4D /* crash-reporting.json */,
 				B878FD8F1F419B900091AD4D /* GoogleService-Info.plist */,
 			);
 			path = Key;
@@ -337,7 +334,7 @@
 				566107CBC1F5AEC70C8A0369 /* [CP] Copy Pods Resources */,
 				B872E6291F29C1FB009BD763 /* swiftlint */,
 				B8DB3F341F2F02AE006E5A58 /* Embed Frameworks */,
-				B878FD8A1F4198210091AD4D /* Upload symbols to Crash Reporting */,
+				B878FDA01F42DBA90091AD4D /* Fabric Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -396,7 +393,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B878FD911F419B900091AD4D /* crash-reporting.json in Resources */,
 				B878FD9B1F4281E70091AD4D /* Localizable.strings in Resources */,
 				B872E6221F29BF91009BD763 /* LaunchScreen.storyboard in Resources */,
 				B878FD921F419B900091AD4D /* GoogleService-Info.plist in Resources */,
@@ -467,19 +463,19 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		B878FD8A1F4198210091AD4D /* Upload symbols to Crash Reporting */ = {
+		B878FDA01F42DBA90091AD4D /* Fabric Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Upload symbols to Crash Reporting";
+			name = "Fabric Crashlytics";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:1049237445300:ios:d8d33676d681ef1a\n\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"${PROJECT_DIR}/Key/crash-reporting.json\"";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" caf4ccb38bc298fb0b28b16f410bc6cb3a080315 8b9f4d22fea0c1cc5168523b7dc72688000b5c9f54b183a0572cf9f319bb230c";
 		};
 /* End PBXShellScriptBuildPhase section */
 

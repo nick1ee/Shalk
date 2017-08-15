@@ -19,7 +19,9 @@ target 'Shalk' do
   pod 'Firebase/Storage'
   pod 'SDWebImage'
   pod 'KeychainSwift'
-  
+  pod 'Fabric'
+  pod 'Crashlytics'
+
   source 'https://github.com/CocoaPods/Specs.git'
   pod 'Quickblox-WebRTC', '~> 2.6.1'
   pod 'QuickBlox', '~>2.9.2'
