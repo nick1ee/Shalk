@@ -16,6 +16,11 @@
 "SVProgress_Connecting_ChatService" = "連接通話服務中..";
 "SVProgress_Fetch_Data" = "載入使用者資料中，請稍等..";
 
+// MARK: - Language
+"English" = "英文";
+"Chinese" = "中文";
+"Japanese" = "日文";
+"Korean" = "韓文";
 
 
 // MARK: - Alert Controller

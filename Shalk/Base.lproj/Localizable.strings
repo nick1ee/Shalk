@@ -17,6 +17,12 @@
 "SVProgress_Fetch_Data" = "Fetching data, please wait..";
 
 
+// MARK: - Language
+"English" = "English";
+"Chinese" = "Chinese";
+"Japanese" = "Japanese";
+"Korean" = "Korean";
+
 
 // MARK: - Alert Controller
 "ERROR" = "ERROR";

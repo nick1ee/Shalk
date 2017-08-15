@@ -182,7 +182,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             } else {
 
-                return "English"
+                return NSLocalizedString("English", comment: "")
 
             }
 
@@ -194,7 +194,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             } else {
 
-            return "Chinese"
+            return NSLocalizedString("Chinese", comment: "")
 
             }
 
@@ -206,7 +206,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             } else {
 
-            return "Japanese"
+            return NSLocalizedString("Japanese", comment: "")
 
             }
 
@@ -218,7 +218,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             } else {
 
-                return "Korean"
+                return NSLocalizedString("Korean", comment: "")
 
             }
 
