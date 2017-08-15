@@ -1,9 +1,71 @@
-/* 
-  Localizable.strings
-  Shalk
+/*
+ Localizable.strings
+ Shalk
+ 
+ Created by Nick Lee on 2017/8/14.
+ Copyright © 2017年 nicklee. All rights reserved.
+ */
 
-  Created by Nick Lee on 2017/8/14.
-  Copyright © 2017年 nicklee. All rights reserved.
-*/
+// MARK: - SVProgrsssHUD
+"SVProgress_Login" = "開始登入..";
+"SVProgress_Register" = "註冊新帳號..";
+"SVProgress_Register_ChatService" = "註冊通話服務..";
+"SVProgress_Register_Success" = "註冊完成，開始登入..";
+"SVProgress_Logout" = "開始登出..";
+"SVProgress_Logout_ChatService" = "登出通話服務..";
+"SVProgress_Connecting_ChatService" = "連接通話服務中..";
+"SVProgress_Fetch_Data" = "載入使用者資料中，請稍等..";
 
-"SVPProgress_Login_Message" = "登入中..";
+
+
+// MARK: - Alert Controller
+"ERROR" = "錯誤";
+"OK" = "好";
+"Send" = "發送";
+"Cancel" = "取消";
+"Confirm" = "確定";
+"Oops" = "哎呀！";
+
+"Login_ChatService_Error" = "目前無法連接通話服務，請將應用程式重啟並且重試一次。";
+
+"AudioCall" = "語音通話";
+"AudioCall_Message" = "撥打語音電話給 ";
+
+"VideoCall" = "視訊通話";
+"VideoCall_Message" = "撥打視訊電話給 ";
+
+"Empty_Field" = "請完成所需表格的填寫！";
+"Reset_Password_Hint" = "請輸入您的信箱，我們將會發送連結給您重置密碼。";
+"Invalid_Email" = "您的信箱格式不正確，請重新輸入！";
+"Invalid_Password" = "密碼最少需有6個字元！";
+"Reject_Call" = " 拒絕接聽電話。";
+"No_Answer" = " 沒有回應。";
+
+"Reset_Password_Title" = "重置密碼";
+"Reset_Password_Message" = "我們已經發送了一個連結到您的信箱，請透過那個連結重置密碼";
+
+"Friend_Request_Title" = "喜歡這次聊天嗎?";
+"Friend_Request_Message" = "是否要發送好友邀請給 ";
+
+"Logout_Title" = "登出訊息";
+"Logout_Message" = "確定要將此帳號進行登出？";
+
+"ImagePicker_Title" = "為您的個人資料選擇一張照片";
+
+"Camera" = "拍照";
+"PhotoLibrary" = "從相片中選取";
+
+// MARK: - Shake View Controller
+"Shake_Hint" = "搖晃您的手機來進行配對";
+"No_Language" = "請選擇一種語言來進行聊天";
+"Discovering" = "搜尋中，請稍候..";
+"Double_Shake" = "請稍候，您的夥伴已經在路上了..";
+
+// MARK: - Chat View Controller
+"InputField_Placefolder" = "寫些什麼..";
+
+// MARK: - Audio Call View Controller
+"Connecting" = "連接中..";
+"AudioConnected" = "語音已連接";
+
+

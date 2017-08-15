@@ -162,7 +162,7 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         guard let opponent = UserManager.shared.opponent else { return }
 
-        let alert = UIAlertController.init(title: "Oops!", message: "\(opponent.name) rejected the call.", preferredStyle: .alert)
+        let alert = UIAlertController.init(title: NSLocalizedString("Oops", comment: ""), message: "\(opponent.name)" + NSLocalizedString("Reject_Call", comment: ""), preferredStyle: .alert)
 
         alert.addAction(title: "OK", style: .default, isEnabled: true) { (_) in
 
@@ -195,15 +195,15 @@ extension MainTabViewController: QBRTCClientDelegate {
 
             // MARK: Not friends, init a friend request.
 
-            let alert = UIAlertController.init(title: "Send a friend request?", message: "If you enjoy the time with \(UserManager.shared.opponent?.name ?? "")", preferredStyle: .alert)
+            let alert = UIAlertController.init(title: NSLocalizedString("Friend_Request_Title", comment: ""), message: NSLocalizedString("Friend_Request_Message", comment: "") + "\(UserManager.shared.opponent?.name ?? "")", preferredStyle: .alert)
 
-            alert.addAction(title: "Cancel", style: .cancel, isEnabled: true, handler: { (_) in
+            alert.addAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, isEnabled: true, handler: { (_) in
                 UserManager.shared.closeChannel()
 
                 self.presentedViewController?.dismiss(animated: true, completion: nil)
             })
 
-            alert.addAction(title: "Send", style: .default, isEnabled: true, handler: { (_) in
+            alert.addAction(title: NSLocalizedString("Send", comment: ""), style: .default, isEnabled: true, handler: { (_) in
 
                 FirebaseManager().checkFriendRequest()
 
@@ -239,7 +239,7 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         guard let opponent = UserManager.shared.opponent else { return }
 
-        let alert = UIAlertController.init(title: "No Answer", message: "\(opponent.name) did not answer the call.", preferredStyle: .alert)
+        let alert = UIAlertController.init(title: NSLocalizedString("Oops", comment: ""), message: "\(opponent.name)" + NSLocalizedString("No_Answer", comment: ""), preferredStyle: .alert)
 
         alert.addAction(title: "OK", style: .default, isEnabled: true) { (_) in
 

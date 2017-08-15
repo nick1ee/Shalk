@@ -57,7 +57,7 @@ class LoginViewController: UIViewController {
 
         } else {
 
-            let alert = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: NSLocalizedString("Reset_Password", comment: ""), preferredStyle: .alert)
+            let alert = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: NSLocalizedString("Reset_Password_Hint", comment: ""), preferredStyle: .alert)
 
             alert.addAction(title: NSLocalizedString("OK", comment: ""))
 

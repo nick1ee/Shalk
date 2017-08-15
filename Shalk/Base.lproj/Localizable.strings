@@ -9,14 +9,63 @@
 // MARK: - SVProgrsssHUD
 "SVProgress_Login" = "Start to log in..";
 "SVProgress_Register" = "Registering a new account..";
+"SVProgress_Register_ChatService" = "Registering on chat service..";
+"SVProgress_Register_Success" = "Registered successfully, get started to log in..";
+"SVProgress_Logout" = "Start to log out..";
+"SVProgress_Logout_ChatService" = "Disconnected from chat service..";
+"SVProgress_Connecting_ChatService" = "Connecting to chat service..";
+"SVProgress_Fetch_Data" = "Fetching data, please wait..";
 
 
 
 // MARK: - Alert Controller
-"ERROR" = "ERROR!";
-"OK" = "OK!";
+"ERROR" = "ERROR";
+"OK" = "OK";
+"Send" = "Send";
+"Cancel" = "Cancel";
+"Confirm" = "Confirm";
+"Oops" = "Oops";
+
+"Login_ChatService_Error" = "Can't log in chat service now, please close this app and try again!";
+
+"AudioCall" = "Audio Call";
+"AudioCall_Message" = "Do you want to start an audio call with ";
+
+"VideoCall" = "Video Call";
+"VideoCall_Message" = "Do you want to start a video call with ";
 
 "Empty_Field" = "Please fill out all required fileds";
-"Reset_Password" = "Please enter your email address, we will send you a link to reset password.";
+"Reset_Password_Hint" = "Please enter your email address, we will send you a link to reset password.";
 "Invalid_Email" = "Your email format is invalid, please check!";
 "Invalid_Password" = "Password must contain least 6 characters!";
+"Reject_Call" = " rejected the call.";
+"No_Answer" = " didn't answer the call.";
+
+"Reset_Password_Title" = "Reset Password";
+"Reset_Password_Message" = "We have sent you a link to reset your password, please check your email box.";
+
+"Friend_Request_Title" = "Send a friend request?";
+"Friend_Request_Message" = "If you want to make friend with ";
+
+"Logout_Title" = "Log Out Message";
+"Logout_Message" = "Do you want to log out this account?";
+
+"ImagePicker_Title" = "Select a picture for your profile.";
+
+"Camera" = "Take a photo";
+"PhotoLibrary" = "Choose from Library";
+
+// MARK: - Shake View Controller
+"Shake_Hint" = "Shake your mobile to find the partner!";
+"No_Language" = "Please select a language that you want to talk.";
+"Discovering" = "Discovering, please wait!";
+"Double_Shake" = "Please wait, you will find your partner very soon!";
+
+// MARK: - Chat View Controller
+"InputField_Placefolder" = "write something..";
+
+// MARK: - Audio Call View Controller
+"Connecting" = "Connecting..";
+"AudioConnected" = "Audio Connected";
+
+

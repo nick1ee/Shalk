@@ -58,9 +58,9 @@ class ModifyProfileViewController: UIViewController {
 
     @IBAction func btnPickImage(_ sender: UIButton) {
 
-        let alertController = UIAlertController.init(title: "Hint", message: "Send a image from..?", preferredStyle: .actionSheet)
+        let alertController = UIAlertController.init(title: "", message: NSLocalizedString("ImagePicker_Title", comment: ""), preferredStyle: .actionSheet)
 
-        let cameraAction = UIAlertAction.init(title: "Camera", style: .default, handler: { (_) in
+        let cameraAction = UIAlertAction.init(title: NSLocalizedString("Camera", comment: ""), style: .default, handler: { (_) in
 
             self.imagePicker.sourceType = .camera
 
@@ -68,7 +68,7 @@ class ModifyProfileViewController: UIViewController {
 
         })
 
-        let phoneLibraryAction = UIAlertAction.init(title: "Photo Library", style: .default, handler: {(_) in
+        let phoneLibraryAction = UIAlertAction.init(title: NSLocalizedString("PhotoLibrary", comment: ""), style: .default, handler: {(_) in
 
             self.imagePicker.sourceType = .photoLibrary
 
@@ -76,7 +76,7 @@ class ModifyProfileViewController: UIViewController {
 
         })
 
-        let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel, handler: {(_) in
+        let cancelAction = UIAlertAction.init(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: {(_) in
 
         })
 

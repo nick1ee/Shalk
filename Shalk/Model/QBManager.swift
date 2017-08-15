@@ -55,7 +55,7 @@ class QBManager {
 
                     // MARK: Failed to connect chat service.
 
-                    let alert = UIAlertController(title: "Error!", message: "Can't log in chat service right now, please close this app and try again!", preferredStyle: .alert)
+                    let alert = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("Login_ChatService_Error", comment: ""), preferredStyle: .alert)
 
                     alert.addAction(title: "OK")
 
@@ -79,7 +79,7 @@ class QBManager {
 
         }
 
-        SVProgressHUD.show(withStatus: "Connecting to chat service.")
+        SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Connecting_ChatService", comment: ""))
 
     }
 
@@ -151,7 +151,7 @@ class QBManager {
 
             guard let qbUser = user else { return }
 
-            SVProgressHUD.show(withStatus: "Sign up successfully, start to log in.")
+            SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Register_Success", comment: ""))
 
             let qbIdToString = String(qbUser.id)
 

@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // MARK: Fetched token successfully, log in directly.
         UserManager.shared.logIn(withEmail: userToken["email"]!, withPassword: userToken["password"]!)
 
-        SVProgressHUD.show(withStatus: "Fetching data, please wait!")
+        SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Fetch_Data", comment: ""))
 
         return true
     }

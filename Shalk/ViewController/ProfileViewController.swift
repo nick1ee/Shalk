@@ -32,15 +32,15 @@ class ProfileViewController: UIViewController {
 
     @IBAction func btnLogOut(_ sender: UIBarButtonItem) {
 
-        let alert = UIAlertController.init(title: "Notification", message: "Do you want to log out this account?", preferredStyle: .alert)
+        let alert = UIAlertController.init(title: NSLocalizedString("Logout_Title", comment: ""), message: NSLocalizedString("Logout_Message", comment: ""), preferredStyle: .alert)
 
-        alert.addAction(title: "Cancel")
+        alert.addAction(title: NSLocalizedString("Cancel", comment: ""))
 
-        alert.addAction(title: "OK", style: .default, isEnabled: true) { (_) in
+        alert.addAction(title: NSLocalizedString("OK", comment: ""), style: .default, isEnabled: true) { (_) in
 
             // MARK: User log out.
 
-            SVProgressHUD.show(withStatus: "Start to log out.")
+            SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Logout", comment: ""))
 
             UserManager.shared.logOut()
 

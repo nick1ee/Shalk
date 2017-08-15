@@ -122,7 +122,7 @@ class AudioCallViewController: UIViewController {
 
         opponentName.text = opponent.name
 
-        connectionStatus.text = "Connecting..."
+        connectionStatus.text = NSLocalizedString("Connecting", comment: "")
 
         DispatchQueue.global().async {
 
@@ -216,7 +216,7 @@ extension AudioCallViewController: QBRTCClientDelegate {
 
         AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
 
-        connectionStatus.text = "Audio Connected"
+        connectionStatus.text = NSLocalizedString("AudioConnected", comment: "")
 
         self.configTimer()
 

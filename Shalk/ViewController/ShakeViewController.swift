@@ -85,7 +85,7 @@ class ShakeViewController: UIViewController {
 
         loadingView.stopAnimating()
 
-        labelSearching.text = "Shake your mobile to find the partner!"
+        labelSearching.text = NSLocalizedString("Shake_Hint", comment: "")
 
         iconShake.isHidden = false
 
@@ -99,7 +99,7 @@ class ShakeViewController: UIViewController {
 
         if selectedNode == nil {
 
-            labelSearching.text = "Please select a preferred language."
+            labelSearching.text = NSLocalizedString("No_Language", comment: "")
 
             return
 
@@ -121,7 +121,7 @@ class ShakeViewController: UIViewController {
 
                     loadingView.startAnimating()
 
-                    labelSearching.text = "Discovering, please wait!"
+                    labelSearching.text = NSLocalizedString("Discovering", comment: "")
 
                     FirebaseManager().fetchChannel()
 
@@ -129,7 +129,7 @@ class ShakeViewController: UIViewController {
 
             } else {
 
-                labelSearching.text = "Please wait, you will find your partner very soon!"
+                labelSearching.text = NSLocalizedString("Double_Shake", comment: "")
 
             }
 
@@ -164,7 +164,7 @@ extension ShakeViewController: MagneticDelegate {
 
         // MAKR: Bubble selected
 
-        labelSearching.text = "Shake your mobile to find the partner!"
+        labelSearching.text = NSLocalizedString("Shake_Hint", comment: "")
 
         selectedNode = node
 

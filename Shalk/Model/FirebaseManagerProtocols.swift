@@ -22,12 +22,6 @@ protocol FirebaseManagerChatRoomDelegate: class {
 
 }
 
-enum UserProfile {
-
-    case myself, opponent
-
-}
-
 enum CallType {
 
     case audio, video, none

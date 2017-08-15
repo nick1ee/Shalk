@@ -86,15 +86,15 @@ class RandomCallViewController: UIViewController {
 
             // MARK: Not friends, init a friend request.
 
-            let alert = UIAlertController.init(title: "Send a friend request?", message: "If you enjoy the time with \(UserManager.shared.opponent?.name ?? "")", preferredStyle: .alert)
+            let alert = UIAlertController.init(title: NSLocalizedString("Friend_Request_Title", comment: ""), message: NSLocalizedString("Friend_Request_Message", comment: "") + "\(UserManager.shared.opponent?.name ?? "")", preferredStyle: .alert)
 
-            alert.addAction(title: "Cancel", style: .cancel, isEnabled: true, handler: { (_) in
+            alert.addAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, isEnabled: true, handler: { (_) in
                 UserManager.shared.closeChannel()
 
                 self.dismiss(animated: true, completion: nil)
             })
 
-            alert.addAction(title: "Send", style: .default, isEnabled: true, handler: { (_) in
+            alert.addAction(title: NSLocalizedString("Send", comment: ""), style: .default, isEnabled: true, handler: { (_) in
 
                 FirebaseManager().checkFriendRequest()
 

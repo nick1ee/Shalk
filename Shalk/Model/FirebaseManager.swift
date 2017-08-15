@@ -77,7 +77,7 @@ class FirebaseManager {
 
             // MARK: User sign up on Firebase successfully, start sign up on Quickblox.
 
-            SVProgressHUD.show(withStatus: "Registering on chat service.")
+            SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Register_ChatService", comment: ""))
 
             QBManager().signUp(name: name, uid: okUser.uid, withEmail: email, withPassword: okUser.uid)
 
@@ -98,7 +98,7 @@ class FirebaseManager {
 
             }
 
-            let alert = UIAlertController.init(title: "Reset Password", message: "We have sent a link to your email, this is for you to reset your password.", preferredStyle: .alert)
+            let alert = UIAlertController.init(title: NSLocalizedString("Reset_Password_Title", comment: ""), message: NSLocalizedString("Reset_Password_Message", comment: ""), preferredStyle: .alert)
 
             alert.addAction(title: "OK")
 
@@ -116,7 +116,7 @@ class FirebaseManager {
 
             // MARK: User log out Firebase successfully, start to log out with Quickblox.
 
-            SVProgressHUD.show(withStatus: "Disconnected from chat service.")
+            SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Logout_ChatService", comment: ""))
 
             QBManager().logOut()
 

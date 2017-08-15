@@ -38,11 +38,11 @@ class ChatViewController: UIViewController {
 
     @IBAction func btnAudioCall(_ sender: UIBarButtonItem) {
 
-        let alert = UIAlertController.init(title: "Audio Call", message: "Do you want to start an audio call with \(opponent.name)?", preferredStyle: .alert)
+        let alert = UIAlertController.init(title: NSLocalizedString("AudioCall", comment: ""), message: NSLocalizedString("AudioCall_Message", comment: "") + "\(opponent.name)?", preferredStyle: .alert)
 
-        alert.addAction(title: "Cancel")
+        alert.addAction(title: NSLocalizedString("Cancel", comment: ""))
 
-        alert.addAction(title: "Confirm", style: .default, isEnabled: true) { (_) in
+        alert.addAction(title: NSLocalizedString("Confirm", comment: ""), style: .default, isEnabled: true) { (_) in
 
             UserManager.shared.startAudioCall()
 
@@ -55,11 +55,11 @@ class ChatViewController: UIViewController {
 
     @IBAction func btnVideoCall(_ sender: UIBarButtonItem) {
 
-        let alert = UIAlertController.init(title: "Video Call", message: "Do you want to start a video call with \(opponent.name)?", preferredStyle: .alert)
+        let alert = UIAlertController.init(title: NSLocalizedString("VideoCall", comment: ""), message: NSLocalizedString("VideoCall_Message", comment: "") + "\(opponent.name)?", preferredStyle: .alert)
 
-        alert.addAction(title: "Cancel")
+        alert.addAction(title: NSLocalizedString("Cancel", comment: ""))
 
-        alert.addAction(title: "Confirm", style: .default, isEnabled: true) { (_) in
+        alert.addAction(title: NSLocalizedString("Confirm", comment: ""), style: .default, isEnabled: true) { (_) in
 
             self.performSegue(withIdentifier: "videoCall", sender: nil)
 
@@ -72,6 +72,8 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        inputTextView.text = NSLocalizedString("InputField_Placefolder", comment: "")
+
         inputTextView.delegate = self
 
         chatTableView.estimatedRowHeight = 300
@@ -83,8 +85,6 @@ class ChatViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.chatTableView.scrollToBottom(animated: true)
-
         opponent = UserManager.shared.opponent
 
         self.navigationItem.title = opponent.name
@@ -93,8 +93,11 @@ class ChatViewController: UIViewController {
 
             self.messages = fetchMessages
 
-            self.chatTableView.reloadData()
+            self.chatTableView.reloadData({
 
+                self.chatTableView.scrollToBottom(animated: false)
+
+            })
         }
 
     }
@@ -207,7 +210,7 @@ extension ChatViewController: UITextViewDelegate {
 
     func textViewDidBeginEditing(_ textView: UITextView) {
 
-        if inputTextView.text == "write something.." {
+        if inputTextView.text == NSLocalizedString("InputField_Placefolder", comment: "") {
 
             inputTextView.text = ""
 
@@ -219,7 +222,7 @@ extension ChatViewController: UITextViewDelegate {
 
         if inputTextView.text.isEmpty {
 
-            inputTextView.text = "write something.."
+            inputTextView.text = NSLocalizedString("InputField_Placefolder", comment: "")
 
         }
     }
