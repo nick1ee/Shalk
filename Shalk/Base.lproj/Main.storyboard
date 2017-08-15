@@ -1743,7 +1743,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XGa-g4-miM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="icon-user2" id="Zoj-L9-Jd7"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5Sq-to-EJ9">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5Sq-to-EJ9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.24398827549999999" green="0.18944382670000001" blue="0.29701077939999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
