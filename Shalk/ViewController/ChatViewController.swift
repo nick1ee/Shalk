@@ -38,13 +38,34 @@ class ChatViewController: UIViewController {
 
     @IBAction func btnAudioCall(_ sender: UIBarButtonItem) {
 
-        self.startAudioCall(uid: opponent.uid, name: opponent.name)
+        let alert = UIAlertController.init(title: "Audio Call", message: "Do you want to start an audio call with \(opponent.name)?", preferredStyle: .alert)
+
+        alert.addAction(title: "Cancel")
+
+        alert.addAction(title: "Confirm", style: .default, isEnabled: true) { (_) in
+
+            UserManager.shared.startAudioCall()
+
+            self.performSegue(withIdentifier: "audioCall", sender: nil)
+        }
+
+        self.present(alert, animated: true, completion: nil)
 
     }
 
     @IBAction func btnVideoCall(_ sender: UIBarButtonItem) {
 
-        self.startVideoCall(uid: opponent.uid, name: opponent.name)
+        let alert = UIAlertController.init(title: "Video Call", message: "Do you want to start a video call with \(opponent.name)?", preferredStyle: .alert)
+
+        alert.addAction(title: "Cancel")
+
+        alert.addAction(title: "Confirm", style: .default, isEnabled: true) { (_) in
+
+            self.performSegue(withIdentifier: "videoCall", sender: nil)
+
+        }
+
+        self.present(alert, animated: true, completion: nil)
 
     }
 

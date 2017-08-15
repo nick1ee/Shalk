@@ -98,11 +98,12 @@ class FirebaseManager {
 
             }
 
-            withVC.pushLoginMessage(title: "Reset Password",
+            let alert = UIAlertController.init(title: "Reset Password", message: "We have sent a link to your email, this is for you to reset your password.", preferredStyle: .alert)
 
-                                    message: "We have sent a link to your email, this is for you to reset your password.",
+            alert.addAction(title: "OK")
 
-                                    handle: nil)
+            withVC.present(alert, animated: true, completion: nil)
+
         }
 
     }

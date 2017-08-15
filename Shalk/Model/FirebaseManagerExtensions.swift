@@ -46,7 +46,7 @@ extension FirebaseManager {
             } catch let error {
 
                 // MARK: Failed to fetch channel.
-                
+
                 FirebaseCrashMessage("fetch_channel_error")
 
                 UIAlertController(error: error).show()
@@ -187,7 +187,7 @@ extension FirebaseManager {
 
                     // MARK: Failed to fetch friend info.
                     FirebaseCrashMessage("fetch_friend_info_error")
-                    
+
                     UIAlertController(error: error).show()
 
                 }
@@ -243,7 +243,7 @@ extension FirebaseManager {
 
                 // MARK: Failed to fetch user profile
                 FirebaseCrashMessage("fetch_opponent_profile_error")
-                
+
                 UIAlertController(error: error).show()
             }
 
@@ -275,7 +275,7 @@ extension FirebaseManager {
 
                 // MARK: Failed to fetch user profile
                 FirebaseCrashMessage("fetch_my_profile_error")
-                
+
                 UIAlertController(error: error).show()
             }
 
@@ -373,7 +373,7 @@ extension FirebaseManager {
 
                 // MARK: Failed to fetch the list of chat rooms.
                 FirebaseCrashMessage("fetch_chat_room_error")
-                
+
                 UIAlertController(error: error).show()
 
             }
@@ -475,7 +475,7 @@ extension FirebaseManager {
 
                 // MARK: Failed to fetch hcat histroy
                 FirebaseCrashMessage("fetch_chat_history_error")
-                
+
                 UIAlertController(error: error).show()
 
             }

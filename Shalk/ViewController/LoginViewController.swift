@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
 
             guard let email = inputEmail.text, let pwd = inputPassword.text else { return }
 
-            SVProgressHUD.show(withStatus: "Start to log in")
+            SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Login", comment: ""))
 
             // MARK: User start to log in.
 
@@ -29,9 +29,9 @@ class LoginViewController: UIViewController {
 
         } else {
 
-            let alert = UIAlertController(title: "Error!", message: "Please fullfill all required fileds", preferredStyle: .alert)
+            let alert = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: NSLocalizedString("Empty_Field", comment: ""), preferredStyle: .alert)
 
-            alert.addAction(title: "OK")
+            alert.addAction(title: NSLocalizedString("OK", comment: ""))
 
             self.present(alert, animated: true, completion: nil)
 
@@ -57,9 +57,9 @@ class LoginViewController: UIViewController {
 
         } else {
 
-            let alert = UIAlertController(title: "Error!", message: "Enter your email, we will send you a link to reset password1", preferredStyle: .alert)
+            let alert = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: NSLocalizedString("Reset_Password", comment: ""), preferredStyle: .alert)
 
-            alert.addAction(title: "OK")
+            alert.addAction(title: NSLocalizedString("OK", comment: ""))
 
             self.present(alert, animated: true, completion: nil)
 
@@ -72,9 +72,9 @@ class LoginViewController: UIViewController {
 
         // MARK: Add padding for textfields.
 
-        inputEmail.layer.sublayerTransform = CATransform3DMakeTranslation(20, 0, 30)
+        inputEmail.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
 
-        inputPassword.layer.sublayerTransform = CATransform3DMakeTranslation(20, 0, 30)
+        inputPassword.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
 
     }
 

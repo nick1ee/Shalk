@@ -1,0 +1,138 @@
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "1GZ-JH-XZ5"; */
+"1GZ-JH-XZ5.placeholder" = "Password";
+
+/* Class = "UITabBarItem"; title = "Shake"; ObjectID = "1Yc-1h-gVA"; */
+"1Yc-1h-gVA.title" = "Shake";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "4TY-v6-1Ua"; */
+"4TY-v6-1Ua.normalTitle" = "Login";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "5aO-dJ-kDh"; */
+"5aO-dJ-kDh.title" = "Title";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "6Og-xj-O7b"; */
+"6Og-xj-O7b.text" = "Label";
+
+/* Class = "UILabel"; text = "User Name"; ObjectID = "9En-QJ-LBd"; */
+"9En-QJ-LBd.text" = "User Name";
+
+/* Class = "UILabel"; text = "Audio Connected"; ObjectID = "AVN-D5-Jkf"; */
+"AVN-D5-Jkf.text" = "Audio Connected";
+
+/* Class = "UILabel"; text = "asdfasdfsadf"; ObjectID = "DLp-zx-gtf"; */
+"DLp-zx-gtf.text" = "asdfasdfsadf";
+
+/* Class = "UILabel"; text = "User Name"; ObjectID = "DUQ-Lq-1Vl"; */
+"DUQ-Lq-1Vl.text" = "User Name";
+
+/* Class = "UILabel"; text = "asdfasdfsadf"; ObjectID = "FQ5-Gu-WPw"; */
+"FQ5-Gu-WPw.text" = "asdfasdfsadf";
+
+/* Class = "UILabel"; text = "Nick Lee"; ObjectID = "HeC-Bb-y32"; */
+"HeC-Bb-y32.text" = "Nick Lee";
+
+/* Class = "UILabel"; text = "00:00:00"; ObjectID = "IT3-OI-iNJ"; */
+"IT3-OI-iNJ.text" = "00:00:00";
+
+/* Class = "UIButton"; normalTitle = "Back to login page"; ObjectID = "J2n-yA-PdO"; */
+"J2n-yA-PdO.normalTitle" = "Back to login page";
+
+/* Class = "UILabel"; text = "SHALK."; ObjectID = "JIe-PW-cgp"; */
+"JIe-PW-cgp.text" = "SHALK.";
+
+/* Class = "UILabel"; text = "Audio Connected"; ObjectID = "Jz3-gY-Acy"; */
+"Jz3-gY-Acy.text" = "Audio Connected";
+
+/* Class = "UIViewController"; title = "audioChatVC"; ObjectID = "MTz-Mg-tpt"; */
+"MTz-Mg-tpt.title" = "audioChatVC";
+
+/* Class = "UITextField"; placeholder = "User Name"; ObjectID = "MVi-bG-sYg"; */
+"MVi-bG-sYg.placeholder" = "User Name";
+
+/* Class = "UILabel"; text = "asfdsafd"; ObjectID = "NmD-y3-how"; */
+"NmD-y3-how.text" = "asfdsafd";
+
+/* Class = "UILabel"; text = "Nick Lee"; ObjectID = "Old-ne-4fq"; */
+"Old-ne-4fq.text" = "Nick Lee";
+
+/* Class = "UILabel"; text = "Latest Message"; ObjectID = "P6U-80-MBA"; */
+"P6U-80-MBA.text" = "Latest Message";
+
+/* Class = "UILabel"; text = "Self Introduction"; ObjectID = "SV1-Yy-Ti5"; */
+"SV1-Yy-Ti5.text" = "Self Introduction";
+
+/* Class = "UILabel"; text = "safdsafdsafdasf"; ObjectID = "TWv-dd-jFB"; */
+"TWv-dd-jFB.text" = "safdsafdsafdasf";
+
+/* Class = "UILabel"; text = "Opponent Name"; ObjectID = "U0a-Ic-iEE"; */
+"U0a-Ic-iEE.text" = "Opponent Name";
+
+/* Class = "UILabel"; text = "Shake your mobile ot find the partner!"; ObjectID = "Ud4-SZ-7yg"; */
+"Ud4-SZ-7yg.text" = "Shake your mobile ot find the partner!";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "VMt-X7-OnC"; */
+"VMt-X7-OnC.placeholder" = "Password";
+
+/* Class = "UILabel"; text = "Shalk."; ObjectID = "Vmx-m7-l2p"; */
+"Vmx-m7-l2p.text" = "Shalk.";
+
+/* Class = "UINavigationItem"; title = "Profile"; ObjectID = "WDZ-fF-ibh"; */
+"WDZ-fF-ibh.title" = "Profile";
+
+/* Class = "UINavigationItem"; title = "Chat"; ObjectID = "WSp-v3-i7H"; */
+"WSp-v3-i7H.title" = "Chat";
+
+/* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "Wdd-Gl-kWd"; */
+"Wdd-Gl-kWd.placeholder" = "Email Address";
+
+/* Class = "UILabel"; text = "00:00:00"; ObjectID = "Y1X-8D-LDP"; */
+"Y1X-8D-LDP.text" = "00:00:00";
+
+/* Class = "UILabel"; text = "User Name"; ObjectID = "ZgK-Tf-vhI"; */
+"ZgK-Tf-vhI.text" = "User Name";
+
+/* Class = "UITabBarItem"; title = "Profile"; ObjectID = "Zoj-L9-Jd7"; */
+"Zoj-L9-Jd7.title" = "Profile";
+
+/* Class = "UILabel"; text = "Video call"; ObjectID = "buB-Wt-bbv"; */
+"buB-Wt-bbv.text" = "Video call";
+
+/* Class = "UINavigationItem"; title = "Discover"; ObjectID = "d7Y-Dv-MdK"; */
+"d7Y-Dv-MdK.title" = "Discover";
+
+/* Class = "UIButton"; normalTitle = "Forget password?"; ObjectID = "dTh-8X-izs"; */
+"dTh-8X-izs.normalTitle" = "Forget password?";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "dbU-qS-x99"; */
+"dbU-qS-x99.normalTitle" = "Sign Up";
+
+/* Class = "UIButton"; normalTitle = "Sign up"; ObjectID = "fEg-n5-jPL"; */
+"fEg-n5-jPL.normalTitle" = "Sign up";
+
+/* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "gEV-FD-Jpb"; */
+"gEV-FD-Jpb.placeholder" = "Email Address";
+
+/* Class = "UILabel"; text = "Don't have an account?"; ObjectID = "gGQ-Wl-50w"; */
+"gGQ-Wl-50w.text" = "Don't have an account?";
+
+/* Class = "UILabel"; text = "00:00:00"; ObjectID = "iJw-xa-ZDq"; */
+"iJw-xa-ZDq.text" = "00:00:00";
+
+/* Class = "UITextField"; placeholder = "Input your name here."; ObjectID = "kAg-Xw-quR"; */
+"kAg-Xw-quR.placeholder" = "Input your name here.";
+
+/* Class = "UINavigationItem"; title = "Shalk."; ObjectID = "kzy-nF-U52"; */
+"kzy-nF-U52.title" = "Shalk.";
+
+/* Class = "UITextView"; text = "write something.."; ObjectID = "mTn-mZ-D9l"; */
+"mTn-mZ-D9l.text" = "write something..";
+
+/* Class = "UITextField"; placeholder = "Introduce yourself here."; ObjectID = "q3X-fB-goB"; */
+"q3X-fB-goB.placeholder" = "Introduce yourself here.";
+
+/* Class = "UINavigationItem"; title = "Modify"; ObjectID = "uVp-Cd-Qq4"; */
+"uVp-Cd-Qq4.title" = "Modify";
+
+/* Class = "UITabBarItem"; title = "Chat"; ObjectID = "wxM-Hv-sf2"; */
+"wxM-Hv-sf2.title" = "Chat";

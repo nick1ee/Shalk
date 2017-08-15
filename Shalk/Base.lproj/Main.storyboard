@@ -65,16 +65,16 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0GU-iA-c9R">
-                                <rect key="frame" x="97" y="686" width="220" height="20"/>
+                                <rect key="frame" x="98.333333333333314" y="686" width="217.33333333333337" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGQ-Wl-50w">
-                                        <rect key="frame" x="0.0" y="1" width="158" height="18"/>
+                                        <rect key="frame" x="0.0" y="1" width="157.33333333333331" height="18"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEg-n5-jPL">
-                                        <rect key="frame" x="163" y="-5" width="55" height="30"/>
+                                        <rect key="frame" x="162.33333333333337" y="-5" width="55" height="30"/>
                                         <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                                         <state key="normal" title="Sign up">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -86,9 +86,9 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="fEg-n5-jPL" firstAttribute="centerY" secondItem="0GU-iA-c9R" secondAttribute="centerY" id="DVd-N7-QlI"/>
-                                    <constraint firstAttribute="width" constant="220" id="F2T-wz-vmI"/>
                                     <constraint firstItem="gGQ-Wl-50w" firstAttribute="centerY" secondItem="0GU-iA-c9R" secondAttribute="centerY" id="LiL-sh-lz1"/>
                                     <constraint firstItem="gGQ-Wl-50w" firstAttribute="leading" secondItem="0GU-iA-c9R" secondAttribute="leading" id="bI6-oE-F6u"/>
+                                    <constraint firstAttribute="trailing" secondItem="fEg-n5-jPL" secondAttribute="trailing" id="i0V-wr-4b0"/>
                                     <constraint firstItem="fEg-n5-jPL" firstAttribute="leading" secondItem="gGQ-Wl-50w" secondAttribute="trailing" constant="5" id="lO4-he-gTS"/>
                                     <constraint firstAttribute="height" constant="20" id="oys-zo-DcD"/>
                                 </constraints>

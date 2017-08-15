@@ -32,7 +32,11 @@ class ProfileViewController: UIViewController {
 
     @IBAction func btnLogOut(_ sender: UIBarButtonItem) {
 
-        self.pushLogOutMessage { (_) in
+        let alert = UIAlertController.init(title: "Notification", message: "Do you want to log out this account?", preferredStyle: .alert)
+
+        alert.addAction(title: "Cancel")
+
+        alert.addAction(title: "OK", style: .default, isEnabled: true) { (_) in
 
             // MARK: User log out.
 
@@ -41,6 +45,8 @@ class ProfileViewController: UIViewController {
             UserManager.shared.logOut()
 
         }
+
+        self.present(alert, animated: true, completion: nil)
 
     }
 

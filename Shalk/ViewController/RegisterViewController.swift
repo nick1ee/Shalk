@@ -29,7 +29,7 @@ class RegisterViewController: UIViewController {
 
                 if  pwd.characters.count >= 6 {
 
-                    SVProgressHUD.show(withStatus: "Registering a new account")
+                    SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Register", comment: ""))
 
                     UserManager.shared.signUp(name: name, withEmail: email, withPassword: pwd)
 
@@ -37,9 +37,9 @@ class RegisterViewController: UIViewController {
 
                     // MARK: Invalid password.
 
-                    let alert = UIAlertController(title: "Error!", message: "Password should have 6 characters at least.", preferredStyle: .alert)
+                    let alert = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: NSLocalizedString("Invalid_Password", comment: ""), preferredStyle: .alert)
 
-                    alert.addAction(title: "OK")
+                    alert.addAction(title: NSLocalizedString("OK", comment: ""))
 
                     self.present(alert, animated: true, completion: nil)
 
@@ -49,9 +49,9 @@ class RegisterViewController: UIViewController {
 
                 // MARK: Invalid email format.
 
-                let alert = UIAlertController(title: "Error!", message: "Please enter a valid email account", preferredStyle: .alert)
+                let alert = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: NSLocalizedString("Invalid_Email", comment: ""), preferredStyle: .alert)
 
-                alert.addAction(title: "OK")
+                alert.addAction(title: NSLocalizedString("OK", comment: ""))
 
                 self.present(alert, animated: true, completion: nil)
 
@@ -59,9 +59,9 @@ class RegisterViewController: UIViewController {
 
         } else {
 
-            let alert = UIAlertController(title: "Error!", message: "Please fullfill all required fileds to apply a new account", preferredStyle: .alert)
+            let alert = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: NSLocalizedString("Empty_Field", comment: ""), preferredStyle: .alert)
 
-            alert.addAction(title: "OK")
+            alert.addAction(title: NSLocalizedString("OK", comment: ""))
 
             self.present(alert, animated: true, completion: nil)
 

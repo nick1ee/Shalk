@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  Shalk
+
+  Created by Nick Lee on 2017/8/14.
+  Copyright © 2017年 nicklee. All rights reserved.
+*/
+
+// MARK: - SVProgrsssHUD
+"SVProgress_Login" = "Start to log in..";
+"SVProgress_Register" = "Registering a new account..";
+
+
+
+// MARK: - Alert Controller
+"ERROR" = "ERROR!";
+"OK" = "OK!";
+
+"Empty_Field" = "Please fill out all required fileds";
+"Reset_Password" = "Please enter your email address, we will send you a link to reset password.";
+"Invalid_Email" = "Your email format is invalid, please check!";
+"Invalid_Password" = "Password must contain least 6 characters!";

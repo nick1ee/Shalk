@@ -160,7 +160,17 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         UserManager.shared.stopPlayingSound()
 
-        self.presentedViewController?.pushRejctedCallMessage()
+        guard let opponent = UserManager.shared.opponent else { return }
+
+        let alert = UIAlertController.init(title: "Oops!", message: "\(opponent.name) rejected the call.", preferredStyle: .alert)
+
+        alert.addAction(title: "OK", style: .default, isEnabled: true) { (_) in
+
+            self.dismiss(animated: true, completion: nil)
+
+        }
+
+        self.presentedViewController?.present(alert, animated: true, completion: nil)
 
         if UserManager.shared.isDiscovering == true {
 
@@ -183,8 +193,25 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         if friend.count == 0 {
 
-            // MARK: 非好友
-            self.receivedEndCallwithFriendRequest()
+            // MARK: Not friends, init a friend request.
+
+            let alert = UIAlertController.init(title: "Send a friend request?", message: "If you enjoy the time with \(UserManager.shared.opponent?.name ?? "")", preferredStyle: .alert)
+
+            alert.addAction(title: "Cancel", style: .cancel, isEnabled: true, handler: { (_) in
+                UserManager.shared.closeChannel()
+
+                self.presentedViewController?.dismiss(animated: true, completion: nil)
+            })
+
+            alert.addAction(title: "Send", style: .default, isEnabled: true, handler: { (_) in
+
+                FirebaseManager().checkFriendRequest()
+
+                self.presentedViewController?.dismiss(animated: true, completion: nil)
+
+            })
+
+            self.presentedViewController?.present(alert, animated: true, completion: nil)
 
             return
 
@@ -196,7 +223,10 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         guard
             let callType = userInfo?["call"],
-            let duration = userInfo?["duration"] else { return }
+            let duration = userInfo?["duration"],
+            let chatRoomId = userInfo?["roomId"] else { return }
+
+        UserManager.shared.chatRoomId = chatRoomId
 
         FirebaseManager().sendCallRecord(callType, duration: duration)
 
@@ -207,7 +237,17 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         UserManager.shared.stopPlayingSound()
 
-        self.presentedViewController?.pushNoRespondMessage()
+        guard let opponent = UserManager.shared.opponent else { return }
+
+        let alert = UIAlertController.init(title: "No Answer", message: "\(opponent.name) did not answer the call.", preferredStyle: .alert)
+
+        alert.addAction(title: "OK", style: .default, isEnabled: true) { (_) in
+
+            self.dismiss(animated: true, completion: nil)
+
+        }
+
+        self.presentedViewController?.present(alert, animated: true, completion: nil)
 
     }
 
