@@ -58,4 +58,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     }
 
+    func applicationWillEnterForeground(_ application: UIApplication) {
+
+        if QBChat.instance().currentUser() != nil {
+
+            // MARK: User connected to chat service successfully.
+
+            //swiftlint:disable force_cast
+            let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainTabVC") as! UITabBarController
+
+            mainTabVC.selectedIndex = 2
+
+            AppDelegate.shared.window?.rootViewController = mainTabVC
+            //swiftlint:enable force_case
+
+        } else {
+
+            guard let userToken = UserManager.shared.restore() else { return }
+
+            // MARK: Fetched token successfully, log in directly.
+            UserManager.shared.logIn(withEmail: userToken["email"]!, withPassword: userToken["password"]!)
+
+            SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Fetch_Data", comment: ""))
+
+        }
+
+    }
+
 }

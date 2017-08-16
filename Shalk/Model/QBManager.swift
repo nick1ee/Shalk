@@ -55,6 +55,10 @@ class QBManager {
 
                     // MARK: Failed to connect chat service.
 
+                    SVProgressHUD.dismiss()
+
+                    UIApplication.shared.endIgnoringInteractionEvents()
+
                     let alert = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("Login_ChatService_Error", comment: ""), preferredStyle: .alert)
 
                     alert.addAction(title: "OK")

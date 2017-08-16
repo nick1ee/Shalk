@@ -18,10 +18,6 @@ class ShakeViewController: UIViewController {
 
     let rtcManager = QBRTCClient.instance()
 
-    let qbManager = QBManager.shared
-
-    let userManager = UserManager.shared
-
     var names = UIImage.names
 
     var selectedNode: Node?
@@ -70,7 +66,9 @@ class ShakeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        userManager.opponent = nil
+        QBManager.shared.session = nil
+
+        UserManager.shared.opponent = nil
 
         UserManager.shared.isDiscovering = false
 

@@ -242,7 +242,7 @@ extension FirebaseManager {
             } catch let error {
 
                 // MARK: Failed to fetch user profile
-                
+
                 Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_OpponentProfile_Error"])
 
                 UIAlertController(error: error).show()
@@ -275,7 +275,7 @@ extension FirebaseManager {
             } catch let error {
 
                 // MARK: Failed to fetch user profile
-                
+
                 Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_MyProfile_Error"])
 
                 UIAlertController(error: error).show()
