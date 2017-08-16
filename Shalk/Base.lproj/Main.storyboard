@@ -1688,6 +1688,7 @@
                     <connections>
                         <outlet property="chatTableView" destination="mU1-Kg-ryA" id="Wyx-GG-XUU"/>
                         <outlet property="inputTextView" destination="mTn-mZ-D9l" id="Pry-cO-PEL"/>
+                        <outlet property="outletSend" destination="ZqD-5w-X1Q" id="em0-mO-nx0"/>
                         <segue destination="MTz-Mg-tpt" kind="presentation" identifier="audioCall" id="E0a-MG-Ga1"/>
                         <segue destination="M85-tE-XmL" kind="presentation" identifier="videoCall" id="SQr-9W-W6x"/>
                     </connections>

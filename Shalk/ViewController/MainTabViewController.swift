@@ -241,15 +241,23 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         guard let opponent = UserManager.shared.opponent else { return }
 
-        let alert = UIAlertController.init(title: NSLocalizedString("Oops", comment: ""), message: "\(opponent.name)" + NSLocalizedString("No_Answer", comment: ""), preferredStyle: .alert)
+        if String(describing: session.opponentsIDs[0]) == opponent.quickbloxId {
 
-        alert.addAction(title: "OK", style: .default, isEnabled: true) { (_) in
+            let alert = UIAlertController.init(title: NSLocalizedString("Oops", comment: ""), message: "\(opponent.name)" + NSLocalizedString("No_Answer", comment: ""), preferredStyle: .alert)
+
+            alert.addAction(title: "OK", style: .default, isEnabled: true) { (_) in
+
+                self.dismiss(animated: true, completion: nil)
+
+            }
+
+            self.presentedViewController?.present(alert, animated: true, completion: nil)
+
+        } else {
 
             self.dismiss(animated: true, completion: nil)
 
         }
-
-        self.presentedViewController?.present(alert, animated: true, completion: nil)
 
     }
 

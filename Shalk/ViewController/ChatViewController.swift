@@ -22,11 +22,21 @@ class ChatViewController: UIViewController {
 
     @IBOutlet weak var inputTextView: UITextView!
 
+    @IBOutlet weak var outletSend: UIButton!
+
     @IBAction func sendMessage(_ sender: UIButton) {
 
-        fbManager.sendMessage(text: inputTextView.text)
+        if !inputTextView.text.isEmpty {
 
-        inputTextView.text = ""
+            fbManager.sendMessage(text: inputTextView.text)
+
+            inputTextView.text = ""
+
+            outletSend.tintColor = UIColor.lightGray
+
+            outletSend.isEnabled = false
+
+        }
 
     }
 
@@ -80,6 +90,10 @@ class ChatViewController: UIViewController {
 
         chatTableView.rowHeight = UITableViewAutomaticDimension
 
+        outletSend.tintColor = UIColor.lightGray
+
+        outletSend.isEnabled = false
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -91,11 +105,11 @@ class ChatViewController: UIViewController {
 
         fbManager.fetchChatHistory { fetchMessages in
 
-            self.messages = fetchMessages
+            self.messages = fetchMessages.filter { $0.text != "" }
 
             self.chatTableView.reloadData({
 
-                self.chatTableView.scrollToBottom(animated: false)
+                self.scrollToLast()
 
             })
         }
@@ -106,6 +120,22 @@ class ChatViewController: UIViewController {
         super.viewDidDisappear(animated)
 
         FirebaseManager().updateChatRoom()
+
+    }
+
+    func scrollToLast() {
+
+        if self.messages.count >= 1 {
+
+            let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+
+            DispatchQueue.main.async {
+
+                self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+
+            }
+
+        }
 
     }
 
@@ -122,29 +152,25 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        let showMessages = messages.filter { $0.text != "" }
-
-        return  showMessages.count
+        return messages.count
 
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let showMessages = messages.filter { $0.text != "" }
-
         let gradientLayer = CAGradientLayer()
 
         guard let myUid = UserManager.shared.currentUser?.uid else { return UITableViewCell() }
 
-        switch showMessages[indexPath.row].senderId {
+        switch messages[indexPath.row].senderId {
 
         case myUid:
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "senderCell", for: indexPath) as! SenderTableViewCell
 
-            cell.sendedMessage.text = showMessages[indexPath.row].text
+            cell.sendedMessage.text = messages[indexPath.row].text
 
-            cell.sendedTime.text = showMessages[indexPath.row].time
+            cell.sendedTime.text = messages[indexPath.row].time
 
             gradientLayer.frame = cell.bounds
 
@@ -168,9 +194,9 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.iconCallType.image = UIImage(named: "icon-audio")
 
-            cell.callDuration.text = showMessages[indexPath.row].text
+            cell.callDuration.text = messages[indexPath.row].text
 
-            cell.time.text = showMessages[indexPath.row].time
+            cell.time.text = messages[indexPath.row].time
 
             return cell
 
@@ -180,21 +206,21 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.iconCallType.image = UIImage(named: "icon-camera")
 
-            cell.callDuration.text = showMessages[indexPath.row].text
+            cell.callDuration.text = messages[indexPath.row].text
 
-            cell.time.text = showMessages[indexPath.row].time
+            cell.time.text = messages[indexPath.row].time
 
             return cell
 
         default:
 
-            let friend = UserManager.shared.friends.filter { $0.uid == showMessages[indexPath.row].senderId }
+            let friend = UserManager.shared.friends.filter { $0.uid == messages[indexPath.row].senderId }
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "receiverCell", for: indexPath) as! ReceiverTableViewCell
 
-            cell.receivedMessage.text = showMessages[indexPath.row].text
+            cell.receivedMessage.text = messages[indexPath.row].text
 
-            cell.receivedTime.text = showMessages[indexPath.row].time
+            cell.receivedTime.text = messages[indexPath.row].time
 
             cell.receiverImageView.sd_setImage(with: URL(string: friend[0].imageUrl))
 
@@ -207,6 +233,24 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ChatViewController: UITextViewDelegate {
+
+    func textViewDidChange(_ textView: UITextView) {
+
+        if !inputTextView.text.isEmpty {
+
+            outletSend.tintColor = UIColor.white
+
+            outletSend.isEnabled = true
+
+        } else {
+
+            outletSend.tintColor = UIColor.lightGray
+
+            outletSend.isEnabled = false
+
+        }
+
+    }
 
     func textViewDidBeginEditing(_ textView: UITextView) {
 
@@ -223,6 +267,10 @@ extension ChatViewController: UITextViewDelegate {
         if inputTextView.text.isEmpty {
 
             inputTextView.text = NSLocalizedString("InputField_Placefolder", comment: "")
+
+            outletSend.tintColor = UIColor.lightGray
+
+            outletSend.isEnabled = false
 
         }
     }
