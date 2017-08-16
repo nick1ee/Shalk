@@ -50,8 +50,8 @@
 "Reset_Password_Title" = "Reset Password";
 "Reset_Password_Message" = "We have sent you a link to reset your password, please check your email box.";
 
-"Friend_Request_Title" = "Send a friend request?";
-"Friend_Request_Message" = "If you want to make friend with ";
+"Friend_Request_Title" = "Enjoy this call?";
+"Friend_Request_Message" = "Do you want to make friend with ";
 
 "Logout_Title" = "Log Out Message";
 "Logout_Message" = "Do you want to log out this account?";

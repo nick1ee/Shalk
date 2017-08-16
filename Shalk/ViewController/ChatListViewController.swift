@@ -18,6 +18,10 @@ class ChatListViewController: UIViewController {
 
     var opponentName = ""
 
+    var btnHint: UIButton?
+
+    let screen = UIScreen.main.bounds
+
     @IBOutlet weak var chatListTableView: UITableView!
 
     override func viewDidLoad() {
@@ -31,6 +35,8 @@ class ChatListViewController: UIViewController {
 
         chatListTableView.backgroundView = bgImageView
 
+        addButonIfNoFriend()
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +47,26 @@ class ChatListViewController: UIViewController {
             self.fbManager.fetchChatRoomList()
 
         }
+
+    }
+
+    func addButonIfNoFriend() {
+
+        btnHint = UIButton(frame: CGRect(x: screen.width / 2 - 75, y: 100, width: 150, height: 30))
+
+        btnHint?.setTitle("Go Discover >", for: .normal)
+
+        btnHint?.setTitleColor(UIColor.init(red: 255/255, green: 189/255, blue: 0/255, alpha: 1), for: .normal)
+
+        btnHint?.addTarget(self, action: #selector(goDiscover), for: .touchDown)
+
+        self.view.addSubview(btnHint!)
+
+    }
+
+    func goDiscover() {
+
+        self.tabBarController?.selectedIndex = 1
 
     }
 
@@ -139,6 +165,8 @@ extension ChatListViewController: FirebaseManagerChatRoomDelegate {
     func manager(_ manager: FirebaseManager, didGetChatRooms rooms: [ChatRoom]) {
 
         self.rooms = rooms
+
+        btnHint?.isHidden = true
 
         chatListTableView.reloadData()
 
