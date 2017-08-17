@@ -104,6 +104,66 @@ class ProfileViewController: UIViewController {
 
     }
 
+    func setTapGestureRecognizer() -> UITapGestureRecognizer {
+
+        let tapRecognizer = UITapGestureRecognizer()
+
+        tapRecognizer.addTarget(self, action: #selector(didTapUserImage))
+
+        return tapRecognizer
+
+    }
+
+    func didTapUserImage(_ gesture: UITapGestureRecognizer) {
+
+        guard
+            let indexNumber = gesture.view?.tag,
+            let imageView = gesture.view as? UIImageView else { return }
+
+        let indexRow = indexNumber % 1000
+
+        let indexSection = indexNumber / 1000
+
+        switch indexSection {
+
+        case 1:
+
+            let alert = CustomAlert(title: englishFriends[indexRow].name, image: imageView.image!)
+
+            alert.show(animated: true)
+
+            break
+
+        case 2:
+
+            let alert = CustomAlert(title: chineseFriends[indexRow].name, image: imageView.image!)
+
+            alert.show(animated: true)
+
+            break
+
+        case 3:
+
+            let alert = CustomAlert(title: japaneseFriends[indexRow].name, image: imageView.image!)
+
+            alert.show(animated: true)
+
+            break
+
+        case 4:
+
+            let alert = CustomAlert(title: koreanFriends[indexRow].name, image: imageView.image!)
+
+            alert.show(animated: true)
+
+            break
+
+        default: break
+
+        }
+
+    }
+
 }
 
 extension ProfileViewController: FirebaseManagerFriendDelegate {
@@ -269,9 +329,17 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.friendImageView.sd_setImage(with: URL(string: englishFriends[indexPath.row].imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
+            let indexNumber = indexPath.section * 1000 + indexPath.row
+
+            cell.friendImageView.tag = indexNumber
+
+            cell.friendImageView.addGestureRecognizer(setTapGestureRecognizer())
+
+            cell.friendImageView.isUserInteractionEnabled = true
+
             cell.friendName.text = self.englishFriends[indexPath.row].name
 
-            cell.backgroundColor = UIColor.clear
+            cell.friendStatus.text = self.englishFriends[indexPath.row].intro
 
             return cell
 
@@ -283,9 +351,17 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.friendImageView.sd_setImage(with: URL(string: chineseFriends[indexPath.row].imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
+            let indexNumber = indexPath.section * 1000 + indexPath.row
+
+            cell.friendImageView.tag = indexNumber
+
+            cell.friendImageView.addGestureRecognizer(setTapGestureRecognizer())
+
+            cell.friendImageView.isUserInteractionEnabled = true
+
             cell.friendName.text = self.chineseFriends[indexPath.row].name
 
-            cell.backgroundColor = UIColor.clear
+            cell.friendStatus.text = self.chineseFriends[indexPath.row].intro
 
             return cell
 
@@ -297,9 +373,17 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.friendImageView.sd_setImage(with: URL(string: japaneseFriends[indexPath.row].imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
+            let indexNumber = indexPath.section * 1000 + indexPath.row
+
+            cell.friendImageView.tag = indexNumber
+
+            cell.friendImageView.addGestureRecognizer(setTapGestureRecognizer())
+
+            cell.friendImageView.isUserInteractionEnabled = true
+
             cell.friendName.text = self.japaneseFriends[indexPath.row].name
 
-            cell.backgroundColor = UIColor.clear
+            cell.friendStatus.text = self.japaneseFriends[indexPath.row].intro
 
             return cell
 
@@ -311,9 +395,17 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.friendImageView.sd_setImage(with: URL(string: koreanFriends[indexPath.row].imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
+            let indexNumber = indexPath.section * 1000 + indexPath.row
+
+            cell.friendImageView.tag = indexNumber
+
+            cell.friendImageView.addGestureRecognizer(setTapGestureRecognizer())
+
+            cell.friendImageView.isUserInteractionEnabled = true
+
             cell.friendName.text = self.koreanFriends[indexPath.row].name
 
-            cell.backgroundColor = UIColor.clear
+            cell.friendStatus.text = self.koreanFriends[indexPath.row].intro
 
             return cell
 

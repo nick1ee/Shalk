@@ -36,6 +36,8 @@
 		B878FD9B1F4281E70091AD4D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B878FD9D1F4281E70091AD4D /* Localizable.strings */; };
 		B89872871F306008007DEDA6 /* AudioChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89872861F306008007DEDA6 /* AudioChannel.swift */; };
 		B8AAB7FA1F3AE01300FFA58E /* FirebaseManagerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AAB7F91F3AE01300FFA58E /* FirebaseManagerProtocols.swift */; };
+		B8AE68811F45357900C259A5 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AE68801F45357900C259A5 /* Modal.swift */; };
+		B8AE68831F45383400C259A5 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AE68821F45383400C259A5 /* CustomAlert.swift */; };
 		B8D9ECDD1F32F7BE00B9FEED /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D9ECDC1F32F7BE00B9FEED /* Message.swift */; };
 		B8DB3F101F2E2852006E5A58 /* RandomCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DB3F0F1F2E2852006E5A58 /* RandomCallViewController.swift */; };
 		B8DB3F191F2F0255006E5A58 /* QuickbloxWebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F171F2F0255006E5A58 /* QuickbloxWebRTC.framework */; };
@@ -115,6 +117,8 @@
 		B878FD9F1F4281F10091AD4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B89872861F306008007DEDA6 /* AudioChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioChannel.swift; sourceTree = "<group>"; };
 		B8AAB7F91F3AE01300FFA58E /* FirebaseManagerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManagerProtocols.swift; sourceTree = "<group>"; };
+		B8AE68801F45357900C259A5 /* Modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
+		B8AE68821F45383400C259A5 /* CustomAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		B8D9ECDC1F32F7BE00B9FEED /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		B8DB3F0F1F2E2852006E5A58 /* RandomCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomCallViewController.swift; sourceTree = "<group>"; };
 		B8DB3F151F2F0237006E5A58 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -209,12 +213,13 @@
 			path = Shalk/Structures;
 			sourceTree = "<group>";
 		};
-		B80331431F2B388F00F89209 /* MagneticExtensions */ = {
+		B80331431F2B388F00F89209 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				B80331441F2B388F00F89209 /* MagneticExtensions.swift */,
+				B8AE68801F45357900C259A5 /* Modal.swift */,
 			);
-			name = MagneticExtensions;
+			name = Extensions;
 			path = Shalk/MagneticExtensions;
 			sourceTree = "<group>";
 		};
@@ -222,7 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				B872E6161F29BF91009BD763 /* Shalk */,
-				B80331431F2B388F00F89209 /* MagneticExtensions */,
+				B80331431F2B388F00F89209 /* Extensions */,
 				B803313A1F2B338200F89209 /* Structures */,
 				B872E6151F29BF91009BD763 /* Products */,
 				A12B4203998B282BB4ACAE23 /* Pods */,
@@ -287,6 +292,7 @@
 				B8F1D0551F3627F2003BACF8 /* SenderTableViewCell.swift */,
 				B8F1D0571F362803003BACF8 /* ReceiverTableViewCell.swift */,
 				B81B33D01F41458B00BE8CAB /* CallTableViewCell.swift */,
+				B8AE68821F45383400C259A5 /* CustomAlert.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -503,9 +509,11 @@
 				B81B33D11F41458B00BE8CAB /* CallTableViewCell.swift in Sources */,
 				B81B33CF1F4138E900BE8CAB /* Timer.swift in Sources */,
 				B803313E1F2B338200F89209 /* User.swift in Sources */,
+				B8AE68831F45383400C259A5 /* CustomAlert.swift in Sources */,
 				B872E6301F29C498009BD763 /* AppDelegate.swift in Sources */,
 				B8456F7C1F38483200641315 /* MainTabViewController.swift in Sources */,
 				B8AAB7FA1F3AE01300FFA58E /* FirebaseManagerProtocols.swift in Sources */,
+				B8AE68811F45357900C259A5 /* Modal.swift in Sources */,
 				B8F1D0561F3627F2003BACF8 /* SenderTableViewCell.swift in Sources */,
 				B8F1D0541F362063003BACF8 /* ChatViewController.swift in Sources */,
 				B82C6DA01F2BAC5A00C5948D /* ChatTableViewCell.swift in Sources */,

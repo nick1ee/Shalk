@@ -12,6 +12,8 @@ class FriendTableViewCell: UITableViewCell {
 
     @IBOutlet weak var friendImageView: UIImageView!
 
+    @IBOutlet weak var friendStatus: UILabel!
+
     @IBOutlet weak var friendName: UILabel!
 
     override func awakeFromNib() {
@@ -20,6 +22,8 @@ class FriendTableViewCell: UITableViewCell {
         friendImageView.tintColor = UIColor.init(red: 62/255, green: 48/255, blue: 76/255, alpha: 1)
 
         friendImageView.backgroundColor = UIColor.white
+
+        self.backgroundColor = UIColor.clear
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

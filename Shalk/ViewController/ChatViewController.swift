@@ -139,6 +139,26 @@ class ChatViewController: UIViewController {
 
     }
 
+    func setTapGestureRecognizer() -> UITapGestureRecognizer {
+
+        let tapRecognizer = UITapGestureRecognizer()
+
+        tapRecognizer.addTarget(self, action: #selector(didTapUserImage))
+
+        return tapRecognizer
+
+    }
+
+    func didTapUserImage(_ gesture: UITapGestureRecognizer) {
+
+        guard let imageView = gesture.view as? UIImageView else { return }
+
+        let alert = CustomAlert(title: opponent.name, image: imageView.image!)
+
+        alert.show(animated: true)
+
+    }
+
 }
 
 //swiftlint:disable force_cast
@@ -223,6 +243,10 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             cell.receivedTime.text = messages[indexPath.row].time
 
             cell.receiverImageView.sd_setImage(with: URL(string: friend[0].imageUrl))
+
+            cell.receiverImageView.addGestureRecognizer(setTapGestureRecognizer())
+
+            cell.receiverImageView.isUserInteractionEnabled = true
 
             return cell
 
