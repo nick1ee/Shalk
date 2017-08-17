@@ -55,6 +55,22 @@ class QBManager {
 
                     // MARK: Failed to connect chat service.
 
+                    if error?.localizedDescription == "The operation couldn’t be completed. (com.quickblox.chat error -1000.)" {
+
+                        let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainTabVC") as! UITabBarController
+
+                        mainTabVC.selectedIndex = 2
+
+                        AppDelegate.shared.window?.rootViewController = mainTabVC
+
+                        SVProgressHUD.dismiss()
+
+                        UIApplication.shared.endIgnoringInteractionEvents()
+
+                        return
+
+                    }
+
                     SVProgressHUD.dismiss()
 
                     UIApplication.shared.endIgnoringInteractionEvents()

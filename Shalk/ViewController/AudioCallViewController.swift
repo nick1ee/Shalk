@@ -39,8 +39,6 @@ class AudioCallViewController: UIViewController {
 
     @IBOutlet weak var opponentName: UILabel!
 
-    @IBOutlet weak var connectionStatus: UILabel!
-
     @IBOutlet weak var outletMicrophone: UIButton!
 
     @IBOutlet weak var outletSpeaker: UIButton!
@@ -121,8 +119,6 @@ class AudioCallViewController: UIViewController {
         guard let opponent = UserManager.shared.opponent else { return }
 
         opponentName.text = opponent.name
-
-        connectionStatus.text = NSLocalizedString("Connecting", comment: "")
 
         DispatchQueue.global().async {
 
@@ -215,8 +211,6 @@ extension AudioCallViewController: QBRTCClientDelegate {
     func session(_ session: QBRTCBaseSession, connectedToUser userID: NSNumber) {
 
         AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-
-        connectionStatus.text = NSLocalizedString("AudioConnected", comment: "")
 
         self.configTimer()
 
