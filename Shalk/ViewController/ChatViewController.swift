@@ -153,7 +153,7 @@ class ChatViewController: UIViewController {
 
         guard let imageView = gesture.view as? UIImageView else { return }
 
-        let alert = CustomAlert(title: opponent.name, image: imageView.image!)
+        let alert = CustomAlert(title: opponent.name, intro: opponent.intro, image: imageView.image!)
 
         alert.show(animated: true)
 

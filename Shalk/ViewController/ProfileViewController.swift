@@ -92,7 +92,7 @@ class ProfileViewController: UIViewController {
 
     func prepareTableView() {
 
-        tableView.estimatedRowHeight = 200
+        tableView.estimatedRowHeight = 250
 
         tableView.rowHeight = UITableViewAutomaticDimension
 
@@ -128,7 +128,7 @@ class ProfileViewController: UIViewController {
 
         case 1:
 
-            let alert = CustomAlert(title: englishFriends[indexRow].name, image: imageView.image!)
+            let alert = CustomAlert(title: englishFriends[indexRow].name, intro: englishFriends[indexRow].intro, image: imageView.image!)
 
             alert.show(animated: true)
 
@@ -136,7 +136,7 @@ class ProfileViewController: UIViewController {
 
         case 2:
 
-            let alert = CustomAlert(title: chineseFriends[indexRow].name, image: imageView.image!)
+            let alert = CustomAlert(title: chineseFriends[indexRow].name, intro: chineseFriends[indexRow].intro, image: imageView.image!)
 
             alert.show(animated: true)
 
@@ -144,7 +144,7 @@ class ProfileViewController: UIViewController {
 
         case 3:
 
-            let alert = CustomAlert(title: japaneseFriends[indexRow].name, image: imageView.image!)
+            let alert = CustomAlert(title: japaneseFriends[indexRow].name, intro: japaneseFriends[indexRow].intro, image: imageView.image!)
 
             alert.show(animated: true)
 
@@ -152,7 +152,7 @@ class ProfileViewController: UIViewController {
 
         case 4:
 
-            let alert = CustomAlert(title: koreanFriends[indexRow].name, image: imageView.image!)
+            let alert = CustomAlert(title: koreanFriends[indexRow].name, intro: koreanFriends[indexRow].intro, image: imageView.image!)
 
             alert.show(animated: true)
 
@@ -462,16 +462,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         default: break
 
         }
-
-    }
-
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-
-        let dismissCell = cell as? FriendTableViewCell
-
-        dismissCell?.friendImageView.image = nil
-
-        dismissCell?.friendName.text = ""
 
     }
 

@@ -22,6 +22,8 @@ class RandomCallViewController: UIViewController {
 
     @IBOutlet weak var userNameLabel: UILabel!
 
+    @IBOutlet weak var userImageView: UIImageView!
+
     @IBOutlet weak var outletSpeaker: UIButton!
 
     @IBOutlet weak var outletMicrophone: UIButton!
@@ -123,6 +125,20 @@ class RandomCallViewController: UIViewController {
         guard let opponent = UserManager.shared.opponent else { return }
 
         userNameLabel.text = opponent.name
+
+        if opponent.imageUrl == "null" {
+
+            userImageView.isHidden = true
+
+        } else {
+
+            userImageView.isHidden = false
+
+            userImageView.sd_setImage(with: URL(string: opponent.imageUrl), placeholderImage: UIImage(named: "icon-user"))
+
+            userImageView.blur(withStyle: .light)
+
+        }
 
     }
 

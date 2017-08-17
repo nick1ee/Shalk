@@ -14,11 +14,11 @@ class CustomAlert: UIView, Modal {
 
     var dialogView: UIView = UIView()
 
-    convenience init(title: String, image: UIImage) {
+    convenience init(title: String, intro: String, image: UIImage) {
 
         self.init(frame: UIScreen.main.bounds)
 
-        initialize(title: title, image: image)
+        initialize(title: title, intro: intro, image: image)
 
     }
 
@@ -34,7 +34,7 @@ class CustomAlert: UIView, Modal {
 
     }
 
-    func initialize(title: String, image: UIImage) {
+    func initialize(title: String, intro: String, image: UIImage) {
 
         dialogView.clipsToBounds = true
 
@@ -54,15 +54,31 @@ class CustomAlert: UIView, Modal {
 
         titleLabel.text = title
 
-        titleLabel.textAlignment = .center
+        titleLabel.textAlignment = .left
 
         dialogView.addSubview(titleLabel)
 
+        let introLabel = UILabel(frame: CGRect(x: 8, y: titleLabel.frame.height + 5, width: dialogViewWidth - 16, height: 60))
+
+        introLabel.font = UIFont.systemFont(ofSize: 14)
+
+        introLabel.textColor = UIColor.gray
+
+        introLabel.text = intro
+
+        introLabel.numberOfLines = 2
+
+        introLabel.sizeToFit()
+
+        introLabel.textAlignment = .left
+
+        dialogView.addSubview(introLabel)
+
         let separatorLineView = UIView()
 
-        separatorLineView.frame.origin = CGPoint(x: 8, y: titleLabel.frame.height + 8)
+        separatorLineView.frame.origin = CGPoint(x: 8, y: introLabel.frame.height + introLabel.frame.origin.y + 8)
 
-        separatorLineView.frame.size = CGSize(width: dialogViewWidth, height: 1)
+        separatorLineView.frame.size = CGSize(width: dialogViewWidth - 16, height: 1)
 
         separatorLineView.backgroundColor = UIColor.groupTableViewBackground
 
@@ -82,7 +98,7 @@ class CustomAlert: UIView, Modal {
 
         dialogView.addSubview(imageView)
 
-        let dialogViewHeight = titleLabel.frame.height + 8 + separatorLineView.frame.height + 8 + imageView.frame.height + 8
+        let dialogViewHeight = titleLabel.frame.height + 8 + introLabel.frame.height + 8 + separatorLineView.frame.height + 8 + imageView.frame.height + 8
 
         dialogView.frame.origin = CGPoint(x: 32, y: frame.height)
 
