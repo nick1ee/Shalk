@@ -96,6 +96,8 @@ class CustomAlert: UIView, Modal {
 
         imageView.clipsToBounds = true
 
+        imageView.contentMode = .scaleAspectFit
+
         dialogView.addSubview(imageView)
 
         let dialogViewHeight = titleLabel.frame.height + 8 + introLabel.frame.height + 8 + separatorLineView.frame.height + 8 + imageView.frame.height + 8

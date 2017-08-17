@@ -47,6 +47,12 @@ class ShakeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        magneticView.allowsTransparency = true
+
+        magneticView.backgroundColor = UIColor.clear
+
+        magnetic.backgroundColor = UIColor.clear
+
         let shakeImage = UIImage(named: "icon-shake")
 
         iconShake.image = shakeImage
@@ -56,8 +62,6 @@ class ShakeViewController: UIViewController {
         iconShake.tintColor = UIColor.white
 
         magnetic.allowsMultipleSelection = false
-
-        magnetic.backgroundColor = UIColor.init(red: 44/255, green: 33/255, blue: 76/255, alpha: 1)
 
         addLangBubbles(nil)
 
@@ -165,6 +169,8 @@ extension ShakeViewController: MagneticDelegate {
         labelSearching.text = NSLocalizedString("Shake_Hint", comment: "")
 
         selectedNode = node
+
+        iconShake.isHidden = false
 
     }
 

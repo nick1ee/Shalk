@@ -40,16 +40,16 @@ class QBManager {
 
                     // MARK: User sign in with Quickblox successfully.
 
-                    SVProgressHUD.dismiss()
-
-                    UIApplication.shared.endIgnoringInteractionEvents()
-
                     //swiftlint:disable force_cast
                     let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainTabVC") as! UITabBarController
 
                     mainTabVC.selectedIndex = 2
 
                     AppDelegate.shared.window?.rootViewController = mainTabVC
+
+                    SVProgressHUD.dismiss()
+
+                    UIApplication.shared.endIgnoringInteractionEvents()
 
                 } else {
 

@@ -330,7 +330,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWZ-um-rAQ" customClass="MagneticView" customModule="Magnetic">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="A4x-Yb-aHT">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
+                            </imageView>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="nWZ-um-rAQ" customClass="MagneticView" customModule="Magnetic">
                                 <rect key="frame" x="0.0" y="64" width="414" height="344"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -382,18 +385,21 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.17281508449999999" green="0.1281037629" blue="0.29844415190000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <accessibility key="accessibilityConfiguration">
                             <accessibilityTraits key="traits" selected="YES"/>
                         </accessibility>
                         <constraints>
                             <constraint firstItem="9xl-g3-Zri" firstAttribute="top" secondItem="7hI-G9-Reo" secondAttribute="bottom" id="2jE-oV-27Y"/>
+                            <constraint firstItem="A4x-Yb-aHT" firstAttribute="height" secondItem="F9O-6f-cr5" secondAttribute="height" id="9rf-zw-T84"/>
                             <constraint firstItem="7hI-G9-Reo" firstAttribute="top" secondItem="nWZ-um-rAQ" secondAttribute="bottom" id="C9M-gu-Xfe"/>
+                            <constraint firstItem="A4x-Yb-aHT" firstAttribute="centerX" secondItem="F9O-6f-cr5" secondAttribute="centerX" id="KzV-b8-d2H"/>
                             <constraint firstAttribute="trailing" secondItem="nWZ-um-rAQ" secondAttribute="trailing" id="PRm-Ec-nPw"/>
+                            <constraint firstItem="A4x-Yb-aHT" firstAttribute="width" secondItem="F9O-6f-cr5" secondAttribute="width" id="WER-lS-008"/>
                             <constraint firstItem="nWZ-um-rAQ" firstAttribute="height" secondItem="F9O-6f-cr5" secondAttribute="height" multiplier="1:2" id="Zpr-IY-Uat"/>
                             <constraint firstItem="nWZ-um-rAQ" firstAttribute="top" secondItem="8LH-0U-0Xn" secondAttribute="bottom" id="a6P-m9-InS"/>
                             <constraint firstAttribute="trailing" secondItem="7hI-G9-Reo" secondAttribute="trailing" id="c64-8K-0Hb"/>
                             <constraint firstItem="nWZ-um-rAQ" firstAttribute="leading" secondItem="F9O-6f-cr5" secondAttribute="leading" id="rmF-dJ-K2C"/>
+                            <constraint firstItem="A4x-Yb-aHT" firstAttribute="centerY" secondItem="F9O-6f-cr5" secondAttribute="centerY" id="uWr-uR-iTB"/>
                             <constraint firstItem="7hI-G9-Reo" firstAttribute="leading" secondItem="F9O-6f-cr5" secondAttribute="leading" id="vbC-lo-dZL"/>
                         </constraints>
                     </view>
