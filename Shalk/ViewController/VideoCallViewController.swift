@@ -207,6 +207,8 @@ class VideoCallViewController: UIViewController {
 
         self.localVideoView.layer.insertSublayer(videoCapture!.previewLayer, at: 0)
 
+        qbManager.audioManager.currentAudioDevice = .speaker
+
     }
 
 }

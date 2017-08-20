@@ -46,36 +46,129 @@ class ChatViewController: UIViewController {
 
     }
 
-    @IBAction func btnAudioCall(_ sender: UIBarButtonItem) {
+    @IBAction func btnStartCall(_ sender: UIBarButtonItem) {
 
-        let alert = UIAlertController.init(title: NSLocalizedString("AudioCall", comment: ""), message: NSLocalizedString("AudioCall_Message", comment: "") + "\(opponent.name)?", preferredStyle: .alert)
+        let alertSheet = UIAlertController(title: "Start Call", message: "Start a following call with your friend.", preferredStyle: .actionSheet)
 
-        alert.addAction(title: NSLocalizedString("Cancel", comment: ""))
-
-        alert.addAction(title: NSLocalizedString("Confirm", comment: ""), style: .default, isEnabled: true) { (_) in
+        let audioCall = UIAlertAction(title: "Audio Call", style: .default) { (_) in
 
             UserManager.shared.startAudioCall()
 
             self.performSegue(withIdentifier: "audioCall", sender: nil)
+
         }
 
-        self.present(alert, animated: true, completion: nil)
-
-    }
-
-    @IBAction func btnVideoCall(_ sender: UIBarButtonItem) {
-
-        let alert = UIAlertController.init(title: NSLocalizedString("VideoCall", comment: ""), message: NSLocalizedString("VideoCall_Message", comment: "") + "\(opponent.name)?", preferredStyle: .alert)
-
-        alert.addAction(title: NSLocalizedString("Cancel", comment: ""))
-
-        alert.addAction(title: NSLocalizedString("Confirm", comment: ""), style: .default, isEnabled: true) { (_) in
+        let videoCall = UIAlertAction(title: "Video Call", style: .default) { (_) in
 
             self.performSegue(withIdentifier: "videoCall", sender: nil)
 
         }
 
-        self.present(alert, animated: true, completion: nil)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
+        alertSheet.addAction(audioCall)
+
+        alertSheet.addAction(videoCall)
+
+        alertSheet.addAction(cancel)
+
+        self.present(alertSheet, animated: true, completion: nil)
+
+    }
+
+    @IBAction func btnMore(_ sender: UIBarButtonItem) {
+
+        let alertSheet = UIAlertController(title: "", message: "You can delete, block, report user here.", preferredStyle: .actionSheet)
+
+        let delete = UIAlertAction(title: "Delete", style: .destructive) { (_) in
+
+            let alert = UIAlertController(title: "Are you sure to delete this friend?", message: nil, preferredStyle: .alert)
+
+            alert.addAction(title: "Cancel")
+
+            let deleteAction = UIAlertAction(title: "Confirm", style: .default, handler: { (_) in
+
+                // MARK: Delete friend
+
+            })
+
+            alert.addAction(deleteAction)
+
+            self.present(alert, animated: true, completion: nil)
+
+        }
+
+        let block = UIAlertAction(title: "Block", style: .default) { (_) in
+
+            let alert = UIAlertController(title: "Are you sure to block this friend?", message: nil, preferredStyle: .alert)
+
+            alert.addAction(title: "Cancel")
+
+            let blockAction = UIAlertAction(title: "Confirm", style: .default, handler: { (_) in
+
+                // MARK: Block friend
+
+            })
+
+            alert.addAction(blockAction)
+
+            self.present(alert, animated: true, completion: nil)
+
+        }
+
+        let report = UIAlertAction(title: "Report", style: .default) { (_) in
+
+            let alert = UIAlertController(title: "Provide a reason that you want to report this user.", message: nil, preferredStyle: .alert)
+
+            alert.addTextField(configurationHandler: { (inputReason) in
+
+                inputReason.placeholder = "Input a reason here!"
+
+            })
+
+            alert.addAction(title: "Cancel")
+
+            let reportAction = UIAlertAction(title: "Confirm", style: .default, handler: { (_) in
+
+                if let inputReason = alert.textFields?[0].text {
+
+                    if inputReason != "" {
+
+                        // MARK: report friend
+
+                    } else {
+
+                        // MARK: input reason could not be nil.
+
+                        let alert = UIAlertController(title: "Error!", message: "reason could not be empty.", preferredStyle: .alert)
+
+                        alert.addAction(title: "OK")
+
+                        self.present(alert, animated: true, completion: nil)
+
+                    }
+
+                }
+
+            })
+
+            alert.addAction(reportAction)
+
+            self.present(alert, animated: true, completion: nil)
+
+        }
+
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
+        alertSheet.addAction(delete)
+
+        alertSheet.addAction(block)
+
+        alertSheet.addAction(report)
+
+        alertSheet.addAction(cancel)
+
+        self.present(alertSheet, animated: true, completion: nil)
 
     }
 
@@ -131,7 +224,7 @@ class ChatViewController: UIViewController {
 
             DispatchQueue.main.async {
 
-                self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
 
             }
 
@@ -278,6 +371,8 @@ extension ChatViewController: UITextViewDelegate {
 
     func textViewDidBeginEditing(_ textView: UITextView) {
 
+        UIApplication.shared.isStatusBarHidden = true
+
         if inputTextView.text == NSLocalizedString("InputField_Placefolder", comment: "") {
 
             inputTextView.text = ""
@@ -287,6 +382,8 @@ extension ChatViewController: UITextViewDelegate {
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
+
+        UIApplication.shared.isStatusBarHidden = false
 
         if inputTextView.text.isEmpty {
 

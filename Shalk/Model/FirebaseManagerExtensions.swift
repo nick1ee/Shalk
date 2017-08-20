@@ -162,6 +162,14 @@ extension FirebaseManager {
             self.fetchFriendInfo(friendUid, languageType: languageType)
 
         })
+        
+        ref?.child("friendList").child(uid).observe(.childRemoved, with: { (snapshot) in
+            
+            let uid = snapshot.key
+            
+            UserManager.shared.friends = UserManager.shared.friends.filter{ $0.uid != uid }
+            
+        })
 
     }
 
@@ -489,6 +497,19 @@ extension FirebaseManager {
             }
 
         })
+
+    }
+
+}
+
+// MARK: Handle remove user
+extension FirebaseManager {
+
+    func deleteFriend() {
+
+        guard let myUid = UserManager.shared.currentUser?.uid else { return }
+
+        ref?.child(myUid).child("Chinese")
 
     }
 
