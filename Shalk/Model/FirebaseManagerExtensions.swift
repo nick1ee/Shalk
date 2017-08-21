@@ -144,7 +144,7 @@ extension FirebaseManager {
 
     }
 
-    func fetchFriendList(completion: @escaping (User, FriendType) -> Void) {
+    func fetchFriendList(completion: @escaping (User) -> Void) {
 
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
@@ -160,9 +160,36 @@ extension FirebaseManager {
 
                 let friendUid = friend.key
 
-                let type = FriendType(rawValue: friend.value)
+                self.fetchFriendInfo(friendUid, completion: completion)
 
-                self.fetchFriendInfo(friendUid, by: type!, completion: completion)
+            }
+
+        })
+
+    }
+
+    func fetchFriendInfo(_ friendUid: String, completion: @escaping (User) -> Void) {
+
+        ref?.child("users").child(friendUid).observeSingleEvent(of: .value, with: { (snapshot) in
+
+            guard let object = snapshot.value else { return }
+
+            do {
+
+                let user = try User.init(json: object)
+
+                DispatchQueue.main.async {
+
+                    completion(user)
+
+                }
+
+            } catch let error {
+
+                // MARK: Failed to fetch friend info.
+                Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_FriendInfo_Error"])
+
+                UIAlertController(error: error).show()
 
             }
 
@@ -189,35 +216,6 @@ extension FirebaseManager {
             }
 
         })
-
-    }
-
-    func fetchFriendInfo(_ friendUid: String, by type: FriendType, completion: @escaping (User, FriendType) -> Void) {
-
-        ref?.child("users").child(friendUid).observeSingleEvent(of: .value, with: { (snapshot) in
-
-                guard let object = snapshot.value else { return }
-
-                do {
-
-                    let user = try User.init(json: object)
-
-                    DispatchQueue.main.async {
-
-                        completion(user, type)
-
-                    }
-
-                } catch let error {
-
-                    // MARK: Failed to fetch friend info.
-                    Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_FriendInfo_Error"])
-
-                    UIAlertController(error: error).show()
-
-                }
-
-            })
 
     }
 
@@ -539,6 +537,35 @@ extension FirebaseManager {
         ref?.child("chatRoomList").child(myUid).child(roomId).removeValue()
 
         ref?.child("friendList").child(friendUid).child(myUid).setValue("Blocked")
+
+        DispatchQueue.main.async {
+
+            completion()
+
+        }
+
+    }
+
+    func reportFriend(_ reason: String, completion: @escaping () -> Void) {
+
+        guard
+            let myUid = Auth.auth().currentUser?.uid,
+            let opponentUid = UserManager.shared.opponent?.uid,
+            let reportId = ref?.childByAutoId().key else { return }
+
+        let formatter = DateFormatter()
+
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+
+        let timestamp = formatter.string(from: Date())
+
+        let report = [ "ausiveUser": opponentUid,
+                       "prosecutor": myUid,
+                       "reason": reason,
+                       "time": timestamp,
+                       "reportId": reportId ]
+
+        ref?.child("ReportUser").child(reportId).updateChildValues(report)
 
         DispatchQueue.main.async {
 

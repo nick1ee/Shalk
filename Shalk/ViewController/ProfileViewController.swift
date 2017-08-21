@@ -16,7 +16,7 @@ class ProfileViewController: UIViewController {
 
     var blockedFriends: [User] = []
 
-    var components: [FriendType] = [ .me, .friend, .blocked ]
+    var components: [FriendType] = [ .me, .friend ]
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -53,21 +53,11 @@ class ProfileViewController: UIViewController {
 
         DispatchQueue.global().async {
 
-            FirebaseManager().fetchFriendList { user, type in
+            FirebaseManager().fetchFriendList { user in
 
-                if type == .blocked {
+                self.friends.append(user)
 
-                    self.blockedFriends.append(user)
-
-                    UserManager.shared.blockedFriends.append(user)
-
-                } else {
-
-                    self.friends.append(user)
-
-                    UserManager.shared.friends.append(user)
-
-                }
+                UserManager.shared.friends.append(user)
 
                 self.tableView.reloadData()
 
@@ -172,10 +162,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             return NSLocalizedString("Friend", comment: "")
 
-        case .blocked:
-
-            return NSLocalizedString("Blocked", comment: "")
-
         }
 
     }
@@ -193,10 +179,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         case .friend:
 
             return self.friends.count
-
-        case .blocked:
-
-            return self.blockedFriends.count
 
         }
 
@@ -247,20 +229,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             return cell
 
-        case .blocked:
-
-            // MARK: Display cells for friends.
-
-            let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
-
-            cell.friendImageView.sd_setImage(with: URL(string: blockedFriends[indexPath.row].imageUrl), placeholderImage: UIImage(named: "icon-user"))
-
-            cell.friendName.text = self.blockedFriends[indexPath.row].name
-
-            cell.friendStatus.text = self.blockedFriends[indexPath.row].intro
-
-            return cell
-
         }
 
     }
@@ -271,13 +239,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
         switch component {
 
+        case .me: break
+
         case .friend:
 
             UserManager.shared.startChat(withVC: self, to: friends[indexPath.row])
-
-            break
-
-        default:
 
             break
 
@@ -298,12 +264,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         case .friend:
 
             displayCell?.friendStatus.textColor = UIColor.lightGray
-
-        case .blocked:
-
-            displayCell?.friendStatus.text = NSLocalizedString("Blocked", comment: "")
-
-            displayCell?.friendStatus.textColor = UIColor.red
 
         }
 

@@ -84,7 +84,7 @@ class ChatViewController: UIViewController {
 
     @IBAction func btnMore(_ sender: UIBarButtonItem) {
 
-        let alertSheet = UIAlertController(title: "", message: "You can delete, block, report user here.", preferredStyle: .actionSheet)
+        let alertSheet = UIAlertController(title: "", message: "You can block and report user here.", preferredStyle: .actionSheet)
 
         let block = UIAlertAction(title: "Block", style: .destructive) { (_) in
 
@@ -94,7 +94,7 @@ class ChatViewController: UIViewController {
 
             let blockAction = UIAlertAction(title: "Confirm", style: .default, handler: { (_) in
 
-                // MARK: Delete friend
+                // MARK: Block friend
 
                 SVProgressHUD.show()
 
@@ -140,11 +140,31 @@ class ChatViewController: UIViewController {
 
             let reportAction = UIAlertAction(title: "Confirm", style: .default, handler: { (_) in
 
-                if let inputReason = alert.textFields?[0].text {
+                if let reason = alert.textFields?[0].text {
 
-                    if inputReason != "" {
+                    if reason != "" {
 
                         // MARK: report friend
+
+                        DispatchQueue.global().async {
+
+                            FirebaseManager().reportFriend(reason) {
+
+                                SVProgressHUD.dismiss()
+
+                                let alert = UIAlertController(title: nil, message: "Reported Successfully", preferredStyle: .alert)
+
+                                alert.addAction(title: "OK", style: .default, isEnabled: true) { _ in
+
+                                    self.navigationController?.popToRootViewController(animated: true)
+
+                                }
+
+                                self.present(alert, animated: true, completion: nil)
+
+                            }
+
+                        }
 
                     } else {
 
@@ -204,6 +224,10 @@ class ChatViewController: UIViewController {
                 self.messageView.isHidden = true
 
                 self.outletStartCall.isEnabled = false
+
+                let alert = UIAlertController(title: "You can not interact with \(opponent.name).")
+
+                alert.show()
 
             }
 

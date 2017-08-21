@@ -35,6 +35,4 @@ enum FriendType: String {
 
     case friend = "true"
 
-    case blocked = "Blocked"
-
 }
