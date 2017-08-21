@@ -8,6 +8,7 @@
 
 import UIKit
 import SVProgressHUD
+import IQKeyboardManagerSwift
 
 class ChatViewController: UIViewController {
 
@@ -15,17 +16,17 @@ class ChatViewController: UIViewController {
 
     var messages: [Message] = []
 
-    let fbManager = FirebaseManager()
-
-    var opponent: User!
-
     @IBOutlet weak var chatTableView: UITableView!
 
     @IBOutlet weak var inputTextView: UITextView!
 
+    @IBOutlet weak var scrollView: UIScrollView!
+
     @IBOutlet weak var outletSend: UIButton!
 
     @IBOutlet weak var messageView: UIView!
+
+    @IBOutlet weak var bottomHeight: NSLayoutConstraint!
 
     @IBOutlet weak var outletStartCall: UIBarButtonItem!
 
@@ -33,7 +34,7 @@ class ChatViewController: UIViewController {
 
         if !inputTextView.text.isEmpty {
 
-            fbManager.sendMessage(text: inputTextView.text)
+            FirebaseManager().sendMessage(text: inputTextView.text)
 
             inputTextView.text = ""
 
@@ -182,44 +183,33 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        IQKeyboardManager.sharedManager().enable = false
+
+        inputTextView.delegate = self
+
+        prepareTableView()
+
         guard let opponent = UserManager.shared.opponent else { return }
-
-        FirebaseManager().checkFriendStatus(opponent.uid) { _ in
-
-        }
-
-        if UserManager.shared.blockedFriends.contains(where: { $0.uid == opponent.uid }) {
-
-            messageView.isHidden = true
-
-            outletStartCall.isEnabled = false
-
-        } else {
-
-            inputTextView.text = NSLocalizedString("InputField_Placefolder", comment: "")
-
-            inputTextView.delegate = self
-
-            chatTableView.estimatedRowHeight = 300
-
-            chatTableView.rowHeight = UITableViewAutomaticDimension
-
-            outletSend.tintColor = UIColor.lightGray
-
-            outletSend.isEnabled = false
-
-        }
-
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        opponent = UserManager.shared.opponent
 
         self.navigationItem.title = opponent.name
 
-        fbManager.fetchChatHistory { fetchMessages in
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+
+        FirebaseManager().checkFriendStatus(opponent.uid) { isFriend in
+
+            if !isFriend {
+
+                self.messageView.isHidden = true
+
+                self.outletStartCall.isEnabled = false
+
+            }
+
+        }
+
+        FirebaseManager().fetchChatHistory { fetchMessages in
 
             self.messages = fetchMessages.filter { $0.text != "" }
 
@@ -231,6 +221,12 @@ class ChatViewController: UIViewController {
 
             })
         }
+
+    }
+
+    deinit {
+
+        NotificationCenter.default.removeObserver(self)
 
     }
 
@@ -262,11 +258,27 @@ class ChatViewController: UIViewController {
 
     func didTapUserImage(_ gesture: UITapGestureRecognizer) {
 
-        guard let imageView = gesture.view as? UIImageView else { return }
+        guard
+            let opponent = UserManager.shared.opponent,
+            let imageView = gesture.view as? UIImageView else { return }
 
         let alert = CustomAlert(title: opponent.name, intro: opponent.intro, image: imageView.image!)
 
         alert.show(animated: true)
+
+    }
+
+    func prepareTableView() {
+
+        inputTextView.text = NSLocalizedString("InputField_Placefolder", comment: "")
+
+        chatTableView.estimatedRowHeight = 300
+
+        chatTableView.rowHeight = UITableViewAutomaticDimension
+
+        outletSend.tintColor = UIColor.lightGray
+
+        outletSend.isEnabled = false
 
     }
 
@@ -408,6 +420,31 @@ extension ChatViewController: UITextViewDelegate {
             outletSend.isEnabled = false
 
         }
+    }
+}
+
+extension ChatViewController {
+
+    func keyboardWillShow(notification: Notification) {
+
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+
+        let keyboardSize = (userInfo.object(forKey: UIKeyboardFrameEndUserInfoKey)! as AnyObject).cgRectValue.size
+
+        bottomHeight.constant = keyboardSize.height
+
+        view.setNeedsLayout()
+
+        self.scrollToLast()
+
+    }
+
+    func keyboardWillHide(notification: Notification) {
+
+        bottomHeight.constant = 0.0
+
+        view.setNeedsLayout()
+
     }
 
 }
