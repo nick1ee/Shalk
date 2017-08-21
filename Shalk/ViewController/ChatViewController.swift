@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class ChatViewController: UIViewController {
 
@@ -23,6 +24,10 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var inputTextView: UITextView!
 
     @IBOutlet weak var outletSend: UIButton!
+
+    @IBOutlet weak var messageView: UIView!
+
+    @IBOutlet weak var outletStartCall: UIBarButtonItem!
 
     @IBAction func sendMessage(_ sender: UIButton) {
 
@@ -80,33 +85,37 @@ class ChatViewController: UIViewController {
 
         let alertSheet = UIAlertController(title: "", message: "You can delete, block, report user here.", preferredStyle: .actionSheet)
 
-        let delete = UIAlertAction(title: "Delete", style: .destructive) { (_) in
+        let block = UIAlertAction(title: "Block", style: .destructive) { (_) in
 
-            let alert = UIAlertController(title: "Are you sure to delete this friend?", message: nil, preferredStyle: .alert)
-
-            alert.addAction(title: "Cancel")
-
-            let deleteAction = UIAlertAction(title: "Confirm", style: .default, handler: { (_) in
-
-                // MARK: Delete friend
-
-            })
-
-            alert.addAction(deleteAction)
-
-            self.present(alert, animated: true, completion: nil)
-
-        }
-
-        let block = UIAlertAction(title: "Block", style: .default) { (_) in
-
-            let alert = UIAlertController(title: "Are you sure to block this friend?", message: nil, preferredStyle: .alert)
+            let alert = UIAlertController(title: "Block User?", message: "Once you blocked this user, we will delete this user from your friend list and chat history.", preferredStyle: .alert)
 
             alert.addAction(title: "Cancel")
 
             let blockAction = UIAlertAction(title: "Confirm", style: .default, handler: { (_) in
 
-                // MARK: Block friend
+                // MARK: Delete friend
+
+                SVProgressHUD.show()
+
+                DispatchQueue.global().async {
+
+                    FirebaseManager().blockFriend {
+
+                        SVProgressHUD.dismiss()
+
+                        let alert = UIAlertController(title: nil, message: "Blocked Successfully", preferredStyle: .alert)
+
+                        alert.addAction(title: "OK", style: .default, isEnabled: true) { _ in
+
+                            self.navigationController?.popToRootViewController(animated: true)
+
+                        }
+
+                        self.present(alert, animated: true, completion: nil)
+
+                    }
+
+                }
 
             })
 
@@ -160,8 +169,6 @@ class ChatViewController: UIViewController {
 
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 
-        alertSheet.addAction(delete)
-
         alertSheet.addAction(block)
 
         alertSheet.addAction(report)
@@ -175,17 +182,29 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        inputTextView.text = NSLocalizedString("InputField_Placefolder", comment: "")
+        guard let opponent = UserManager.shared.opponent else { return }
 
-        inputTextView.delegate = self
+        if UserManager.shared.blockedFriends.contains(where: { $0.uid == opponent.uid }) {
 
-        chatTableView.estimatedRowHeight = 300
+            messageView.isHidden = true
 
-        chatTableView.rowHeight = UITableViewAutomaticDimension
+            outletStartCall.isEnabled = false
 
-        outletSend.tintColor = UIColor.lightGray
+        } else {
 
-        outletSend.isEnabled = false
+            inputTextView.text = NSLocalizedString("InputField_Placefolder", comment: "")
+
+            inputTextView.delegate = self
+
+            chatTableView.estimatedRowHeight = 300
+
+            chatTableView.rowHeight = UITableViewAutomaticDimension
+
+            outletSend.tintColor = UIColor.lightGray
+
+            outletSend.isEnabled = false
+
+        }
 
     }
 
@@ -204,15 +223,10 @@ class ChatViewController: UIViewController {
 
                 self.scrollToLast()
 
+                FirebaseManager().updateChatRoom()
+
             })
         }
-
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-
-        FirebaseManager().updateChatRoom()
 
     }
 
@@ -371,8 +385,6 @@ extension ChatViewController: UITextViewDelegate {
 
     func textViewDidBeginEditing(_ textView: UITextView) {
 
-        UIApplication.shared.isStatusBarHidden = true
-
         if inputTextView.text == NSLocalizedString("InputField_Placefolder", comment: "") {
 
             inputTextView.text = ""
@@ -382,8 +394,6 @@ extension ChatViewController: UITextViewDelegate {
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
-
-        UIApplication.shared.isStatusBarHidden = false
 
         if inputTextView.text.isEmpty {
 

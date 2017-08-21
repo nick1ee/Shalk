@@ -69,6 +69,8 @@
 // MARK: - Chat View Controller
 "InputField_Placefolder" = "寫些什麼..";
 
+"Friend" = "朋友";
+
 // MARK: - Audio Call View Controller
 "Connecting" = "連接中..";
 "AudioConnected" = "語音已連接";

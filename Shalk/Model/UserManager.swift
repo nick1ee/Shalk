@@ -27,11 +27,37 @@ class UserManager {
 
     var language: String?
 
-    var chatRooms: [ChatRoom] = []
+    var chatRooms: [ChatRoom] = [] {
+
+        didSet {
+
+            if chatRooms.count == 0 {
+
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RoomChange"), object: nil)
+
+            }
+
+        }
+
+    }
 
     var chatRoomId: String = ""
 
-    var friends: [User] = []
+    var friends: [User] = [] {
+
+        didSet {
+
+            if friends.count == 0 {
+
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FriendChange"), object: nil)
+
+            }
+
+        }
+
+    }
+
+    var blockedFriends: [User] = []
 
     var isDiscovering: Bool = false
 

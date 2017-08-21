@@ -35,12 +35,7 @@ class ChatListViewController: UIViewController {
 
         chatListTableView.backgroundView = bgImageView
 
-        addButonIfNoFriend()
-
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        addDiscoverButton()
 
         DispatchQueue.global().async {
 
@@ -48,9 +43,23 @@ class ChatListViewController: UIViewController {
 
         }
 
+        NotificationCenter.default.addObserver(self, selector: #selector(handleRoomChange), name: NSNotification.Name(rawValue: "RoomChange"), object: nil)
+
     }
 
-    func addButonIfNoFriend() {
+    func handleRoomChange() {
+
+        self.rooms = []
+
+    }
+
+    deinit {
+
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "RoomChange"), object: self)
+
+    }
+
+    func addDiscoverButton() {
 
         btnHint = UIButton(frame: CGRect(x: screen.width / 2 - 75, y: 100, width: 150, height: 30))
 
@@ -105,7 +114,13 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
         if myUid == room.user1Id {
 
-            let friend = UserManager.shared.friends.filter { $0.uid == room.user2Id }
+            var friend = UserManager.shared.friends.filter { $0.uid == room.user2Id }
+
+            if friend.count == 0 {
+
+                friend = UserManager.shared.blockedFriends.filter { $0.uid == room.user2Id }
+
+            }
 
             cell.opponentImageView.sd_setImage(with: URL(string: friend[0].imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
@@ -115,7 +130,13 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
         } else {
 
-            let friend = UserManager.shared.friends.filter { $0.uid == room.user1Id }
+            var friend = UserManager.shared.friends.filter { $0.uid == room.user1Id }
+
+            if friend.count == 0 {
+
+                friend = UserManager.shared.blockedFriends.filter { $0.uid == room.user1Id }
+
+            }
 
             cell.opponentImageView.sd_setImage(with: URL(string: friend[0].imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
@@ -137,7 +158,13 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
             UserManager.shared.chatRoomId = room.roomId
 
-            let friend = UserManager.shared.friends.filter { $0.uid == room.user2Id }
+            var friend = UserManager.shared.friends.filter { $0.uid == room.user2Id }
+
+            if friend.count == 0 {
+
+                friend = UserManager.shared.blockedFriends.filter { $0.uid == room.user2Id }
+
+            }
 
             UserManager.shared.opponent = friend[0]
 
@@ -147,13 +174,27 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
             UserManager.shared.chatRoomId = room.roomId
 
-            let friend = UserManager.shared.friends.filter { $0.uid == room.user1Id }
+            var friend = UserManager.shared.friends.filter { $0.uid == room.user1Id }
+
+            if friend.count == 0 {
+
+                friend = UserManager.shared.blockedFriends.filter { $0.uid == room.user1Id }
+
+            }
 
             UserManager.shared.opponent = friend[0]
 
             self.performSegue(withIdentifier: "goChat", sender: nil)
 
         }
+
+    }
+
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+
+        let dismissCell = cell as? ChatTableViewCell
+
+        dismissCell?.opponentImageView.image = nil
 
     }
 

@@ -6,13 +6,13 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
-protocol FirebaseManagerFriendDelegate: class {
-
-    func manager (_ manager: FirebaseManager, didGetFriend friend: User, byType: LanguageType)
-
-    func manager (_ manager: FirebaseManager, didGetError error: Error)
-
-}
+//protocol FirebaseManagerFriendDelegate: class {
+//
+//    func manager (_ manager: FirebaseManager, didGetFriend friend: User, by type: FriendType)
+//
+//    func manager (_ manager: FirebaseManager, didGetError error: Error)
+//
+//}
 
 protocol FirebaseManagerChatRoomDelegate: class {
 
@@ -28,13 +28,13 @@ enum CallType {
 
 }
 
-enum LanguageType: String {
+//swiftlint:disable identifier_name
+enum FriendType: String {
 
-    case english = "English"
+    case me
 
-    case chinese = "Chinese"
+    case friend = "true"
 
-    case japanese = "Japanese"
+    case blocked = "Blocked"
 
-    case korean = "Korean"
 }

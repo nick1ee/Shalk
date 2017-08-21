@@ -38,6 +38,7 @@
 		B8AAB7FA1F3AE01300FFA58E /* FirebaseManagerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AAB7F91F3AE01300FFA58E /* FirebaseManagerProtocols.swift */; };
 		B8AE68811F45357900C259A5 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AE68801F45357900C259A5 /* Modal.swift */; };
 		B8AE68831F45383400C259A5 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AE68821F45383400C259A5 /* CustomAlert.swift */; };
+		B8C2FB4A1F4ABD70007AC488 /* EULAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C2FB491F4ABD70007AC488 /* EULAViewController.swift */; };
 		B8D9ECDD1F32F7BE00B9FEED /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D9ECDC1F32F7BE00B9FEED /* Message.swift */; };
 		B8DB3F101F2E2852006E5A58 /* RandomCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DB3F0F1F2E2852006E5A58 /* RandomCallViewController.swift */; };
 		B8DB3F191F2F0255006E5A58 /* QuickbloxWebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8DB3F171F2F0255006E5A58 /* QuickbloxWebRTC.framework */; };
@@ -119,6 +120,7 @@
 		B8AAB7F91F3AE01300FFA58E /* FirebaseManagerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManagerProtocols.swift; sourceTree = "<group>"; };
 		B8AE68801F45357900C259A5 /* Modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
 		B8AE68821F45383400C259A5 /* CustomAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		B8C2FB491F4ABD70007AC488 /* EULAViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EULAViewController.swift; sourceTree = "<group>"; };
 		B8D9ECDC1F32F7BE00B9FEED /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		B8DB3F0F1F2E2852006E5A58 /* RandomCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomCallViewController.swift; sourceTree = "<group>"; };
 		B8DB3F151F2F0237006E5A58 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 			children = (
 				B872E6321F29C4F7009BD763 /* LoginViewController.swift */,
 				B872E6361F29E031009BD763 /* RegisterViewController.swift */,
+				B8C2FB491F4ABD70007AC488 /* EULAViewController.swift */,
 				B80331031F2A374600F89209 /* ChatListViewController.swift */,
 				B80331051F2A374F00F89209 /* ShakeViewController.swift */,
 				B8DB3F0F1F2E2852006E5A58 /* RandomCallViewController.swift */,
@@ -512,6 +515,7 @@
 				B89872871F306008007DEDA6 /* AudioChannel.swift in Sources */,
 				B84968B81F31753200400579 /* ProfileTableViewCell.swift in Sources */,
 				B8D9ECDD1F32F7BE00B9FEED /* Message.swift in Sources */,
+				B8C2FB4A1F4ABD70007AC488 /* EULAViewController.swift in Sources */,
 				B872E6371F29E031009BD763 /* RegisterViewController.swift in Sources */,
 				B872E63D1F29F046009BD763 /* AppDelegateExtensions.swift in Sources */,
 				B8DDCE211F398C0D00D79ED5 /* ModifyProfileViewController.swift in Sources */,

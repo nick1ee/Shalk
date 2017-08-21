@@ -75,6 +75,14 @@ class RegisterViewController: UIViewController {
 
     }
 
+    @IBAction func checkEULA(_ sender: UIButton) {
+
+        let eulaVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EULAVC")
+
+        self.present(eulaVC, animated: true, completion: nil)
+
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

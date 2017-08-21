@@ -122,18 +122,11 @@ extension FirebaseManager {
 
                 guard
                     let myUid = UserManager.shared.currentUser?.uid,
-                    let language = UserManager.shared.language,
                     let opponent = UserManager.shared.opponent else { return }
 
-                let formatter = DateFormatter()
+                self.ref?.child("friendList").child(myUid).updateChildValues([opponent.uid: "true"])
 
-                formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-
-                let timestamp = formatter.string(from: Date())
-
-                self.ref?.child("friendList").child(myUid).child(language).updateChildValues([opponent.uid: timestamp])
-
-                self.ref?.child("friendList").child(opponent.uid).child(language).updateChildValues([myUid: timestamp])
+                self.ref?.child("friendList").child(opponent.uid).updateChildValues([myUid: "true"])
 
                 UserManager.shared.closeChannel()
 
@@ -151,29 +144,33 @@ extension FirebaseManager {
 
     }
 
-    func fetchFriendList(languageType: LanguageType) {
+    func fetchFriendList(completion: @escaping (User, FriendType) -> Void) {
 
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
-        ref?.child("friendList").child(uid).child(languageType.rawValue).observe(.childAdded, with: { (snapshot) in
+        ref?.child("friendList").child(uid).observe(.value, with: { (snapshot) in
 
-            let friendUid = snapshot.key
+            UserManager.shared.friends = []
 
-            self.fetchFriendInfo(friendUid, languageType: languageType)
+            UserManager.shared.blockedFriends = []
 
-        })
-        
-        ref?.child("friendList").child(uid).observe(.childRemoved, with: { (snapshot) in
-            
-            let uid = snapshot.key
-            
-            UserManager.shared.friends = UserManager.shared.friends.filter{ $0.uid != uid }
-            
+            guard let friendList = snapshot.value as? [String: String] else { return }
+
+            for friend in friendList {
+
+                let friendUid = friend.key
+
+                let type = FriendType(rawValue: friend.value)
+
+                self.fetchFriendInfo(friendUid, by: type!, completion: completion)
+
+            }
+
         })
 
     }
 
-    func fetchFriendInfo(_ friendUid: String, languageType: LanguageType) {
+    func fetchFriendInfo(_ friendUid: String, by type: FriendType, completion: @escaping (User, FriendType) -> Void) {
 
         ref?.child("users").child(friendUid).observeSingleEvent(of: .value, with: { (snapshot) in
 
@@ -183,11 +180,9 @@ extension FirebaseManager {
 
                     let user = try User.init(json: object)
 
-                    UserManager.shared.friends.append(user)
-
                     DispatchQueue.main.async {
 
-                        self.friendDelegate?.manager(self, didGetFriend: user, byType: languageType)
+                        completion(user, type)
 
                     }
 
@@ -365,26 +360,30 @@ extension FirebaseManager {
 
     func fetchChatRoomList() {
 
-        var rooms: [ChatRoom] = []
-
         guard let myUid = Auth.auth().currentUser?.uid else { return }
 
-        handle = ref?.child("chatRoomList").child(myUid).observe(.childAdded, with: { (snapshot) in
+        handle = ref?.child("chatRoomList").child(myUid).observe(.value, with: { (snapshot) in
 
-            guard let object = snapshot.value as? [String: Any] else { return }
+            var rooms: [ChatRoom] = []
 
-            do {
+            guard let roomList = snapshot.value as? [String: Any] else { return }
 
-                let room = try ChatRoom.init(json: object)
+            for object in roomList {
 
-                rooms.append(room)
+                do {
 
-            } catch let error {
+                    let room = try ChatRoom.init(json: object.value)
 
-                // MARK: Failed to fetch the list of chat rooms.
-                Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_ChatRoom_Error"])
+                    rooms.append(room)
 
-                UIAlertController(error: error).show()
+                } catch let error {
+
+                    // MARK: Failed to fetch the list of chat rooms.
+                    Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_ChatRoom_Error"])
+
+                    UIAlertController(error: error).show()
+
+                }
 
             }
 
@@ -505,11 +504,25 @@ extension FirebaseManager {
 // MARK: Handle remove user
 extension FirebaseManager {
 
-    func deleteFriend() {
+    func blockFriend(completion: @escaping () -> Void) {
 
-        guard let myUid = UserManager.shared.currentUser?.uid else { return }
+        guard
+            let myUid = UserManager.shared.currentUser?.uid,
+            let friendUid = UserManager.shared.opponent?.uid else { return }
 
-        ref?.child(myUid).child("Chinese")
+        let roomId = UserManager.shared.chatRoomId
+
+        ref?.child("friendList").child(myUid).child(friendUid).removeValue()
+
+        ref?.child("chatRoomList").child(myUid).child(roomId).removeValue()
+
+        ref?.child("friendList").child(friendUid).child(myUid).setValue("Blocked")
+
+        DispatchQueue.main.async {
+
+            completion()
+
+        }
 
     }
 

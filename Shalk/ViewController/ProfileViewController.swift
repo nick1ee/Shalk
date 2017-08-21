@@ -12,15 +12,11 @@ import SVProgressHUD
 
 class ProfileViewController: UIViewController {
 
-    let fbManager = FirebaseManager()
+    var friends: [User] = []
 
-    var englishFriends: [User] = []
+    var blockedFriends: [User] = []
 
-    var chineseFriends: [User] = []
-
-    var japaneseFriends: [User] = []
-
-    var koreanFriends: [User] = []
+    var components: [FriendType] = [ .me, .friend, .blocked ]
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -53,21 +49,33 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fbManager.friendDelegate = self
-
         prepareTableView()
 
         DispatchQueue.global().async {
 
-            self.fbManager.fetchFriendList(languageType: .english)
+            FirebaseManager().fetchFriendList { user, type in
 
-            self.fbManager.fetchFriendList(languageType: .chinese)
+                if type == .blocked {
 
-            self.fbManager.fetchFriendList(languageType: .japanese)
+                    self.blockedFriends.append(user)
 
-            self.fbManager.fetchFriendList(languageType: .korean)
+                    UserManager.shared.blockedFriends.append(user)
+
+                } else {
+
+                    self.friends.append(user)
+
+                    UserManager.shared.friends.append(user)
+
+                }
+
+                self.tableView.reloadData()
+
+            }
 
         }
+
+        NotificationCenter.default.addObserver(self, selector: #selector(handleFriendChange), name: NSNotification.Name(rawValue: "FriendChange"), object: nil)
 
     }
 
@@ -120,103 +128,23 @@ class ProfileViewController: UIViewController {
             let indexNumber = gesture.view?.tag,
             let imageView = gesture.view as? UIImageView else { return }
 
-        let indexRow = indexNumber % 1000
+        let alert = CustomAlert(title: friends[indexNumber].name, intro: friends[indexNumber].intro, image: imageView.image!)
 
-        let indexSection = indexNumber / 1000
-
-        switch indexSection {
-
-        case 1:
-
-            let alert = CustomAlert(title: englishFriends[indexRow].name, intro: englishFriends[indexRow].intro, image: imageView.image!)
-
-            alert.show(animated: true)
-
-            break
-
-        case 2:
-
-            let alert = CustomAlert(title: chineseFriends[indexRow].name, intro: chineseFriends[indexRow].intro, image: imageView.image!)
-
-            alert.show(animated: true)
-
-            break
-
-        case 3:
-
-            let alert = CustomAlert(title: japaneseFriends[indexRow].name, intro: japaneseFriends[indexRow].intro, image: imageView.image!)
-
-            alert.show(animated: true)
-
-            break
-
-        case 4:
-
-            let alert = CustomAlert(title: koreanFriends[indexRow].name, intro: koreanFriends[indexRow].intro, image: imageView.image!)
-
-            alert.show(animated: true)
-
-            break
-
-        default: break
-
-        }
+        alert.show(animated: true)
 
     }
 
-}
+    func handleFriendChange() {
 
-extension ProfileViewController: FirebaseManagerFriendDelegate {
+        self.friends = []
 
-    func manager(_ manager: FirebaseManager, didGetError error: Error) {
-
-        SVProgressHUD.dismiss()
-
-        // MARK: Failed to get friend info.
-
-        UIAlertController(error: error).show()
+        self.blockedFriends = []
 
     }
 
-    func manager(_ manager: FirebaseManager, didGetFriend friend: User, byType: LanguageType) {
+    deinit {
 
-        SVProgressHUD.dismiss()
-
-        switch byType {
-
-        case .english:
-
-            self.englishFriends.append(friend)
-
-            self.tableView.reloadData()
-
-            break
-
-        case .chinese:
-
-            self.chineseFriends.append(friend)
-
-            self.tableView.reloadData()
-
-            break
-
-        case .japanese:
-
-            self.japaneseFriends.append(friend)
-
-            self.tableView.reloadData()
-
-            break
-
-        case .korean:
-
-            self.koreanFriends.append(friend)
-
-            self.tableView.reloadData()
-
-            break
-
-        }
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "FriendChange"), object: self)
 
     }
 
@@ -226,92 +154,50 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
 
-        return 5
+        return components.count
 
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 
-        switch section {
+        let component = components[section]
 
-        case 1:
+        switch component {
 
-            if englishFriends.count == 0 {
-
-                return nil
-
-            } else {
-
-                return NSLocalizedString("English", comment: "")
-
-            }
-
-        case 2:
-
-            if chineseFriends.count == 0 {
-
-                return nil
-
-            } else {
-
-            return NSLocalizedString("Chinese", comment: "")
-
-            }
-
-        case 3:
-
-            if japaneseFriends.count == 0 {
-
-                return nil
-
-            } else {
-
-            return NSLocalizedString("Japanese", comment: "")
-
-            }
-
-        case 4:
-
-            if koreanFriends.count == 0 {
-
-                return nil
-
-            } else {
-
-                return NSLocalizedString("Korean", comment: "")
-
-            }
-
-        default:
+        case .me:
 
             return nil
+
+        case .friend:
+
+            return NSLocalizedString("Friend", comment: "")
+
+        case .blocked:
+
+            return NSLocalizedString("Blocked", comment: "")
+
         }
 
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        switch section {
+        let component = components[section]
 
-        case 1:
+        switch component {
 
-            return englishFriends.count
-
-        case 2:
-
-            return chineseFriends.count
-
-        case 3:
-
-            return japaneseFriends.count
-
-        case 4:
-
-            return koreanFriends.count
-
-        default:
+        case .me:
 
             return 1
+
+        case .friend:
+
+            return self.friends.count
+
+        case .blocked:
+
+            return self.blockedFriends.count
+
         }
 
     }
@@ -319,97 +205,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     //swiftlint:disable force_cast
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        switch indexPath.section {
+        let component = components[indexPath.section]
 
-        case 1:
+        switch component {
 
-            // MARK: Display cells for friends.
-
-            let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
-
-            cell.friendImageView.sd_setImage(with: URL(string: englishFriends[indexPath.row].imageUrl), placeholderImage: UIImage(named: "icon-user"))
-
-            let indexNumber = indexPath.section * 1000 + indexPath.row
-
-            cell.friendImageView.tag = indexNumber
-
-            cell.friendImageView.addGestureRecognizer(setTapGestureRecognizer())
-
-            cell.friendImageView.isUserInteractionEnabled = true
-
-            cell.friendName.text = self.englishFriends[indexPath.row].name
-
-            cell.friendStatus.text = self.englishFriends[indexPath.row].intro
-
-            return cell
-
-        case 2:
-
-            // MARK: Display cells for friends.
-
-            let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
-
-            cell.friendImageView.sd_setImage(with: URL(string: chineseFriends[indexPath.row].imageUrl), placeholderImage: UIImage(named: "icon-user"))
-
-            let indexNumber = indexPath.section * 1000 + indexPath.row
-
-            cell.friendImageView.tag = indexNumber
-
-            cell.friendImageView.addGestureRecognizer(setTapGestureRecognizer())
-
-            cell.friendImageView.isUserInteractionEnabled = true
-
-            cell.friendName.text = self.chineseFriends[indexPath.row].name
-
-            cell.friendStatus.text = self.chineseFriends[indexPath.row].intro
-
-            return cell
-
-        case 3:
-
-            // MARK: Display cells for friends.
-
-            let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
-
-            cell.friendImageView.sd_setImage(with: URL(string: japaneseFriends[indexPath.row].imageUrl), placeholderImage: UIImage(named: "icon-user"))
-
-            let indexNumber = indexPath.section * 1000 + indexPath.row
-
-            cell.friendImageView.tag = indexNumber
-
-            cell.friendImageView.addGestureRecognizer(setTapGestureRecognizer())
-
-            cell.friendImageView.isUserInteractionEnabled = true
-
-            cell.friendName.text = self.japaneseFriends[indexPath.row].name
-
-            cell.friendStatus.text = self.japaneseFriends[indexPath.row].intro
-
-            return cell
-
-        case 4:
-
-            // MARK: Display cells for friends.
-
-            let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
-
-            cell.friendImageView.sd_setImage(with: URL(string: koreanFriends[indexPath.row].imageUrl), placeholderImage: UIImage(named: "icon-user"))
-
-            let indexNumber = indexPath.section * 1000 + indexPath.row
-
-            cell.friendImageView.tag = indexNumber
-
-            cell.friendImageView.addGestureRecognizer(setTapGestureRecognizer())
-
-            cell.friendImageView.isUserInteractionEnabled = true
-
-            cell.friendName.text = self.koreanFriends[indexPath.row].name
-
-            cell.friendStatus.text = self.koreanFriends[indexPath.row].intro
-
-            return cell
-
-        default:
+        case .me:
 
             // MARK: Display profile cell.
 
@@ -427,42 +227,85 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             return cell
 
+        case .friend:
+
+            // MARK: Display cells for friends.
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
+
+            cell.friendImageView.sd_setImage(with: URL(string: friends[indexPath.row].imageUrl), placeholderImage: UIImage(named: "icon-user"))
+
+            cell.friendImageView.tag = indexPath.row
+
+            cell.friendImageView.addGestureRecognizer(setTapGestureRecognizer())
+
+            cell.friendImageView.isUserInteractionEnabled = true
+
+            cell.friendName.text = self.friends[indexPath.row].name
+
+            cell.friendStatus.text = self.friends[indexPath.row].intro
+
+            return cell
+
+        case .blocked:
+
+            // MARK: Display cells for friends.
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
+
+            cell.friendImageView.sd_setImage(with: URL(string: blockedFriends[indexPath.row].imageUrl), placeholderImage: UIImage(named: "icon-user"))
+
+            cell.friendName.text = self.blockedFriends[indexPath.row].name
+
+            cell.friendStatus.text = self.blockedFriends[indexPath.row].intro
+
+            return cell
+
         }
 
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        switch indexPath.section {
+        let component = components[indexPath.section]
 
-        case 1:
+        switch component {
 
-            UserManager.shared.startChat(withVC: self, to: englishFriends[indexPath.row])
+        case .friend:
 
-            break
-
-        case 2:
-
-            UserManager.shared.startChat(withVC: self, to: chineseFriends[indexPath.row])
+            UserManager.shared.startChat(withVC: self, to: friends[indexPath.row])
 
             break
 
-        case 3:
-
-            UserManager.shared.startChat(withVC: self, to: japaneseFriends[indexPath.row])
+        default:
 
             break
-
-        case 4:
-
-            UserManager.shared.startChat(withVC: self, to: koreanFriends[indexPath.row])
-
-            break
-
-        default: break
 
         }
 
     }
 
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+
+        let component = components[indexPath.section]
+
+        let displayCell = cell as? FriendTableViewCell
+
+        switch component {
+
+        case .me: break
+
+        case .friend:
+
+            displayCell?.friendStatus.textColor = UIColor.lightGray
+
+        case .blocked:
+
+            displayCell?.friendStatus.text = NSLocalizedString("Blocked", comment: "")
+
+            displayCell?.friendStatus.textColor = UIColor.red
+
+        }
+
+    }
 }

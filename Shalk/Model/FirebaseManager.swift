@@ -12,7 +12,7 @@ import SVProgressHUD
 
 class FirebaseManager {
 
-    weak var friendDelegate: FirebaseManagerFriendDelegate?
+//    weak var friendDelegate: FirebaseManagerFriendDelegate?
 
     weak var chatRoomDelegate: FirebaseManagerChatRoomDelegate?
 

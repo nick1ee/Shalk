@@ -67,6 +67,9 @@
 "Discovering" = "Discovering, please wait!";
 "Double_Shake" = "Please wait, you will find your partner very soon!";
 
+"Blocked" = "Blocked";
+"Friend" = "Friend";
+
 // MARK: - Chat View Controller
 "InputField_Placefolder" = "write something..";
 
