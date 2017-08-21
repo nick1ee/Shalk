@@ -72,6 +72,17 @@
 
 // MARK: - Chat View Controller
 "InputField_Placefolder" = "write something..";
+"ReportUserAlert" = "You can block and report this user here.";
+"Block" = "Block";
+"Block_Confirmation" = "Once you blocked this user, we will delete this user from your friend list and chat history.";
+"BlockSuccessfully" = "Blocked successfully.";
+"Report" = "Report";
+"Report_Hint" = "Provide a reason that you want to report this user.";
+"Report_Reason" = "Input a reason here!";
+"ReportSuccessfully" = "Reported successfully! We will process your report in 24 hrs.";
+"Invalid_Reason" = "reason could not be empty.";
+"Block_Message" = "You can not interact with ";
+
 
 // MARK: - Audio Call View Controller
 "Connecting" = "Connecting..";

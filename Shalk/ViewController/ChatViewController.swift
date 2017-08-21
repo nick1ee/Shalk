@@ -32,15 +32,35 @@ class ChatViewController: UIViewController {
 
     @IBAction func sendMessage(_ sender: UIButton) {
 
+        guard let opponent = UserManager.shared.opponent else { return }
+
         if !inputTextView.text.isEmpty {
 
-            FirebaseManager().sendMessage(text: inputTextView.text)
+            FirebaseManager().checkFriendStatus(opponent.uid) { isFriend in
 
-            inputTextView.text = ""
+                if !isFriend {
 
-            outletSend.tintColor = UIColor.lightGray
+                    self.messageView.isHidden = true
 
-            outletSend.isEnabled = false
+                    self.outletStartCall.isEnabled = false
+
+                    let alert = UIAlertController(title: NSLocalizedString("Block_Message", comment: "") + "\(opponent.name).")
+
+                    alert.show()
+
+                } else {
+
+                    FirebaseManager().sendMessage(text: self.inputTextView.text)
+
+                    self.inputTextView.text = ""
+
+                    self.outletSend.tintColor = UIColor.lightGray
+
+                    self.outletSend.isEnabled = false
+
+                }
+
+            }
 
         }
 
@@ -54,9 +74,9 @@ class ChatViewController: UIViewController {
 
     @IBAction func btnStartCall(_ sender: UIBarButtonItem) {
 
-        let alertSheet = UIAlertController(title: "Start Call", message: "Start a following call with your friend.", preferredStyle: .actionSheet)
+        let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        let audioCall = UIAlertAction(title: "Audio Call", style: .default) { (_) in
+        let audioCall = UIAlertAction(title: NSLocalizedString("AudioCall", comment: ""), style: .default) { (_) in
 
             UserManager.shared.startAudioCall()
 
@@ -64,13 +84,13 @@ class ChatViewController: UIViewController {
 
         }
 
-        let videoCall = UIAlertAction(title: "Video Call", style: .default) { (_) in
+        let videoCall = UIAlertAction(title: NSLocalizedString("VideoCall", comment: ""), style: .default) { (_) in
 
             self.performSegue(withIdentifier: "videoCall", sender: nil)
 
         }
 
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
 
         alertSheet.addAction(audioCall)
 
@@ -84,15 +104,15 @@ class ChatViewController: UIViewController {
 
     @IBAction func btnMore(_ sender: UIBarButtonItem) {
 
-        let alertSheet = UIAlertController(title: "", message: "You can block and report user here.", preferredStyle: .actionSheet)
+        let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        let block = UIAlertAction(title: "Block", style: .destructive) { (_) in
+        let block = UIAlertAction(title: NSLocalizedString("Block", comment: ""), style: .destructive) { (_) in
 
-            let alert = UIAlertController(title: "Block User?", message: "Once you blocked this user, we will delete this user from your friend list and chat history.", preferredStyle: .alert)
+            let alert = UIAlertController(title: nil, message: NSLocalizedString("Block_Confirmation", comment: ""), preferredStyle: .alert)
 
-            alert.addAction(title: "Cancel")
+            alert.addAction(title: NSLocalizedString("Cancel", comment: ""))
 
-            let blockAction = UIAlertAction(title: "Confirm", style: .default, handler: { (_) in
+            let blockAction = UIAlertAction(title: NSLocalizedString("Confirm", comment: ""), style: .default, handler: { (_) in
 
                 // MARK: Block friend
 
@@ -104,7 +124,7 @@ class ChatViewController: UIViewController {
 
                         SVProgressHUD.dismiss()
 
-                        let alert = UIAlertController(title: nil, message: "Blocked Successfully", preferredStyle: .alert)
+                        let alert = UIAlertController(title: nil, message: NSLocalizedString("BlockSuccessfully", comment: ""), preferredStyle: .alert)
 
                         alert.addAction(title: "OK", style: .default, isEnabled: true) { _ in
 
@@ -126,19 +146,19 @@ class ChatViewController: UIViewController {
 
         }
 
-        let report = UIAlertAction(title: "Report", style: .default) { (_) in
+        let report = UIAlertAction(title: NSLocalizedString("Report", comment: ""), style: .default) { (_) in
 
-            let alert = UIAlertController(title: "Provide a reason that you want to report this user.", message: nil, preferredStyle: .alert)
+            let alert = UIAlertController(title: NSLocalizedString("Report_Hint", comment: ""), message: nil, preferredStyle: .alert)
 
             alert.addTextField(configurationHandler: { (inputReason) in
 
-                inputReason.placeholder = "Input a reason here!"
+                inputReason.placeholder = NSLocalizedString("Report_Reason", comment: "")
 
             })
 
-            alert.addAction(title: "Cancel")
+            alert.addAction(title: NSLocalizedString("Cancel", comment: ""))
 
-            let reportAction = UIAlertAction(title: "Confirm", style: .default, handler: { (_) in
+            let reportAction = UIAlertAction(title: NSLocalizedString("Confirm", comment: ""), style: .default, handler: { (_) in
 
                 if let reason = alert.textFields?[0].text {
 
@@ -152,7 +172,7 @@ class ChatViewController: UIViewController {
 
                                 SVProgressHUD.dismiss()
 
-                                let alert = UIAlertController(title: nil, message: "Reported Successfully", preferredStyle: .alert)
+                                let alert = UIAlertController(title: nil, message: NSLocalizedString("ReportSuccessfully", comment: ""), preferredStyle: .alert)
 
                                 alert.addAction(title: "OK", style: .default, isEnabled: true) { _ in
 
@@ -170,7 +190,7 @@ class ChatViewController: UIViewController {
 
                         // MARK: input reason could not be nil.
 
-                        let alert = UIAlertController(title: "Error!", message: "reason could not be empty.", preferredStyle: .alert)
+                        let alert = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: NSLocalizedString("Invalid_Reason", comment: ""), preferredStyle: .alert)
 
                         alert.addAction(title: "OK")
 
@@ -188,7 +208,7 @@ class ChatViewController: UIViewController {
 
         }
 
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
 
         alertSheet.addAction(block)
 
@@ -225,7 +245,7 @@ class ChatViewController: UIViewController {
 
                 self.outletStartCall.isEnabled = false
 
-                let alert = UIAlertController(title: "You can not interact with \(opponent.name).")
+                let alert = UIAlertController(title: NSLocalizedString("Block_Message", comment: "") + "\(opponent.name).")
 
                 alert.show()
 

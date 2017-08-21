@@ -51,6 +51,8 @@ class ChatListViewController: UIViewController {
 
         self.rooms = []
 
+        self.chatListTableView.reloadData()
+
     }
 
     deinit {

@@ -6,14 +6,6 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
-//protocol FirebaseManagerFriendDelegate: class {
-//
-//    func manager (_ manager: FirebaseManager, didGetFriend friend: User, by type: FriendType)
-//
-//    func manager (_ manager: FirebaseManager, didGetError error: Error)
-//
-//}
-
 protocol FirebaseManagerChatRoomDelegate: class {
 
     func manager (_ manager: FirebaseManager, didGetChatRooms rooms: [ChatRoom])

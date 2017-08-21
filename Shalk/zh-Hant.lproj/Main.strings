@@ -81,7 +81,7 @@
 "WDZ-fF-ibh.title" = "Profile";
 
 /* Class = "UINavigationItem"; title = "Chat"; ObjectID = "WSp-v3-i7H"; */
-"WSp-v3-i7H.title" = "聊天";
+"WSp-v3-i7H.title" = "Chat";
 
 /* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "Wdd-Gl-kWd"; */
 "Wdd-Gl-kWd.placeholder" = "信箱";
@@ -135,4 +135,4 @@
 "uVp-Cd-Qq4.title" = "修改";
 
 /* Class = "UITabBarItem"; title = "Chat"; ObjectID = "wxM-Hv-sf2"; */
-"wxM-Hv-sf2.title" = "Chat";
+"wxM-Hv-sf2.title" = "聊天";

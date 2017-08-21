@@ -68,6 +68,16 @@
 
 // MARK: - Chat View Controller
 "InputField_Placefolder" = "寫些什麼..";
+"ReportUserAlert" = "您可以從這邊封鎖使用者或是回報任何不恰當的內容";
+"Block" = "封鎖該用戶";
+"Block_Confirmation" = "一旦您封鎖該使用者，我們會將其從好友清單中移除，並且刪除對話訊息。";
+"BlockSuccessfully" = "封鎖成功！";
+"Report" = "回報不恰當的內容";
+"Report_Hint" = "請說明原因";
+"Report_Reason" = "例如：色情、暴力、人身攻擊、褻瀆..等等";
+"ReportSuccessfully" = "回報成功，我們將會在24小時內處理您的回報。";
+"Invalid_Reason" = "原因不能為空";
+"Block_Message" = "您現在不能發送訊息給 ";
 
 "Friend" = "朋友";
 
