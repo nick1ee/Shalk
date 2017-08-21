@@ -1425,13 +1425,13 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opponent Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U0a-Ic-iEE">
-                                                    <rect key="frame" x="78" y="10" width="147" height="22"/>
+                                                    <rect key="frame" x="78" y="10" width="296" height="22"/>
                                                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="19"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Latest Message" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6U-80-MBA">
-                                                    <rect key="frame" x="78" y="35" width="106" height="18"/>
+                                                    <rect key="frame" x="78" y="35" width="296" height="18"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -1462,6 +1462,7 @@
                                                 <constraint firstItem="ihA-X2-0Nh" firstAttribute="centerY" secondItem="6Jm-GR-Ngv" secondAttribute="centerY" id="5xn-Sd-8oX"/>
                                                 <constraint firstItem="oOL-jW-6TO" firstAttribute="leading" secondItem="6Jm-GR-Ngv" secondAttribute="leadingMargin" constant="10" id="Atf-vA-5we"/>
                                                 <constraint firstItem="oOL-jW-6TO" firstAttribute="centerY" secondItem="6Jm-GR-Ngv" secondAttribute="centerY" id="Gci-Gl-jv5"/>
+                                                <constraint firstItem="ihA-X2-0Nh" firstAttribute="leading" secondItem="P6U-80-MBA" secondAttribute="trailing" constant="10" id="Jsa-QA-WKa"/>
                                                 <constraint firstItem="U0a-Ic-iEE" firstAttribute="top" secondItem="6Jm-GR-Ngv" secondAttribute="top" constant="10" id="Q4v-9F-SKM"/>
                                                 <constraint firstItem="P6U-80-MBA" firstAttribute="top" secondItem="U0a-Ic-iEE" secondAttribute="bottom" constant="3" id="Snl-kL-OL3"/>
                                                 <constraint firstAttribute="bottom" secondItem="Usb-oL-IhY" secondAttribute="bottom" id="TRH-ey-FiO"/>
@@ -1469,6 +1470,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="ihA-X2-0Nh" secondAttribute="trailing" constant="10" id="cSc-CI-O87"/>
                                                 <constraint firstItem="U0a-Ic-iEE" firstAttribute="leading" secondItem="oOL-jW-6TO" secondAttribute="trailing" constant="10" id="g0Y-Dw-dRF"/>
                                                 <constraint firstItem="P6U-80-MBA" firstAttribute="leading" secondItem="oOL-jW-6TO" secondAttribute="trailing" constant="10" id="kxY-1b-gU6"/>
+                                                <constraint firstItem="ihA-X2-0Nh" firstAttribute="leading" secondItem="U0a-Ic-iEE" secondAttribute="trailing" constant="10" id="p7T-3e-3lx"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2049,8 +2051,8 @@
         <image name="icon_plus" width="44" height="44"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="M4q-bF-we2"/>
-        <segue reference="E0a-MG-Ga1"/>
+        <segue reference="xxV-J9-TX2"/>
         <segue reference="SQr-9W-W6x"/>
+        <segue reference="E0a-MG-Ga1"/>
     </inferredMetricsTieBreakers>
 </document>

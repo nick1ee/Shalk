@@ -184,6 +184,10 @@ class ChatViewController: UIViewController {
 
         guard let opponent = UserManager.shared.opponent else { return }
 
+        FirebaseManager().checkFriendStatus(opponent.uid) { _ in
+
+        }
+
         if UserManager.shared.blockedFriends.contains(where: { $0.uid == opponent.uid }) {
 
             messageView.isHidden = true

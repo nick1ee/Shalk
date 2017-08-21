@@ -170,6 +170,28 @@ extension FirebaseManager {
 
     }
 
+    func checkFriendStatus(_ friendUid: String, completion: (Bool) -> Void) {
+
+        guard let myUid = Auth.auth().currentUser?.uid else { return }
+
+        ref?.child("friendList").child(myUid).child(friendUid).observeSingleEvent(of: .value, with: { (snapshot) in
+
+            guard let status = snapshot.value as? String else { return }
+            
+            if status == "true" {
+                
+                completion(true)
+                
+            } else {
+                
+                completion(false)
+                
+            }
+            
+        })
+
+    }
+
     func fetchFriendInfo(_ friendUid: String, by type: FriendType, completion: @escaping (User, FriendType) -> Void) {
 
         ref?.child("users").child(friendUid).observeSingleEvent(of: .value, with: { (snapshot) in

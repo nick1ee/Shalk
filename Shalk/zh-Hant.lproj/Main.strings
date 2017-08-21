@@ -78,7 +78,7 @@
 "Vmx-m7-l2p.text" = "Shalk.";
 
 /* Class = "UINavigationItem"; title = "Profile"; ObjectID = "WDZ-fF-ibh"; */
-"WDZ-fF-ibh.title" = "個人資料";
+"WDZ-fF-ibh.title" = "Profile";
 
 /* Class = "UINavigationItem"; title = "Chat"; ObjectID = "WSp-v3-i7H"; */
 "WSp-v3-i7H.title" = "聊天";
@@ -99,7 +99,7 @@
 "buB-Wt-bbv.text" = "視訊通話";
 
 /* Class = "UINavigationItem"; title = "Discover"; ObjectID = "d7Y-Dv-MdK"; */
-"d7Y-Dv-MdK.title" = "探索";
+"d7Y-Dv-MdK.title" = "Discover";
 
 /* Class = "UIButton"; normalTitle = "Forget password?"; ObjectID = "dTh-8X-izs"; */
 "dTh-8X-izs.normalTitle" = "忘記密碼？";
@@ -135,4 +135,4 @@
 "uVp-Cd-Qq4.title" = "修改";
 
 /* Class = "UITabBarItem"; title = "Chat"; ObjectID = "wxM-Hv-sf2"; */
-"wxM-Hv-sf2.title" = "聊天";
+"wxM-Hv-sf2.title" = "Chat";
