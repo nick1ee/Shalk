@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
@@ -686,34 +687,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="lXH-A7-doD">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Dm-Cc-2yC">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="491"/>
+                                <rect key="frame" x="107" y="60" width="200" height="200"/>
                                 <color key="backgroundColor" red="0.46529024299999999" green="0.35942899010000001" blue="0.58205107869999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="5b8-mm-GXc"/>
+                                    <constraint firstAttribute="width" constant="200" id="kHC-MQ-O0I"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nick Lee" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Old-ne-4fq">
-                                <rect key="frame" x="0.0" y="511" width="414" height="57"/>
-                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="40"/>
-                                <color key="textColor" red="0.46529024299999999" green="0.35942899010000001" blue="0.58205107869999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="310" width="414" height="41.666666666666686"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="36"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video call" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buB-Wt-bbv">
-                                <rect key="frame" x="152" y="573" width="111" height="36"/>
-                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="25"/>
+                                <rect key="frame" x="164" y="356.66666666666669" width="86.666666666666657" height="23"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="20"/>
                                 <color key="textColor" red="0.66969025140000005" green="0.70234423879999996" blue="0.6899892688" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pFQ-Km-GbI">
-                                <rect key="frame" x="60" y="666" width="50" height="50"/>
+                                <rect key="frame" x="50" y="601" width="105" height="105"/>
                                 <color key="backgroundColor" red="1" green="0.30231175056745807" blue="0.30362829047558104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="NFh-Qh-2Pz"/>
-                                    <constraint firstAttribute="width" constant="50" id="juC-Rx-CSj"/>
+                                    <constraint firstAttribute="width" secondItem="pFQ-Km-GbI" secondAttribute="height" multiplier="1:1" id="9bq-a1-vfg"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="icon-endcall"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="25"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -721,17 +742,19 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRI-Z6-PSj">
-                                <rect key="frame" x="304" y="666" width="50" height="50"/>
+                                <rect key="frame" x="259" y="601" width="105" height="105"/>
                                 <color key="backgroundColor" red="0.41555618004489114" green="1" blue="0.31792793659916685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="7iA-1X-yUW"/>
-                                    <constraint firstAttribute="height" constant="50" id="H2T-Ju-izX"/>
+                                    <constraint firstAttribute="width" secondItem="cRI-Z6-PSj" secondAttribute="height" multiplier="1:1" id="Lbi-6O-iNA"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="icon-audio"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="25"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -741,26 +764,32 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2Dm-Cc-2yC" firstAttribute="leading" secondItem="kSv-Oi-ZGS" secondAttribute="leading" id="0KY-JH-L2H"/>
-                            <constraint firstItem="2Dm-Cc-2yC" firstAttribute="top" secondItem="kSv-Oi-ZGS" secondAttribute="top" id="0jW-eB-BMx"/>
-                            <constraint firstAttribute="trailing" secondItem="2Dm-Cc-2yC" secondAttribute="trailing" id="45P-UC-WAc"/>
+                            <constraint firstItem="q1s-Ic-Stl" firstAttribute="top" secondItem="cRI-Z6-PSj" secondAttribute="bottom" constant="30" id="Ce3-53-jfA"/>
+                            <constraint firstItem="pFQ-Km-GbI" firstAttribute="height" secondItem="kSv-Oi-ZGS" secondAttribute="height" multiplier="1:7" id="DgC-0Z-Qam"/>
                             <constraint firstItem="buB-Wt-bbv" firstAttribute="top" secondItem="Old-ne-4fq" secondAttribute="bottom" constant="5" id="Fl4-ci-FPt"/>
-                            <constraint firstAttribute="trailing" secondItem="cRI-Z6-PSj" secondAttribute="trailing" constant="60" id="LqF-3t-NbB"/>
-                            <constraint firstItem="pFQ-Km-GbI" firstAttribute="leading" secondItem="kSv-Oi-ZGS" secondAttribute="leading" constant="60" id="Rp7-VZ-937"/>
+                            <constraint firstItem="lXH-A7-doD" firstAttribute="top" secondItem="JFp-dS-cFz" secondAttribute="bottom" constant="-20" id="H3O-xJ-gpU"/>
+                            <constraint firstAttribute="trailing" secondItem="cRI-Z6-PSj" secondAttribute="trailing" constant="50" id="LqF-3t-NbB"/>
+                            <constraint firstItem="pFQ-Km-GbI" firstAttribute="leading" secondItem="kSv-Oi-ZGS" secondAttribute="leading" constant="50" id="Rp7-VZ-937"/>
                             <constraint firstAttribute="trailing" secondItem="Old-ne-4fq" secondAttribute="trailing" id="SyO-gm-8xB"/>
+                            <constraint firstItem="cRI-Z6-PSj" firstAttribute="height" secondItem="kSv-Oi-ZGS" secondAttribute="height" multiplier="1:7" id="T1W-Nf-CQy"/>
+                            <constraint firstItem="lXH-A7-doD" firstAttribute="leading" secondItem="kSv-Oi-ZGS" secondAttribute="leading" id="U30-4Q-sa9"/>
                             <constraint firstItem="buB-Wt-bbv" firstAttribute="centerX" secondItem="kSv-Oi-ZGS" secondAttribute="centerX" id="XS4-aB-Vif"/>
                             <constraint firstItem="Old-ne-4fq" firstAttribute="centerX" secondItem="kSv-Oi-ZGS" secondAttribute="centerX" id="bzm-hv-6X9"/>
-                            <constraint firstItem="2Dm-Cc-2yC" firstAttribute="height" secondItem="kSv-Oi-ZGS" secondAttribute="height" multiplier="2:3" id="c6T-Rd-rW2"/>
-                            <constraint firstItem="q1s-Ic-Stl" firstAttribute="top" secondItem="pFQ-Km-GbI" secondAttribute="bottom" constant="20" id="ckk-N4-IVp"/>
-                            <constraint firstItem="Old-ne-4fq" firstAttribute="top" secondItem="2Dm-Cc-2yC" secondAttribute="bottom" constant="20" id="o6U-De-NMb"/>
-                            <constraint firstItem="q1s-Ic-Stl" firstAttribute="top" secondItem="cRI-Z6-PSj" secondAttribute="bottom" constant="20" id="sHy-BQ-rcy"/>
+                            <constraint firstItem="2Dm-Cc-2yC" firstAttribute="top" secondItem="kSv-Oi-ZGS" secondAttribute="top" constant="60" id="cKx-tS-q9c"/>
+                            <constraint firstAttribute="trailing" secondItem="lXH-A7-doD" secondAttribute="trailing" id="fb1-R3-Zwc"/>
+                            <constraint firstItem="Old-ne-4fq" firstAttribute="top" secondItem="2Dm-Cc-2yC" secondAttribute="bottom" constant="50" id="o6U-De-NMb"/>
+                            <constraint firstItem="2Dm-Cc-2yC" firstAttribute="centerX" secondItem="kSv-Oi-ZGS" secondAttribute="centerX" id="pAg-lD-N4h"/>
+                            <constraint firstItem="q1s-Ic-Stl" firstAttribute="top" secondItem="pFQ-Km-GbI" secondAttribute="bottom" constant="30" id="rrz-It-NNX"/>
                             <constraint firstItem="Old-ne-4fq" firstAttribute="leading" secondItem="kSv-Oi-ZGS" secondAttribute="leading" id="sMl-e0-JEp"/>
+                            <constraint firstItem="q1s-Ic-Stl" firstAttribute="top" secondItem="lXH-A7-doD" secondAttribute="bottom" id="wp3-SH-jqQ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="callType" destination="buB-Wt-bbv" id="TRX-fX-Xmc"/>
                         <outlet property="opponentImageView" destination="2Dm-Cc-2yC" id="hpN-mo-gxg"/>
                         <outlet property="opponentNameLabel" destination="Old-ne-4fq" id="aEU-2J-mvw"/>
+                        <outlet property="outletAcceptCall" destination="cRI-Z6-PSj" id="f3h-P0-5mM"/>
+                        <outlet property="outletEndCall" destination="pFQ-Km-GbI" id="c0V-Qp-1Ci"/>
                         <segue destination="MTz-Mg-tpt" kind="presentation" identifier="acceptAudioCall" id="065-oc-QVO"/>
                         <segue destination="M85-tE-XmL" kind="presentation" identifier="acceptVideoCall" id="wBI-qr-d8x"/>
                     </connections>
@@ -964,17 +993,17 @@
                                     <constraint firstAttribute="height" constant="50" id="AEY-I6-BP4"/>
                                     <constraint firstAttribute="width" constant="50" id="oah-uS-Nbe"/>
                                 </constraints>
-                                <color key="tintColor" red="0.46529024299999999" green="0.35942899010000001" blue="0.58205107869999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.55042088030000003" green="0.13585129379999999" blue="0.60357242820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="icon-mic"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.24184587599999999" green="0.18653875589999999" blue="0.29894664879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.55042088030000003" green="0.13585129379999999" blue="0.60357242820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                         <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="15"/>
+                                        <real key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -987,17 +1016,17 @@
                                     <constraint firstAttribute="height" constant="50" id="ggb-gw-ng9"/>
                                     <constraint firstAttribute="width" constant="50" id="x58-6Q-ku8"/>
                                 </constraints>
-                                <color key="tintColor" red="0.46529024299999999" green="0.35942899010000001" blue="0.58205107869999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" image="icon-nospeaker"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="icon-speaker"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.46529024299999999" green="0.35942899010000001" blue="0.58205107869999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                         <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="15"/>
+                                        <real key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -1006,21 +1035,22 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUC-3g-6Zl">
                                 <rect key="frame" x="282" y="666" width="50" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.30231175059999998" blue="0.30362829050000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="5P8-jS-jCf"/>
                                     <constraint firstAttribute="height" constant="50" id="eUU-7w-LrF"/>
                                 </constraints>
-                                <color key="tintColor" red="0.46529024299999999" green="0.35942899010000001" blue="0.58205107869999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="icon-endcall"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.24184587599999999" green="0.18653875589999999" blue="0.29894664879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="1" green="0.30231175059999998" blue="0.30362829050000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                         <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="15"/>
+                                        <real key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -2196,12 +2226,13 @@
         <image name="icon-setting" width="25" height="25"/>
         <image name="icon-shake" width="25" height="25"/>
         <image name="icon-shalk" width="701" height="261"/>
+        <image name="icon-speaker" width="25" height="25"/>
         <image name="icon-user" width="34" height="34"/>
         <image name="icon-user2" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="xxV-J9-TX2"/>
-        <segue reference="SQr-9W-W6x"/>
-        <segue reference="E0a-MG-Ga1"/>
+        <segue reference="wBI-qr-d8x"/>
+        <segue reference="065-oc-QVO"/>
     </inferredMetricsTieBreakers>
 </document>

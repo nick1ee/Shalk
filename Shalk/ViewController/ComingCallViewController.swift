@@ -24,6 +24,10 @@ class ComingCallViewController: UIViewController {
 
     @IBOutlet weak var callType: UILabel!
 
+    @IBOutlet weak var outletAcceptCall: UIButton!
+
+    @IBOutlet weak var outletEndCall: UIButton!
+
     @IBAction func btnAcceptCall(_ sender: UIButton) {
 
         QBManager.shared.acceptCall()
@@ -59,6 +63,8 @@ class ComingCallViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        addButtonRadius()
+
         opponentNameLabel.text = opponent?.name
 
         callType.text = callTypeString
@@ -81,6 +87,16 @@ class ComingCallViewController: UIViewController {
             isCallAccepted = false
 
         }
+
+    }
+
+    func addButtonRadius() {
+
+        let screen = UIScreen.main.bounds
+
+        outletAcceptCall.layer.cornerRadius = screen.height / 14
+
+        outletEndCall.layer.cornerRadius = screen.height / 14
 
     }
 

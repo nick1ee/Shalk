@@ -36,7 +36,9 @@ class RandomCallViewController: UIViewController {
 
             isSpeakerEnabled = true
 
-            outletSpeaker.setImage(UIImage(named: "icon-speaker.png"), for: .normal)
+            outletSpeaker.tintColor = UIColor(red: 140/255, green: 35/255, blue: 154/255, alpha: 1)
+
+            outletSpeaker.layer.borderColor = UIColor(red: 140/255, green: 35/255, blue: 154/255, alpha: 1).cgColor
 
             qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.speaker
 
@@ -46,7 +48,9 @@ class RandomCallViewController: UIViewController {
 
             isSpeakerEnabled = false
 
-            outletSpeaker.setImage(UIImage(named: "icon-nospeaker.png"), for: .normal)
+            outletSpeaker.tintColor = UIColor.lightGray
+
+            outletSpeaker.layer.borderColor = UIColor.lightGray.cgColor
 
             qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
 
@@ -62,6 +66,10 @@ class RandomCallViewController: UIViewController {
 
             isMicrophoneEnabled = false
 
+            outletMicrophone.tintColor = UIColor.lightGray
+
+            outletMicrophone.layer.borderColor = UIColor.lightGray.cgColor
+
             outletMicrophone.setImage(UIImage(named: "icon-nomic.png"), for: .normal)
 
             qbManager.session?.localMediaStream.audioTrack.isEnabled = false
@@ -71,6 +79,10 @@ class RandomCallViewController: UIViewController {
             // MARK: User enabled the local microphone
 
             isMicrophoneEnabled = true
+
+            outletMicrophone.tintColor = UIColor(red: 140/255, green: 35/255, blue: 154/255, alpha: 1)
+
+            outletMicrophone.layer.borderColor = UIColor(red: 140/255, green: 35/255, blue: 154/255, alpha: 1).cgColor
 
             outletMicrophone.setImage(UIImage(named: "icon-mic.png"), for: .normal)
 
