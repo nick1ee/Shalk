@@ -14,11 +14,11 @@
 /* Class = "UILabel"; text = "Label"; ObjectID = "6Og-xj-O7b"; */
 "6Og-xj-O7b.text" = "Label";
 
+/* Class = "UIButton"; normalTitle = "查看使用者規範"; ObjectID = "90K-dq-dq9"; */
+"90K-dq-dq9.normalTitle" = "Click me to review EULA";
+
 /* Class = "UILabel"; text = "User Name"; ObjectID = "9En-QJ-LBd"; */
 "9En-QJ-LBd.text" = "User Name";
-
-/* Class = "UILabel"; text = "Audio Connected"; ObjectID = "AVN-D5-Jkf"; */
-"AVN-D5-Jkf.text" = "Audio Connected";
 
 /* Class = "UILabel"; text = "asdfasdfsadf"; ObjectID = "DLp-zx-gtf"; */
 "DLp-zx-gtf.text" = "asdfasdfsadf";
@@ -35,12 +35,6 @@
 /* Class = "UILabel"; text = "00:00:00"; ObjectID = "IT3-OI-iNJ"; */
 "IT3-OI-iNJ.text" = "00:00:00";
 
-/* Class = "UIButton"; normalTitle = "Back to login page"; ObjectID = "J2n-yA-PdO"; */
-"J2n-yA-PdO.normalTitle" = "Back to login page";
-
-/* Class = "UILabel"; text = "SHALK."; ObjectID = "JIe-PW-cgp"; */
-"JIe-PW-cgp.text" = "SHALK.";
-
 /* Class = "UILabel"; text = "Audio Connected"; ObjectID = "Jz3-gY-Acy"; */
 "Jz3-gY-Acy.text" = "Audio Connected";
 
@@ -56,6 +50,9 @@
 /* Class = "UILabel"; text = "Nick Lee"; ObjectID = "Old-ne-4fq"; */
 "Old-ne-4fq.text" = "Nick Lee";
 
+/* Class = "UILabel"; text = "當您按下註冊帳號後，即表示您同意Shalk所提供的使用者規範。"; ObjectID = "OsJ-ta-Toa"; */
+"OsJ-ta-Toa.text" = "You agreed with the EULA that provided by Shalk if you get started to register a new account.";
+
 /* Class = "UILabel"; text = "Latest Message"; ObjectID = "P6U-80-MBA"; */
 "P6U-80-MBA.text" = "Latest Message";
 
@@ -68,14 +65,11 @@
 /* Class = "UILabel"; text = "Opponent Name"; ObjectID = "U0a-Ic-iEE"; */
 "U0a-Ic-iEE.text" = "Opponent Name";
 
-/* Class = "UILabel"; text = "Shake your mobile ot find the partner!"; ObjectID = "Ud4-SZ-7yg"; */
-"Ud4-SZ-7yg.text" = "Shake your mobile ot find the partner!";
+/* Class = "UILabel"; text = "Shake your mobile to find the partner!"; ObjectID = "Ud4-SZ-7yg"; */
+"Ud4-SZ-7yg.text" = "Shake your mobile to find the partner!";
 
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "VMt-X7-OnC"; */
 "VMt-X7-OnC.placeholder" = "Password";
-
-/* Class = "UILabel"; text = "Shalk."; ObjectID = "Vmx-m7-l2p"; */
-"Vmx-m7-l2p.text" = "Shalk.";
 
 /* Class = "UINavigationItem"; title = "Profile"; ObjectID = "WDZ-fF-ibh"; */
 "WDZ-fF-ibh.title" = "Profile";
@@ -85,6 +79,9 @@
 
 /* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "Wdd-Gl-kWd"; */
 "Wdd-Gl-kWd.placeholder" = "Email Address";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "XkY-fT-K2U"; */
+"XkY-fT-K2U.text" = "Label";
 
 /* Class = "UILabel"; text = "00:00:00"; ObjectID = "Y1X-8D-LDP"; */
 "Y1X-8D-LDP.text" = "00:00:00";
@@ -119,6 +116,9 @@
 /* Class = "UILabel"; text = "00:00:00"; ObjectID = "iJw-xa-ZDq"; */
 "iJw-xa-ZDq.text" = "00:00:00";
 
+/* Class = "UIButton"; normalTitle = "回到登入頁"; ObjectID = "jfc-T9-7lc"; */
+"jfc-T9-7lc.normalTitle" = "Back to login Page";
+
 /* Class = "UITextField"; placeholder = "Input your name here."; ObjectID = "kAg-Xw-quR"; */
 "kAg-Xw-quR.placeholder" = "Input your name here.";
 
@@ -127,6 +127,9 @@
 
 /* Class = "UITextView"; text = "write something.."; ObjectID = "mTn-mZ-D9l"; */
 "mTn-mZ-D9l.text" = "write something..";
+
+/* Class = "UITextView"; text = "非常歡迎您使用「Shalk」，為了讓您能夠安心使用「Shalk」的各項服務與資訊，特此向您說明「Shalk」的使用者條款，以保障您的權益，請您詳閱下列內容：\n\n一、隱私權保護政策的適用範圍\n\n隱私權保護政策內容，包括「Shalk」如何處理在您使用服務時收集到的個人識別資料。隱私權保護政策不適用於「Shalk」以外的相關連結，也不適用於非「Shalk」所委託或參與管理的人員。\n\n二、個人資料的蒐集、處理及利用方式\n\n當您造訪「Shalk」或使用「Shalk」所提供之功能服務時，我們將視該服務功能性質，請您提供必要的個人資料，並在該特定目的範圍內處理及利用您的個人資料；非經您書面同意，「Shalk」不會將個人資料用於其他用途。\n「Shalk」在您使用服務信箱、問卷調查等互動性功能時，會保留您所提供的姓名、電子郵件地址、聯絡方式及使用時間等。\n為提供精確的服務，我們會將收集的問卷調查內容進行統計與分析，分析結果之統計數據或說明文字呈現，除供內部研究外，我們會視需要公佈統計數據及說明文字，但不涉及特定個人之資料。\n\n三、資料之保護\n\n「Shalk」使用Google後台儲存資料，只由經過授權的人員才能接觸您的個人資料，相關處理人員皆簽有保密合約，如有違反保密義務者，將會受到相關的法律處分。\n如因業務需要有必要委託其他單位提供服務時，「Shalk」亦會嚴格要求其遵守保密義務，並且採取必要檢查程序以確定其將確實遵守。\n\n此外，「Shalk」不擔保各項服務之正確、完整、安全、可靠、合適、穩定、不會斷線及出錯， 對於您所傳送之任何資料，「Shalk」官方不負任何保管之責任。 \n而有關因傳送過程而造成任何資料之遺失，以及可能因軟體bug所導致程式發生錯誤而資料遺失，「Shalk」官方不負任何擔保責任。\n\n四、與第三人共用個人資料之政策\n\n「Shalk」絕不會提供、交換、出租或出售任何您的個人資料給其他個人、團體、私人企業或公務機關，但有法律依據或合約義務者，不在此限。\n\n五、使用者規範\n\n「Shalk」本意是提供一個線上的平台，讓使用者僅選擇有興趣的語言來進行聊天。因此絕對禁止任何色情、暴力、毀謗、涉及人身攻擊、歧視與任何霸凌狀況的發生。\n若遭檢舉且經查確實有涉及以上內容的發生，「Shalk」官方有權利可以在不通知使用者的狀況下，停權該帳號，並且將其刪除。\n\n「Shalk」提供電子郵件來進行註冊帳號的動作，不會存取任何社群帳號來做使用，而在使用的過程中，若用戶間有衍生出後續的發展、糾紛或是訴訟的狀況產生，「Shalk」官方不承擔任何直接、間接、附帶、特別、衍生性或懲罰性賠償。\n\n"; ObjectID = "oHc-6M-N66"; */
+"oHc-6M-N66.text" = "非常歡迎您使用「Shalk」，為了讓您能夠安心使用「Shalk」的各項服務與資訊，特此向您說明「Shalk」的使用者條款，以保障您的權益，請您詳閱下列內容：\n\n一、隱私權保護政策的適用範圍\n\n隱私權保護政策內容，包括「Shalk」如何處理在您使用服務時收集到的個人識別資料。隱私權保護政策不適用於「Shalk」以外的相關連結，也不適用於非「Shalk」所委託或參與管理的人員。\n\n二、個人資料的蒐集、處理及利用方式\n\n當您造訪「Shalk」或使用「Shalk」所提供之功能服務時，我們將視該服務功能性質，請您提供必要的個人資料，並在該特定目的範圍內處理及利用您的個人資料；非經您書面同意，「Shalk」不會將個人資料用於其他用途。\n「Shalk」在您使用服務信箱、問卷調查等互動性功能時，會保留您所提供的姓名、電子郵件地址、聯絡方式及使用時間等。\n為提供精確的服務，我們會將收集的問卷調查內容進行統計與分析，分析結果之統計數據或說明文字呈現，除供內部研究外，我們會視需要公佈統計數據及說明文字，但不涉及特定個人之資料。\n\n三、資料之保護\n\n「Shalk」使用Google後台儲存資料，只由經過授權的人員才能接觸您的個人資料，相關處理人員皆簽有保密合約，如有違反保密義務者，將會受到相關的法律處分。\n如因業務需要有必要委託其他單位提供服務時，「Shalk」亦會嚴格要求其遵守保密義務，並且採取必要檢查程序以確定其將確實遵守。\n\n此外，「Shalk」不擔保各項服務之正確、完整、安全、可靠、合適、穩定、不會斷線及出錯， 對於您所傳送之任何資料，「Shalk」官方不負任何保管之責任。 \n而有關因傳送過程而造成任何資料之遺失，以及可能因軟體bug所導致程式發生錯誤而資料遺失，「Shalk」官方不負任何擔保責任。\n\n四、與第三人共用個人資料之政策\n\n「Shalk」絕不會提供、交換、出租或出售任何您的個人資料給其他個人、團體、私人企業或公務機關，但有法律依據或合約義務者，不在此限。\n\n五、使用者規範\n\n「Shalk」本意是提供一個線上的平台，讓使用者僅選擇有興趣的語言來進行聊天。因此絕對禁止任何色情、暴力、毀謗、涉及人身攻擊、歧視與任何霸凌狀況的發生。\n若遭檢舉且經查確實有涉及以上內容的發生，「Shalk」官方有權利可以在不通知使用者的狀況下，停權該帳號，並且將其刪除。\n\n「Shalk」提供電子郵件來進行註冊帳號的動作，不會存取任何社群帳號來做使用，而在使用的過程中，若用戶間有衍生出後續的發展、糾紛或是訴訟的狀況產生，「Shalk」官方不承擔任何直接、間接、附帶、特別、衍生性或懲罰性賠償。\n\n";
 
 /* Class = "UITextField"; placeholder = "Introduce yourself here."; ObjectID = "q3X-fB-goB"; */
 "q3X-fB-goB.placeholder" = "Introduce yourself here.";

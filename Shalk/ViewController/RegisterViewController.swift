@@ -11,6 +11,8 @@ import SVProgressHUD
 
 class RegisterViewController: UIViewController {
 
+    @IBOutlet weak var scrollView: UIScrollView!
+
     @IBOutlet weak var inputUserName: UITextField!
 
     @IBOutlet weak var inputEmail: UITextField!
@@ -86,11 +88,77 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        inputUserName.delegate = self
+
+        inputEmail.delegate = self
+
+        inputPassword.delegate = self
+
+        adjustTextfieldPadding()
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+
+        self.view.addGestureRecognizer(tap)
+
+    }
+
+    func adjustTextfieldPadding() {
+
         inputUserName.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
 
         inputEmail.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
 
         inputPassword.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
+
+    }
+
+    func hideKeyboard() {
+
+        self.view.endEditing(true)
+
+    }
+
+    deinit {
+
+        NotificationCenter.default.removeObserver(self)
+
+    }
+
+}
+
+extension RegisterViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+        textField.resignFirstResponder()
+
+        return true
+
+    }
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+
+        return true
+
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+
+        scrollView.contentInset = UIEdgeInsets.zero
+
+    }
+
+    func keyboardWillShow(notification: Notification) {
+
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+
+        let keyboardSize = (userInfo.object(forKey: UIKeyboardFrameEndUserInfoKey)! as AnyObject).cgRectValue.size
+
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+
+        scrollView.contentInset = contentInsets
 
     }
 

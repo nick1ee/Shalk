@@ -10,7 +10,6 @@ import UIKit
 import Quickblox
 import QuickbloxWebRTC
 import Crashlytics
-import IQKeyboardManagerSwift
 
 class MainTabViewController: UITabBarController {
 
@@ -28,8 +27,6 @@ class MainTabViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
         rtcManager.add(self)
 

@@ -7,7 +7,6 @@ target 'Shalk' do
 
   # Pods for Shalk
   pod 'SwiftLint'
-  pod 'IQKeyboardManagerSwift'
   pod 'SwifterSwift'
   pod 'Firebase/Core'
   pod 'Firebase/Database'

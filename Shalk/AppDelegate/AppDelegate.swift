@@ -11,7 +11,6 @@ import Firebase
 import Quickblox
 import QuickbloxWebRTC
 import SVProgressHUD
-import IQKeyboardManagerSwift
 import Fabric
 import Crashlytics
 
@@ -37,10 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         QBSettings.setAccountKey(QBAccountKey)
 
         QBSettings.enableXMPPLogging()
-
-        // MARK: Init IQKeyboardManager
-        IQKeyboardManager.sharedManager().enable = true
-        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
 
         guard let userToken = UserManager.shared.restore() else { return true }
 

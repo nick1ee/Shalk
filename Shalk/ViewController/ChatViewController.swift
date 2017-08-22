@@ -8,7 +8,6 @@
 
 import UIKit
 import SVProgressHUD
-import IQKeyboardManagerSwift
 
 class ChatViewController: UIViewController {
 
@@ -222,8 +221,6 @@ class ChatViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        IQKeyboardManager.sharedManager().enable = false
 
         inputTextView.delegate = self
 

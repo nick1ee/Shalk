@@ -78,10 +78,10 @@
 "Vmx-m7-l2p.text" = "Shalk.";
 
 /* Class = "UINavigationItem"; title = "Profile"; ObjectID = "WDZ-fF-ibh"; */
-"WDZ-fF-ibh.title" = "Profile";
+"WDZ-fF-ibh.title" = "個人資料";
 
 /* Class = "UINavigationItem"; title = "Chat"; ObjectID = "WSp-v3-i7H"; */
-"WSp-v3-i7H.title" = "Chat";
+"WSp-v3-i7H.title" = "聊天";
 
 /* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "Wdd-Gl-kWd"; */
 "Wdd-Gl-kWd.placeholder" = "信箱";
@@ -99,7 +99,7 @@
 "buB-Wt-bbv.text" = "視訊通話";
 
 /* Class = "UINavigationItem"; title = "Discover"; ObjectID = "d7Y-Dv-MdK"; */
-"d7Y-Dv-MdK.title" = "Discover";
+"d7Y-Dv-MdK.title" = "探索";
 
 /* Class = "UIButton"; normalTitle = "Forget password?"; ObjectID = "dTh-8X-izs"; */
 "dTh-8X-izs.normalTitle" = "忘記密碼？";
@@ -136,3 +136,12 @@
 
 /* Class = "UITabBarItem"; title = "Chat"; ObjectID = "wxM-Hv-sf2"; */
 "wxM-Hv-sf2.title" = "聊天";
+
+/* Class = "UIButton"; normalTitle = "查看使用者規範"; ObjectID = "90K-dq-dq9"; */
+"90K-dq-dq9.normalTitle" = "查看使用者規範";
+
+/* Class = "UILabel"; text = "當您按下註冊帳號後，即表示您同意Shalk所提供的使用者規範。"; ObjectID = "OsJ-ta-Toa"; */
+"OsJ-ta-Toa.text" = "當您按下註冊帳號後，即表示您同意Shalk所提供的使用者規範。";
+
+/* Class = "UIButton"; normalTitle = "回到登入頁"; ObjectID = "jfc-T9-7lc"; */
+"jfc-T9-7lc.normalTitle" = "回到登入頁";

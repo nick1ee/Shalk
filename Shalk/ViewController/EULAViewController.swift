@@ -18,4 +18,20 @@ class EULAViewController: UIViewController {
 
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        eulaTextView.isEditable = false
+
+        UIApplication.shared.statusBarStyle = .default
+
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        UIApplication.shared.statusBarStyle = .lightContent
+
+    }
+
 }
