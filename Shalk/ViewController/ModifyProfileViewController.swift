@@ -12,6 +12,8 @@ class ModifyProfileViewController: UIViewController {
 
     let imagePicker = UIImagePickerController()
 
+    @IBOutlet weak var scrollView: UIScrollView!
+
     @IBOutlet weak var iconUser: UIImageView!
 
     @IBOutlet weak var iconIntro: UIImageView!
@@ -95,7 +97,45 @@ class ModifyProfileViewController: UIViewController {
 
         imagePicker.delegate = self
 
+        inputName.delegate = self
+
+        inputIntro.delegate = self
+
+        adjustTextfieldPadding()
+
         displayUserProfile()
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+
+        self.view.addGestureRecognizer(tap)
+
+    }
+
+    func adjustTextfieldPadding() {
+
+        // MARK: Add padding for textfields.
+
+        inputName.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
+
+        inputIntro.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
+
+        inputName.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("InputName", comment: ""),
+                                                               attributes: [NSForegroundColorAttributeName: UIColor.white])
+
+        inputIntro.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("InputIntro", comment: ""),
+                                                             attributes: [NSForegroundColorAttributeName: UIColor.white])
+
+    }
+
+    func hideKeyboard() {
+
+        self.view.endEditing(true)
+
+    }
+
+    deinit {
+
+        NotificationCenter.default.removeObserver(self)
 
     }
 
@@ -148,6 +188,44 @@ extension ModifyProfileViewController: UIImagePickerControllerDelegate, UINaviga
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 
         dismiss(animated: true, completion: nil)
+
+    }
+
+}
+
+extension ModifyProfileViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+        textField.resignFirstResponder()
+
+        return true
+
+    }
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+
+        return true
+
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+
+        scrollView.contentInset = UIEdgeInsets.zero
+
+    }
+
+    func keyboardWillShow(notification: Notification) {
+
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+
+        let keyboardSize = (userInfo.object(forKey: UIKeyboardFrameEndUserInfoKey)! as AnyObject).cgRectValue.size
+
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+
+        scrollView.contentInset = contentInsets
 
     }
 

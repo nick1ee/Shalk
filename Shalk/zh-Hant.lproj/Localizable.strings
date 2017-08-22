@@ -85,4 +85,8 @@
 "Connecting" = "連接中..";
 "AudioConnected" = "語音已連接";
 
+// MARK: - Modify Profile View Controller
+"InputName" = "使用者姓名";
+"InputIntro" = "用一句話介紹你自己吧！";
+
 

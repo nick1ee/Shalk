@@ -88,4 +88,8 @@
 "Connecting" = "Connecting..";
 "AudioConnected" = "Audio Connected";
 
+// MARK: - Modify Profile View Controller
+"InputName" = "User Name";
+"InputIntro" = "Introduce yourself in a sentence.";
+
 
