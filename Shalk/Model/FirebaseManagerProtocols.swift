@@ -14,9 +14,13 @@ protocol FirebaseManagerChatRoomDelegate: class {
 
 }
 
-enum CallType {
+enum CallType: String {
 
-    case audio, video, none
+    case audio = "Audio Call"
+
+    case video = "Video Call"
+
+    case none
 
 }
 

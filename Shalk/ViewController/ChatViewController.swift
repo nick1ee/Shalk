@@ -364,11 +364,11 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.sendedMessage.text = messages[indexPath.row].text
 
-            cell.sendedTime.text = messages[indexPath.row].time
+            cell.sendedTime.text = messages[indexPath.row].time.convertDate()
 
             return cell
 
-        case "Audio Call":
+        case CallType.audio.rawValue:
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "callCell", for: indexPath) as! CallTableViewCell
 
@@ -376,11 +376,11 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.callDuration.text = messages[indexPath.row].text
 
-            cell.time.text = messages[indexPath.row].time
+            cell.time.text = messages[indexPath.row].time.convertDate()
 
             return cell
 
-        case "Video Call":
+        case CallType.video.rawValue:
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "callCell", for: indexPath) as! CallTableViewCell
 
@@ -388,7 +388,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.callDuration.text = messages[indexPath.row].text
 
-            cell.time.text = messages[indexPath.row].time
+            cell.time.text = messages[indexPath.row].time.convertDate()
 
             return cell
 
@@ -400,7 +400,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.receivedMessage.text = messages[indexPath.row].text
 
-            cell.receivedTime.text = messages[indexPath.row].time
+            cell.receivedTime.text = messages[indexPath.row].time.convertDate()
 
             cell.receiverImageView.sd_setImage(with: URL(string: friend[0].imageUrl))
 
@@ -499,6 +499,44 @@ extension String {
         }
 
         return text
+
+    }
+
+    func convertDate() -> String {
+
+        let dateFormatter = DateFormatter()
+
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+
+        print(self)
+
+        guard let date = dateFormatter.date(from: self) else { return "" }
+
+        if Calendar.current.isDateInToday(date) {
+
+            dateFormatter.dateFormat = "a HH:mm"
+
+            dateFormatter.amSymbol = "AM"
+
+            dateFormatter.pmSymbol = "PM"
+
+            return dateFormatter.string(from: date)
+
+        }
+
+        if Calendar.current.isDateInYesterday(date) {
+
+            dateFormatter.dateFormat = "HH:mm"
+
+            return "昨天 \(dateFormatter.string(from: date))"
+
+        } else {
+
+            dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
+
+            return dateFormatter.string(from: date)
+
+        }
 
     }
 

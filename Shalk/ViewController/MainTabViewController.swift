@@ -15,8 +15,6 @@ class MainTabViewController: UITabBarController {
 
     var opponentName = ""
 
-    var callType = ""
-
     let qbManager = QBManager.shared
 
     let userManager = UserManager.shared
@@ -40,18 +38,6 @@ class MainTabViewController: UITabBarController {
 
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        if segue.identifier == "comingCall" {
-
-            let comingCallVC = segue.destination as? ComingCallViewController
-
-            comingCallVC?.callTypeString = callType
-
-        }
-
-    }
-
 }
 
 extension MainTabViewController: QBRTCClientDelegate {
@@ -71,9 +57,9 @@ extension MainTabViewController: QBRTCClientDelegate {
 
             do {
 
-                let user = try User.init(json: userInfo!)
+                let opponent = try User.init(json: userInfo!)
 
-                UserManager.shared.opponent = user
+                UserManager.shared.opponent = opponent
 
                 qbManager.session = session
 
@@ -90,19 +76,27 @@ extension MainTabViewController: QBRTCClientDelegate {
 
                 } else {
 
+                    let chatRoom = UserManager.shared.chatRooms.filter { $0.user1Id == opponent.uid || $0.user2Id == opponent.uid }
+
+                    UserManager.shared.chatRoomId = chatRoom[0].roomId
+
                     switch session.conferenceType {
 
                     case .audio:
 
-                        callType = "Audio Call"
+                        let comingCallVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ComingCallVC") as? ComingCallViewController
 
-                        self.performSegue(withIdentifier: "comingCall", sender: nil)
+                        comingCallVC?.callType = CallType.audio
+
+                        AppDelegate.shared.window?.rootViewController?.present(comingCallVC!, animated: true, completion: nil)
 
                     case .video:
 
-                        callType = "Video Call"
+                        let comingCallVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ComingCallVC") as? ComingCallViewController
 
-                        self.performSegue(withIdentifier: "comingCall", sender: nil)
+                        comingCallVC?.callType = CallType.video
+
+                        AppDelegate.shared.window?.rootViewController?.present(comingCallVC!, animated: true, completion: nil)
 
                     }
 
@@ -188,9 +182,7 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         let userString = String(describing: userID)
 
-        let friend = UserManager.shared.friends.filter { $0.quickbloxId == userString }
-
-        if friend.count == 0 {
+        if UserManager.shared.friends.contains(where: { $0.quickbloxId != userString }) {
 
             // MARK: Not friends, init a friend request.
 
@@ -219,15 +211,6 @@ extension MainTabViewController: QBRTCClientDelegate {
         // MARK: 確定為好友
 
         self.dismiss(animated: true, completion: nil)
-
-        guard
-            let callType = userInfo?["call"],
-            let duration = userInfo?["duration"],
-            let chatRoomId = userInfo?["roomId"] else { return }
-
-        UserManager.shared.chatRoomId = chatRoomId
-
-        FirebaseManager().sendCallRecord(callType, duration: duration)
 
     }
 

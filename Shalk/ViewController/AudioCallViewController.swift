@@ -113,7 +113,13 @@ class AudioCallViewController: UIViewController {
 
         let duration = "\(self.hour.addLeadingZero()) : \(self.minute.addLeadingZero()) : \(self.second.addLeadingZero())"
 
-        QBManager.shared.handUpCall(["call": "Audio Call", "duration": duration, "roomId": UserManager.shared.chatRoomId])
+        DispatchQueue.global().async {
+
+            FirebaseManager().sendCallRecord(CallType.audio, duration: duration)
+
+            QBManager.shared.handUpCall(nil)
+
+        }
 
         self.dismiss(animated: true, completion: nil)
 

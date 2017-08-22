@@ -130,7 +130,13 @@ class VideoCallViewController: UIViewController {
 
         let duration = "\(self.hour.addLeadingZero()) : \(self.minute.addLeadingZero()) : \(self.second.addLeadingZero())"
 
-        QBManager.shared.handUpCall(["call": "Video Call", "duration": duration, "roomId": UserManager.shared.chatRoomId])
+        DispatchQueue.global().async {
+
+            FirebaseManager().sendCallRecord(CallType.video, duration: duration)
+
+            QBManager.shared.handUpCall(nil)
+
+        }
 
         self.dismiss(animated: true, completion: nil)
 
@@ -139,17 +145,9 @@ class VideoCallViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        localVideoView.center = CGPoint(x: 0, y: 0)
-
         rtcManager.add(self)
 
-        if UserManager.shared.callType == .video {
-
-            videoPreparation()
-
-            QBManager.shared.acceptCall()
-
-        } else {
+        if QBManager.shared.session == nil {
 
             guard
                 let qbID = UserManager.shared.opponent?.quickbloxId,
@@ -161,6 +159,12 @@ class VideoCallViewController: UIViewController {
             videoPreparation()
 
             UserManager.shared.startVideoCall()
+
+        } else {
+
+            videoPreparation()
+
+            QBManager.shared.acceptCall()
 
         }
 
@@ -197,15 +201,17 @@ class VideoCallViewController: UIViewController {
 
         videoFormat.height = 480
 
-        self.videoCapture = QBRTCCameraCapture.init(videoFormat: videoFormat, position: AVCaptureDevicePosition.front)
+        videoCapture = QBRTCCameraCapture.init(videoFormat: videoFormat, position: AVCaptureDevicePosition.front)
 
         QBManager.shared.session?.localMediaStream.videoTrack.videoCapture = self.videoCapture
 
-        self.videoCapture!.previewLayer.frame = self.localVideoView.bounds
+        videoCapture!.previewLayer.frame = self.localVideoView.bounds
 
-        self.videoCapture!.startSession()
+        videoCapture!.startSession()
 
-        self.localVideoView.layer.insertSublayer(videoCapture!.previewLayer, at: 0)
+        localVideoView.center = CGPoint(x: 0, y: 0)
+
+        localVideoView.layer.insertSublayer(videoCapture!.previewLayer, at: 0)
 
         qbManager.audioManager.currentAudioDevice = .speaker
 

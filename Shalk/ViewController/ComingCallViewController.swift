@@ -16,13 +16,13 @@ class ComingCallViewController: UIViewController {
 
     let opponent = UserManager.shared.opponent
 
-    var callTypeString = ""
+    var callType: CallType = .none
 
     @IBOutlet weak var opponentImageView: UIImageView!
 
     @IBOutlet weak var opponentNameLabel: UILabel!
 
-    @IBOutlet weak var callType: UILabel!
+    @IBOutlet weak var callTypeLabel: UILabel!
 
     @IBOutlet weak var outletAcceptCall: UIButton!
 
@@ -34,19 +34,33 @@ class ComingCallViewController: UIViewController {
 
         self.isCallAccepted = true
 
-        switch callTypeString {
+        switch callType {
 
-        case "Audio Call":
+        case .audio:
 
-            UserManager.shared.callType = .audio
+            self.dismiss(animated: false, completion: {
 
-            self.performSegue(withIdentifier: "acceptAudioCall", sender: nil)
+                let audioVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AudioCallVC")
 
-        default:
+                AppDelegate.shared.window?.rootViewController?.present(audioVC, animated: true, completion: nil)
 
-            UserManager.shared.callType = .video
+            })
 
-            self.performSegue(withIdentifier: "acceptVideoCall", sender: nil)
+            break
+
+        case .video:
+
+            self.dismiss(animated: false, completion: {
+
+                let videoVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VideoCallVC")
+
+                AppDelegate.shared.window?.rootViewController?.present(videoVC, animated: true, completion: nil)
+
+            })
+
+            break
+
+        case .none: break
 
         }
 
@@ -65,26 +79,13 @@ class ComingCallViewController: UIViewController {
 
         addButtonRadius()
 
-        opponentNameLabel.text = opponent?.name
+        opponentNameLabel.text = opponent?.name.addSpacingAndCapitalized()
 
-        callType.text = callTypeString
+        callTypeLabel.text = callType.rawValue
 
         if opponent?.imageUrl != "null" {
 
             opponentImageView.sd_setImage(with: URL(string: (opponent?.imageUrl)!))
-
-        }
-
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        if isCallAccepted == true {
-
-            self.dismiss(animated: true, completion: nil)
-
-            isCallAccepted = false
 
         }
 
