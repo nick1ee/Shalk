@@ -118,12 +118,6 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
             var friend = UserManager.shared.friends.filter { $0.uid == room.user2Id }
 
-            if friend.count == 0 {
-
-                friend = UserManager.shared.blockedFriends.filter { $0.uid == room.user2Id }
-
-            }
-
             cell.opponentImageView.sd_setImage(with: URL(string: friend[0].imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
             cell.opponentName.text = friend[0].name
@@ -133,12 +127,6 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
 
             var friend = UserManager.shared.friends.filter { $0.uid == room.user1Id }
-
-            if friend.count == 0 {
-
-                friend = UserManager.shared.blockedFriends.filter { $0.uid == room.user1Id }
-
-            }
 
             cell.opponentImageView.sd_setImage(with: URL(string: friend[0].imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
@@ -162,12 +150,6 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
             var friend = UserManager.shared.friends.filter { $0.uid == room.user2Id }
 
-            if friend.count == 0 {
-
-                friend = UserManager.shared.blockedFriends.filter { $0.uid == room.user2Id }
-
-            }
-
             UserManager.shared.opponent = friend[0]
 
             self.performSegue(withIdentifier: "goChat", sender: nil)
@@ -177,12 +159,6 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
             UserManager.shared.chatRoomId = room.roomId
 
             var friend = UserManager.shared.friends.filter { $0.uid == room.user1Id }
-
-            if friend.count == 0 {
-
-                friend = UserManager.shared.blockedFriends.filter { $0.uid == room.user1Id }
-
-            }
 
             UserManager.shared.opponent = friend[0]
 

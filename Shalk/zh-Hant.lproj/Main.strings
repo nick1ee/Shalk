@@ -81,7 +81,7 @@
 "WDZ-fF-ibh.title" = "個人資料";
 
 /* Class = "UINavigationItem"; title = "Chat"; ObjectID = "WSp-v3-i7H"; */
-"WSp-v3-i7H.title" = "聊天";
+"WSp-v3-i7H.title" = "Chat";
 
 /* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "Wdd-Gl-kWd"; */
 "Wdd-Gl-kWd.placeholder" = "信箱";
@@ -93,13 +93,13 @@
 "ZgK-Tf-vhI.text" = "使用者姓名";
 
 /* Class = "UITabBarItem"; title = "Profile"; ObjectID = "Zoj-L9-Jd7"; */
-"Zoj-L9-Jd7.title" = "個人資料";
+"Zoj-L9-Jd7.title" = "Profile";
 
 /* Class = "UILabel"; text = "Video call"; ObjectID = "buB-Wt-bbv"; */
 "buB-Wt-bbv.text" = "視訊通話";
 
 /* Class = "UINavigationItem"; title = "Discover"; ObjectID = "d7Y-Dv-MdK"; */
-"d7Y-Dv-MdK.title" = "探索";
+"d7Y-Dv-MdK.title" = "Discover";
 
 /* Class = "UIButton"; normalTitle = "Forget password?"; ObjectID = "dTh-8X-izs"; */
 "dTh-8X-izs.normalTitle" = "忘記密碼？";
@@ -135,7 +135,7 @@
 "uVp-Cd-Qq4.title" = "修改";
 
 /* Class = "UITabBarItem"; title = "Chat"; ObjectID = "wxM-Hv-sf2"; */
-"wxM-Hv-sf2.title" = "聊天";
+"wxM-Hv-sf2.title" = "Chat";
 
 /* Class = "UIButton"; normalTitle = "查看使用者規範"; ObjectID = "90K-dq-dq9"; */
 "90K-dq-dq9.normalTitle" = "查看使用者規範";

@@ -14,19 +14,17 @@ class ProfileViewController: UIViewController {
 
     var friends: [User] = []
 
-    var blockedFriends: [User] = []
-
     var components: [FriendType] = [ .me, .friend ]
 
     @IBOutlet weak var tableView: UITableView!
 
-    @IBAction func btnModifyProfile(_ sender: UIBarButtonItem) {
+    @IBAction func btnModifyProfile(_ sender: UIButton) {
 
         self.navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ModifyProfile"))
 
     }
 
-    @IBAction func btnLogOut(_ sender: UIBarButtonItem) {
+    @IBAction func btnLogOut(_ sender: UIButton) {
 
         let alert = UIAlertController.init(title: NSLocalizedString("Logout_Title", comment: ""), message: NSLocalizedString("Logout_Message", comment: ""), preferredStyle: .alert)
 
@@ -128,7 +126,7 @@ class ProfileViewController: UIViewController {
 
         self.friends = []
 
-        self.blockedFriends = []
+        self.tableView.reloadData()
 
     }
 
@@ -201,7 +199,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.userName.text = user.name
 
-            cell.userIntroduction.text = user.intro
+            if user.intro != "null" {
+
+                cell.userIntroduction.text = user.intro
+
+            }
 
             cell.userImageView.sd_setImage(with: URL(string: user.imageUrl), placeholderImage: UIImage(named: "icon-user"))
 

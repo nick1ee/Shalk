@@ -27,7 +27,9 @@ class ChatViewController: UIViewController {
 
     @IBOutlet weak var bottomHeight: NSLayoutConstraint!
 
-    @IBOutlet weak var outletStartCall: UIBarButtonItem!
+    @IBOutlet weak var outletStartCall: UIButton!
+
+    @IBOutlet weak var opponentName: UILabel!
 
     @IBAction func sendMessage(_ sender: UIButton) {
 
@@ -65,13 +67,13 @@ class ChatViewController: UIViewController {
 
     }
 
-    @IBAction func btnBack(_ sender: UIBarButtonItem) {
+    @IBAction func btnBack(_ sender: UIButton) {
 
         self.navigationController?.popViewController(animated: true)
 
     }
 
-    @IBAction func btnStartCall(_ sender: UIBarButtonItem) {
+    @IBAction func btnStartCall(_ sender: UIButton) {
 
         let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
@@ -101,7 +103,7 @@ class ChatViewController: UIViewController {
 
     }
 
-    @IBAction func btnMore(_ sender: UIBarButtonItem) {
+    @IBAction func btnMore(_ sender: UIButton) {
 
         let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
@@ -228,7 +230,7 @@ class ChatViewController: UIViewController {
 
         guard let opponent = UserManager.shared.opponent else { return }
 
-        self.navigationItem.title = opponent.name
+        opponentName.text = opponent.name.addSpacingAndCapitalized()
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
 
@@ -263,11 +265,21 @@ class ChatViewController: UIViewController {
             })
         }
 
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+
+        self.view.addGestureRecognizer(tap)
+
     }
 
     deinit {
 
         NotificationCenter.default.removeObserver(self)
+
+    }
+
+    func hideKeyboard() {
+
+        self.view.endEditing(true)
 
     }
 
@@ -342,8 +354,6 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let gradientLayer = CAGradientLayer()
-
         guard let myUid = UserManager.shared.currentUser?.uid else { return UITableViewCell() }
 
         switch messages[indexPath.row].senderId {
@@ -355,20 +365,6 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             cell.sendedMessage.text = messages[indexPath.row].text
 
             cell.sendedTime.text = messages[indexPath.row].time
-
-            gradientLayer.frame = cell.bounds
-
-            let color1 = UIColor.init(red: 44/255, green: 33/255, blue: 76/255, alpha: 1).cgColor
-
-            let color2 = UIColor.init(red: 62/255, green: 47/255, blue: 75/255, alpha: 1).cgColor
-
-            gradientLayer.colors = [color1, color2]
-
-            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
-
-            gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
-
-            cell.layer.insertSublayer(gradientLayer, at: 0)
 
             return cell
 
@@ -485,6 +481,24 @@ extension ChatViewController {
         bottomHeight.constant = 0.0
 
         view.setNeedsLayout()
+
+    }
+
+}
+
+extension String {
+
+    func addSpacingAndCapitalized() -> String {
+
+        var text = ""
+
+        for character in self.charactersArray {
+
+            text += "\(character.uppercased) "
+
+        }
+
+        return text
 
     }
 

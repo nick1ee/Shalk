@@ -152,8 +152,6 @@ extension FirebaseManager {
 
             UserManager.shared.friends = []
 
-            UserManager.shared.blockedFriends = []
-
             guard let friendList = snapshot.value as? [String: String] else { return }
 
             for friend in friendList {
@@ -521,7 +519,7 @@ extension FirebaseManager {
 
 }
 
-// MARK: Handle remove user
+// MARK: Block and Report abusive user
 extension FirebaseManager {
 
     func blockFriend(completion: @escaping () -> Void) {

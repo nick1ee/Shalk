@@ -52,7 +52,7 @@ class ModifyProfileViewController: UIViewController {
 
     }
 
-    @IBAction func btnBack(_ sender: UIBarButtonItem) {
+    @IBAction func btnBack(_ sender: UIButton) {
 
         self.navigationController?.popViewController(animated: true)
 
@@ -141,25 +141,25 @@ class ModifyProfileViewController: UIViewController {
 
     func displayUserProfile() {
 
-        self.iconIntro.tintColor = UIColor.init(red: 255/255, green: 189/255, blue: 0/255, alpha: 1)
+        iconIntro.tintColor = UIColor.white
 
-        self.iconUser.tintColor = UIColor.init(red: 255/255, green: 189/255, blue: 0/255, alpha: 1)
+        iconUser.tintColor = UIColor.white
 
-        self.userImageView.tintColor = UIColor.white
+        userImageView.tintColor = UIColor.white
 
         guard let user = UserManager.shared.currentUser else { return }
 
-        self.inputName.text = user.name
+        inputName.text = user.name
 
-        self.inputIntro.text = user.intro
+        if user.intro != "null" {
+
+            inputIntro.text = user.intro
+
+        }
 
         if user.imageUrl != "null" {
 
-            DispatchQueue.global().async {
-
-                self.userImageView.sd_setImage(with: URL(string: user.imageUrl))
-
-            }
+            userImageView.sd_setImage(with: URL(string: user.imageUrl))
 
         }
 

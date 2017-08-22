@@ -82,9 +82,15 @@ class RandomCallViewController: UIViewController {
 
     @IBAction func btnEndCall(_ sender: UIButton) {
 
-        let friend = UserManager.shared.friends.filter { $0.uid == UserManager.shared.opponent?.uid }
+        if UserManager.shared.friends.contains(where: { $0.uid == UserManager.shared.opponent?.uid }) {
 
-        if friend.count == 0 {
+            // MARK: You are already friends.
+
+            UserManager.shared.closeChannel()
+
+            self.dismiss(animated: true, completion: nil)
+
+        } else {
 
             // MARK: Not friends, init a friend request.
 
@@ -104,12 +110,6 @@ class RandomCallViewController: UIViewController {
             })
 
             self.present(alert, animated: true, completion: nil)
-
-        } else {
-
-            UserManager.shared.closeChannel()
-
-            self.dismiss(animated: true, completion: nil)
 
         }
 

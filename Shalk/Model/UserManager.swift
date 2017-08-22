@@ -57,8 +57,6 @@ class UserManager {
 
     }
 
-    var blockedFriends: [User] = []
-
     var isDiscovering: Bool = false
 
     var isConnected = false

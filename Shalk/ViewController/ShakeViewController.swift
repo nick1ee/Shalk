@@ -10,7 +10,6 @@ import UIKit
 import Magnetic
 import SpriteKit
 import Quickblox
-import AudioToolbox
 import QuickbloxWebRTC
 import NVActivityIndicatorView
 
@@ -21,6 +20,8 @@ class ShakeViewController: UIViewController {
     var names = UIImage.names
 
     var selectedNode: Node?
+
+    var nodes: [Node] = []
 
     @IBOutlet weak var iconShake: UIImageView!
 
@@ -49,6 +50,8 @@ class ShakeViewController: UIViewController {
 
         magneticView.allowsTransparency = true
 
+        magnetic.allowsMultipleSelection = false
+
         magneticView.backgroundColor = UIColor.clear
 
         magnetic.backgroundColor = UIColor.clear
@@ -61,7 +64,16 @@ class ShakeViewController: UIViewController {
 
         iconShake.tintColor = UIColor.white
 
-        magnetic.allowsMultipleSelection = false
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        iconShake.isHidden = true
+
+        labelSearching.text = NSLocalizedString("No_Language", comment: "")
+
+        nodes = []
 
         addLangBubbles(nil)
 
@@ -80,6 +92,12 @@ class ShakeViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+
+        for node in nodes {
+
+            node.removeFromParent()
+
+        }
 
         selectedNode?.isSelected = false
 
@@ -141,17 +159,21 @@ class ShakeViewController: UIViewController {
 
     @IBAction func addLangBubbles(_ sender: UIControl?) {
 
-        for _ in 0...3 {
+        var colorArray = UIColor.colors
 
-            let name = names.randomItem()
+        for item in 0...3 {
 
-            names.removeAll(name)
+            let name = names[item]
 
-            let color = UIColor.colors.randomItem()
+            let color = colorArray.randomItem
 
-            let node = Node(text: name.capitalized, image: UIImage(named: name), color: color, radius: 40)
+            colorArray.removeAll(color)
+
+            let node = Node(text: name.capitalized, image: UIImage(named: name), color: color, radius: UIScreen.main.bounds.width / 9)
 
             magnetic.addChild(node)
+
+            nodes.append(node)
 
         }
 
@@ -183,6 +205,10 @@ extension ShakeViewController: MagneticDelegate {
         UserManager.shared.isDiscovering = false
 
         loadingView.stopAnimating()
+
+        iconShake.isHidden = true
+
+        labelSearching.text = NSLocalizedString("No_Language", comment: "")
 
     }
 

@@ -19,6 +19,8 @@ class SenderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        self.backgroundColor = UIColor.clear
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
