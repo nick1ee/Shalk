@@ -94,7 +94,7 @@ class RegisterViewController: UIViewController {
 
         inputPassword.delegate = self
 
-        adjustTextfieldPadding()
+        adjustTextfield()
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
 
@@ -102,7 +102,13 @@ class RegisterViewController: UIViewController {
 
     }
 
-    func adjustTextfieldPadding() {
+    func adjustTextfield() {
+
+        inputUserName.maxLength = 20
+
+        inputEmail.maxLength = 30
+
+        inputPassword.maxLength = 12
 
         inputUserName.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
 

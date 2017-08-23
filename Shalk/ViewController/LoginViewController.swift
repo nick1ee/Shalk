@@ -77,7 +77,7 @@ class LoginViewController: UIViewController {
 
         inputPassword.delegate = self
 
-        adjustTextfieldPadding()
+        adjustTextfield()
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
 
@@ -85,7 +85,11 @@ class LoginViewController: UIViewController {
 
     }
 
-    func adjustTextfieldPadding() {
+    func adjustTextfield() {
+
+        inputEmail.maxLength = 30
+
+        inputPassword.maxLength = 12
 
         // MARK: Add padding for textfields.
 

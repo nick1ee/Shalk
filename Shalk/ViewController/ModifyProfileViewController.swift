@@ -101,7 +101,7 @@ class ModifyProfileViewController: UIViewController {
 
         inputIntro.delegate = self
 
-        adjustTextfieldPadding()
+        adjustTextfield()
 
         displayUserProfile()
 
@@ -111,9 +111,13 @@ class ModifyProfileViewController: UIViewController {
 
     }
 
-    func adjustTextfieldPadding() {
+    func adjustTextfield() {
 
         // MARK: Add padding for textfields.
+
+        inputName.maxLength = 20
+
+        inputIntro.maxLength = 40
 
         inputName.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
 

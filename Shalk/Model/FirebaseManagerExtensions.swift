@@ -89,7 +89,7 @@ extension FirebaseManager {
 
         ref?.child("channels").child(lang).child(roomId).updateChildValues(["isFinished": true, "isLocked": true])
 
-        UserManager.shared.roomKey = nil
+//        UserManager.shared.roomKey = nil
 
         UserManager.shared.language = nil
 
@@ -128,17 +128,15 @@ extension FirebaseManager {
 
                 self.ref?.child("friendList").child(opponent.uid).updateChildValues([myUid: "true"])
 
-                UserManager.shared.closeChannel()
-
             } else {
 
-                // MARK: Add myself into the queue.
+                // MARK: Send friend request.
 
                 self.ref?.child("friendRequest").child(roomId).setValue(true)
 
-                UserManager.shared.closeChannel()
-
             }
+
+            self.closeChannel()
 
         })
 

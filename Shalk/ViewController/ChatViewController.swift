@@ -402,7 +402,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.receivedTime.text = messages[indexPath.row].time.convertDate()
 
-            cell.receiverImageView.sd_setImage(with: URL(string: friend[0].imageUrl))
+            cell.receiverImageView.sd_setImage(with: URL(string: friend[0].imageUrl)!, placeholderImage: UIImage(named: "icon-user"))
 
             cell.receiverImageView.addGestureRecognizer(setTapGestureRecognizer())
 
@@ -507,8 +507,6 @@ extension String {
         let dateFormatter = DateFormatter()
 
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-
-        print(self)
 
         guard let date = dateFormatter.date(from: self) else { return "" }
 

@@ -146,19 +146,55 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
     }
 
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 
         let component = components[section]
 
         switch component {
 
-        case .me:
+        case .me: return 0
 
-            return nil
+        case .friend: return 30.0
+
+        }
+
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        let component = components[section]
+
+        switch component {
+
+        case .me: return nil
 
         case .friend:
 
-            return NSLocalizedString("Friend", comment: "")
+            let screen = UIScreen.main.bounds
+
+            let header = UIView(frame: CGRect(x: 0, y: 0, width: screen.width, height: 30))
+
+            let headerLabel = UILabel(frame: CGRect(x: 20, y: 0, width: screen.width, height: 30))
+
+            headerLabel.font = UIFont.boldSystemFont(ofSize: 13)
+
+            headerLabel.text = "F R I E N D S"
+
+            headerLabel.textColor = UIColor.white
+
+            headerLabel.layer.shadowColor = UIColor.black.cgColor
+
+            headerLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
+
+            headerLabel.layer.shadowRadius = 10
+
+            headerLabel.layer.opacity = 1
+
+            header.backgroundColor = UIColor.clear
+
+            header.addSubview(headerLabel)
+
+            return header
 
         }
 
@@ -207,7 +243,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             if user.imageUrl == "null" {
 
-                let userPlaceholder = UIImage(named: "icon-user")
+                let userPlaceholder = UIImage(named: "bigUser")
 
                 cell.userImageView.image = userPlaceholder
 

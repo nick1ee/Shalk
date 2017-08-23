@@ -9,6 +9,7 @@
 import UIKit
 import Quickblox
 import QuickbloxWebRTC
+import SCLAlertView
 
 class RandomCallViewController: UIViewController {
 
@@ -94,37 +95,39 @@ class RandomCallViewController: UIViewController {
 
     @IBAction func btnEndCall(_ sender: UIButton) {
 
+        UserManager.shared.closeChannel()
+
         if UserManager.shared.friends.contains(where: { $0.uid == UserManager.shared.opponent?.uid }) {
 
-            // MARK: You are already friends.
-
-            UserManager.shared.closeChannel()
-
-            self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
 
         } else {
 
-            // MARK: Not friends, init a friend request.
+            guard let opponent = UserManager.shared.opponent else { return }
 
-            let alert = UIAlertController.init(title: NSLocalizedString("Friend_Request_Title", comment: ""), message: NSLocalizedString("Friend_Request_Message", comment: "") + "\(UserManager.shared.opponent?.name ?? "")", preferredStyle: .alert)
+            let appearance = SCLAlertView.SCLAppearance( kTitleFont: UIFont.boldSystemFont(ofSize: 18), kTextFont: UIFont.systemFont(ofSize: 12), kButtonFont: UIFont.boldSystemFont(ofSize: 18), showCloseButton: false)
 
-            alert.addAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, isEnabled: true, handler: { (_) in
-                UserManager.shared.closeChannel()
+            let alert = SCLAlertView(appearance: appearance)
+
+            alert.addButton("確定", action: {
+
+                DispatchQueue.global().async {
+
+                    FirebaseManager().checkFriendRequest()
+
+                }
 
                 self.dismiss(animated: true, completion: nil)
+
             })
 
-            alert.addAction(title: NSLocalizedString("Send", comment: ""), style: .default, isEnabled: true, handler: { (_) in
+            alert.addButton("取消", backgroundColor: UIColor.red, textColor: UIColor.white, showDurationStatus: true, action: { })
 
-                FirebaseManager().checkFriendRequest()
+            alert.showSuccess("通話結束！", subTitle: "通話已經結束囉，是否要與\(opponent.name)成為好友呢？")
 
-                self.dismiss(animated: true, completion: nil)
-            })
-
-            self.present(alert, animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
 
         }
-
     }
 
     override func viewDidLoad() {

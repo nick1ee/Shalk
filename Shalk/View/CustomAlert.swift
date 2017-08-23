@@ -98,6 +98,8 @@ class CustomAlert: UIView, Modal {
 
         imageView.contentMode = .scaleAspectFit
 
+        imageView.tintColor = UIColor(red: 140/255, green: 35/255, blue: 154/255, alpha: 1)
+
         dialogView.addSubview(imageView)
 
         let dialogViewHeight = titleLabel.frame.height + 8 + introLabel.frame.height + 8 + separatorLineView.frame.height + 8 + imageView.frame.height + 8

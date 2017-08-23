@@ -15,7 +15,7 @@ extension UIColor {
     }
 
     static var green: UIColor {
-        return UIColor(red: 152, green: 29, blue: 155)
+        return UIColor(red: 44, green: 203, blue: 128)
     }
 
     static var blue: UIColor {

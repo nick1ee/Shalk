@@ -69,6 +69,7 @@ PODS:
   - QuickBlox (2.9.2)
   - Quickblox-WebRTC (2.6.1):
     - QuickBlox (>= 2.7)
+  - SCLAlertView (0.7.0)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
@@ -95,6 +96,7 @@ DEPENDENCIES:
   - NVActivityIndicatorView
   - QuickBlox (~> 2.9.2)
   - Quickblox-WebRTC (~> 2.6.1)
+  - SCLAlertView
   - SDWebImage
   - SVProgressHUD
   - SwifterSwift
@@ -120,11 +122,12 @@ SPEC CHECKSUMS:
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
   QuickBlox: 67cafa5d7b237db7344c506ca5dc38365180cacb
   Quickblox-WebRTC: 496447d228663836d6372cdb8e63affa46fe5039
+  SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwifterSwift: f84eb7308f7742724b3cbf84283ce00f7c06d7fc
   SwiftLint: f60095dc173a3f3ec505bb34f5229c3dfd779a54
 
-PODFILE CHECKSUM: 7564943f12d35ba2eea28a13928414b4f96bca19
+PODFILE CHECKSUM: 0a77325ed0beabd251a099eef016055e965c86e3
 
 COCOAPODS: 1.2.0

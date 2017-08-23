@@ -20,6 +20,7 @@ target 'Shalk' do
   pod 'KeychainSwift'
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'SCLAlertView'
 
   source 'https://github.com/CocoaPods/Specs.git'
   pod 'Quickblox-WebRTC', '~> 2.6.1'

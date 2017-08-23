@@ -84,8 +84,6 @@ class ShakeViewController: UIViewController {
 
         QBManager.shared.session = nil
 
-        UserManager.shared.opponent = nil
-
         UserManager.shared.isDiscovering = false
 
     }
@@ -124,6 +122,8 @@ class ShakeViewController: UIViewController {
             return
 
         } else {
+
+            UserManager.shared.opponent = nil
 
             if UserManager.shared.isDiscovering == false {
 

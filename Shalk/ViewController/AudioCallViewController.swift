@@ -53,9 +53,9 @@ class AudioCallViewController: UIViewController {
 
             isMicrophoneEnabled = false
 
-            outletMicrophone.tintColor = UIColor.lightGray
+            outletMicrophone.tintColor = UIColor.darkGray
 
-            outletMicrophone.layer.borderColor = UIColor.lightGray.cgColor
+            outletMicrophone.layer.borderColor = UIColor.darkGray.cgColor
 
             outletMicrophone.setImage(UIImage(named: "icon-nomic.png"), for: .normal)
 
@@ -67,9 +67,9 @@ class AudioCallViewController: UIViewController {
 
             isMicrophoneEnabled = true
 
-            outletMicrophone.tintColor = UIColor(red: 140/255, green: 35/255, blue: 154/255, alpha: 1)
+            outletMicrophone.tintColor = UIColor.white
 
-            outletMicrophone.layer.borderColor = UIColor(red: 140/255, green: 35/255, blue: 154/255, alpha: 1).cgColor
+            outletMicrophone.layer.borderColor = UIColor.white.cgColor
 
             outletMicrophone.setImage(UIImage(named: "icon-mic.png"), for: .normal)
 
@@ -87,9 +87,9 @@ class AudioCallViewController: UIViewController {
 
             isSpeakerEnabled = true
 
-            outletSpeaker.tintColor = UIColor(red: 140/255, green: 35/255, blue: 154/255, alpha: 1)
+            outletSpeaker.tintColor = UIColor.white
 
-            outletSpeaker.layer.borderColor = UIColor(red: 140/255, green: 35/255, blue: 154/255, alpha: 1).cgColor
+            outletSpeaker.layer.borderColor = UIColor.white.cgColor
 
             qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.speaker
 
@@ -99,9 +99,9 @@ class AudioCallViewController: UIViewController {
 
             isSpeakerEnabled = false
 
-            outletSpeaker.tintColor = UIColor.lightGray
+            outletSpeaker.tintColor = UIColor.darkGray
 
-            outletSpeaker.layer.borderColor = UIColor.lightGray.cgColor
+            outletSpeaker.layer.borderColor = UIColor.darkGray.cgColor
 
             qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
 
