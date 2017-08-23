@@ -93,9 +93,9 @@ class LoginViewController: UIViewController {
 
         // MARK: Add padding for textfields.
 
-        inputEmail.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
-
-        inputPassword.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
+//        inputEmail.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
+//
+//        inputPassword.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
 
     }
 

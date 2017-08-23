@@ -110,11 +110,11 @@ class RegisterViewController: UIViewController {
 
         inputPassword.maxLength = 12
 
-        inputUserName.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
-
-        inputEmail.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
-
-        inputPassword.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
+//        inputUserName.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
+//
+//        inputEmail.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
+//
+//        inputPassword.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
 
     }
 

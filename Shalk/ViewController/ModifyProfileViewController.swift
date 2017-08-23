@@ -119,10 +119,6 @@ class ModifyProfileViewController: UIViewController {
 
         inputIntro.maxLength = 40
 
-        inputName.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
-
-        inputIntro.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 30)
-
         inputName.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("InputName", comment: ""),
                                                                attributes: [NSForegroundColorAttributeName: UIColor.white])
 
