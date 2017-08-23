@@ -182,7 +182,13 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         let userString = String(describing: userID)
 
-        if UserManager.shared.friends.contains(where: { $0.quickbloxId != userString }) {
+        if UserManager.shared.friends.contains(where: { $0.quickbloxId == userString }) {
+
+            // MARK: 確定為好友
+
+            self.dismiss(animated: true, completion: nil)
+
+        } else {
 
             // MARK: Not friends, init a friend request.
 
@@ -204,13 +210,7 @@ extension MainTabViewController: QBRTCClientDelegate {
 
             self.presentedViewController?.present(alert, animated: true, completion: nil)
 
-            return
-
         }
-
-        // MARK: 確定為好友
-
-        self.dismiss(animated: true, completion: nil)
 
     }
 

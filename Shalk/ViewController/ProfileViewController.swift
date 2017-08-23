@@ -205,9 +205,23 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             }
 
-            cell.userImageView.sd_setImage(with: URL(string: user.imageUrl), placeholderImage: UIImage(named: "icon-user"))
+            if user.imageUrl == "null" {
 
-            cell.backgroundColor = UIColor.clear
+                let userPlaceholder = UIImage(named: "icon-user")
+
+                cell.userImageView.image = userPlaceholder
+
+                cell.userImageView.image = cell.userImageView.image?.withRenderingMode(.alwaysTemplate)
+
+                cell.userImageView.tintColor = UIColor.white
+
+                cell.userImageView.backgroundColor = UIColor.clear
+
+            } else {
+
+                cell.userImageView.sd_setImage(with: URL(string: user.imageUrl))
+
+            }
 
             return cell
 
@@ -215,9 +229,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             // MARK: Display cells for friends.
 
+            let friend = friends[indexPath.row]
+
             let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
 
-            cell.friendImageView.sd_setImage(with: URL(string: friends[indexPath.row].imageUrl), placeholderImage: UIImage(named: "icon-user"))
+            cell.friendImageView.sd_setImage(with: URL(string: friend.imageUrl), placeholderImage: UIImage(named: "icon-user"))
 
             cell.friendImageView.tag = indexPath.row
 
@@ -225,9 +241,13 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.friendImageView.isUserInteractionEnabled = true
 
-            cell.friendName.text = self.friends[indexPath.row].name
+            cell.friendName.text = friend.name
 
-            cell.friendStatus.text = self.friends[indexPath.row].intro
+            if friend.intro != "null" {
+
+                cell.friendStatus.text = friend.intro
+
+            }
 
             return cell
 

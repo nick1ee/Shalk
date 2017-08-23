@@ -19,9 +19,7 @@ class ProfileTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        userImageView.tintColor = UIColor.init(red: 62/255, green: 48/255, blue: 76/255, alpha: 1)
-
-        userImageView.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.clear
 
     }
 
