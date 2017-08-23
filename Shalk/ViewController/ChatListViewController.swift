@@ -63,11 +63,19 @@ class ChatListViewController: UIViewController {
 
     func addDiscoverButton() {
 
-        btnHint = UIButton(frame: CGRect(x: screen.width / 2 - 75, y: 100, width: 150, height: 30))
+        let screen = UIScreen.main.bounds
 
-        btnHint?.setTitle("Go Discover >", for: .normal)
+        btnHint = UIButton(frame: CGRect(x: 50, y: 100, width: screen.width - 100, height: 50))
 
-        btnHint?.setTitleColor(UIColor.init(red: 255/255, green: 189/255, blue: 0/255, alpha: 1), for: .normal)
+        btnHint?.setTitle("D I S C O V E R !", for: .normal)
+
+        btnHint?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+
+        btnHint?.layer.cornerRadius = 15
+
+        btnHint?.setTitleColor(UIColor.white, for: .normal)
+
+        btnHint?.backgroundColor = UIColor(red: 243, green: 173, blue: 47)
 
         btnHint?.addTarget(self, action: #selector(goDiscover), for: .touchDown)
 

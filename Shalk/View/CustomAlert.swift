@@ -110,6 +110,8 @@ class CustomAlert: UIView, Modal {
 
         dialogView.backgroundColor = UIColor.white
 
+        dialogView.layer.cornerRadius = 15
+
         addSubview(dialogView)
 
     }

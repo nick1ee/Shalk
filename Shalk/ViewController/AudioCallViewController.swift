@@ -158,7 +158,7 @@ class AudioCallViewController: UIViewController {
 
         guard let opponent = UserManager.shared.opponent else { return }
 
-        opponentName.text = opponent.name
+        opponentName.text = opponent.name.addSpacingAndCapitalized()
 
         DispatchQueue.global().async {
 
