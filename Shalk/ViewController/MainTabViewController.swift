@@ -144,7 +144,15 @@ extension MainTabViewController: QBRTCClientDelegate {
     // MARK: 連接關閉後
     func sessionDidClose(_ session: QBRTCSession) {
 
-        qbManager.session = nil
+        QBManager.shared.session = nil
+
+        guard let user = UserManager.shared.currentUser else { return }
+
+        let hostId = String(describing: session.initiatorID)
+
+        if hostId == user.quickbloxId {
+
+        }
 
     }
 
@@ -187,6 +195,27 @@ extension MainTabViewController: QBRTCClientDelegate {
             // MARK: 確定為好友
 
             self.dismiss(animated: true, completion: nil)
+
+            if UserManager.shared.isConnected == true {
+
+                guard
+                    let hostQbId = session.initiatorID as? Int,
+                    let user = UserManager.shared.currentUser else { return }
+
+                let hostQbString = String(describing: hostQbId)
+
+                if user.quickbloxId == hostQbString {
+
+                    guard
+                        let callType = userInfo?["callType"],
+                        let duration = userInfo?["duration"],
+                        let chatRoomId = userInfo?["roomId"] else { return }
+
+                    FirebaseManager().sendCallRecord(CallType(rawValue: callType)!, duration: duration, roomId: chatRoomId)
+
+                }
+
+            }
 
         } else {
 

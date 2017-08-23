@@ -247,8 +247,6 @@ extension QBManager {
 
         self.session?.hangUp(userInfo)
 
-        userManager.isConnected = false
-
         self.session = nil
 
     }

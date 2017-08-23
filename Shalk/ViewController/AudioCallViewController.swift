@@ -111,13 +111,35 @@ class AudioCallViewController: UIViewController {
 
     @IBAction func btnHungUp(_ sender: UIButton) {
 
+        UserManager.shared.isConnected = false
+
         let duration = "\(self.hour.addLeadingZero()) : \(self.minute.addLeadingZero()) : \(self.second.addLeadingZero())"
+
+        let roomId = UserManager.shared.chatRoomId
+
+        let callinfo = ["callType": CallType.audio.rawValue,
+                        "duration": duration,
+                        "roomId": roomId ]
+
+        guard
+            let hostQbId = QBManager.shared.session?.initiatorID as? Int,
+            let user = UserManager.shared.currentUser else { return }
+
+        let hostQbString = String(describing: hostQbId)
+
+        if user.quickbloxId == hostQbString {
+
+            DispatchQueue.global().async {
+
+                FirebaseManager().sendCallRecord(.audio, duration: duration, roomId: roomId)
+
+            }
+
+        }
 
         DispatchQueue.global().async {
 
-            FirebaseManager().sendCallRecord(CallType.audio, duration: duration)
-
-            QBManager.shared.handUpCall(nil)
+            QBManager.shared.handUpCall(callinfo)
 
         }
 

@@ -466,7 +466,7 @@ extension FirebaseManager {
 
     }
 
-    func sendCallRecord(_ callType: CallType, duration: String) {
+    func sendCallRecord(_ callType: CallType, duration: String, roomId: String) {
 
         guard let messageId = ref?.childByAutoId().key else { return }
 
@@ -478,7 +478,15 @@ extension FirebaseManager {
 
         let newMessage = Message.init(text: duration, senderId: callType.rawValue, time: timestamp)
 
-        ref?.child("chatHistory").child(UserManager.shared.chatRoomId).child(messageId).updateChildValues(newMessage.toDictionary())
+        ref?.child("chatHistory").child(roomId).child(messageId).updateChildValues(newMessage.toDictionary())
+
+    }
+
+    func generateAutoId() -> String {
+
+        guard let autoId = ref?.childByAutoId().key else { return "123456789" }
+
+        return autoId
 
     }
 
