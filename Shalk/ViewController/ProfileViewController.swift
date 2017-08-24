@@ -70,15 +70,11 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        SVProgressHUD.show()
-
         DispatchQueue.global().async {
 
             FirebaseManager().fetchMyProfile {
 
                 self.tableView.reloadData()
-
-                SVProgressHUD.dismiss()
 
             }
 

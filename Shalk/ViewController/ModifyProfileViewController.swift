@@ -109,6 +109,22 @@ class ModifyProfileViewController: UIViewController {
 
         self.view.addGestureRecognizer(tap)
 
+        let swipeBack = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
+
+        swipeBack.direction = .right
+
+        self.view.addGestureRecognizer(swipeBack)
+
+    }
+
+    func handleSwipe(gesture: UISwipeGestureRecognizer) {
+
+        if gesture.direction == UISwipeGestureRecognizerDirection.right {
+
+            self.navigationController?.popViewController(animated: true)
+
+        }
+
     }
 
     func adjustTextfield() {

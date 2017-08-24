@@ -1179,7 +1179,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EfT-Bn-btP">
-                                <rect key="frame" x="0.0" y="62" width="414" height="625"/>
+                                <rect key="frame" x="0.0" y="67" width="414" height="620"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="profileCell" rowHeight="180" id="gQp-gx-XZv" customClass="ProfileTableViewCell" customModule="Shalk" customModuleProvider="target">
@@ -1307,10 +1307,10 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N20-fd-EyW">
-                                <rect key="frame" x="20" y="33.666666666666664" width="25" height="25"/>
+                                <rect key="frame" x="20" y="26.333333333333329" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="0da-YQ-fBG"/>
-                                    <constraint firstAttribute="width" constant="25" id="sJJ-PF-r1B"/>
+                                    <constraint firstAttribute="height" constant="40" id="0da-YQ-fBG"/>
+                                    <constraint firstAttribute="width" constant="40" id="sJJ-PF-r1B"/>
                                 </constraints>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="icon-exit"/>
@@ -1319,10 +1319,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d7r-0T-sbI">
-                                <rect key="frame" x="369" y="34" width="25" height="25"/>
+                                <rect key="frame" x="354" y="26.666666666666671" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="25" id="WbZ-s5-L4x"/>
-                                    <constraint firstAttribute="height" constant="25" id="d0M-NR-GPy"/>
+                                    <constraint firstAttribute="width" constant="40" id="WbZ-s5-L4x"/>
+                                    <constraint firstAttribute="height" constant="40" id="d0M-NR-GPy"/>
                                 </constraints>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="icon-edit"/>
@@ -1351,7 +1351,7 @@
                             <constraint firstAttribute="trailing" secondItem="d7r-0T-sbI" secondAttribute="trailing" constant="20" id="cbg-Ie-f61"/>
                             <constraint firstItem="hcP-cd-F2S" firstAttribute="top" secondItem="EfT-Bn-btP" secondAttribute="bottom" id="hQG-0j-nQq"/>
                             <constraint firstAttribute="trailing" secondItem="EfT-Bn-btP" secondAttribute="trailing" id="iCF-op-zfX"/>
-                            <constraint firstItem="EfT-Bn-btP" firstAttribute="top" secondItem="JOm-8y-4Fm" secondAttribute="bottom" constant="5" id="osa-aw-dcw"/>
+                            <constraint firstItem="EfT-Bn-btP" firstAttribute="top" secondItem="JOm-8y-4Fm" secondAttribute="bottom" constant="10" id="osa-aw-dcw"/>
                             <constraint firstItem="N20-fd-EyW" firstAttribute="leading" secondItem="ZZr-Z1-9EK" secondAttribute="leading" constant="20" id="tHI-MJ-sYd"/>
                             <constraint firstItem="p4n-2k-VKv" firstAttribute="top" secondItem="KjZ-bF-6av" secondAttribute="bottom" constant="-20" id="tRz-M6-FE0"/>
                             <constraint firstItem="EfT-Bn-btP" firstAttribute="leading" secondItem="ZZr-Z1-9EK" secondAttribute="leading" id="z0T-UF-toS"/>
@@ -1510,10 +1510,10 @@
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oxn-HD-0bL">
-                                                <rect key="frame" x="20" y="35" width="25" height="25"/>
+                                                <rect key="frame" x="20" y="35" width="40" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="25" id="Q5H-V3-LWd"/>
-                                                    <constraint firstAttribute="height" constant="25" id="T1a-yN-zzc"/>
+                                                    <constraint firstAttribute="width" constant="40" id="Q5H-V3-LWd"/>
+                                                    <constraint firstAttribute="height" constant="40" id="T1a-yN-zzc"/>
                                                 </constraints>
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" image="icon-back"/>
@@ -1779,7 +1779,7 @@
                                                 <size key="shadowOffset" width="0.0" height="1"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mU1-Kg-ryA">
-                                                <rect key="frame" x="0.0" y="59" width="414" height="617"/>
+                                                <rect key="frame" x="0.0" y="66.666666666666686" width="414" height="609.33333333333326"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="senderCell" rowHeight="75" id="fQ7-xz-rSm" customClass="SenderTableViewCell" customModule="Shalk" customModuleProvider="target">
@@ -1997,10 +1997,10 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mde-m1-gCL">
-                                                <rect key="frame" x="20" y="33.666666666666664" width="25" height="25"/>
+                                                <rect key="frame" x="20" y="26.333333333333329" width="40" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="25" id="xcX-D4-X9o"/>
-                                                    <constraint firstAttribute="height" constant="25" id="y0Z-sc-fO4"/>
+                                                    <constraint firstAttribute="width" constant="40" id="xcX-D4-X9o"/>
+                                                    <constraint firstAttribute="height" constant="40" id="y0Z-sc-fO4"/>
                                                 </constraints>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <state key="normal" image="icon-back"/>
@@ -2009,10 +2009,10 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lkD-f2-gy5">
-                                                <rect key="frame" x="369" y="33.666666666666664" width="25" height="25"/>
+                                                <rect key="frame" x="354" y="26.333333333333329" width="40" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="25" id="HC6-Tt-Gol"/>
-                                                    <constraint firstAttribute="width" constant="25" id="NKz-fI-dxU"/>
+                                                    <constraint firstAttribute="height" constant="40" id="HC6-Tt-Gol"/>
+                                                    <constraint firstAttribute="width" constant="40" id="NKz-fI-dxU"/>
                                                 </constraints>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <state key="normal" image="icon-more"/>
@@ -2021,7 +2021,11 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1M-KZ-P38">
-                                                <rect key="frame" x="329" y="34" width="25" height="25"/>
+                                                <rect key="frame" x="299" y="26.666666666666671" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="Uw9-Pq-oAT"/>
+                                                    <constraint firstAttribute="width" constant="40" id="o7a-jK-Dko"/>
+                                                </constraints>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <state key="normal" image="icon-audio"/>
                                                 <connections>
