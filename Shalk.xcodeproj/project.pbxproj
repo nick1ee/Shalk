@@ -23,6 +23,7 @@
 		B84968B81F31753200400579 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84968B71F31753200400579 /* ProfileTableViewCell.swift */; };
 		B84968BA1F31753F00400579 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84968B91F31753F00400579 /* FriendTableViewCell.swift */; };
 		B870EA921F4D4A34007EF45F /* TextFieldExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B870EA911F4D4A34007EF45F /* TextFieldExtensions.swift */; };
+		B870EA951F4E686A007EF45F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B870EA941F4E686A007EF45F /* Extensions.swift */; };
 		B872E61D1F29BF91009BD763 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B872E61B1F29BF91009BD763 /* Main.storyboard */; };
 		B872E61F1F29BF91009BD763 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B872E61E1F29BF91009BD763 /* Assets.xcassets */; };
 		B872E6221F29BF91009BD763 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B872E6201F29BF91009BD763 /* LaunchScreen.storyboard */; };
@@ -100,6 +101,7 @@
 		B84968B71F31753200400579 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		B84968B91F31753F00400579 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		B870EA911F4D4A34007EF45F /* TextFieldExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldExtensions.swift; sourceTree = "<group>"; };
+		B870EA941F4E686A007EF45F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B872E6141F29BF91009BD763 /* Shalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B872E61C1F29BF91009BD763 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B872E61E1F29BF91009BD763 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				B80331441F2B388F00F89209 /* MagneticExtensions.swift */,
 				B8AE68801F45357900C259A5 /* Modal.swift */,
 				B870EA911F4D4A34007EF45F /* TextFieldExtensions.swift */,
+				B870EA941F4E686A007EF45F /* Extensions.swift */,
 			);
 			name = Extensions;
 			path = Shalk/MagneticExtensions;
@@ -528,6 +531,7 @@
 				B872E6331F29C4F7009BD763 /* LoginViewController.swift in Sources */,
 				B8456F7E1F384D1A00641315 /* ComingCallViewController.swift in Sources */,
 				B80331081F2A375700F89209 /* ProfileViewController.swift in Sources */,
+				B870EA951F4E686A007EF45F /* Extensions.swift in Sources */,
 				B8F1D05A1F375A76003BACF8 /* AudioCallViewController.swift in Sources */,
 				B8F1CFEC1F35E0A5003BACF8 /* ChatRoom.swift in Sources */,
 				B80331041F2A374600F89209 /* ChatListViewController.swift in Sources */,

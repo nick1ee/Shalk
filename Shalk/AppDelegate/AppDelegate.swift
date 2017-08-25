@@ -51,16 +51,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         FirebaseManager().removeAllObserver()
 
+//        QBChat.instance().disconnect(completionBlock: nil)
+
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
 
         guard let userToken = UserManager.shared.restore() else { return }
 
-        // MARK: Fetched token successfully, log in directly.
-        UserManager.shared.logIn(withEmail: userToken["email"]!, withPassword: userToken["password"]!)
-
         SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Fetch_Data", comment: ""))
+//
+//        // MARK: Fetched token successfully, log in directly.
+//        UserManager.shared.logIn(withEmail: userToken["email"]!, withPassword: userToken["password"]!)
+
+        if QBChat.instance().isConnected == true {
+
+            print("yes")
+
+        } else {
+
+            print("false")
+
+        }
+
+        let user = QBUUser()
+        user.email = userToken["email"]
+        user.password = userToken["password"]
+
+        let qbuser = QBChat.instance().currentUser()
+
+        print(qbuser)
+
+        QBChat.instance().connect(with: user) { (error) in
+
+            if error == nil {
+
+                SVProgressHUD.dismiss()
+
+            } else {
+
+                print(user, error?.localizedDescription)
+
+                SVProgressHUD.dismiss()
+
+                let loginVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
+
+                AppDelegate.shared.window?.rootViewController = loginVC
+
+            }
+
+        }
 
     }
 

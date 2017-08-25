@@ -63,7 +63,7 @@
 
 // MARK: - Shake View Controller
 "Shake_Hint" = "Shake your mobile to find the partner!";
-"No_Language" = "Please select a language that you want to talk.";
+"No_Language" = "Select a language that you want to talk.";
 "Discovering" = "Discovering, please wait!";
 "Double_Shake" = "Please wait, you will find your partner very soon!";
 
