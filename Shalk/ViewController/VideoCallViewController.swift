@@ -46,6 +46,10 @@ class VideoCallViewController: UIViewController {
 
     @IBOutlet weak var outletMicrophone: UIButton!
 
+    @IBOutlet weak var localvideoXConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var localvideoYConstraint: NSLayoutConstraint!
+
     @IBAction func btnRotateCamera(_ sender: UIButton) {
 
         let position = self.videoCapture?.position
@@ -196,9 +200,13 @@ class VideoCallViewController: UIViewController {
 
     func handlePan(_ recognizer: UIPanGestureRecognizer) {
 
-        let point = recognizer.location(in: self.view)
+        let translation = recognizer.translation(in: view.superview)
 
-        localVideoView.center = point
+        localvideoXConstraint.constant += translation.x
+
+        localvideoYConstraint.constant += translation.y
+
+        recognizer.setTranslation(.zero, in: view.superview)
 
     }
 

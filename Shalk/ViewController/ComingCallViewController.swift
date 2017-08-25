@@ -95,9 +95,9 @@ class ComingCallViewController: UIViewController {
 
         let screen = UIScreen.main.bounds
 
-        outletAcceptCall.layer.cornerRadius = screen.height / 14
+        outletAcceptCall.layer.cornerRadius = screen.height / 16
 
-        outletEndCall.layer.cornerRadius = screen.height / 14
+        outletEndCall.layer.cornerRadius = screen.height / 16
 
     }
 

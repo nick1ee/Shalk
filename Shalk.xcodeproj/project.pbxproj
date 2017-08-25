@@ -209,6 +209,7 @@
 		B803313A1F2B338200F89209 /* Structures */ = {
 			isa = PBXGroup;
 			children = (
+				B878FD9D1F4281E70091AD4D /* Localizable.strings */,
 				B803313B1F2B338200F89209 /* User.swift */,
 				B89872861F306008007DEDA6 /* AudioChannel.swift */,
 				B8D9ECDC1F32F7BE00B9FEED /* Message.swift */,
@@ -265,7 +266,6 @@
 				B872E6201F29BF91009BD763 /* LaunchScreen.storyboard */,
 				B872E6231F29BF91009BD763 /* Info.plist */,
 				B8DB3F151F2F0237006E5A58 /* PrefixHeader.pch */,
-				B878FD9D1F4281E70091AD4D /* Localizable.strings */,
 			);
 			path = Shalk;
 			sourceTree = "<group>";
@@ -586,6 +586,7 @@
 				B878FD9F1F4281F10091AD4D /* Base */,
 			);
 			name = Localizable.strings;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

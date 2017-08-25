@@ -35,6 +35,8 @@ class ChatListViewController: UIViewController {
 
         chatListTableView.backgroundView = bgImageView
 
+        addDiscoverButton()
+
         DispatchQueue.global().async {
 
             self.fbManager.fetchChatRoomList()
@@ -42,13 +44,6 @@ class ChatListViewController: UIViewController {
         }
 
         NotificationCenter.default.addObserver(self, selector: #selector(handleRoomChange), name: NSNotification.Name(rawValue: "RoomChange"), object: nil)
-
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        addDiscoverButton()
 
     }
 
