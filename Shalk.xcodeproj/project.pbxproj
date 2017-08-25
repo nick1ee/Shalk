@@ -377,10 +377,10 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.Keychain = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Push = {
 								enabled = 0;
@@ -692,7 +692,6 @@
 			baseConfigurationReference = 62B84D84F08A0D2A952A2A78 /* Pods-Shalk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Shalk/Shalk.entitlements;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = EQ43V2KPAV;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -713,7 +712,6 @@
 			baseConfigurationReference = 714FEE4C1D66F84E19F1666C /* Pods-Shalk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Shalk/Shalk.entitlements;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = EQ43V2KPAV;
 				FRAMEWORK_SEARCH_PATHS = (

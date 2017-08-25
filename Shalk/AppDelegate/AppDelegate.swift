@@ -54,13 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if QBChat.instance().isConnected == true {
 
-            //swiftlint:disable force_cast
-            let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainTabVC") as! UITabBarController
-
-            mainTabVC.selectedIndex = 2
-
-            AppDelegate.shared.window?.rootViewController = mainTabVC
-
         } else {
 
             SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Fetch_Data", comment: ""))
