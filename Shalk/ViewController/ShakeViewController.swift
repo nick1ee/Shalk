@@ -73,8 +73,6 @@ class ShakeViewController: UIViewController {
 
         labelSearching.text = NSLocalizedString("No_Language", comment: "")
 
-        nodes = []
-
         addLangBubbles(nil)
 
     }
@@ -91,12 +89,6 @@ class ShakeViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        for node in nodes {
-
-            node.removeFromParent()
-
-        }
-
         selectedNode?.isSelected = false
 
         selectedNode = nil
@@ -108,8 +100,12 @@ class ShakeViewController: UIViewController {
         iconShake.isHidden = false
 
         UserManager.shared.isDiscovering = false
-
-        FirebaseManager().leaveChannel()
+        
+        DispatchQueue.global().async {
+         
+            FirebaseManager().leaveChannel()
+            
+        }
 
     }
 
@@ -159,6 +155,14 @@ class ShakeViewController: UIViewController {
 
     @IBAction func addLangBubbles(_ sender: UIControl?) {
 
+        for node in nodes {
+
+            node.removeFromParent()
+
+        }
+
+        nodes = []
+
         var colorArray = UIColor.colors
 
         for item in 0...3 {
@@ -186,7 +190,7 @@ extension ShakeViewController: MagneticDelegate {
 
     func magnetic(_ magnetic: Magnetic, didSelect node: Node) {
 
-        // MAKR: Bubble selected
+        // MARK: Bubble selected
 
         labelSearching.text = NSLocalizedString("Shake_Hint", comment: "")
 
@@ -199,8 +203,12 @@ extension ShakeViewController: MagneticDelegate {
     func magnetic(_ magnetic: Magnetic, didDeselect node: Node) {
 
         selectedNode = nil
+        
+        DispatchQueue.global().async {
 
-        FirebaseManager().closeChannel()
+            FirebaseManager().closeChannel()
+
+        }
 
         UserManager.shared.isDiscovering = false
 

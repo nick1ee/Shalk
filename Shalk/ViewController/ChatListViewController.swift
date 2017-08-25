@@ -35,8 +35,6 @@ class ChatListViewController: UIViewController {
 
         chatListTableView.backgroundView = bgImageView
 
-        addDiscoverButton()
-
         DispatchQueue.global().async {
 
             self.fbManager.fetchChatRoomList()
@@ -44,6 +42,13 @@ class ChatListViewController: UIViewController {
         }
 
         NotificationCenter.default.addObserver(self, selector: #selector(handleRoomChange), name: NSNotification.Name(rawValue: "RoomChange"), object: nil)
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        addDiscoverButton()
 
     }
 
@@ -67,15 +72,25 @@ class ChatListViewController: UIViewController {
 
         btnHint = UIButton(frame: CGRect(x: 50, y: 100, width: screen.width - 100, height: 50))
 
-        btnHint?.setTitle("D I S C O V E R !", for: .normal)
+        btnHint?.setTitle("D I S C O V E R  !", for: .normal)
 
         btnHint?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
 
-        btnHint?.layer.cornerRadius = 15
-
         btnHint?.setTitleColor(UIColor.white, for: .normal)
 
-        btnHint?.backgroundColor = UIColor(red: 243, green: 173, blue: 47)
+        btnHint?.backgroundColor = UIColor.clear
+
+        btnHint?.layer.borderColor = UIColor.white.cgColor
+
+        btnHint?.layer.borderWidth = 2
+
+        btnHint?.layer.shadowColor = UIColor.black.cgColor
+
+        btnHint?.layer.shadowOffset = CGSize(width: 1, height: 1)
+
+        btnHint?.layer.shadowRadius = 0.5
+
+        btnHint?.layer.shadowOpacity = 1
 
         btnHint?.addTarget(self, action: #selector(goDiscover), for: .touchDown)
 

@@ -48,8 +48,6 @@ class FirebaseManager {
 
                 // MARK: User Signed in Firebase successfully, start sign in with Quickblox.
 
-                UserManager.shared.saveToken(email: email, pwd: pwd)
-
                 QBManager().logIn(withEmail: email, withPassword: okUser.uid)
 
             }

@@ -21,8 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        UIApplication.shared.statusBarStyle = .lightContent
-
         // MARK: Init Firebase
         FirebaseApp.configure()
         Fabric.with([Crashlytics.self])
@@ -37,12 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         QBSettings.enableXMPPLogging()
 
-        guard let userToken = UserManager.shared.restore() else { return true }
-
-        // MARK: Fetched token successfully, log in directly.
-        UserManager.shared.logIn(withEmail: userToken["email"]!, withPassword: userToken["password"]!)
+        guard let user = Auth.auth().currentUser else { return true }
 
         SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Fetch_Data", comment: ""))
+
+        QBManager.shared.logIn(withEmail: user.email!, withPassword: user.uid)
 
         return true
     }
@@ -51,54 +48,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         FirebaseManager().removeAllObserver()
 
-//        QBChat.instance().disconnect(completionBlock: nil)
-
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
 
-        guard let userToken = UserManager.shared.restore() else { return }
-
-        SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Fetch_Data", comment: ""))
-//
-//        // MARK: Fetched token successfully, log in directly.
-//        UserManager.shared.logIn(withEmail: userToken["email"]!, withPassword: userToken["password"]!)
-
         if QBChat.instance().isConnected == true {
 
-            print("yes")
+            //swiftlint:disable force_cast
+            let mainTabVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainTabVC") as! UITabBarController
+
+            mainTabVC.selectedIndex = 2
+
+            AppDelegate.shared.window?.rootViewController = mainTabVC
 
         } else {
 
-            print("false")
+            SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Fetch_Data", comment: ""))
 
-        }
-
-        let user = QBUUser()
-        user.email = userToken["email"]
-        user.password = userToken["password"]
-
-        let qbuser = QBChat.instance().currentUser()
-
-        print(qbuser)
-
-        QBChat.instance().connect(with: user) { (error) in
-
-            if error == nil {
-
-                SVProgressHUD.dismiss()
-
-            } else {
-
-                print(user, error?.localizedDescription)
-
-                SVProgressHUD.dismiss()
+            guard let user = Auth.auth().currentUser else {
 
                 let loginVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
 
                 AppDelegate.shared.window?.rootViewController = loginVC
 
+                UserManager.shared.currentUser = nil
+
+                return
+
             }
+
+            QBManager.shared.logIn(withEmail: user.email!, withPassword: user.uid)
 
         }
 

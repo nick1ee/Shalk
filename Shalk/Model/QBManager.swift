@@ -117,9 +117,7 @@ class QBManager {
 
                     UIApplication.shared.endIgnoringInteractionEvents()
 
-                    UserManager.shared.deleteToken()
-
-                    let loginVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginVC")
+                    let loginVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
 
                     AppDelegate.shared.window?.rootViewController = loginVC
 

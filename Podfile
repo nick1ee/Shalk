@@ -17,7 +17,6 @@ target 'Shalk' do
   pod 'NVActivityIndicatorView'
   pod 'Firebase/Storage'
   pod 'SDWebImage'
-  pod 'KeychainSwift'
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'SCLAlertView'

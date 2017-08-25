@@ -15,7 +15,7 @@
 "6Og-xj-O7b.text" = "Label";
 
 /* Class = "UIButton"; normalTitle = "查看使用者規範"; ObjectID = "90K-dq-dq9"; */
-"90K-dq-dq9.normalTitle" = "Click me to review EULA";
+"90K-dq-dq9.normalTitle" = "Review EULA";
 
 /* Class = "UILabel"; text = "User Name"; ObjectID = "9En-QJ-LBd"; */
 "9En-QJ-LBd.text" = "User Name";
@@ -51,7 +51,7 @@
 "Old-ne-4fq.text" = "Nick Lee";
 
 /* Class = "UILabel"; text = "當您按下註冊帳號後，即表示您同意Shalk所提供的使用者規範。"; ObjectID = "OsJ-ta-Toa"; */
-"OsJ-ta-Toa.text" = "You agreed with the EULA that provided by Shalk if you get started to register a new account.";
+"OsJ-ta-Toa.text" = "You agreed the EULA if you registered a new account.";
 
 /* Class = "UILabel"; text = "Latest Message"; ObjectID = "P6U-80-MBA"; */
 "P6U-80-MBA.text" = "Latest Message";
@@ -117,7 +117,7 @@
 "iJw-xa-ZDq.text" = "00:00:00";
 
 /* Class = "UIButton"; normalTitle = "回到登入頁"; ObjectID = "jfc-T9-7lc"; */
-"jfc-T9-7lc.normalTitle" = "Back to login Page";
+"jfc-T9-7lc.normalTitle" = "Back to login page";
 
 /* Class = "UITextField"; placeholder = "Input your name here."; ObjectID = "kAg-Xw-quR"; */
 "kAg-Xw-quR.placeholder" = "Input your name here.";

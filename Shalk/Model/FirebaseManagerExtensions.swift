@@ -40,9 +40,13 @@ extension FirebaseManager {
 
                 self.updateChannel()
 
-                self.fetchOpponentInfo(withUid: channel.owner, call: .audio)
+                self.fetchFriendInfo(channel.owner, completion: { (user) in
 
-                return
+                    UserManager.shared.opponent = user
+
+                    UserManager.shared.startAudioCall()
+
+                })
 
             } catch let error {
 
@@ -226,51 +230,6 @@ extension FirebaseManager {
 
     }
 
-    func fetchOpponentInfo(withUid uid: String, call: CallType) {
-
-        ref?.child("users").child(uid).observeSingleEvent(of: .value, with: {(snapshot) in
-
-            guard let object = snapshot.value as? [String: Any] else { return }
-
-            do {
-
-                let user = try User.init(json: object)
-
-                self.userManager.opponent = user
-
-                switch call {
-
-                case .audio:
-
-                    self.userManager.startAudioCall()
-
-                    break
-
-                case .video:
-
-                    self.userManager.startVideoCall()
-
-                    break
-
-                case .none:
-
-                    break
-
-                }
-
-            } catch let error {
-
-                // MARK: Failed to fetch user profile
-
-                Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_OpponentProfile_Error"])
-
-                UIAlertController(error: error).show()
-            }
-
-        })
-
-    }
-
     func fetchMyProfile(completion: @escaping () -> Void) {
 
         guard let userId = Auth.auth().currentUser?.uid else { return }
@@ -379,6 +338,8 @@ extension FirebaseManager {
         guard let myUid = Auth.auth().currentUser?.uid else { return }
 
         handle = ref?.child("chatRoomList").child(myUid).observe(.value, with: { (snapshot) in
+
+            UserManager.shared.chatRooms = []
 
             var rooms: [ChatRoom] = []
 

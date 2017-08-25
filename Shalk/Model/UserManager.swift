@@ -9,15 +9,12 @@
 import Foundation
 import Firebase
 import AudioToolbox
-import KeychainSwift
 
 class UserManager {
 
     let ref = Database.database().reference()
 
     static let shared = UserManager()
-
-    let keychain = KeychainSwift()
 
     var currentUser: User?
 
@@ -83,34 +80,6 @@ class UserManager {
 
     }
 
-    func restore() -> [String: String]? {
-
-        if let getEmail = keychain.get("email"), let getPassword = keychain.get("password") {
-
-            return ["email": getEmail, "password": getPassword]
-
-        } else {
-
-            return nil
-
-        }
-
-    }
-
-    func saveToken(email: String, pwd: String) {
-
-        keychain.set(email, forKey: "email")
-
-        keychain.set(pwd, forKey: "password")
-
-    }
-
-    func deleteToken() {
-
-        keychain.clear()
-
-    }
-
     func registerProfile() {
 
         let userDict = currentUser?.toDictionary()
@@ -122,8 +91,6 @@ class UserManager {
     }
 
     func logOut() {
-
-        self.deleteToken()
 
         UIApplication.shared.beginIgnoringInteractionEvents()
 
