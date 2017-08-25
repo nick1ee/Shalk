@@ -100,11 +100,11 @@ class ShakeViewController: UIViewController {
         iconShake.isHidden = false
 
         UserManager.shared.isDiscovering = false
-        
+
         DispatchQueue.global().async {
-         
+
             FirebaseManager().leaveChannel()
-            
+
         }
 
     }
@@ -203,7 +203,7 @@ extension ShakeViewController: MagneticDelegate {
     func magnetic(_ magnetic: Magnetic, didDeselect node: Node) {
 
         selectedNode = nil
-        
+
         DispatchQueue.global().async {
 
             FirebaseManager().closeChannel()
