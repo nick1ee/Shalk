@@ -1,4 +1,3 @@
-# Shalk
 # Shalk #
 
 Shalk is a platform that allow users to find a partenr and get started to talk by the interested langauge. Once you and your partner become friends, you could start a video/audio call with your friends.
@@ -6,7 +5,7 @@ Shalk is a platform that allow users to find a partenr and get started to talk b
 # Note #
 Private keys is needed if you want to compile this project. If you want to run this app, please download the app from app store. Thanks for your understanding.
 
-[[Download Shlak from App Store]](https://itunes.apple.com/us/app/shalk/id1272630937)
+[[Download Shalk from App Store]](https://itunes.apple.com/us/app/shalk/id1272630937)
 
 # Features
   * Discover
