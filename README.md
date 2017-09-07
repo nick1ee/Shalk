@@ -37,10 +37,8 @@ Private keys is needed if you want to compile this project. If you want to run t
   * SCLAlertView
 
 # Screen Shot #
-![image](https://github.com/nick1ee/Shalk/blob/master/screenshot/1.png){:height="667px" width="375px"}
-![image](https://github.com/nick1ee/Shalk/blob/master/screenshot/2.png){:height="667px" width="375px"}
-![image](https://github.com/nick1ee/Shalk/blob/master/screenshot/3.png){:height="667px" width="375px"}
-![image](https://github.com/nick1ee/Shalk/blob/master/screenshot/4.png){:height="667px" width="375px"}
+![image](https://github.com/nick1ee/Shalk/blob/master/screenshot/1.png)![image](https://github.com/nick1ee/Shalk/blob/master/screenshot/2.png)
+![image](https://github.com/nick1ee/Shalk/blob/master/screenshot/3.png)![image](https://github.com/nick1ee/Shalk/blob/master/screenshot/4.png)
 
 # Requirement #
 * iOS 10.3 +
