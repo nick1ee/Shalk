@@ -35,11 +35,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         QBSettings.enableXMPPLogging()
 
-        guard let user = Auth.auth().currentUser else { return true }
+        guard
+            let user = Auth.auth().currentUser,
+            let email = user.email
+            else {
+
+                return true
+
+        }
 
         SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Fetch_Data", comment: ""))
 
-        QBManager.shared.logIn(withEmail: user.email!, withPassword: user.uid)
+        QBManager.shared.logIn(withEmail: email, withPassword: user.uid)
 
         return true
     }
@@ -70,7 +77,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             }
 
-            QBManager.shared.logIn(withEmail: user.email!, withPassword: user.uid)
+            if let email = user.email {
+
+                QBManager.shared.logIn(withEmail: email, withPassword: user.uid)
+
+            }
 
         }
 

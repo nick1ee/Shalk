@@ -25,6 +25,8 @@ class ChatTableViewCell: UITableViewCell {
 
         opponentImageView.backgroundColor = UIColor.clear
 
+        self.backgroundColor = UIColor.clear
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
