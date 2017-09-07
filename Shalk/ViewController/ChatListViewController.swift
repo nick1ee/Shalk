@@ -6,19 +6,23 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - ChatListViewController
+
 import UIKit
 
 class ChatListViewController: UIViewController {
 
-    let fbManager = FirebaseManager()
-
-    var rooms: [ChatRoom] = []
+    // MARK: Property
 
     var opponentUid = ""
 
     var opponentName = ""
 
-    var btnHint: UIButton?
+    var rooms: [ChatRoom] = []
+
+    let fbManager = FirebaseManager()
+
+    let btnHint: UIButton = UIButton()
 
     let screen = UIScreen.main.bounds
 
@@ -29,13 +33,9 @@ class ChatListViewController: UIViewController {
 
         fbManager.chatRoomDelegate = self
 
-        let bgImageView = UIImageView(image: UIImage(named: "background"))
-
-        chatListTableView.backgroundColor = UIColor.clear
-
-        chatListTableView.backgroundView = bgImageView
-
         addDiscoverButton()
+
+        setUpBackground()
 
         DispatchQueue.global().async {
 
@@ -47,6 +47,16 @@ class ChatListViewController: UIViewController {
 
     }
 
+    func setUpBackground() {
+
+        let bgImageView = UIImageView(image: UIImage(named: "background"))
+
+        chatListTableView.backgroundColor = UIColor.clear
+
+        chatListTableView.backgroundView = bgImageView
+
+    }
+
     func handleRoomChange() {
 
         self.rooms = []
@@ -54,6 +64,8 @@ class ChatListViewController: UIViewController {
         self.chatListTableView.reloadData()
 
     }
+
+    // MARK: - Deinit
 
     deinit {
 
@@ -63,33 +75,29 @@ class ChatListViewController: UIViewController {
 
     func addDiscoverButton() {
 
-        let screen = UIScreen.main.bounds
+        btnHint.frame = CGRect(x: 50, y: 100, width: screen.width - 100, height: 50)
 
-        btnHint = UIButton(frame: CGRect(x: 50, y: 100, width: screen.width - 100, height: 50))
+        btnHint.setTitle("D I S C O V E R  !", for: .normal)
 
-        btnHint?.setTitle("D I S C O V E R  !", for: .normal)
+        btnHint.setTitleColor(UIColor.white, for: .normal)
 
-        btnHint?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+        btnHint.backgroundColor = UIColor.clear
 
-        btnHint?.setTitleColor(UIColor.white, for: .normal)
+        btnHint.layer.borderColor = UIColor.white.cgColor
 
-        btnHint?.backgroundColor = UIColor.clear
+        btnHint.layer.borderWidth = 2
 
-        btnHint?.layer.borderColor = UIColor.white.cgColor
+        btnHint.layer.shadowColor = UIColor.black.cgColor
 
-        btnHint?.layer.borderWidth = 2
+        btnHint.layer.shadowOffset = CGSize(width: 1, height: 1)
 
-        btnHint?.layer.shadowColor = UIColor.black.cgColor
+        btnHint.layer.shadowRadius = 0.5
 
-        btnHint?.layer.shadowOffset = CGSize(width: 1, height: 1)
+        btnHint.layer.shadowOpacity = 1
 
-        btnHint?.layer.shadowRadius = 0.5
+        btnHint.addTarget(self, action: #selector(goDiscover), for: .touchDown)
 
-        btnHint?.layer.shadowOpacity = 1
-
-        btnHint?.addTarget(self, action: #selector(goDiscover), for: .touchDown)
-
-        self.view.addSubview(btnHint!)
+        self.view.addSubview(btnHint)
 
     }
 
@@ -115,8 +123,6 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "chatCell", for: indexPath) as! ChatTableViewCell
 
         let room = rooms[indexPath.row]
-
-        cell.backgroundColor = UIColor.clear
 
         cell.latestMessage.text = room.latestMessage
 
@@ -166,7 +172,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
             UserManager.shared.chatRoomId = room.roomId
 
-            var friend = UserManager.shared.friends.filter { $0.uid == room.user2Id }
+            let friend = UserManager.shared.friends.filter { $0.uid == room.user2Id }
 
             UserManager.shared.opponent = friend[0]
 
@@ -176,7 +182,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
             UserManager.shared.chatRoomId = room.roomId
 
-            var friend = UserManager.shared.friends.filter { $0.uid == room.user1Id }
+            let friend = UserManager.shared.friends.filter { $0.uid == room.user1Id }
 
             UserManager.shared.opponent = friend[0]
 
@@ -203,7 +209,7 @@ extension ChatListViewController: FirebaseManagerChatRoomDelegate {
 
         self.rooms = rooms
 
-        btnHint?.isHidden = true
+        btnHint.isHidden = true
 
         chatListTableView.reloadData()
 
