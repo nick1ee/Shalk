@@ -6,6 +6,8 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - FirebaseManagerChatRoomDelegate
+
 protocol FirebaseManagerChatRoomDelegate: class {
 
     func manager (_ manager: FirebaseManager, didGetChatRooms rooms: [ChatRoom])
@@ -13,6 +15,8 @@ protocol FirebaseManagerChatRoomDelegate: class {
     func manager (_ manager: FirebaseManager, didGetError error: Error)
 
 }
+
+// MARK: - CallType
 
 enum CallType: String {
 
@@ -25,7 +29,7 @@ enum CallType: String {
 }
 
 //swiftlint:disable identifier_name
-enum FriendType: String {
+enum ProfileCell: String {
 
     case me
 

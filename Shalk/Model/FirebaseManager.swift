@@ -11,7 +11,7 @@ import Crashlytics
 import SVProgressHUD
 
 class FirebaseManager {
-    
+
     // MARK: Property
 
     weak var chatRoomDelegate: FirebaseManagerChatRoomDelegate?
@@ -69,25 +69,25 @@ class FirebaseManager {
                 UIAlertController(error: error).show()
 
             }
-            
+
             if let okUser = user {
-                
+
                 // MARK: User sign up on Firebase successfully, start sign up on Quickblox.
-                
+
                 SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Register_ChatService", comment: ""))
-                
+
                 QBManager().signUp(
                     name: name,
                     uid: okUser.uid,
                     withEmail: email,
                     withPassword: okUser.uid
                 )
-                
+
                 self.logIn(
                     withEmail: email,
                     withPassword: pwd
                 )
-                
+
             }
 
         }

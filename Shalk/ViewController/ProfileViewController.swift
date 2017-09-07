@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController {
 
     var friends: [User] = []
 
-    var components: [FriendType] = [ .me, .friend ]
+    var components: [ProfileCell] = [ .me, .friend ]
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -26,21 +26,35 @@ class ProfileViewController: UIViewController {
 
     @IBAction func btnLogOut(_ sender: UIButton) {
 
-        let alert = UIAlertController.init(title: NSLocalizedString("Logout_Title", comment: ""), message: NSLocalizedString("Logout_Message", comment: ""), preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: NSLocalizedString("Logout_Title", comment: ""),
+            message: NSLocalizedString("Logout_Message", comment: ""),
+            preferredStyle: .alert
+        )
 
-        alert.addAction(title: NSLocalizedString("Cancel", comment: ""))
+        alert.addAction(
+            title: NSLocalizedString("Cancel", comment: "")
+        )
 
-        alert.addAction(title: NSLocalizedString("OK", comment: ""), style: .default, isEnabled: true) { (_) in
+        alert.addAction(
+            title: NSLocalizedString("OK", comment: ""),
+            style: .default,
+            isEnabled: true,
+            handler: { (_) in
 
-            // MARK: User log out.
+                // MARK: User log out.
 
-            SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Logout", comment: ""))
+                SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Logout", comment: ""))
 
-            UserManager.shared.logOut()
+                UserManager.shared.logOut()
 
-        }
+        })
 
-        self.present(alert, animated: true, completion: nil)
+        self.present(
+            alert,
+            animated: true,
+            completion: nil
+        )
 
     }
 
@@ -100,7 +114,10 @@ class ProfileViewController: UIViewController {
 
         let tapRecognizer = UITapGestureRecognizer()
 
-        tapRecognizer.addTarget(self, action: #selector(didTapUserImage))
+        tapRecognizer.addTarget(
+            self,
+            action: #selector(didTapUserImage)
+        )
 
         return tapRecognizer
 
@@ -113,12 +130,16 @@ class ProfileViewController: UIViewController {
             let imageView = gesture.view as? UIImageView,
             let image = imageView.image
             else {
-        
+
             return
-        
+
         }
 
-        let alert = CustomAlert(title: friends[indexNumber].name, intro: friends[indexNumber].intro, image: image)
+        let alert = CustomAlert(
+            title: friends[indexNumber].name,
+            intro: friends[indexNumber].intro,
+            image: image
+        )
 
         alert.show(animated: true)
 
@@ -214,7 +235,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
         case .friend:
 
-            return self.friends.count
+            return friends.count
 
         }
 

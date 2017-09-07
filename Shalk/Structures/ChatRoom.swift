@@ -11,7 +11,7 @@
 import Foundation
 
 struct ChatRoom {
-    
+
     // MARK: Property
 
     var roomId: String
@@ -37,7 +37,7 @@ extension ChatRoom {
         case invalidChatRoomObject, missingRoomId, missingUser1Id, missingUser2Id, missingLatestMessage, missingLatestMessageTime, missingIsRead
 
     }
-    
+
     // MARK: - Schema
 
     struct Schema {
@@ -55,7 +55,7 @@ extension ChatRoom {
         static let isRead = "isRead"
 
     }
-    
+
     // MARK: Init
 
     init(json: Any) throws {
@@ -143,14 +143,14 @@ extension ChatRoom {
     func toDictionary() -> RoomObject {
 
         let roomInfo: RoomObject = [
-        
+
             Schema.roomId: self.roomId,
             Schema.user1Id: self.user1Id,
             Schema.user2Id: self.user2Id,
             Schema.latestMessage: self.latestMessage,
             Schema.latestMessageTime: self.latestMessageTime,
             Schema.isRead: self.isRead
-        
+
         ]
 
         return roomInfo

@@ -53,25 +53,25 @@ class VideoCallViewController: UIViewController {
     @IBAction func btnRotateCamera(_ sender: UIButton) {
 
         if let position = self.videoCapture?.position {
-         
+
             switch position {
-                
+
             case .back:
-                
+
                 self.videoCapture?.position = .front
-                
+
                 break
-                
+
             case .front:
-                
+
                 self.videoCapture?.position = .back
-                
+
                 break
-                
+
             default: break
-                
+
             }
-            
+
         }
 
     }
