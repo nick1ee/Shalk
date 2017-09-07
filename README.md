@@ -3,7 +3,8 @@
 Shalk is a platform that allow users to find a partenr and get started to talk by the interested langauge. Once you and your partner become friends, you could start a video/audio call with your friends.
 
 # Note #
-Private keys is needed if you want to compile this project. If you want to run this app, please download the app from app store. Thanks for your understanding.
+Private keys are necessary for this project. If you want to run this app, please download from app store directly.  
+Thanks for your understanding.
 
 [[Download Shalk from App Store]](https://itunes.apple.com/us/app/shalk/id1272630937)
 
@@ -45,5 +46,5 @@ Private keys is needed if you want to compile this project. If you want to run t
 * XCode 8.3.3
 
 # Contacts #
-Nick Lee
+Nick Lee  
 zhongwei0717@gmail.com
