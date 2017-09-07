@@ -23,11 +23,11 @@ class AudioCallViewController: UIViewController {
 
     var second = 0
 
-    var secondTimer: Timer?
+    let secondTimer: Timer = Timer()
 
-    var minuteTimer: Timer?
+    let minuteTimer: Timer = Timer()
 
-    var hourTimer: Timer?
+    let hourTimer: Timer = Timer()
 
     let qbManager = QBManager.shared
 
@@ -181,13 +181,7 @@ extension AudioCallViewController {
 
     func configTimer() {
 
-        secondTimer = Timer()
-
-        minuteTimer = Timer()
-
-        hourTimer = Timer()
-
-        secondTimer?.start(DispatchTime.now(), interval: 1, repeats: true) {
+        secondTimer.start(DispatchTime.now(), interval: 1, repeats: true) {
 
             if self.second == 59 {
 
@@ -202,7 +196,7 @@ extension AudioCallViewController {
             self.timeLabel.text = "\(self.hour.addLeadingZero()) : \(self.minute.addLeadingZero()) : \(self.second.addLeadingZero())"
         }
 
-        minuteTimer?.start(DispatchTime.now() + 60.0, interval: 60, repeats: true) {
+        minuteTimer.start(DispatchTime.now() + 60.0, interval: 60, repeats: true) {
 
             if self.minute == 59 {
 
@@ -218,7 +212,7 @@ extension AudioCallViewController {
 
         }
 
-        hourTimer?.start(DispatchTime.now() + 3600.0, interval: 3600, repeats: true) {
+        hourTimer.start(DispatchTime.now() + 3600.0, interval: 3600, repeats: true) {
 
             self.hour += 1
 
@@ -230,11 +224,11 @@ extension AudioCallViewController {
 
     func stopTimer() {
 
-        secondTimer?.cancel()
+        secondTimer.cancel()
 
-        minuteTimer?.cancel()
+        minuteTimer.cancel()
 
-        hourTimer?.cancel()
+        hourTimer.cancel()
 
         second = 0
 

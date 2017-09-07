@@ -201,7 +201,12 @@ extension MainTabViewController: QBRTCClientDelegate {
 
                 guard
                     let hostQbId = session.initiatorID as? Int,
-                    let user = UserManager.shared.currentUser else { return }
+                    let user = UserManager.shared.currentUser
+                    else {
+                        
+                        return
+                
+                }
 
                 let hostQbString = String(describing: hostQbId)
 
@@ -210,7 +215,12 @@ extension MainTabViewController: QBRTCClientDelegate {
                     guard
                         let callType = userInfo?["callType"],
                         let duration = userInfo?["duration"],
-                        let chatRoomId = userInfo?["roomId"] else { return }
+                        let chatRoomId = userInfo?["roomId"]
+                        else {
+                            
+                            return
+                    
+                    }
 
                     FirebaseManager().sendCallRecord(CallType(rawValue: callType)!, duration: duration, roomId: chatRoomId)
 

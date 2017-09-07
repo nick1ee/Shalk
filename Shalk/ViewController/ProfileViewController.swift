@@ -110,9 +110,15 @@ class ProfileViewController: UIViewController {
 
         guard
             let indexNumber = gesture.view?.tag,
-            let imageView = gesture.view as? UIImageView else { return }
+            let imageView = gesture.view as? UIImageView,
+            let image = imageView.image
+            else {
+        
+            return
+        
+        }
 
-        let alert = CustomAlert(title: friends[indexNumber].name, intro: friends[indexNumber].intro, image: imageView.image!)
+        let alert = CustomAlert(title: friends[indexNumber].name, intro: friends[indexNumber].intro, image: image)
 
         alert.show(animated: true)
 

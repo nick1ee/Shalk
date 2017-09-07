@@ -6,9 +6,13 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - ChatROOM
+
 import Foundation
 
 struct ChatRoom {
+    
+    // MARK: Property
 
     var roomId: String
 
@@ -33,6 +37,8 @@ extension ChatRoom {
         case invalidChatRoomObject, missingRoomId, missingUser1Id, missingUser2Id, missingLatestMessage, missingLatestMessageTime, missingIsRead
 
     }
+    
+    // MARK: - Schema
 
     struct Schema {
 
@@ -49,6 +55,8 @@ extension ChatRoom {
         static let isRead = "isRead"
 
     }
+    
+    // MARK: Init
 
     init(json: Any) throws {
 
@@ -112,9 +120,9 @@ extension ChatRoom {
 
         let me = UserManager.shared.currentUser
 
-        self.roomId = roomId
-
         self.user1Id = me!.uid
+
+        self.roomId = roomId
 
         self.user2Id = opponent.uid
 
@@ -134,17 +142,16 @@ extension ChatRoom {
 
     func toDictionary() -> RoomObject {
 
-        let roomInfo: RoomObject = [Schema.roomId: self.roomId,
-
-                                    Schema.user1Id: self.user1Id,
-
-                                    Schema.user2Id: self.user2Id,
-
-                                    Schema.latestMessage: self.latestMessage,
-
-                                    Schema.latestMessageTime: self.latestMessageTime,
-
-                                    Schema.isRead: self.isRead]
+        let roomInfo: RoomObject = [
+        
+            Schema.roomId: self.roomId,
+            Schema.user1Id: self.user1Id,
+            Schema.user2Id: self.user2Id,
+            Schema.latestMessage: self.latestMessage,
+            Schema.latestMessageTime: self.latestMessageTime,
+            Schema.isRead: self.isRead
+        
+        ]
 
         return roomInfo
 
