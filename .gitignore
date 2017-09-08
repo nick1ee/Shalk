@@ -6,6 +6,7 @@
 build/
 DerivedData/
 Key/
+Shalk/AppDelegate
 
 ## Various settings
 *.pbxuser
