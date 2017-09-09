@@ -374,4 +374,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
         }
     }
+    
+    //swiftlint:enable force_cast
 }
