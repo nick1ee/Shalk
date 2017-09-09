@@ -6,9 +6,13 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - ModifyProfileViewController
+
 import UIKit
 
 class ModifyProfileViewController: UIViewController {
+    
+    // MARK: Property
 
     let imagePicker = UIImagePickerController()
 
@@ -91,6 +95,8 @@ class ModifyProfileViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
 
     }
+    
+    // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,6 +122,21 @@ class ModifyProfileViewController: UIViewController {
         self.view.addGestureRecognizer(swipeBack)
 
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.hideKeyboard()
+        
+    }
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
+        
+    }
+    
+    // MARK: Selector Functions
 
     func handleSwipe(gesture: UISwipeGestureRecognizer) {
 
@@ -127,33 +148,13 @@ class ModifyProfileViewController: UIViewController {
 
     }
 
-    func adjustTextfield() {
-
-        // MARK: Add padding for textfields.
-
-        inputName.maxLength = 20
-
-        inputIntro.maxLength = 40
-
-        inputName.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("InputName", comment: ""),
-                                                               attributes: [NSForegroundColorAttributeName: UIColor.white])
-
-        inputIntro.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("InputIntro", comment: ""),
-                                                             attributes: [NSForegroundColorAttributeName: UIColor.white])
-
-    }
-
     func hideKeyboard() {
 
         self.view.endEditing(true)
 
     }
-
-    deinit {
-
-        NotificationCenter.default.removeObserver(self)
-
-    }
+    
+    // MARK: UI Customization
 
     func displayUserProfile() {
 
@@ -180,8 +181,26 @@ class ModifyProfileViewController: UIViewController {
         }
 
     }
+    
+    func adjustTextfield() {
+        
+        // MARK: Add padding for textfields.
+        
+        inputName.maxLength = 20
+        
+        inputIntro.maxLength = 40
+        
+        inputName.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("InputName", comment: ""),
+                                                             attributes: [NSForegroundColorAttributeName: UIColor.white])
+        
+        inputIntro.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("InputIntro", comment: ""),
+                                                              attributes: [NSForegroundColorAttributeName: UIColor.white])
+        
+    }
 
 }
+
+// MARK: UIImagePickerControllerDelegate, UINavigationControllerDelegate
 
 extension ModifyProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -208,6 +227,8 @@ extension ModifyProfileViewController: UIImagePickerControllerDelegate, UINaviga
     }
 
 }
+
+// MARK: UITextFieldDelegate
 
 extension ModifyProfileViewController: UITextFieldDelegate {
 
