@@ -260,8 +260,6 @@ class ChatViewController: UIViewController {
 
                 self.scrollToLast()
 
-                FirebaseManager().updateChatRoom()
-
             })
         }
 
@@ -296,6 +294,13 @@ class ChatViewController: UIViewController {
     func hideKeyboard() {
 
         self.view.endEditing(true)
+
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        FirebaseManager().updateChatRoom()
 
     }
 
