@@ -6,6 +6,8 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - AudioChannel
+
 import Foundation
 
 struct AudioChannel {
@@ -26,11 +28,15 @@ extension AudioChannel {
 
     typealias ChannelObject = [String: Any]
 
+    // MARK: ParseChannelError
+
     enum ParseChannelError: Error {
 
         case invalidChannelObject, missingRoomID, missingParticipant, missingOwner, missingIsLocked, missingIsFinished
 
     }
+
+    // MARK: Schema
 
     struct Schema {
 
@@ -45,6 +51,8 @@ extension AudioChannel {
         static let isFinished = "isFinished"
 
     }
+
+    // MARK: Init
 
     init(json: Any) throws {
 
@@ -110,17 +118,15 @@ extension AudioChannel {
 
     }
 
-    func toDictionary() -> [String: Any] {
+    func toDictionary() -> ChannelObject {
 
-        let channelInfo: [String: Any] = [Schema.roomID: self.roomID,
-
-                                          Schema.participant: self.participant,
-
-                                          Schema.owner: self.owner,
-
-                                          Schema.isLocked: self.isLocked,
-
-                                          Schema.isFinished: self.isFinished]
+        let channelInfo: ChannelObject = [
+            Schema.roomID: self.roomID,
+            Schema.participant: self.participant,
+            Schema.owner: self.owner,
+            Schema.isLocked: self.isLocked,
+            Schema.isFinished: self.isFinished
+        ]
 
         return channelInfo
 
