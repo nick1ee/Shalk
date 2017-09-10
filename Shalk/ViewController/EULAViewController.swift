@@ -11,7 +11,7 @@
 import UIKit
 
 class EULAViewController: UIViewController {
-    
+
     // MARK: Property
 
     @IBOutlet weak var eulaTextView: UITextView!
@@ -21,7 +21,7 @@ class EULAViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
 
     }
-    
+
     // MARK: Life Cycle
 
     override func viewDidLoad() {

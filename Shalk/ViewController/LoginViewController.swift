@@ -13,7 +13,7 @@ import SwifterSwift
 import SVProgressHUD
 
 class LoginViewController: UIViewController {
-    
+
     // MARK: Property
 
     @IBOutlet weak var scrollView: UIScrollView!
@@ -73,7 +73,7 @@ class LoginViewController: UIViewController {
         }
 
     }
-    
+
     // MARK: Life Cycle
 
     override func viewDidLoad() {
@@ -90,13 +90,13 @@ class LoginViewController: UIViewController {
         self.view.addGestureRecognizer(tap)
 
     }
-    
+
     deinit {
-        
+
         NotificationCenter.default.removeObserver(self)
-        
+
     }
-    
+
     // MARK: UI Customization
 
     func adjustTextfield() {
@@ -106,7 +106,7 @@ class LoginViewController: UIViewController {
         inputPassword.maxLength = 12
 
     }
-    
+
     // MARK: Selector Function
 
     func hideKeyboard() {

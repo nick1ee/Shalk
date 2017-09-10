@@ -12,7 +12,7 @@ import UIKit
 import SVProgressHUD
 
 class RegisterViewController: UIViewController {
-    
+
     // MARK: Property
 
     @IBOutlet weak var scrollView: UIScrollView!
@@ -88,7 +88,7 @@ class RegisterViewController: UIViewController {
         self.present(eulaVC, animated: true, completion: nil)
 
     }
-    
+
     // MARK: Life Cycle
 
     override func viewDidLoad() {
@@ -107,13 +107,13 @@ class RegisterViewController: UIViewController {
         self.view.addGestureRecognizer(tap)
 
     }
-    
+
     deinit {
-        
+
         NotificationCenter.default.removeObserver(self)
-        
+
     }
-    
+
     // MARK: UI Customization
 
     func adjustTextfield() {
@@ -125,7 +125,7 @@ class RegisterViewController: UIViewController {
         inputPassword.maxLength = 12
 
     }
-    
+
     // MARK: Selector Function
 
     func hideKeyboard() {

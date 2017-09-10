@@ -1,5 +1,5 @@
 //
-//  ChatTableViewCell.swift
+//  ChatRoomTableViewCell.swift
 //  Shalk
 //
 //  Created by Nick Lee on 2017/7/29.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatTableViewCell: UITableViewCell {
+class ChatRoomTableViewCell: UITableViewCell {
 
     @IBOutlet weak var opponentImageView: UIImageView!
 

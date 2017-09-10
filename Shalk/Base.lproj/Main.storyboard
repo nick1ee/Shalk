@@ -1700,7 +1700,7 @@
                                 <rect key="frame" x="0.0" y="67" width="414" height="620"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="chatCell" rowHeight="69" id="2ct-cR-Bke" customClass="ChatTableViewCell" customModule="Shalk" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="chatCell" rowHeight="69" id="2ct-cR-Bke" customClass="ChatRoomTableViewCell" customModule="Shalk" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2ct-cR-Bke" id="6Jm-GR-Ngv">
@@ -2447,7 +2447,7 @@
         <image name="icon-user" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="M4q-bF-we2"/>
+        <segue reference="xxV-J9-TX2"/>
         <segue reference="SQr-9W-W6x"/>
     </inferredMetricsTieBreakers>
 </document>
