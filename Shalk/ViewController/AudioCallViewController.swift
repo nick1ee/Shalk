@@ -17,10 +17,6 @@ class AudioCallViewController: UIViewController {
 
     // MARK: Property
 
-    var isMicrophoneEnabled: Bool = true
-
-    var isSpeakerEnabled: Bool = false
-
     var hour = 0
 
     var minute = 0
@@ -32,6 +28,10 @@ class AudioCallViewController: UIViewController {
     let minuteTimer: Timer = Timer()
 
     let hourTimer: Timer = Timer()
+
+    var isMicrophoneEnabled: Bool = true
+
+    var isSpeakerEnabled: Bool = false
 
     let rtcManager = QBRTCClient.instance()
 
