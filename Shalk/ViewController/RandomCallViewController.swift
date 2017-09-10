@@ -6,6 +6,8 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - RandomCallViewController
+
 import UIKit
 import Quickblox
 import QuickbloxWebRTC
@@ -13,11 +15,11 @@ import SCLAlertView
 
 class RandomCallViewController: UIViewController {
 
+    // MARK: Property
+
     var isMicrophoneEnabled: Bool = true
 
     var isSpeakerEnabled: Bool = false
-
-    let qbManager = QBManager.shared
 
     let rtcManager = QBRTCClient.instance()
 
@@ -41,7 +43,7 @@ class RandomCallViewController: UIViewController {
 
             outletSpeaker.layer.borderColor = UIColor.white.cgColor
 
-            qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.speaker
+            QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.speaker
 
         } else {
 
@@ -53,7 +55,7 @@ class RandomCallViewController: UIViewController {
 
             outletSpeaker.layer.borderColor = UIColor.darkGray.cgColor
 
-            qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
+            QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
 
         }
 
@@ -71,9 +73,12 @@ class RandomCallViewController: UIViewController {
 
             outletMicrophone.layer.borderColor = UIColor.darkGray.cgColor
 
-            outletMicrophone.setImage(UIImage(named: "icon-nomic.png"), for: .normal)
+            outletMicrophone.setImage(
+                UIImage(named: "icon-nomic.png"),
+                for: .normal
+            )
 
-            qbManager.session?.localMediaStream.audioTrack.isEnabled = false
+            QBManager.shared.session?.localMediaStream.audioTrack.isEnabled = false
 
         } else {
 
@@ -85,9 +90,12 @@ class RandomCallViewController: UIViewController {
 
             outletMicrophone.layer.borderColor = UIColor.white.cgColor
 
-            outletMicrophone.setImage(UIImage(named: "icon-mic.png"), for: .normal)
+            outletMicrophone.setImage(
+                UIImage(named: "icon-mic.png"),
+                for: .normal
+            )
 
-            qbManager.session?.localMediaStream.audioTrack.isEnabled = true
+            QBManager.shared.session?.localMediaStream.audioTrack.isEnabled = true
 
         }
 
@@ -99,13 +107,21 @@ class RandomCallViewController: UIViewController {
 
         if UserManager.shared.friends.contains(where: { $0.uid == UserManager.shared.opponent?.uid }) {
 
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(
+            animated: true,
+            completion: nil
+            )
 
         } else {
 
             guard let opponent = UserManager.shared.opponent else { return }
 
-            let appearance = SCLAlertView.SCLAppearance( kTitleFont: UIFont.boldSystemFont(ofSize: 18), kTextFont: UIFont.systemFont(ofSize: 12), kButtonFont: UIFont.boldSystemFont(ofSize: 18), showCloseButton: false)
+            let appearance = SCLAlertView.SCLAppearance(
+                kTitleFont: UIFont.boldSystemFont(ofSize: 18),
+                kTextFont: UIFont.systemFont(ofSize: 12),
+                kButtonFont: UIFont.boldSystemFont(ofSize: 18),
+                showCloseButton: false
+            )
 
             let alert = SCLAlertView(appearance: appearance)
 
@@ -117,41 +133,63 @@ class RandomCallViewController: UIViewController {
 
                 }
 
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(
+                    animated: true,
+                    completion: nil
+                )
 
             })
 
-            alert.addButton("取消", backgroundColor: UIColor.red, textColor: UIColor.white, showDurationStatus: true, action: { })
+            alert.addButton(
+                "取消",
+                backgroundColor: UIColor.red,
+                textColor: UIColor.white,
+                showDurationStatus: true,
+                action: {}
+            )
 
-            alert.showSuccess("通話結束！", subTitle: "通話已經結束囉，是否要與\(opponent.name)成為好友呢？")
+            alert.showSuccess(
+                "通話結束！",
+                subTitle: "通話已經結束囉，是否要與\(opponent.name)成為好友呢？"
+            )
 
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(
+                animated: true,
+                completion: nil
+            )
 
         }
     }
 
+    // MARK: Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        qbManager.session?.localMediaStream.audioTrack.isEnabled = true
+        QBManager.shared.session?.localMediaStream.audioTrack.isEnabled = true
 
-        qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
+        QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
 
-        guard let opponent = UserManager.shared.opponent else { return }
+        if let opponent = UserManager.shared.opponent {
 
-        userNameLabel.text = opponent.name.addSpacingAndCapitalized()
+            userNameLabel.text = opponent.name.addSpacingAndCapitalized()
 
-        if opponent.imageUrl == "null" {
+            if opponent.imageUrl == "null" {
 
-            userImageView.isHidden = true
+                userImageView.isHidden = true
 
-        } else {
+            } else {
 
-            userImageView.isHidden = false
+                userImageView.isHidden = false
 
-            userImageView.sd_setImage(with: URL(string: opponent.imageUrl), placeholderImage: UIImage(named: "icon-user"))
+                userImageView.sd_setImage(
+                    with: URL(string: opponent.imageUrl),
+                    placeholderImage: UIImage(named: "icon-user")
+                )
 
-            userImageView.blur(withStyle: .light)
+                userImageView.blur(withStyle: .light)
+
+            }
 
         }
 

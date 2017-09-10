@@ -6,15 +6,19 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - ChatROOM
+
 import Foundation
 
 struct ChatRoom {
 
-    var roomId: String
+    // MARK: Property
 
-    var user1Id: String
+    let roomId: String
 
-    var user2Id: String
+    let user1Id: String
+
+    let user2Id: String
 
     var latestMessage: String
 
@@ -28,11 +32,15 @@ extension ChatRoom {
 
     typealias RoomObject = [String: Any]
 
+    // MARK: FetchChatRoomError
+
     enum FetchChatRoomError: Error {
 
         case invalidChatRoomObject, missingRoomId, missingUser1Id, missingUser2Id, missingLatestMessage, missingLatestMessageTime, missingIsRead
 
     }
+
+    // MARK: Schema
 
     struct Schema {
 
@@ -49,6 +57,8 @@ extension ChatRoom {
         static let isRead = "isRead"
 
     }
+
+    // MARK: Init
 
     init(json: Any) throws {
 
@@ -112,9 +122,9 @@ extension ChatRoom {
 
         let me = UserManager.shared.currentUser
 
-        self.roomId = roomId
-
         self.user1Id = me!.uid
+
+        self.roomId = roomId
 
         self.user2Id = opponent.uid
 
@@ -134,17 +144,16 @@ extension ChatRoom {
 
     func toDictionary() -> RoomObject {
 
-        let roomInfo: RoomObject = [Schema.roomId: self.roomId,
+        let roomInfo: RoomObject = [
 
-                                    Schema.user1Id: self.user1Id,
+            Schema.roomId: self.roomId,
+            Schema.user1Id: self.user1Id,
+            Schema.user2Id: self.user2Id,
+            Schema.latestMessage: self.latestMessage,
+            Schema.latestMessageTime: self.latestMessageTime,
+            Schema.isRead: self.isRead
 
-                                    Schema.user2Id: self.user2Id,
-
-                                    Schema.latestMessage: self.latestMessage,
-
-                                    Schema.latestMessageTime: self.latestMessageTime,
-
-                                    Schema.isRead: self.isRead]
+        ]
 
         return roomInfo
 

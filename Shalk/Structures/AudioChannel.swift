@@ -6,19 +6,23 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - AudioChannel
+
 import Foundation
 
 struct AudioChannel {
 
-    var roomID: String
+    // MARK: Property
 
-    var participant: String
+    let roomID: String
 
-    var owner: String
+    let participant: String
 
-    var isLocked: Bool
+    let owner: String
 
-    var isFinished: Bool
+    let isLocked: Bool
+
+    let isFinished: Bool
 
 }
 
@@ -26,11 +30,15 @@ extension AudioChannel {
 
     typealias ChannelObject = [String: Any]
 
+    // MARK: ParseChannelError
+
     enum ParseChannelError: Error {
 
         case invalidChannelObject, missingRoomID, missingParticipant, missingOwner, missingIsLocked, missingIsFinished
 
     }
+
+    // MARK: Schema
 
     struct Schema {
 
@@ -45,6 +53,8 @@ extension AudioChannel {
         static let isFinished = "isFinished"
 
     }
+
+    // MARK: Init
 
     init(json: Any) throws {
 
@@ -110,17 +120,17 @@ extension AudioChannel {
 
     }
 
-    func toDictionary() -> [String: Any] {
+    func toDictionary() -> ChannelObject {
 
-        let channelInfo: [String: Any] = [Schema.roomID: self.roomID,
+        let channelInfo: ChannelObject = [
 
-                                          Schema.participant: self.participant,
+            Schema.roomID: self.roomID,
+            Schema.participant: self.participant,
+            Schema.owner: self.owner,
+            Schema.isLocked: self.isLocked,
+            Schema.isFinished: self.isFinished
 
-                                          Schema.owner: self.owner,
-
-                                          Schema.isLocked: self.isLocked,
-
-                                          Schema.isFinished: self.isFinished]
+        ]
 
         return channelInfo
 

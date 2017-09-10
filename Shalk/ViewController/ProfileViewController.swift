@@ -6,15 +6,29 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - ProfileViewController
+
 import UIKit
 import SDWebImage
 import SVProgressHUD
 
 class ProfileViewController: UIViewController {
 
+    // MARK: Property
+
+    //swiftlint:disable identifier_name
+    enum ProfileCell: String {
+
+        case me
+
+        case friend = "true"
+
+    }
+    //swiftlint:enable identifier_name
+
     var friends: [User] = []
 
-    var components: [FriendType] = [ .me, .friend ]
+    let components: [ProfileCell] = [ .me, .friend ]
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -26,23 +40,39 @@ class ProfileViewController: UIViewController {
 
     @IBAction func btnLogOut(_ sender: UIButton) {
 
-        let alert = UIAlertController.init(title: NSLocalizedString("Logout_Title", comment: ""), message: NSLocalizedString("Logout_Message", comment: ""), preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: NSLocalizedString("Logout_Title", comment: ""),
+            message: NSLocalizedString("Logout_Message", comment: ""),
+            preferredStyle: .alert
+        )
 
-        alert.addAction(title: NSLocalizedString("Cancel", comment: ""))
+        alert.addAction(
+            title: NSLocalizedString("Cancel", comment: "")
+        )
 
-        alert.addAction(title: NSLocalizedString("OK", comment: ""), style: .default, isEnabled: true) { (_) in
+        alert.addAction(
+            title: NSLocalizedString("OK", comment: ""),
+            style: .default,
+            isEnabled: true,
+            handler: { (_) in
 
-            // MARK: User log out.
+                // MARK: User log out.
 
-            SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Logout", comment: ""))
+                SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Logout", comment: ""))
 
-            UserManager.shared.logOut()
+                UserManager.shared.logOut()
 
-        }
+        })
 
-        self.present(alert, animated: true, completion: nil)
+        self.present(
+            alert,
+            animated: true,
+            completion: nil
+        )
 
     }
+
+    // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +93,12 @@ class ProfileViewController: UIViewController {
 
         }
 
-        NotificationCenter.default.addObserver(self, selector: #selector(handleFriendChange), name: NSNotification.Name(rawValue: "FriendChange"), object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleFriendChange),
+            name: NSNotification.Name(rawValue: "FriendChange"),
+            object: nil
+        )
 
     }
 
@@ -82,9 +117,21 @@ class ProfileViewController: UIViewController {
 
     }
 
+    deinit {
+
+        NotificationCenter.default.removeObserver(
+            self,
+            name: NSNotification.Name(rawValue: "FriendChange"),
+            object: self
+        )
+
+    }
+
+    // MARK: UI Customization
+
     func prepareTableView() {
 
-        tableView.estimatedRowHeight = 250
+        tableView.estimatedRowHeight = 250.0
 
         tableView.rowHeight = UITableViewAutomaticDimension
 
@@ -100,19 +147,36 @@ class ProfileViewController: UIViewController {
 
         let tapRecognizer = UITapGestureRecognizer()
 
-        tapRecognizer.addTarget(self, action: #selector(didTapUserImage))
+        tapRecognizer.addTarget(
+            self,
+            action: #selector(didTapUserImage)
+        )
 
         return tapRecognizer
 
     }
 
+    // MARK: Selector Functions
+
     func didTapUserImage(_ gesture: UITapGestureRecognizer) {
 
         guard
             let indexNumber = gesture.view?.tag,
-            let imageView = gesture.view as? UIImageView else { return }
+            let imageView = gesture.view as? UIImageView,
+            let image = imageView.image
+            else {
 
-        let alert = CustomAlert(title: friends[indexNumber].name, intro: friends[indexNumber].intro, image: imageView.image!)
+            return
+
+        }
+
+        let friend = friends[indexNumber]
+
+        let alert = CustomAlert(
+            title: friend.name,
+            intro: friend.intro,
+            image: image
+        )
 
         alert.show(animated: true)
 
@@ -126,13 +190,9 @@ class ProfileViewController: UIViewController {
 
     }
 
-    deinit {
-
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "FriendChange"), object: self)
-
-    }
-
 }
+
+// MARK: UITableViewDelegate, UITableViewDataSource
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
@@ -148,7 +208,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
         switch component {
 
-        case .me: return 0
+        case .me: return 0.0
 
         case .friend: return 30.0
 
@@ -168,9 +228,23 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             let screen = UIScreen.main.bounds
 
-            let header = UIView(frame: CGRect(x: 0, y: 0, width: screen.width, height: 30))
+            let header = UIView(
+                frame: CGRect(
+                    x: 0.0,
+                    y: 0.0,
+                    width: screen.width,
+                    height: 30.0
+                )
+            )
 
-            let headerLabel = UILabel(frame: CGRect(x: 20, y: 0, width: screen.width, height: 30))
+            let headerLabel = UILabel(
+                frame: CGRect(
+                    x: 20.0,
+                    y: 0.0,
+                    width: screen.width,
+                    height: 30.0
+                )
+            )
 
             headerLabel.font = UIFont.boldSystemFont(ofSize: 13)
 
@@ -180,11 +254,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             headerLabel.layer.shadowColor = UIColor.black.cgColor
 
-            headerLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
+            headerLabel.layer.shadowOffset = CGSize(
+                width: 1.0,
+                height: 1.0
+            )
 
-            headerLabel.layer.shadowRadius = 10
+            headerLabel.layer.shadowRadius = 10.0
 
-            headerLabel.layer.opacity = 1
+            headerLabel.layer.opacity = 1.0
 
             header.backgroundColor = UIColor.clear
 
@@ -208,7 +285,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
         case .friend:
 
-            return self.friends.count
+            return friends.count
 
         }
 
@@ -225,35 +302,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             // MARK: Display profile cell.
 
-            guard let user = UserManager.shared.currentUser else { return UITableViewCell() }
-
             let cell = tableView.dequeueReusableCell(withIdentifier: "profileCell") as! ProfileTableViewCell
-
-            cell.userName.text = user.name
-
-            if user.intro != "null" {
-
-                cell.userIntroduction.text = user.intro
-
-            }
-
-            if user.imageUrl == "null" {
-
-                let userPlaceholder = UIImage(named: "bigUser")
-
-                cell.userImageView.image = userPlaceholder
-
-                cell.userImageView.image = cell.userImageView.image?.withRenderingMode(.alwaysTemplate)
-
-                cell.userImageView.tintColor = UIColor.white
-
-                cell.userImageView.backgroundColor = UIColor.clear
-
-            } else {
-
-                cell.userImageView.sd_setImage(with: URL(string: user.imageUrl))
-
-            }
 
             return cell
 
@@ -261,25 +310,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             // MARK: Display cells for friends.
 
-            let friend = friends[indexPath.row]
-
             let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
-
-            cell.friendImageView.sd_setImage(with: URL(string: friend.imageUrl), placeholderImage: UIImage(named: "icon-user"))
-
-            cell.friendImageView.tag = indexPath.row
-
-            cell.friendImageView.addGestureRecognizer(setTapGestureRecognizer())
-
-            cell.friendImageView.isUserInteractionEnabled = true
-
-            cell.friendName.text = friend.name
-
-            if friend.intro != "null" {
-
-                cell.friendStatus.text = friend.intro
-
-            }
 
             return cell
 
@@ -297,9 +328,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
         case .friend:
 
-            UserManager.shared.startChat(withVC: self, to: friends[indexPath.row])
-
-            break
+            UserManager.shared.startChat(
+                withVC: self,
+                to: friends[indexPath.row]
+            )
 
         }
 
@@ -309,17 +341,81 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
         let component = components[indexPath.section]
 
-        let displayCell = cell as? FriendTableViewCell
-
         switch component {
 
-        case .me: break
+        case .me:
+
+            let cell = cell as! ProfileTableViewCell
+
+            if let user = UserManager.shared.currentUser {
+
+                cell.userName.text = user.name
+
+                if user.intro != "null" {
+
+                    cell.userIntroduction.text = user.intro
+
+                }
+
+                if user.imageUrl != "null" {
+
+                    cell.userImageView.sd_setImage(with: URL(string: user.imageUrl))
+
+                }
+
+            }
 
         case .friend:
 
-            displayCell?.friendStatus.textColor = UIColor.lightGray
+            let cell = cell as! FriendTableViewCell
+
+            let friend = friends[indexPath.row]
+
+            cell.friendImageView.sd_setImage(
+                with: URL(string: friend.imageUrl),
+                placeholderImage: UIImage(named: "icon-user")
+            )
+
+            cell.friendImageView.tag = indexPath.row
+
+            cell.friendImageView.addGestureRecognizer(setTapGestureRecognizer())
+
+            cell.friendImageView.isUserInteractionEnabled = true
+
+            cell.friendName.text = friend.name
+
+            if friend.intro != "null" {
+
+                cell.friendStatus.text = friend.intro
+
+            }
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+
+        let component = components[indexPath.section]
+
+        switch component {
+
+        case .me:
+
+            break
+
+        case .friend:
+
+            let cell = cell as! FriendTableViewCell
+
+            cell.friendName.text = nil
+
+            cell.friendStatus.text = nil
+
+            cell.friendImageView.image = nil
+
+            cell.friendImageView.isUserInteractionEnabled = false
 
         }
-
     }
+
+    //swiftlint:enable force_cast
 }

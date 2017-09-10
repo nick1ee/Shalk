@@ -64,7 +64,11 @@ class CustomAlert: UIView, Modal {
 
         introLabel.textColor = UIColor.gray
 
-        introLabel.text = intro
+        if intro != "null" {
+
+            introLabel.text = intro
+
+        }
 
         introLabel.numberOfLines = 2
 

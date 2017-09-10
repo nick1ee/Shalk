@@ -6,13 +6,12 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - UserManager
+import UIKit
 import Foundation
-import Firebase
 import AudioToolbox
 
 class UserManager {
-
-    let ref = Database.database().reference()
 
     static let shared = UserManager()
 
@@ -82,11 +81,11 @@ class UserManager {
 
     func registerProfile() {
 
-        let userDict = currentUser?.toDictionary()
+        if let uid = currentUser?.uid, let userDict = currentUser?.toDictionary() {
 
-        guard let uid = currentUser?.uid else { return }
+            FirebaseManager().registerProfile(uid: uid, userDict: userDict)
 
-        FirebaseManager().registerProfile(uid: uid, userDict: userDict!)
+        }
 
     }
 
@@ -100,18 +99,18 @@ class UserManager {
 
     func startAudioCall() {
 
-        self.isPlayingCallingSound = true
+        isPlayingCallingSound = true
 
-        self.playingSound()
+        playingSound()
 
         QBManager.shared.startAudioCall()
     }
 
     func startVideoCall() {
 
-        self.isPlayingCallingSound = true
+        isPlayingCallingSound = true
 
-        self.playingSound()
+        playingSound()
 
         QBManager.shared.startVideoCall()
 
@@ -151,7 +150,11 @@ class UserManager {
 
         playingSoundTimer = Timer()
 
-        playingSoundTimer?.start(DispatchTime.now(), interval: 4, repeats: true) {
+        playingSoundTimer?.start(
+            DispatchTime.now(),
+            interval: 4,
+            repeats: true
+        ) {
 
             AudioServicesPlaySystemSound(1151)
 

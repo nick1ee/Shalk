@@ -6,6 +6,8 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - AudioCallViewController
+
 import UIKit
 import Quickblox
 import QuickbloxWebRTC
@@ -13,9 +15,7 @@ import AudioToolbox
 
 class AudioCallViewController: UIViewController {
 
-    var isMicrophoneEnabled: Bool = true
-
-    var isSpeakerEnabled: Bool = false
+    // MARK: Property
 
     var hour = 0
 
@@ -23,15 +23,15 @@ class AudioCallViewController: UIViewController {
 
     var second = 0
 
-    var secondTimer: Timer?
+    let secondTimer: Timer = Timer()
 
-    var minuteTimer: Timer?
+    let minuteTimer: Timer = Timer()
 
-    var hourTimer: Timer?
+    let hourTimer: Timer = Timer()
 
-    let qbManager = QBManager.shared
+    var isMicrophoneEnabled: Bool = true
 
-    let userManager = UserManager.shared
+    var isSpeakerEnabled: Bool = false
 
     let rtcManager = QBRTCClient.instance()
 
@@ -57,9 +57,12 @@ class AudioCallViewController: UIViewController {
 
             outletMicrophone.layer.borderColor = UIColor.darkGray.cgColor
 
-            outletMicrophone.setImage(UIImage(named: "icon-nomic.png"), for: .normal)
+            outletMicrophone.setImage(
+                UIImage(named: "icon-nomic.png"),
+                for: .normal
+            )
 
-            qbManager.session?.localMediaStream.audioTrack.isEnabled = false
+            QBManager.shared.session?.localMediaStream.audioTrack.isEnabled = false
 
         } else {
 
@@ -71,9 +74,12 @@ class AudioCallViewController: UIViewController {
 
             outletMicrophone.layer.borderColor = UIColor.white.cgColor
 
-            outletMicrophone.setImage(UIImage(named: "icon-mic.png"), for: .normal)
+            outletMicrophone.setImage(
+                UIImage(named: "icon-mic.png"),
+                for: .normal
+            )
 
-            qbManager.session?.localMediaStream.audioTrack.isEnabled = true
+            QBManager.shared.session?.localMediaStream.audioTrack.isEnabled = true
 
         }
 
@@ -91,7 +97,7 @@ class AudioCallViewController: UIViewController {
 
             outletSpeaker.layer.borderColor = UIColor.white.cgColor
 
-            qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.speaker
+            QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.speaker
 
         } else {
 
@@ -103,7 +109,7 @@ class AudioCallViewController: UIViewController {
 
             outletSpeaker.layer.borderColor = UIColor.darkGray.cgColor
 
-            qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
+            QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
 
         }
 
@@ -117,13 +123,20 @@ class AudioCallViewController: UIViewController {
 
         let roomId = UserManager.shared.chatRoomId
 
-        let callinfo = ["callType": CallType.audio.rawValue,
-                        "duration": duration,
-                        "roomId": roomId ]
+        let callinfo = [
+            "callType": CallType.audio.rawValue,
+            "duration": duration,
+            "roomId": roomId
+        ]
 
         guard
             let hostQbId = QBManager.shared.session?.initiatorID as? Int,
-            let user = UserManager.shared.currentUser else { return }
+            let user = UserManager.shared.currentUser
+            else {
+
+                return
+
+        }
 
         let hostQbString = String(describing: hostQbId)
 
@@ -131,38 +144,44 @@ class AudioCallViewController: UIViewController {
 
             DispatchQueue.global().async {
 
-                FirebaseManager().sendCallRecord(.audio, duration: duration, roomId: roomId)
+                FirebaseManager().sendCallRecord(
+                    .audio,
+                    duration: duration,
+                    roomId: roomId
+                )
 
             }
 
         }
 
-        DispatchQueue.global().async {
+        QBManager.shared.handUpCall(callinfo)
 
-            QBManager.shared.handUpCall(callinfo)
-
-        }
-
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(
+            animated: true,
+            completion: nil
+        )
 
     }
+
+    // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         QBRTCClient.instance().add(self)
 
-        qbManager.session?.localMediaStream.audioTrack.isEnabled = true
+        QBManager.shared.session?.localMediaStream.audioTrack.isEnabled = true
 
-        qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
+        QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
 
-        guard let opponent = UserManager.shared.opponent else { return }
+        if let opponent = UserManager.shared.opponent {
 
-        opponentName.text = opponent.name.addSpacingAndCapitalized()
+            opponentName.text = opponent.name.addSpacingAndCapitalized()
 
-        DispatchQueue.global().async {
-
-            self.opponentImageView.sd_setImage(with: URL(string: opponent.imageUrl), placeholderImage: UIImage(named: "icon-user"))
+            self.opponentImageView.sd_setImage(
+                with: URL(string: opponent.imageUrl),
+                placeholderImage: UIImage(named: "icon-user")
+            )
 
         }
     }
@@ -176,18 +195,13 @@ class AudioCallViewController: UIViewController {
 
 }
 
-// MARK: Timer setting
+// MARK: Timer Configuration
+
 extension AudioCallViewController {
 
     func configTimer() {
 
-        secondTimer = Timer()
-
-        minuteTimer = Timer()
-
-        hourTimer = Timer()
-
-        secondTimer?.start(DispatchTime.now(), interval: 1, repeats: true) {
+        secondTimer.start(DispatchTime.now(), interval: 1, repeats: true) {
 
             if self.second == 59 {
 
@@ -202,7 +216,7 @@ extension AudioCallViewController {
             self.timeLabel.text = "\(self.hour.addLeadingZero()) : \(self.minute.addLeadingZero()) : \(self.second.addLeadingZero())"
         }
 
-        minuteTimer?.start(DispatchTime.now() + 60.0, interval: 60, repeats: true) {
+        minuteTimer.start(DispatchTime.now() + 60.0, interval: 60, repeats: true) {
 
             if self.minute == 59 {
 
@@ -218,7 +232,7 @@ extension AudioCallViewController {
 
         }
 
-        hourTimer?.start(DispatchTime.now() + 3600.0, interval: 3600, repeats: true) {
+        hourTimer.start(DispatchTime.now() + 3600.0, interval: 3600, repeats: true) {
 
             self.hour += 1
 
@@ -230,11 +244,11 @@ extension AudioCallViewController {
 
     func stopTimer() {
 
-        secondTimer?.cancel()
+        secondTimer.cancel()
 
-        minuteTimer?.cancel()
+        minuteTimer.cancel()
 
-        hourTimer?.cancel()
+        hourTimer.cancel()
 
         second = 0
 
@@ -244,6 +258,8 @@ extension AudioCallViewController {
 
     }
 }
+
+// MARK: QBRTCClientDelegate
 
 extension AudioCallViewController: QBRTCClientDelegate {
 

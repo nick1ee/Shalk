@@ -6,36 +6,32 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - ChatListViewController
+
 import UIKit
 
 class ChatListViewController: UIViewController {
 
-    let fbManager = FirebaseManager()
+    // MARK: Property
 
     var rooms: [ChatRoom] = []
 
-    var opponentUid = ""
+    let fbManager = FirebaseManager()
 
-    var opponentName = ""
-
-    var btnHint: UIButton?
-
-    let screen = UIScreen.main.bounds
+    let btnHint: UIButton = UIButton()
 
     @IBOutlet weak var chatListTableView: UITableView!
+
+    // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         fbManager.chatRoomDelegate = self
 
-        let bgImageView = UIImageView(image: UIImage(named: "background"))
-
-        chatListTableView.backgroundColor = UIColor.clear
-
-        chatListTableView.backgroundView = bgImageView
-
         addDiscoverButton()
+
+        setUpBackground()
 
         DispatchQueue.global().async {
 
@@ -43,21 +39,34 @@ class ChatListViewController: UIViewController {
 
         }
 
-        NotificationCenter.default.addObserver(self, selector: #selector(handleRoomChange), name: NSNotification.Name(rawValue: "RoomChange"), object: nil)
-
-    }
-
-    func handleRoomChange() {
-
-        self.rooms = []
-
-        self.chatListTableView.reloadData()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleRoomChange),
+            name: NSNotification.Name(rawValue: "RoomChange"),
+            object: nil
+        )
 
     }
 
     deinit {
 
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "RoomChange"), object: self)
+        NotificationCenter.default.removeObserver(
+            self,
+            name: NSNotification.Name(rawValue: "RoomChange"),
+            object: self
+        )
+
+    }
+
+    // MARK: UI Customization
+
+    func setUpBackground() {
+
+        let bgImageView = UIImageView(image: UIImage(named: "background"))
+
+        chatListTableView.backgroundColor = UIColor.clear
+
+        chatListTableView.backgroundView = bgImageView
 
     }
 
@@ -65,31 +74,54 @@ class ChatListViewController: UIViewController {
 
         let screen = UIScreen.main.bounds
 
-        btnHint = UIButton(frame: CGRect(x: 50, y: 100, width: screen.width - 100, height: 50))
+        btnHint.frame = CGRect(
+            x: 50.0,
+            y: 100.0,
+            width: screen.width - 100.0,
+            height: 50.0
+        )
 
-        btnHint?.setTitle("D I S C O V E R  !", for: .normal)
+        btnHint.setTitle(
+            "D I S C O V E R  !",
+            for: .normal
+        )
 
-        btnHint?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+        btnHint.setTitleColor(
+            UIColor.white,
+            for: .normal
+        )
 
-        btnHint?.setTitleColor(UIColor.white, for: .normal)
+        btnHint.backgroundColor = UIColor.clear
 
-        btnHint?.backgroundColor = UIColor.clear
+        btnHint.layer.borderColor = UIColor.white.cgColor
 
-        btnHint?.layer.borderColor = UIColor.white.cgColor
+        btnHint.layer.borderWidth = 2.0
 
-        btnHint?.layer.borderWidth = 2
+        btnHint.layer.shadowColor = UIColor.black.cgColor
 
-        btnHint?.layer.shadowColor = UIColor.black.cgColor
+        btnHint.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
 
-        btnHint?.layer.shadowOffset = CGSize(width: 1, height: 1)
+        btnHint.layer.shadowRadius = 0.5
 
-        btnHint?.layer.shadowRadius = 0.5
+        btnHint.layer.shadowOpacity = 1.0
 
-        btnHint?.layer.shadowOpacity = 1
+        btnHint.addTarget(
+            self,
+            action: #selector(goDiscover),
+            for: .touchDown
+        )
 
-        btnHint?.addTarget(self, action: #selector(goDiscover), for: .touchDown)
+        self.view.addSubview(btnHint)
 
-        self.view.addSubview(btnHint!)
+    }
+
+    // MARK: Selector Functions
+
+    func handleRoomChange() {
+
+        self.rooms = []
+
+        self.chatListTableView.reloadData()
 
     }
 
@@ -100,6 +132,8 @@ class ChatListViewController: UIViewController {
     }
 
 }
+
+// MARK: UITableViewDelegate, UITableViewDataSource
 
 //swiftlint:disable force_cast
 extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -112,47 +146,9 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "chatCell", for: indexPath) as! ChatTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "chatCell", for: indexPath) as! ChatRoomTableViewCell
 
-        let room = rooms[indexPath.row]
-
-        cell.backgroundColor = UIColor.clear
-
-        cell.latestMessage.text = room.latestMessage
-
-        if room.isRead == false {
-
-            cell.newMessageBubble.isHidden = false
-
-        } else {
-
-            cell.newMessageBubble.isHidden = true
-
-        }
-
-        guard let myUid = UserManager.shared.currentUser?.uid else { return UITableViewCell() }
-
-        if myUid == room.user1Id {
-
-            var friend = UserManager.shared.friends.filter { $0.uid == room.user2Id }
-
-            cell.opponentImageView.sd_setImage(with: URL(string: friend[0].imageUrl), placeholderImage: UIImage(named: "icon-user"))
-
-            cell.opponentName.text = friend[0].name
-
-            return cell
-
-        } else {
-
-            var friend = UserManager.shared.friends.filter { $0.uid == room.user1Id }
-
-            cell.opponentImageView.sd_setImage(with: URL(string: friend[0].imageUrl), placeholderImage: UIImage(named: "icon-user"))
-
-            cell.opponentName.text = friend[0].name
-
-            return cell
-
-        }
+        return cell
 
     }
 
@@ -166,7 +162,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
             UserManager.shared.chatRoomId = room.roomId
 
-            var friend = UserManager.shared.friends.filter { $0.uid == room.user2Id }
+            let friend = UserManager.shared.friends.filter { $0.uid == room.user2Id }
 
             UserManager.shared.opponent = friend[0]
 
@@ -176,7 +172,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
             UserManager.shared.chatRoomId = room.roomId
 
-            var friend = UserManager.shared.friends.filter { $0.uid == room.user1Id }
+            let friend = UserManager.shared.friends.filter { $0.uid == room.user1Id }
 
             UserManager.shared.opponent = friend[0]
 
@@ -186,16 +182,63 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
     }
 
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+
+        let cell = cell as! ChatRoomTableViewCell
+
+        let room = rooms[indexPath.row]
+
+        cell.latestMessage.text = room.latestMessage
+
+        if room.isRead == false {
+
+            cell.newMessageBubble.isHidden = false
+
+        } else {
+
+            cell.newMessageBubble.isHidden = true
+
+        }
+
+        guard let myUid = UserManager.shared.currentUser?.uid else { return }
+
+        if myUid == room.user1Id {
+
+            let friend = UserManager.shared.friends.filter { $0.uid == room.user2Id }
+
+            cell.opponentImageView.sd_setImage(with: URL(string: friend[0].imageUrl), placeholderImage: UIImage(named: "icon-user"))
+
+            cell.opponentName.text = friend[0].name
+
+        } else {
+
+            let friend = UserManager.shared.friends.filter { $0.uid == room.user1Id }
+
+            cell.opponentImageView.sd_setImage(with: URL(string: friend[0].imageUrl), placeholderImage: UIImage(named: "icon-user"))
+
+            cell.opponentName.text = friend[0].name
+
+        }
+    }
+
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 
-        let dismissCell = cell as? ChatTableViewCell
+        let cell = cell as! ChatRoomTableViewCell
 
-        dismissCell?.opponentImageView.image = nil
+        cell.opponentImageView.image = nil
+
+        cell.opponentName.text = nil
+
+        cell.latestMessage.text = nil
+
+        cell.newMessageBubble.isHidden = true
 
     }
 
 }
 //swiftlint:enable force_cast
+
+// MARK: FirebaseManagerChatRoomDelegate
 
 extension ChatListViewController: FirebaseManagerChatRoomDelegate {
 
@@ -203,15 +246,13 @@ extension ChatListViewController: FirebaseManagerChatRoomDelegate {
 
         self.rooms = rooms
 
-        btnHint?.isHidden = true
+        btnHint.isHidden = true
 
         chatListTableView.reloadData()
 
     }
 
     func manager(_ manager: FirebaseManager, didGetError error: Error) {
-
-        // MARK: Failed to fetch chat rooms
 
         UIAlertController(error: error).show()
 

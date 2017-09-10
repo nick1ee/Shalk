@@ -24,7 +24,7 @@ class QBManager {
 
     var session: QBRTCSession?
 
-    func logIn(withEmail email: String, withPassword password: String) {
+    func logIn(credential email: String, _ password: String) {
 
         QBRequest.logIn(withUserEmail: email, password: password, successBlock: { (response, user) in
 

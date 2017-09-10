@@ -6,11 +6,15 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - VideoCallViewController
+
 import UIKit
 import Quickblox
 import QuickbloxWebRTC
 
 class VideoCallViewController: UIViewController {
+
+    // MARK: Property
 
     var hour = 0
 
@@ -18,13 +22,11 @@ class VideoCallViewController: UIViewController {
 
     var second = 0
 
-    var secondTimer: Timer?
+    let secondTimer = Timer()
 
-    var minuteTimer: Timer?
+    let minuteTimer = Timer()
 
-    var hourTimer: Timer?
-
-    var location = CGPoint(x: 0, y: 0)
+    let hourTimer = Timer()
 
     var isCameraEnabled = true
 
@@ -33,8 +35,6 @@ class VideoCallViewController: UIViewController {
     let rtcManager = QBRTCClient.instance()
 
     var videoCapture: QBRTCCameraCapture?
-
-    let qbManager = QBManager.shared
 
     @IBOutlet weak var timeLabel: UILabel!
 
@@ -52,23 +52,21 @@ class VideoCallViewController: UIViewController {
 
     @IBAction func btnRotateCamera(_ sender: UIButton) {
 
-        let position = self.videoCapture?.position
+        if let position = self.videoCapture?.position {
 
-        switch position! {
+            switch position {
 
-        case .back:
+            case .back:
 
-            self.videoCapture?.position = .front
+                self.videoCapture?.position = .front
 
-            break
+            case .front:
 
-        case .front:
+                self.videoCapture?.position = .back
 
-            self.videoCapture?.position = .back
+            default: break
 
-            break
-
-        default: break
+            }
 
         }
 
@@ -82,7 +80,10 @@ class VideoCallViewController: UIViewController {
 
             isCameraEnabled = false
 
-            outletCamera.setImage(UIImage(named: "icon-nocamera.png"), for: .normal)
+            outletCamera.setImage(
+                UIImage(named: "icon-nocamera.png"),
+                for: .normal
+            )
 
             QBManager.shared.session?.localMediaStream.videoTrack.isEnabled = false
 
@@ -94,7 +95,10 @@ class VideoCallViewController: UIViewController {
 
             isCameraEnabled = true
 
-            outletCamera.setImage(UIImage(named: "icon-camera.png"), for: .normal)
+            outletCamera.setImage(
+                UIImage(named: "icon-camera.png"),
+                for: .normal
+            )
 
             QBManager.shared.session?.localMediaStream.videoTrack.isEnabled = true
 
@@ -112,9 +116,12 @@ class VideoCallViewController: UIViewController {
 
             isMicrophoneEnabled = false
 
-            outletMicrophone.setImage(UIImage(named: "icon-nomic.png"), for: .normal)
+            outletMicrophone.setImage(
+                UIImage(named: "icon-nomic.png"),
+                for: .normal
+            )
 
-            qbManager.session?.localMediaStream.audioTrack.isEnabled = false
+            QBManager.shared.session?.localMediaStream.audioTrack.isEnabled = false
 
         } else {
 
@@ -122,9 +129,12 @@ class VideoCallViewController: UIViewController {
 
             isMicrophoneEnabled = true
 
-            outletMicrophone.setImage(UIImage(named: "icon-mic.png"), for: .normal)
+            outletMicrophone.setImage(
+                UIImage(named: "icon-mic.png"),
+                for: .normal
+            )
 
-            qbManager.session?.localMediaStream.audioTrack.isEnabled = true
+            QBManager.shared.session?.localMediaStream.audioTrack.isEnabled = true
 
         }
 
@@ -136,13 +146,20 @@ class VideoCallViewController: UIViewController {
 
         let roomId = UserManager.shared.chatRoomId
 
-        let callinfo = ["callType": CallType.video.rawValue,
-                        "duration": duration,
-                        "roomId": roomId ]
+        let callinfo = [
+            "callType": CallType.video.rawValue,
+            "duration": duration,
+            "roomId": roomId
+        ]
 
         guard
             let hostQbId = QBManager.shared.session?.initiatorID as? Int,
-            let user = UserManager.shared.currentUser else { return }
+            let user = UserManager.shared.currentUser
+            else {
+
+                return
+
+        }
 
         let hostQbString = String(describing: hostQbId)
 
@@ -150,21 +167,26 @@ class VideoCallViewController: UIViewController {
 
             DispatchQueue.global().async {
 
-                FirebaseManager().sendCallRecord(.video, duration: duration, roomId: roomId)
+                FirebaseManager().sendCallRecord(
+                    .video,
+                    duration: duration,
+                    roomId: roomId
+                )
 
             }
 
         }
 
-        DispatchQueue.global().async {
+        QBManager.shared.handUpCall(callinfo)
 
-            QBManager.shared.handUpCall(callinfo)
-
-        }
-
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(
+            animated: true,
+            completion: nil
+        )
 
     }
+
+    // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -176,9 +198,16 @@ class VideoCallViewController: UIViewController {
             guard
                 let qbID = UserManager.shared.opponent?.quickbloxId,
                 let qbIDInteger = Int(qbID),
-                let opponentID = [qbIDInteger] as? [NSNumber] else { return }
+                let opponentID = [qbIDInteger] as? [NSNumber]
+                else {
 
-            QBManager.shared.session = QBRTCClient.instance().createNewSession(withOpponents: opponentID, with: .video)
+                    return
+            }
+
+            QBManager.shared.session = QBRTCClient.instance().createNewSession(
+                withOpponents: opponentID,
+                with: .video
+            )
 
             videoPreparation()
 
@@ -192,11 +221,23 @@ class VideoCallViewController: UIViewController {
 
         }
 
-        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        let pan = UIPanGestureRecognizer(
+            target: self,
+            action: #selector(handlePan)
+        )
 
         localVideoView.addGestureRecognizer(pan)
 
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.stopTimer()
+
+    }
+
+    // MARK: Selector Function
 
     func handlePan(_ recognizer: UIPanGestureRecognizer) {
 
@@ -210,12 +251,7 @@ class VideoCallViewController: UIViewController {
 
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        self.stopTimer()
-
-    }
+    // MARK: Capture Video
 
     func videoPreparation() {
 
@@ -229,7 +265,10 @@ class VideoCallViewController: UIViewController {
 
         videoFormat.height = 480
 
-        videoCapture = QBRTCCameraCapture.init(videoFormat: videoFormat, position: AVCaptureDevicePosition.front)
+        videoCapture = QBRTCCameraCapture.init(
+            videoFormat: videoFormat,
+            position: AVCaptureDevicePosition.front
+        )
 
         QBManager.shared.session?.localMediaStream.videoTrack.videoCapture = self.videoCapture
 
@@ -237,11 +276,17 @@ class VideoCallViewController: UIViewController {
 
         videoCapture!.startSession()
 
-        localVideoView.center = CGPoint(x: 0, y: 0)
+        localVideoView.center = CGPoint(
+            x: 0.0,
+            y: 0.0
+        )
 
-        localVideoView.layer.insertSublayer(videoCapture!.previewLayer, at: 0)
+        localVideoView.layer.insertSublayer(
+            videoCapture!.previewLayer,
+            at: 0
+        )
 
-        qbManager.audioManager.currentAudioDevice = .speaker
+        QBManager.shared.audioManager.currentAudioDevice = .speaker
 
     }
 
@@ -252,13 +297,13 @@ extension VideoCallViewController {
 
     func configTimer() {
 
-        secondTimer = Timer()
+        let currentTime = DispatchTime.now()
 
-        minuteTimer = Timer()
-
-        hourTimer = Timer()
-
-        secondTimer?.start(DispatchTime.now(), interval: 1, repeats: true) {
+        secondTimer.start(
+            currentTime,
+            interval: 1,
+            repeats: true,
+            handler: {
 
             if self.second == 59 {
 
@@ -271,9 +316,14 @@ extension VideoCallViewController {
             }
 
             self.timeLabel.text = "\(self.hour.addLeadingZero()) : \(self.minute.addLeadingZero()) : \(self.second.addLeadingZero())"
-        }
 
-        minuteTimer?.start(DispatchTime.now() + 60.0, interval: 60, repeats: true) {
+        })
+
+        minuteTimer.start(
+            currentTime + 60.0,
+            interval: 60,
+            repeats: true,
+            handler: {
 
             if self.minute == 59 {
 
@@ -287,25 +337,28 @@ extension VideoCallViewController {
 
             self.timeLabel.text = "\(self.hour.addLeadingZero()) : \(self.minute.addLeadingZero()) : \(self.second.addLeadingZero())"
 
-        }
+        })
 
-        hourTimer?.start(DispatchTime.now() + 3600.0, interval: 3600, repeats: true) {
+        hourTimer.start(
+            currentTime + 3600.0,
+            interval: 3600,
+            repeats: true,
+            handler: {
 
             self.hour += 1
 
             self.timeLabel.text = "\(self.hour.addLeadingZero()) : \(self.minute.addLeadingZero()) : \(self.second.addLeadingZero())"
 
-        }
-
+        })
     }
 
     func stopTimer() {
 
-        secondTimer?.cancel()
+        secondTimer.cancel()
 
-        minuteTimer?.cancel()
+        minuteTimer.cancel()
 
-        hourTimer?.cancel()
+        hourTimer.cancel()
 
         second = 0
 

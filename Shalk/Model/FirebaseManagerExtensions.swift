@@ -6,12 +6,15 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: FirebaseMAnagerExtensions
+
 import Foundation
 import Firebase
 import FirebaseStorage
 import Crashlytics
 
-// MARK: Functions for fetch and update channel.
+// MARK: Pairing Mechanism
+
 extension FirebaseManager {
 
     func fetchChannel() {
@@ -40,7 +43,9 @@ extension FirebaseManager {
 
                 self.updateChannel()
 
-                self.fetchFriendInfo(channel.owner, completion: { (user) in
+                self.fetchFriendInfo(
+                    channel.owner,
+                    completion: { (user) in
 
                     UserManager.shared.opponent = user
 
@@ -64,22 +69,37 @@ extension FirebaseManager {
 
         // MARK: No channel online.
 
-        guard let uid = Auth.auth().currentUser?.uid, let roomId = ref?.childByAutoId().key else { return }
+        guard
+            let uid = Auth.auth().currentUser?.uid,
+            let roomId = ref?.childByAutoId().key
+            else {
 
-        let newChannel = AudioChannel.init(roomID: roomId, owner: uid)
+                return
+
+        }
+
+        let newChannel = AudioChannel(
+            roomID: roomId,
+            owner: uid
+        )
 
         UserManager.shared.roomKey = roomId
 
-        self.ref?.child("channels").child(language).child(roomId).setValue(newChannel.toDictionary())
+        ref?.child("channels").child(language).child(roomId).setValue(newChannel.toDictionary())
 
     }
 
     func updateChannel() {
 
         guard
-            let uid = userManager.currentUser?.uid,
-            let roomId = userManager.roomKey,
-            let lang = userManager.language else { return }
+            let uid = UserManager.shared.currentUser?.uid,
+            let roomId = UserManager.shared.roomKey,
+            let lang = UserManager.shared.language
+            else {
+
+                return
+
+        }
 
         ref?.child("channels").child(lang).child(roomId).updateChildValues(["isLocked": true])
 
@@ -89,11 +109,16 @@ extension FirebaseManager {
 
     func closeChannel() {
 
-        guard let roomId = userManager.roomKey, let lang = userManager.language else { return }
+        guard
+            let roomId = UserManager.shared.roomKey,
+            let lang = UserManager.shared.language
+            else {
+
+                return
+
+        }
 
         ref?.child("channels").child(lang).child(roomId).updateChildValues(["isFinished": true, "isLocked": true])
-
-//        UserManager.shared.roomKey = nil
 
         UserManager.shared.language = nil
 
@@ -102,8 +127,13 @@ extension FirebaseManager {
     func leaveChannel() {
 
         guard
-            let roomId = userManager.roomKey,
-            let lang = userManager.language else { return }
+            let roomId = UserManager.shared.roomKey,
+            let lang = UserManager.shared.language
+            else {
+
+                return
+
+        }
 
         ref?.child("channels").child(lang).child(roomId).updateChildValues(["isLocked": true, "isFinished": true])
 
@@ -111,60 +141,73 @@ extension FirebaseManager {
 
 }
 
-// MARK: Functions for handle friends.
+// MARK: Friends Mechanism
+
 extension FirebaseManager {
 
     func checkFriendRequest() {
 
-        guard let roomId = userManager.roomKey else { return }
+        if let roomId = UserManager.shared.roomKey {
 
-        ref?.child("friendRequest").observeSingleEvent(of: .value, with: { (snapshot) in
+            ref?.child("friendRequest").observeSingleEvent(of: .value, with: { (snapshot) in
 
-            if snapshot.hasChild(roomId) {
+                if snapshot.hasChild(roomId) {
 
-                // MARK: We are friends now, update both data.
+                    // MARK: We are friends now, update both data.
 
-                guard
-                    let myUid = UserManager.shared.currentUser?.uid,
-                    let opponent = UserManager.shared.opponent else { return }
+                    guard
+                        let myUid = UserManager.shared.currentUser?.uid,
+                        let opponent = UserManager.shared.opponent
+                        else {
 
-                self.ref?.child("friendList").child(myUid).updateChildValues([opponent.uid: "true"])
+                            return
 
-                self.ref?.child("friendList").child(opponent.uid).updateChildValues([myUid: "true"])
+                    }
 
-            } else {
+                    self.ref?.child("friendList").child(myUid).updateChildValues([opponent.uid: "true"])
 
-                // MARK: Send friend request.
+                    self.ref?.child("friendList").child(opponent.uid).updateChildValues([myUid: "true"])
 
-                self.ref?.child("friendRequest").child(roomId).setValue(true)
+                } else {
 
-            }
+                    // MARK: Send friend request.
 
-            self.closeChannel()
+                    self.ref?.child("friendRequest").child(roomId).setValue(true)
 
-        })
+                }
+
+                self.closeChannel()
+
+            })
+
+        }
 
     }
 
     func fetchFriendList(completion: @escaping (User) -> Void) {
 
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+        if let uid = Auth.auth().currentUser?.uid {
 
-        ref?.child("friendList").child(uid).observe(.value, with: { (snapshot) in
+            ref?.child("friendList").child(uid).observe(.value, with: { (snapshot) in
 
-            UserManager.shared.friends = []
+                UserManager.shared.friends = []
 
-            guard let friendList = snapshot.value as? [String: String] else { return }
+                guard let friendList = snapshot.value as? [String: String] else { return }
 
-            for friend in friendList {
+                for friend in friendList {
 
-                let friendUid = friend.key
+                    let friendUid = friend.key
 
-                self.fetchFriendInfo(friendUid, completion: completion)
+                    self.fetchFriendInfo(
+                        friendUid,
+                        completion: completion
+                    )
 
-            }
+                }
 
-        })
+            })
+
+        }
 
     }
 
@@ -187,7 +230,11 @@ extension FirebaseManager {
             } catch let error {
 
                 // MARK: Failed to fetch friend info.
-                Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_FriendInfo_Error"])
+
+                Crashlytics.sharedInstance().recordError(
+                    error,
+                    withAdditionalUserInfo: ["info": "Fetch_FriendInfo_Error"]
+                )
 
                 UIAlertController(error: error).show()
 
@@ -221,7 +268,8 @@ extension FirebaseManager {
 
 }
 
-// MARK: Functions for fetch and update user profile.
+// MARK: User Profile
+
 extension FirebaseManager {
 
     func registerProfile(uid: String, userDict: [String: String]) {
@@ -254,7 +302,10 @@ extension FirebaseManager {
 
                 // MARK: Failed to fetch user profile
 
-                Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_MyProfile_Error"])
+                Crashlytics.sharedInstance().recordError(
+                    error,
+                    withAdditionalUserInfo: ["info": "Fetch_MyProfile_Error"]
+                )
 
                 UIAlertController(error: error).show()
             }
@@ -265,17 +316,21 @@ extension FirebaseManager {
 
     func updateUserName(name: String) {
 
-        guard let user = UserManager.shared.currentUser else { return }
+        if let user = UserManager.shared.currentUser {
 
-        ref?.child("users").child(user.uid).child("name").setValue(name)
+            ref?.child("users").child(user.uid).child("name").setValue(name)
+
+        }
 
     }
 
     func updateUserIntro(intro: String) {
 
-        guard let user = UserManager.shared.currentUser else { return }
+        if let user = UserManager.shared.currentUser {
 
-        ref?.child("users").child(user.uid).child("intro").setValue(intro)
+            ref?.child("users").child(user.uid).child("intro").setValue(intro)
+
+        }
 
     }
 
@@ -289,11 +344,11 @@ extension FirebaseManager {
 
         storageRef.child("userImage").child(user.uid).putData(data, metadata: metaData) { (metadata, error) in
 
-            if error != nil {
+            if let error = error {
 
                 // MARK: Failed to upload image.
 
-                UIAlertController(error: error!).show()
+                UIAlertController(error: error).show()
 
                 return
 
@@ -301,11 +356,13 @@ extension FirebaseManager {
 
             // MARK: Upload image successfully, and updated user image url.
 
-            guard let imageUrlString = metadata?.downloadURL()?.absoluteString else { return }
+            if let imageUrlString = metadata?.downloadURL()?.absoluteString {
 
-            self.ref?.child("users").child(user.uid).child("imageUrl").setValue(imageUrlString)
+                self.ref?.child("users").child(user.uid).child("imageUrl").setValue(imageUrlString)
 
-            UserManager.shared.currentUser?.imageUrl = imageUrlString
+                UserManager.shared.currentUser?.imageUrl = imageUrlString
+
+            }
 
         }
 
@@ -313,23 +370,33 @@ extension FirebaseManager {
 
 }
 
-// MARK: Real-time chat functions
+// MARK: Real-Time Communication
+
 extension FirebaseManager {
 
     func createChatRoom(to opponent: User) {
 
         guard
             let myUid = Auth.auth().currentUser?.uid,
-            let roomId = ref?.childByAutoId().key else { return }
+            let roomId = ref?.childByAutoId().key
+            else {
 
-        let room = ChatRoom.init(roomId: roomId, opponent: opponent)
+                return
+
+        }
+
+        let room = ChatRoom(
+            roomId: roomId,
+            opponent: opponent
+        )
+
         ref?.child("chatRoomList").child(myUid).child(roomId).setValue(room.toDictionary())
 
         ref?.child("chatRoomList").child(opponent.uid).child(roomId).setValue(room.toDictionary())
 
         ref?.child("chatHistory").child(roomId).child("init").setValue(Message.init(text: "").toDictionary())
 
-        userManager.chatRoomId = roomId
+        UserManager.shared.chatRoomId = roomId
 
     }
 
@@ -349,14 +416,18 @@ extension FirebaseManager {
 
                 do {
 
-                    let room = try ChatRoom.init(json: object.value)
+                    let room = try ChatRoom(json: object.value)
 
                     rooms.append(room)
 
                 } catch let error {
 
                     // MARK: Failed to fetch the list of chat rooms.
-                    Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_ChatRoom_Error"])
+
+                    Crashlytics.sharedInstance().recordError(
+                        error,
+                        withAdditionalUserInfo: ["info": "Fetch_ChatRoom_Error"]
+                    )
 
                     UIAlertController(error: error).show()
 
@@ -382,7 +453,10 @@ extension FirebaseManager {
 
             DispatchQueue.main.async {
 
-                self.chatRoomDelegate?.manager(self, didGetChatRooms: sortedRooms)
+                self.chatRoomDelegate?.manager(
+                    self,
+                    didGetChatRooms: sortedRooms
+                )
 
             }
 
@@ -392,22 +466,29 @@ extension FirebaseManager {
 
     func updateChatRoom() {
 
-        guard let myUid = Auth.auth().currentUser?.uid else { return }
+        if let myUid = Auth.auth().currentUser?.uid {
 
-        let roomId = UserManager.shared.chatRoomId
+            let roomId = UserManager.shared.chatRoomId
 
-        ref?.child("chatRoomList").child(myUid).child(roomId).updateChildValues(["isRead": true])
+            ref?.child("chatRoomList").child(myUid).child(roomId).updateChildValues(["isRead": true])
+
+        }
 
     }
 
     func sendMessage(text: String) {
 
-        let roomId = userManager.chatRoomId
+        let roomId = UserManager.shared.chatRoomId
 
         guard
             let messageId = ref?.childByAutoId().key,
-            let myUid = userManager.currentUser?.uid,
-            let opponentUid = userManager.opponent?.uid else { return }
+            let myUid = UserManager.shared.currentUser?.uid,
+            let opponentUid = UserManager.shared.opponent?.uid
+            else {
+
+                return
+
+        }
 
         let formatter = DateFormatter()
 
@@ -427,25 +508,35 @@ extension FirebaseManager {
 
     func sendCallRecord(_ callType: CallType, duration: String, roomId: String) {
 
-        guard let messageId = ref?.childByAutoId().key else { return }
+        if let messageId = ref?.childByAutoId().key {
 
-        let formatter = DateFormatter()
+            let formatter = DateFormatter()
 
-        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+            formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
 
-        let timestamp = formatter.string(from: Date())
+            let timestamp = formatter.string(from: Date())
 
-        let newMessage = Message.init(text: duration, senderId: callType.rawValue, time: timestamp)
+            let newMessage = Message(
+                text: duration,
+                senderId: callType.rawValue,
+                time: timestamp
+            )
 
-        ref?.child("chatHistory").child(roomId).child(messageId).updateChildValues(newMessage.toDictionary())
+            ref?.child("chatHistory").child(roomId).child(messageId).updateChildValues(newMessage.toDictionary())
+
+        }
 
     }
 
     func generateAutoId() -> String {
 
-        guard let autoId = ref?.childByAutoId().key else { return "123456789" }
+        if let autoId = ref?.childByAutoId().key {
 
-        return autoId
+            return autoId
+
+        }
+
+        return "123456789"
 
     }
 
@@ -453,7 +544,7 @@ extension FirebaseManager {
 
         var messages: [Message] = []
 
-        let roomId = userManager.chatRoomId
+        let roomId = UserManager.shared.chatRoomId
 
         handle = ref?.child("chatHistory").child(roomId).observe(.childAdded, with: { (snapshot) in
 
@@ -468,7 +559,11 @@ extension FirebaseManager {
             } catch let error {
 
                 // MARK: Failed to fetch hcat histroy
-                Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_ChatHistory_Error"])
+
+                Crashlytics.sharedInstance().recordError(
+                    error,
+                    withAdditionalUserInfo: ["info": "Fetch_ChatHistory_Error"]
+                )
 
                 UIAlertController(error: error).show()
 
@@ -486,14 +581,20 @@ extension FirebaseManager {
 
 }
 
-// MARK: Block and Report abusive user
+// MARK: Block and Report
+
 extension FirebaseManager {
 
     func blockFriend(completion: @escaping () -> Void) {
 
         guard
             let myUid = UserManager.shared.currentUser?.uid,
-            let friendUid = UserManager.shared.opponent?.uid else { return }
+            let friendUid = UserManager.shared.opponent?.uid
+            else {
+
+                return
+
+        }
 
         let roomId = UserManager.shared.chatRoomId
 
@@ -516,7 +617,12 @@ extension FirebaseManager {
         guard
             let myUid = Auth.auth().currentUser?.uid,
             let opponentUid = UserManager.shared.opponent?.uid,
-            let reportId = ref?.childByAutoId().key else { return }
+            let reportId = ref?.childByAutoId().key
+            else {
+
+                return
+
+        }
 
         let formatter = DateFormatter()
 
@@ -524,11 +630,15 @@ extension FirebaseManager {
 
         let timestamp = formatter.string(from: Date())
 
-        let report = [ "ausiveUser": opponentUid,
-                       "prosecutor": myUid,
-                       "reason": reason,
-                       "time": timestamp,
-                       "reportId": reportId ]
+        let report = [
+
+            "ausiveUser": opponentUid,
+            "prosecutor": myUid,
+            "reason": reason,
+            "time": timestamp,
+            "reportId": reportId
+
+        ]
 
         ref?.child("ReportUser").child(reportId).updateChildValues(report)
 
@@ -542,7 +652,8 @@ extension FirebaseManager {
 
 }
 
-// MARK: Remove Firebase Observer
+// MARK: Remove Observer
+
 extension FirebaseManager {
 
     func removeAllObserver() {
@@ -553,7 +664,8 @@ extension FirebaseManager {
 
 }
 
-// MARK: Firebase Analystic.
+// MARK: Analystic.
+
 extension FirebaseManager {
 
     func logEvent(_ eventName: String) {

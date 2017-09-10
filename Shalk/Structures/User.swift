@@ -6,17 +6,21 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - USer
+
 import Foundation
 
 typealias UserObject = [String: Any]
 
 struct User {
 
+    // MARK: Property
+
     var name: String
 
-    var uid: String
+    let uid: String
 
-    var email: String
+    let email: String
 
     var quickbloxId: String
 
@@ -28,11 +32,15 @@ struct User {
 
 extension User {
 
+    // MARK: FetchUserProfileError
+
     enum FetchUserProfileError: Error {
 
         case invaidJSONObject, missingName, missingUID, missingEmail, missingQuickbloxId, missingImageUrl, missingIntro
 
     }
+
+    // MARK: Schema
 
     struct Schema {
 
@@ -49,6 +57,8 @@ extension User {
         static let intro = "intro"
 
     }
+
+    // MARK: Init
 
     init(json: Any) throws {
 
@@ -124,19 +134,20 @@ extension User {
 
     }
 
-    func toDictionary() -> [String: String] {
+    typealias UserProfile = [String: String]
 
-        let userInfo: [String: String] = [Schema.name: self.name,
+    func toDictionary() -> UserProfile {
 
-                                          Schema.uid: self.uid,
+        let userInfo: UserProfile = [
 
-                                          Schema.email: self.email,
+            Schema.name: self.name,
+            Schema.uid: self.uid,
+            Schema.email: self.email,
+            Schema.qbID: self.quickbloxId,
+            Schema.imageUrl: self.imageUrl,
+            Schema.intro: self.intro
 
-                                          Schema.qbID: self.quickbloxId,
-
-                                          Schema.imageUrl: self.imageUrl,
-
-                                          Schema.intro: self.intro]
+        ]
 
         return userInfo
 

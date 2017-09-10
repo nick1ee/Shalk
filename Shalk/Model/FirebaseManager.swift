@@ -12,13 +12,13 @@ import SVProgressHUD
 
 class FirebaseManager {
 
+    // MARK: Property
+
     weak var chatRoomDelegate: FirebaseManagerChatRoomDelegate?
 
     var ref: DatabaseReference? = Database.database().reference()
 
     var handle: DatabaseHandle?
-
-    let userManager = UserManager.shared
 
     let storage = Storage.storage()
 
@@ -28,9 +28,9 @@ class FirebaseManager {
 
         // MARK: Start to login Firebase
 
-        Auth.auth().signIn(withEmail: email, password: pwd) { (user, error) in
+        Auth.auth().signIn(withEmail: email, password: pwd, completion: { (user, error) in
 
-            if error != nil {
+            if let error = error {
 
                 // MARK: User failed to sign in on Firebase.
 
@@ -38,7 +38,7 @@ class FirebaseManager {
 
                 UIApplication.shared.endIgnoringInteractionEvents()
 
-                UIAlertController(error: error!).show()
+                UIAlertController(error: error).show()
 
             }
 
@@ -46,19 +46,24 @@ class FirebaseManager {
 
                 // MARK: User Signed in Firebase successfully, start sign in with Quickblox.
 
-                QBManager().logIn(withEmail: email, withPassword: okUser.uid)
+                QBManager().logIn(
+                    credential: email,
+                    okUser.uid
+                )
 
             }
 
-        }
-
+        })
     }
 
     func signUp(name: String, withEmail email: String, withPassword pwd: String) {
 
-        Auth.auth().createUser(withEmail: email, password: pwd) { (user, error) in
+        Auth.auth().createUser(
+            withEmail: email,
+            password: pwd,
+            completion: { (user, error) in
 
-            if error != nil {
+            if let error = error {
 
                 // MARK: User failed to sign up on Firebase.
 
@@ -66,43 +71,62 @@ class FirebaseManager {
 
                 UIApplication.shared.endIgnoringInteractionEvents()
 
-                UIAlertController(error: error!).show()
+                UIAlertController(error: error).show()
 
             }
 
-            guard let okUser = user else { return }
+            if let okUser = user {
 
-            // MARK: User sign up on Firebase successfully, start sign up on Quickblox.
+                // MARK: User sign up on Firebase successfully, start sign up on Quickblox.
 
-            SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Register_ChatService", comment: ""))
+                SVProgressHUD.show(withStatus: NSLocalizedString("SVProgress_Register_ChatService", comment: ""))
 
-            QBManager().signUp(name: name, uid: okUser.uid, withEmail: email, withPassword: okUser.uid)
+                QBManager().signUp(
+                    name: name,
+                    uid: okUser.uid,
+                    withEmail: email,
+                    withPassword: okUser.uid
+                )
 
-            self.logIn(withEmail: email, withPassword: pwd)
+                self.logIn(
+                    withEmail: email,
+                    withPassword: pwd
+                )
 
-        }
+            }
+
+        })
 
     }
 
     func resetPassword(_ withVC: UIViewController, withEmail email: String) {
 
-        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+        Auth.auth().sendPasswordReset(withEmail: email, completion: { (error) in
 
-            if error != nil {
+            if let error = error {
 
                 // MARK: Failed to reset password.
-                UIAlertController(error: error!).show()
+                UIAlertController(error: error).show()
 
             }
 
-            let alert = UIAlertController.init(title: NSLocalizedString("Reset_Password_Title", comment: ""), message: NSLocalizedString("Reset_Password_Message", comment: ""), preferredStyle: .alert)
+            let alert = UIAlertController(
+                title: NSLocalizedString("Reset_Password_Title", comment: ""),
+                message: NSLocalizedString("Reset_Password_Message", comment: ""),
+                preferredStyle: .alert
+            )
 
-            alert.addAction(title: "OK")
+            alert.addAction(
+                title: "OK"
+            )
 
-            withVC.present(alert, animated: true, completion: nil)
+            withVC.present(
+                alert,
+                animated: true,
+                completion: nil
+            )
 
-        }
-
+        })
     }
 
     func logOut() {

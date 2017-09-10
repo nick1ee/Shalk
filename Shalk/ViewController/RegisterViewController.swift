@@ -6,10 +6,14 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - RegisterViewController
+
 import UIKit
 import SVProgressHUD
 
 class RegisterViewController: UIViewController {
+
+    // MARK: Property
 
     @IBOutlet weak var scrollView: UIScrollView!
 
@@ -85,6 +89,8 @@ class RegisterViewController: UIViewController {
 
     }
 
+    // MARK: Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -102,6 +108,14 @@ class RegisterViewController: UIViewController {
 
     }
 
+    deinit {
+
+        NotificationCenter.default.removeObserver(self)
+
+    }
+
+    // MARK: UI Customization
+
     func adjustTextfield() {
 
         inputUserName.maxLength = 20
@@ -112,19 +126,17 @@ class RegisterViewController: UIViewController {
 
     }
 
+    // MARK: Selector Function
+
     func hideKeyboard() {
 
         self.view.endEditing(true)
 
     }
 
-    deinit {
-
-        NotificationCenter.default.removeObserver(self)
-
-    }
-
 }
+
+// MARK: UITextFieldDelegate
 
 extension RegisterViewController: UITextFieldDelegate {
 
@@ -159,22 +171,6 @@ extension RegisterViewController: UITextFieldDelegate {
         let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
 
         scrollView.contentInset = contentInsets
-
-    }
-
-}
-
-extension String {
-
-    func isValidEmail() -> Bool {
-
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-
-        let result = emailTest.evaluate(with: self)
-
-        return result
 
     }
 

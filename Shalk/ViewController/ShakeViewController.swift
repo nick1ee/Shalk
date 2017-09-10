@@ -6,6 +6,8 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - ShakeViewController
+
 import UIKit
 import Magnetic
 import SpriteKit
@@ -15,9 +17,9 @@ import NVActivityIndicatorView
 
 class ShakeViewController: UIViewController {
 
-    let rtcManager = QBRTCClient.instance()
+    // MARK: Property
 
-    var names = UIImage.names
+    let rtcManager = QBRTCClient.instance()
 
     var selectedNode: Node?
 
@@ -45,24 +47,12 @@ class ShakeViewController: UIViewController {
 
     }
 
+    // MARK: Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        magneticView.allowsTransparency = true
-
-        magnetic.allowsMultipleSelection = false
-
-        magneticView.backgroundColor = UIColor.clear
-
-        magnetic.backgroundColor = UIColor.clear
-
-        let shakeImage = UIImage(named: "icon-shake")
-
-        iconShake.image = shakeImage
-
-        iconShake.image = iconShake.image?.withRenderingMode(.alwaysTemplate)
-
-        iconShake.tintColor = UIColor.white
+        setUpBackgroundView()
 
     }
 
@@ -73,7 +63,7 @@ class ShakeViewController: UIViewController {
 
         labelSearching.text = NSLocalizedString("No_Language", comment: "")
 
-        addLangBubbles(nil)
+        addLangBubbles()
 
     }
 
@@ -115,15 +105,13 @@ class ShakeViewController: UIViewController {
 
             labelSearching.text = NSLocalizedString("No_Language", comment: "")
 
-            return
-
         } else {
 
             UserManager.shared.opponent = nil
 
             if UserManager.shared.isDiscovering == false {
 
-                // MARK: Start pairing...
+                // MARK: Start Pairing
 
                 UserManager.shared.isDiscovering = true
 
@@ -153,7 +141,31 @@ class ShakeViewController: UIViewController {
 
     }
 
-    @IBAction func addLangBubbles(_ sender: UIControl?) {
+    // MARK: UI Customization
+
+    func setUpBackgroundView() {
+
+        magneticView.allowsTransparency = true
+
+        magnetic.allowsMultipleSelection = false
+
+        magneticView.backgroundColor = UIColor.clear
+
+        magnetic.backgroundColor = UIColor.clear
+
+        let shakeImage = UIImage(named: "icon-shake")
+
+        iconShake.image = shakeImage
+
+        iconShake.image = iconShake.image?.withRenderingMode(.alwaysTemplate)
+
+        iconShake.tintColor = UIColor.white
+
+    }
+
+    // MARK: Add Bubbles
+
+    func addLangBubbles() {
 
         for node in nodes {
 
@@ -167,13 +179,13 @@ class ShakeViewController: UIViewController {
 
         for item in 0...3 {
 
-            let name = names[item]
+            let language = UIImage.languages[item]
 
             let color = colorArray.randomItem
 
             colorArray.removeAll(color)
 
-            let node = Node(text: name.capitalized, image: UIImage(named: name), color: color, radius: UIScreen.main.bounds.width / 9)
+            let node = Node(text: language.capitalized, image: UIImage(named: language), color: color, radius: UIScreen.main.bounds.width / 9)
 
             magnetic.addChild(node)
 
@@ -185,7 +197,8 @@ class ShakeViewController: UIViewController {
 
 }
 
-// MARK: - MagneticDelegate
+// MARK: MagneticDelegate
+
 extension ShakeViewController: MagneticDelegate {
 
     func magnetic(_ magnetic: Magnetic, didSelect node: Node) {
@@ -222,7 +235,8 @@ extension ShakeViewController: MagneticDelegate {
 
 }
 
-// MARK: - ImageNode
+// MARK: ImageNode
+
 class ImageNode: Node {
 
     override var image: UIImage? {

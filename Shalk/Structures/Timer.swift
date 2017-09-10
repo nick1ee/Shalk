@@ -6,11 +6,15 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: Timer
+
 import UIKit
 
 private let timerQueue = DispatchQueue(label: "com.timer.queue", attributes: [])
 
 final class Timer: NSObject {
+
+    // MARK: Property
 
     private var timer: DispatchSourceTimer?
 
@@ -20,6 +24,8 @@ final class Timer: NSObject {
 
     }
 
+    // MARK: Methods
+
     func start(_ startPoint: DispatchTime, interval: Int, repeats: Bool = false, handler: @escaping () -> Void) {
 
         cancel()
@@ -28,7 +34,10 @@ final class Timer: NSObject {
 
         self.timer = timer
 
-        timer.scheduleRepeating(deadline: startPoint, interval: .seconds(interval))
+        timer.scheduleRepeating(
+            deadline: startPoint,
+            interval: .seconds(interval)
+        )
 
         timer.setEventHandler {
 
@@ -48,12 +57,13 @@ final class Timer: NSObject {
 
     func cancel() {
 
-        guard let timer = timer else { return }
+        if let timer = timer {
 
-        timer.cancel()
+            timer.cancel()
 
-        self.timer = nil
+            self.timer = nil
 
+        }
     }
 
     deinit {

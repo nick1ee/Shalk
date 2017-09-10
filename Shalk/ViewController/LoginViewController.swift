@@ -6,11 +6,15 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - LoginViewController
+
 import UIKit
 import SwifterSwift
 import SVProgressHUD
 
 class LoginViewController: UIViewController {
+
+    // MARK: Property
 
     @IBOutlet weak var scrollView: UIScrollView!
 
@@ -70,6 +74,8 @@ class LoginViewController: UIViewController {
 
     }
 
+    // MARK: Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -85,6 +91,14 @@ class LoginViewController: UIViewController {
 
     }
 
+    deinit {
+
+        NotificationCenter.default.removeObserver(self)
+
+    }
+
+    // MARK: UI Customization
+
     func adjustTextfield() {
 
         inputEmail.maxLength = 30
@@ -93,19 +107,17 @@ class LoginViewController: UIViewController {
 
     }
 
+    // MARK: Selector Function
+
     func hideKeyboard() {
 
         self.view.endEditing(true)
 
     }
 
-    deinit {
-
-        NotificationCenter.default.removeObserver(self)
-
-    }
-
 }
+
+// MARK: UITextFieldDelegate
 
 extension LoginViewController: UITextFieldDelegate {
 

@@ -19,11 +19,8 @@ class FriendTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        friendImageView.tintColor = UIColor.white
-
-        friendImageView.backgroundColor = UIColor.clear
-
         self.backgroundColor = UIColor.clear
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

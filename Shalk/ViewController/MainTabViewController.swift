@@ -6,6 +6,8 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - MainTabViewController
+
 import UIKit
 import Quickblox
 import QuickbloxWebRTC
@@ -14,15 +16,9 @@ import SCLAlertView
 
 class MainTabViewController: UITabBarController {
 
-    var opponentName = ""
-
-    let qbManager = QBManager.shared
-
-    let userManager = UserManager.shared
+    // MARK: Property
 
     let rtcManager = QBRTCClient.instance()
-
-    var videoCapture: QBRTCCameraCapture?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,9 +29,18 @@ class MainTabViewController: UITabBarController {
 
         self.tabBarController?.tabBar.backgroundColor = UIColor.clear
 
-        self.tabBarController?.tabBar.tintColor = UIColor.init(red: 62/255, green: 48/255, blue: 76/255, alpha: 1)
+        self.tabBarController?.tabBar.tintColor = UIColor(
+            red: 62/255,
+            green: 48/255,
+            blue: 76/255,
+            alpha: 1
+        )
 
-        FirebaseManager().fetchChatRoomList()
+        DispatchQueue.global().async {
+
+            FirebaseManager().fetchChatRoomList()
+
+        }
 
     }
 
@@ -46,7 +51,7 @@ extension MainTabViewController: QBRTCClientDelegate {
     // MARK: 收到新的連線請求
     func didReceiveNewSession(_ session: QBRTCSession, userInfo: [String : String]? = nil) {
 
-        if qbManager.session != nil {
+        if QBManager.shared.session != nil {
 
             // MARK: This device is on call
 
@@ -54,24 +59,29 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         } else {
 
-            // MARK: Accepted the call
+            // MARK: Accepted Call
+
+            guard let object = userInfo else { return }
 
             do {
 
-                let opponent = try User.init(json: userInfo!)
+                let opponent = try User(json: object)
 
                 UserManager.shared.opponent = opponent
 
-                qbManager.session = session
+                QBManager.shared.session = session
 
                 // MARK: 如果使用者正在配對，則前往random call的畫面，不然則表示是好友的來電，前往commingCall的畫面
                 if UserManager.shared.isDiscovering == true {
 
-                    qbManager.acceptCall()
+                    QBManager.shared.acceptCall()
 
                     AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
 
-                    self.performSegue(withIdentifier: "callDiscovered", sender: nil)
+                    self.performSegue(
+                        withIdentifier: "callDiscovered",
+                        sender: nil
+                    )
 
                     UserManager.shared.isDiscovering = false
 
@@ -85,28 +95,39 @@ extension MainTabViewController: QBRTCClientDelegate {
 
                     case .audio:
 
-                        let comingCallVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ComingCallVC") as? ComingCallViewController
+                        if let comingCallVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ComingCallVC") as? ComingCallViewController {
 
-                        comingCallVC?.callType = CallType.audio
+                            comingCallVC.callType = CallType.audio
 
-                        AppDelegate.shared.window?.rootViewController?.present(comingCallVC!, animated: true, completion: nil)
+                            AppDelegate.shared.window?.rootViewController?.present(
+                                comingCallVC,
+                                animated: true,
+                                completion: nil
+                            )
+                        }
 
                     case .video:
 
-                        let comingCallVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ComingCallVC") as? ComingCallViewController
+                        if let comingCallVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ComingCallVC") as? ComingCallViewController {
 
-                        comingCallVC?.callType = CallType.video
+                            comingCallVC.callType = CallType.video
 
-                        AppDelegate.shared.window?.rootViewController?.present(comingCallVC!, animated: true, completion: nil)
-
+                            AppDelegate.shared.window?.rootViewController?.present(
+                                comingCallVC,
+                                animated: true,
+                                completion: nil
+                            )
+                        }
                     }
-
                 }
 
             } catch let error {
                 // MARK: Failed to init a coming call.
 
-                Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Init_ComingCall_Error"])
+                Crashlytics.sharedInstance().recordError(
+                    error,
+                    withAdditionalUserInfo: ["info": "Init_ComingCall_Error"]
+                )
 
                 UIAlertController(error: error).show()
 
@@ -134,7 +155,10 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         if UserManager.shared.isDiscovering == true {
 
-            self.performSegue(withIdentifier: "callDiscovered", sender: nil)
+            self.performSegue(
+                withIdentifier: "callDiscovered",
+                sender: nil
+            )
 
             UserManager.shared.isDiscovering = false
 
@@ -147,14 +171,6 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         QBManager.shared.session = nil
 
-        guard let user = UserManager.shared.currentUser else { return }
-
-        let hostId = String(describing: session.initiatorID)
-
-        if hostId == user.quickbloxId {
-
-        }
-
     }
 
     // MARK: 電話被使用者拒絕
@@ -162,17 +178,34 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         UserManager.shared.stopPlayingSound()
 
-        guard let opponent = UserManager.shared.opponent else { return }
+        if let opponent = UserManager.shared.opponent {
 
-        let alert = UIAlertController.init(title: NSLocalizedString("Oops", comment: ""), message: "\(opponent.name)" + NSLocalizedString("Reject_Call", comment: ""), preferredStyle: .alert)
+            let alert = UIAlertController(
+                title: NSLocalizedString("Oops", comment: ""),
+                message: "\(opponent.name)" + NSLocalizedString("Reject_Call", comment: ""),
+                preferredStyle: .alert
+            )
 
-        alert.addAction(title: "OK", style: .default, isEnabled: true) { (_) in
+            alert.addAction(
+                title: "OK",
+                style: .default,
+                isEnabled: true,
+                handler: { (_) in
 
-            self.dismiss(animated: true, completion: nil)
+                    self.dismiss(
+                        animated: true,
+                        completion: nil
+                    )
+
+            })
+
+            self.presentedViewController?.present(
+                alert,
+                animated: true,
+                completion: nil
+            )
 
         }
-
-        self.presentedViewController?.present(alert, animated: true, completion: nil)
 
         if UserManager.shared.isDiscovering == true {
 
@@ -195,13 +228,21 @@ extension MainTabViewController: QBRTCClientDelegate {
 
             // MARK: 確定為好友
 
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(
+                animated: true,
+                completion: nil
+            )
 
             if UserManager.shared.isConnected == true {
 
                 guard
                     let hostQbId = session.initiatorID as? Int,
-                    let user = UserManager.shared.currentUser else { return }
+                    let user = UserManager.shared.currentUser
+                    else {
+
+                        return
+
+                }
 
                 let hostQbString = String(describing: hostQbId)
 
@@ -210,10 +251,21 @@ extension MainTabViewController: QBRTCClientDelegate {
                     guard
                         let callType = userInfo?["callType"],
                         let duration = userInfo?["duration"],
-                        let chatRoomId = userInfo?["roomId"] else { return }
+                        let chatRoomId = userInfo?["roomId"]
+                        else {
 
-                    FirebaseManager().sendCallRecord(CallType(rawValue: callType)!, duration: duration, roomId: chatRoomId)
+                            return
 
+                    }
+
+                    if let type = CallType(rawValue: callType) {
+
+                        FirebaseManager().sendCallRecord(
+                            type,
+                            duration: duration,
+                            roomId: chatRoomId
+                        )
+                    }
                 }
 
             }
@@ -223,7 +275,12 @@ extension MainTabViewController: QBRTCClientDelegate {
             // MARK: Not friends, init a friend request.
             guard let opponent = UserManager.shared.opponent else { return }
 
-            let appearance = SCLAlertView.SCLAppearance( kTitleFont: UIFont.boldSystemFont(ofSize: 18), kTextFont: UIFont.systemFont(ofSize: 12), kButtonFont: UIFont.boldSystemFont(ofSize: 18), showCloseButton: false)
+            let appearance = SCLAlertView.SCLAppearance(
+                kTitleFont: UIFont.boldSystemFont(ofSize: 18),
+                kTextFont: UIFont.systemFont(ofSize: 12),
+                kButtonFont: UIFont.boldSystemFont(ofSize: 18),
+                showCloseButton: false
+            )
 
             let alert = SCLAlertView(appearance: appearance)
 
@@ -237,11 +294,23 @@ extension MainTabViewController: QBRTCClientDelegate {
 
             })
 
-            alert.addButton("取消", backgroundColor: UIColor.red, textColor: UIColor.white, showDurationStatus: true, action: { })
+            alert.addButton(
+                "取消",
+                backgroundColor: UIColor.red,
+                textColor: UIColor.white,
+                showDurationStatus: true,
+                action: {}
+            )
 
-            alert.showSuccess("通話結束！", subTitle: "通話已經結束囉，是否要與\(opponent.name)成為好友呢？")
+            alert.showSuccess(
+                "通話結束！",
+                subTitle: "通話已經結束囉，是否要與\(opponent.name)成為好友呢？"
+            )
 
-            self.presentedViewController?.dismiss(animated: true, completion: nil)
+            self.presentedViewController?.dismiss(
+                animated: true,
+                completion: nil
+            )
 
         }
 
@@ -256,19 +325,37 @@ extension MainTabViewController: QBRTCClientDelegate {
 
         if String(describing: session.opponentsIDs[0]) == opponent.quickbloxId {
 
-            let alert = UIAlertController.init(title: NSLocalizedString("Oops", comment: ""), message: "\(opponent.name)" + NSLocalizedString("No_Answer", comment: ""), preferredStyle: .alert)
+            let alert = UIAlertController(
+                title: NSLocalizedString("Oops", comment: ""),
+                message: "\(opponent.name)" + NSLocalizedString("No_Answer", comment: ""),
+                preferredStyle: .alert
+            )
 
-            alert.addAction(title: "OK", style: .default, isEnabled: true) { (_) in
+            alert.addAction(
+                title: "OK",
+                style: .default,
+                isEnabled: true,
+                handler: { (_) in
 
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(
+                    animated: true,
+                    completion: nil
+                    )
 
-            }
+            })
 
-            self.presentedViewController?.present(alert, animated: true, completion: nil)
+            self.presentedViewController?.present(
+                alert,
+                animated: true,
+                completion: nil
+            )
 
         } else {
 
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(
+                animated: true,
+                completion: nil
+            )
 
         }
 

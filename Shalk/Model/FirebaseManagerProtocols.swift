@@ -6,6 +6,8 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - FirebaseManagerChatRoomDelegate
+
 protocol FirebaseManagerChatRoomDelegate: class {
 
     func manager (_ manager: FirebaseManager, didGetChatRooms rooms: [ChatRoom])
@@ -14,6 +16,8 @@ protocol FirebaseManagerChatRoomDelegate: class {
 
 }
 
+// MARK: - CallType
+
 enum CallType: String {
 
     case audio = "Audio Call"
@@ -21,14 +25,5 @@ enum CallType: String {
     case video = "Video Call"
 
     case none
-
-}
-
-//swiftlint:disable identifier_name
-enum FriendType: String {
-
-    case me
-
-    case friend = "true"
 
 }

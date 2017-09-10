@@ -6,15 +6,19 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: Message.swift
+
 import UIKit
 
 struct Message {
 
-    var text: String
+    // MARK: Property
 
-    var senderId: String
+    let text: String
 
-    var time: String
+    let senderId: String
+
+    let time: String
 
 }
 
@@ -22,11 +26,15 @@ extension Message {
 
     typealias MessageObject = [String: String]
 
+    // MARK: FetchMessageError
+
     enum FetchMessageError: Error {
 
         case invalidMessageObject, missingText, missingSenderId, missingTime
 
     }
+
+    // MARK: Schema
 
     struct Schema {
 
@@ -37,6 +45,8 @@ extension Message {
         static let time = "time"
 
     }
+
+    // MARK: Init
 
     init(json: Any) throws {
 
@@ -92,11 +102,13 @@ extension Message {
 
     func toDictionary() -> MessageObject {
 
-        let messageInfo: MessageObject = [Schema.text: self.text,
+        let messageInfo: MessageObject = [
 
-                                          Schema.senderId: self.senderId,
+            Schema.text: self.text,
+            Schema.senderId: self.senderId,
+            Schema.time: self.time
 
-                                          Schema.time: self.time]
+        ]
 
         return messageInfo
 
