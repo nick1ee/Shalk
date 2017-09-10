@@ -60,13 +60,9 @@ class VideoCallViewController: UIViewController {
 
                 self.videoCapture?.position = .front
 
-                break
-
             case .front:
 
                 self.videoCapture?.position = .back
-
-                break
 
             default: break
 
