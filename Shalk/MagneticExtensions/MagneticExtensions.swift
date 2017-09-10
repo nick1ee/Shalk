@@ -28,7 +28,7 @@ extension UIColor {
 
 extension UIImage {
 
-    static let names: [String] = ["english", "chinese", "japanese", "korean"]
+    static let languages: [String] = ["english", "chinese", "japanese", "korean"]
 
 }
 
