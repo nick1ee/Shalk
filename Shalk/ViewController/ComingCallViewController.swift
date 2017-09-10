@@ -6,15 +6,15 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - ComingCallViewController
+
 import UIKit
 import Quickblox
 import QuickbloxWebRTC
 
 class ComingCallViewController: UIViewController {
 
-    var isCallAccepted: Bool = false
-
-    let opponent = UserManager.shared.opponent
+    // MARK: Property
 
     var callType: CallType = .none
 
@@ -32,33 +32,37 @@ class ComingCallViewController: UIViewController {
 
         QBManager.shared.acceptCall()
 
-        self.isCallAccepted = true
-
         switch callType {
 
         case .audio:
 
-            self.dismiss(animated: false, completion: {
+            self.dismiss(
+                animated: false,
+                completion: {
 
-                let audioVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AudioCallVC")
+                let audioCallViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AudioCallVC")
 
-                AppDelegate.shared.window?.rootViewController?.present(audioVC, animated: true, completion: nil)
-
+                AppDelegate.shared.window?.rootViewController?.present(
+                    audioCallViewController,
+                    animated: true,
+                    completion: nil
+                )
             })
-
-            break
 
         case .video:
 
-            self.dismiss(animated: false, completion: {
+            self.dismiss(
+                animated: false,
+                completion: {
 
-                let videoVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VideoCallVC")
+                let videoCallViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VideoCallVC")
 
-                AppDelegate.shared.window?.rootViewController?.present(videoVC, animated: true, completion: nil)
-
+                AppDelegate.shared.window?.rootViewController?.present(
+                    videoCallViewController,
+                    animated: true,
+                    completion: nil
+                )
             })
-
-            break
 
         case .none: break
 
@@ -70,26 +74,37 @@ class ComingCallViewController: UIViewController {
 
         QBManager.shared.rejectCall(nil)
 
-        self.dismiss(animated: true, completion: nil)
-
+        self.dismiss(
+            animated: true,
+            completion: nil
+        )
     }
+
+    // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         addButtonRadius()
 
-        opponentNameLabel.text = opponent?.name.addSpacingAndCapitalized()
+        if let opponent = UserManager.shared.opponent {
 
-        callTypeLabel.text = callType.rawValue
+            opponentNameLabel.text = opponent.name.addSpacingAndCapitalized()
 
-        if opponent?.imageUrl != "null" {
+            callTypeLabel.text = callType.rawValue
 
-            opponentImageView.sd_setImage(with: URL(string: (opponent?.imageUrl)!))
+            if opponent.imageUrl != "null" {
 
+                if let url = URL(string: opponent.imageUrl) {
+
+                    opponentImageView.sd_setImage(with: url)
+
+                }
+            }
         }
-
     }
+
+    // MARK: UI Customization
 
     func addButtonRadius() {
 
