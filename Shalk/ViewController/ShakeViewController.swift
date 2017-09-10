@@ -23,7 +23,7 @@ class ShakeViewController: UIViewController {
 
     var selectedNode: Node?
 
-    var nodes: [Node] = []gi
+    var nodes: [Node] = []
 
     @IBOutlet weak var iconShake: UIImageView!
 

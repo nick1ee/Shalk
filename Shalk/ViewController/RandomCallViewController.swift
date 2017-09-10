@@ -6,18 +6,20 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - RandomCallViewController
+
 import UIKit
 import Quickblox
 import QuickbloxWebRTC
 import SCLAlertView
 
 class RandomCallViewController: UIViewController {
+    
+    // MARK: Property
 
     var isMicrophoneEnabled: Bool = true
 
     var isSpeakerEnabled: Bool = false
-
-    let qbManager = QBManager.shared
 
     let rtcManager = QBRTCClient.instance()
 
@@ -41,7 +43,7 @@ class RandomCallViewController: UIViewController {
 
             outletSpeaker.layer.borderColor = UIColor.white.cgColor
 
-            qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.speaker
+            QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.speaker
 
         } else {
 
@@ -53,7 +55,7 @@ class RandomCallViewController: UIViewController {
 
             outletSpeaker.layer.borderColor = UIColor.darkGray.cgColor
 
-            qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
+            QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
 
         }
 
@@ -73,7 +75,7 @@ class RandomCallViewController: UIViewController {
 
             outletMicrophone.setImage(UIImage(named: "icon-nomic.png"), for: .normal)
 
-            qbManager.session?.localMediaStream.audioTrack.isEnabled = false
+            QBManager.shared.session?.localMediaStream.audioTrack.isEnabled = false
 
         } else {
 
@@ -87,7 +89,7 @@ class RandomCallViewController: UIViewController {
 
             outletMicrophone.setImage(UIImage(named: "icon-mic.png"), for: .normal)
 
-            qbManager.session?.localMediaStream.audioTrack.isEnabled = true
+            QBManager.shared.session?.localMediaStream.audioTrack.isEnabled = true
 
         }
 
@@ -133,9 +135,9 @@ class RandomCallViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        qbManager.session?.localMediaStream.audioTrack.isEnabled = true
+        QBManager.shared.session?.localMediaStream.audioTrack.isEnabled = true
 
-        qbManager.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
+        QBManager.shared.audioManager.currentAudioDevice = QBRTCAudioDevice.receiver
 
         guard let opponent = UserManager.shared.opponent else { return }
 
