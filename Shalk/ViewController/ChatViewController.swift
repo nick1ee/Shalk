@@ -6,10 +6,14 @@
 //  Copyright © 2017年 nicklee. All rights reserved.
 //
 
+// MARK: - ChatViewController
+
 import UIKit
 import SVProgressHUD
 
 class ChatViewController: UIViewController {
+
+    // MARK: Property
 
     let imagePicker = UIImagePickerController()
 
@@ -75,23 +79,43 @@ class ChatViewController: UIViewController {
 
     @IBAction func btnStartCall(_ sender: UIButton) {
 
-        let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let alertSheet = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
 
-        let audioCall = UIAlertAction(title: NSLocalizedString("AudioCall", comment: ""), style: .default) { (_) in
+        let audioCall = UIAlertAction(
+            title: NSLocalizedString("AudioCall", comment: ""),
+            style: .default,
+            handler: { (_) in
 
             UserManager.shared.startAudioCall()
 
-            self.performSegue(withIdentifier: "audioCall", sender: nil)
+            self.performSegue(
+                withIdentifier: "audioCall",
+                sender: nil
+                )
 
-        }
+        })
 
-        let videoCall = UIAlertAction(title: NSLocalizedString("VideoCall", comment: ""), style: .default) { (_) in
+        let videoCall = UIAlertAction(
+            title: NSLocalizedString("VideoCall", comment: ""),
+            style: .default,
+            handler: { (_) in
 
-            self.performSegue(withIdentifier: "videoCall", sender: nil)
+            self.performSegue(
+                withIdentifier: "videoCall",
+                sender: nil
+                )
 
-        }
+        })
 
-        let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+        let cancel = UIAlertAction(
+            title: NSLocalizedString("Cancel", comment: ""),
+            style: .cancel,
+            handler: nil
+        )
 
         alertSheet.addAction(audioCall)
 
@@ -99,21 +123,39 @@ class ChatViewController: UIViewController {
 
         alertSheet.addAction(cancel)
 
-        self.present(alertSheet, animated: true, completion: nil)
+        self.present(
+            alertSheet,
+            animated: true,
+            completion: nil
+        )
 
     }
 
     @IBAction func btnMore(_ sender: UIButton) {
 
-        let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let alertSheet = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
 
-        let block = UIAlertAction(title: NSLocalizedString("Block", comment: ""), style: .destructive) { (_) in
+        let block = UIAlertAction(
+            title: NSLocalizedString("Block", comment: ""),
+            style: .destructive,
+            handler: { (_) in
 
-            let alert = UIAlertController(title: nil, message: NSLocalizedString("Block_Confirmation", comment: ""), preferredStyle: .alert)
+            let alert = UIAlertController(
+                title: nil,
+                message: NSLocalizedString("Block_Confirmation", comment: ""),
+                preferredStyle: .alert
+                )
 
             alert.addAction(title: NSLocalizedString("Cancel", comment: ""))
 
-            let blockAction = UIAlertAction(title: NSLocalizedString("Confirm", comment: ""), style: .default, handler: { (_) in
+            let blockAction = UIAlertAction(
+                title: NSLocalizedString("Confirm", comment: ""),
+                style: .default,
+                handler: { (_) in
 
                 // MARK: Block friend
 
@@ -125,31 +167,49 @@ class ChatViewController: UIViewController {
 
                         SVProgressHUD.dismiss()
 
-                        let alert = UIAlertController(title: nil, message: NSLocalizedString("BlockSuccessfully", comment: ""), preferredStyle: .alert)
+                        let alert = UIAlertController(
+                            title: nil,
+                            message: NSLocalizedString("BlockSuccessfully", comment: ""),
+                            preferredStyle: .alert
+                        )
 
-                        alert.addAction(title: "OK", style: .default, isEnabled: true) { _ in
+                        alert.addAction(
+                            title: "OK",
+                            style: .default,
+                            isEnabled: true,
+                            handler: { (_) in
 
                             self.navigationController?.popToRootViewController(animated: true)
+                        })
 
-                        }
-
-                        self.present(alert, animated: true, completion: nil)
-
+                        self.present(
+                            alert,
+                            animated: true,
+                            completion: nil
+                        )
                     }
-
                 }
-
             })
 
             alert.addAction(blockAction)
 
-            self.present(alert, animated: true, completion: nil)
+            self.present(
+                alert,
+                animated: true,
+                completion: nil
+            )
+        })
 
-        }
+        let report = UIAlertAction(
+            title: NSLocalizedString("Report", comment: ""),
+            style: .default,
+            handler: { (_) in
 
-        let report = UIAlertAction(title: NSLocalizedString("Report", comment: ""), style: .default) { (_) in
-
-            let alert = UIAlertController(title: NSLocalizedString("Report_Hint", comment: ""), message: nil, preferredStyle: .alert)
+            let alert = UIAlertController(
+                title: NSLocalizedString("Report_Hint", comment: ""),
+                message: nil,
+                preferredStyle: .alert
+            )
 
             alert.addTextField(configurationHandler: { (inputReason) in
 
@@ -159,7 +219,10 @@ class ChatViewController: UIViewController {
 
             alert.addAction(title: NSLocalizedString("Cancel", comment: ""))
 
-            let reportAction = UIAlertAction(title: NSLocalizedString("Confirm", comment: ""), style: .default, handler: { (_) in
+            let reportAction = UIAlertAction(
+                title: NSLocalizedString("Confirm", comment: ""),
+                style: .default,
+                handler: { (_) in
 
                 if let reason = alert.textFields?[0].text {
 
@@ -173,15 +236,27 @@ class ChatViewController: UIViewController {
 
                                 SVProgressHUD.dismiss()
 
-                                let alert = UIAlertController(title: nil, message: NSLocalizedString("ReportSuccessfully", comment: ""), preferredStyle: .alert)
+                                let alert = UIAlertController(
+                                    title: nil,
+                                    message: NSLocalizedString("ReportSuccessfully", comment: ""),
+                                    preferredStyle: .alert
+                                )
 
-                                alert.addAction(title: "OK", style: .default, isEnabled: true) { _ in
+                                alert.addAction(
+                                    title: "OK",
+                                    style: .default,
+                                    isEnabled: true,
+                                    handler: { (_) in
 
                                     self.navigationController?.popToRootViewController(animated: true)
 
-                                }
+                                })
 
-                                self.present(alert, animated: true, completion: nil)
+                                self.present(
+                                    alert,
+                                    animated: true,
+                                    completion: nil
+                                )
 
                             }
 
@@ -191,11 +266,19 @@ class ChatViewController: UIViewController {
 
                         // MARK: input reason could not be nil.
 
-                        let alert = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: NSLocalizedString("Invalid_Reason", comment: ""), preferredStyle: .alert)
+                        let alert = UIAlertController(
+                            title: NSLocalizedString("ERROR", comment: ""),
+                            message: NSLocalizedString("Invalid_Reason", comment: ""),
+                            preferredStyle: .alert
+                        )
 
                         alert.addAction(title: "OK")
 
-                        self.present(alert, animated: true, completion: nil)
+                        self.present(
+                            alert,
+                            animated: true,
+                            completion: nil
+                        )
 
                     }
 
@@ -205,11 +288,19 @@ class ChatViewController: UIViewController {
 
             alert.addAction(reportAction)
 
-            self.present(alert, animated: true, completion: nil)
+            self.present(
+                alert,
+                animated: true,
+                completion: nil
+                )
 
-        }
+        })
 
-        let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+        let cancel = UIAlertAction(
+            title: NSLocalizedString("Cancel", comment: ""),
+            style: .cancel,
+            handler: nil
+        )
 
         alertSheet.addAction(block)
 
@@ -217,7 +308,11 @@ class ChatViewController: UIViewController {
 
         alertSheet.addAction(cancel)
 
-        self.present(alertSheet, animated: true, completion: nil)
+        self.present(
+            alertSheet,
+            animated: true,
+            completion: nil
+        )
 
     }
 
@@ -232,9 +327,19 @@ class ChatViewController: UIViewController {
 
         opponentName.text = opponent.name.addSpacingAndCapitalized()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(
+            self, selector:
+            #selector(keyboardWillShow),
+            name: .UIKeyboardWillShow,
+            object: nil
+        )
 
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: .UIKeyboardWillHide,
+            object: nil
+        )
 
         FirebaseManager().checkFriendStatus(opponent.uid) { isFriend in
 
@@ -263,11 +368,17 @@ class ChatViewController: UIViewController {
             })
         }
 
-        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        let tap = UITapGestureRecognizer(
+            target: self,
+            action: #selector(hideKeyboard)
+        )
 
         self.view.addGestureRecognizer(tap)
 
-        let swipeBack = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
+        let swipeBack = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(handleSwipe)
+        )
 
         swipeBack.direction = .right
 
@@ -312,7 +423,11 @@ class ChatViewController: UIViewController {
 
             DispatchQueue.main.async {
 
-                self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+                self.chatTableView.scrollToRow(
+                    at: indexPath,
+                    at: .bottom,
+                    animated: false
+                )
 
             }
 
@@ -334,9 +449,19 @@ class ChatViewController: UIViewController {
 
         guard
             let opponent = UserManager.shared.opponent,
-            let imageView = gesture.view as? UIImageView else { return }
+            let imageView = gesture.view as? UIImageView,
+            let image = imageView.image
+            else {
 
-        let alert = CustomAlert(title: opponent.name, intro: opponent.intro, image: imageView.image!)
+                return
+
+        }
+
+        let alert = CustomAlert(
+            title: opponent.name,
+            intro: opponent.intro,
+            image: image
+        )
 
         alert.show(animated: true)
 
@@ -346,7 +471,7 @@ class ChatViewController: UIViewController {
 
         inputTextView.text = NSLocalizedString("InputField_Placefolder", comment: "")
 
-        chatTableView.estimatedRowHeight = 300
+        chatTableView.estimatedRowHeight = 300.0
 
         chatTableView.rowHeight = UITableViewAutomaticDimension
 
@@ -423,7 +548,10 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.receivedTime.text = messages[indexPath.row].time.convertDate()
 
-            cell.receiverImageView.sd_setImage(with: URL(string: friend[0].imageUrl)!, placeholderImage: UIImage(named: "icon-user"))
+            cell.receiverImageView.sd_setImage(
+                with: URL(string: friend[0].imageUrl)!,
+                placeholderImage: UIImage(named: "icon-user")
+            )
 
             cell.receiverImageView.addGestureRecognizer(setTapGestureRecognizer())
 
@@ -436,6 +564,8 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
 }
+
+// MARK: UITextViewDelegate
 
 extension ChatViewController: UITextViewDelegate {
 

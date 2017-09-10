@@ -64,35 +64,60 @@ class ModifyProfileViewController: UIViewController {
 
     @IBAction func btnPickImage(_ sender: UIButton) {
 
-        let alertController = UIAlertController.init(title: "", message: NSLocalizedString("ImagePicker_Title", comment: ""), preferredStyle: .actionSheet)
+        let alert = UIAlertController(
+            title: "",
+            message: NSLocalizedString("ImagePicker_Title", comment: ""),
+            preferredStyle: .actionSheet
+        )
 
-        let cameraAction = UIAlertAction.init(title: NSLocalizedString("Camera", comment: ""), style: .default, handler: { (_) in
+        let cameraAction = UIAlertAction(
+            title: NSLocalizedString("Camera", comment: ""),
+            style: .default,
+            handler: { (_) in
 
             self.imagePicker.sourceType = .camera
 
-            self.present(self.imagePicker, animated: true, completion: nil)
+            self.present(
+                self.imagePicker,
+                animated: true,
+                completion: nil
+                )
 
         })
 
-        let phoneLibraryAction = UIAlertAction.init(title: NSLocalizedString("PhotoLibrary", comment: ""), style: .default, handler: {(_) in
+        let phoneLibraryAction = UIAlertAction(
+            title: NSLocalizedString("PhotoLibrary", comment: ""),
+            style: .default,
+            handler: {(_) in
 
             self.imagePicker.sourceType = .photoLibrary
 
-            self.present(self.imagePicker, animated: true, completion: nil)
+            self.present(
+                self.imagePicker,
+                animated: true,
+                completion: nil
+            )
 
         })
 
-        let cancelAction = UIAlertAction.init(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: {(_) in
+        let cancelAction = UIAlertAction(
+            title: NSLocalizedString("Cancel", comment: ""),
+            style: .cancel,
+            handler: {(_) in
 
         })
 
-        alertController.addAction(cameraAction)
+        alert.addAction(cameraAction)
 
-        alertController.addAction(phoneLibraryAction)
+        alert.addAction(phoneLibraryAction)
 
-        alertController.addAction(cancelAction)
+        alert.addAction(cancelAction)
 
-        self.present(alertController, animated: true, completion: nil)
+        self.present(
+            alert,
+            animated: true,
+            completion: nil
+        )
 
     }
 
@@ -111,11 +136,17 @@ class ModifyProfileViewController: UIViewController {
 
         displayUserProfile()
 
-        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        let tap = UITapGestureRecognizer(
+            target: self,
+            action: #selector(hideKeyboard)
+        )
 
         self.view.addGestureRecognizer(tap)
 
-        let swipeBack = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
+        let swipeBack = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(handleSwipe)
+        )
 
         swipeBack.direction = .right
 
@@ -164,22 +195,22 @@ class ModifyProfileViewController: UIViewController {
 
         userImageView.tintColor = UIColor.white
 
-        guard let user = UserManager.shared.currentUser else { return }
+        if let user = UserManager.shared.currentUser {
 
-        inputName.text = user.name
+            inputName.text = user.name
 
-        if user.intro != "null" {
+            if user.intro != "null" {
 
-            inputIntro.text = user.intro
+                inputIntro.text = user.intro
 
+            }
+
+            if user.imageUrl != "null" {
+
+                userImageView.sd_setImage(with: URL(string: user.imageUrl))
+
+            }
         }
-
-        if user.imageUrl != "null" {
-
-            userImageView.sd_setImage(with: URL(string: user.imageUrl))
-
-        }
-
     }
 
     func adjustTextfield() {
@@ -190,11 +221,15 @@ class ModifyProfileViewController: UIViewController {
 
         inputIntro.maxLength = 40
 
-        inputName.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("InputName", comment: ""),
-                                                             attributes: [NSForegroundColorAttributeName: UIColor.white])
+        inputName.attributedPlaceholder = NSAttributedString(
+            string: NSLocalizedString("InputName", comment: ""),
+            attributes: [NSForegroundColorAttributeName: UIColor.white]
+        )
 
-        inputIntro.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("InputIntro", comment: ""),
-                                                              attributes: [NSForegroundColorAttributeName: UIColor.white])
+        inputIntro.attributedPlaceholder = NSAttributedString(
+            string: NSLocalizedString("InputIntro", comment: ""),
+            attributes: [NSForegroundColorAttributeName: UIColor.white]
+        )
 
     }
 
@@ -206,23 +241,31 @@ extension ModifyProfileViewController: UIImagePickerControllerDelegate, UINaviga
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
 
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        guard
+            let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage,
+            let imageData = UIImageJPEGRepresentation(pickedImage, 0.7) else {
 
-            userImageView.image = pickedImage
-
-            let imageData = UIImageJPEGRepresentation(userImageView.image!, 0.7)
-
-            FirebaseManager().uploadImage(withData: imageData!)
+                return
 
         }
 
-        dismiss(animated: true, completion: nil)
+        userImageView.image = pickedImage
+
+        FirebaseManager().uploadImage(withData: imageData)
+
+        dismiss(
+            animated: true,
+            completion: nil
+        )
 
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 
-        dismiss(animated: true, completion: nil)
+        dismiss(
+            animated: true,
+            completion: nil
+        )
 
     }
 
@@ -242,7 +285,12 @@ extension ModifyProfileViewController: UITextFieldDelegate {
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
 
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: .UIKeyboardWillShow,
+            object: nil
+        )
 
         return true
 
@@ -260,7 +308,12 @@ extension ModifyProfileViewController: UITextFieldDelegate {
 
         let keyboardSize = (userInfo.object(forKey: UIKeyboardFrameEndUserInfoKey)! as AnyObject).cgRectValue.size
 
-        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        let contentInsets = UIEdgeInsets(
+            top: 0.0,
+            left: 0.0,
+            bottom: keyboardSize.height,
+            right: 0.0
+        )
 
         scrollView.contentInset = contentInsets
 
