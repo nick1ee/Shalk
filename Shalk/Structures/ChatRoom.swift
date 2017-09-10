@@ -14,11 +14,11 @@ struct ChatRoom {
 
     // MARK: Property
 
-    var roomId: String
+    let roomId: String
 
-    var user1Id: String
+    let user1Id: String
 
-    var user2Id: String
+    let user2Id: String
 
     var latestMessage: String
 
@@ -32,13 +32,15 @@ extension ChatRoom {
 
     typealias RoomObject = [String: Any]
 
+    // MARK: FetchChatRoomError
+
     enum FetchChatRoomError: Error {
 
         case invalidChatRoomObject, missingRoomId, missingUser1Id, missingUser2Id, missingLatestMessage, missingLatestMessageTime, missingIsRead
 
     }
 
-    // MARK: - Schema
+    // MARK: Schema
 
     struct Schema {
 

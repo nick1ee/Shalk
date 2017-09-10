@@ -12,15 +12,17 @@ import Foundation
 
 struct AudioChannel {
 
-    var roomID: String
+    // MARK: Property
 
-    var participant: String
+    let roomID: String
 
-    var owner: String
+    let participant: String
 
-    var isLocked: Bool
+    let owner: String
 
-    var isFinished: Bool
+    let isLocked: Bool
+
+    let isFinished: Bool
 
 }
 
@@ -121,11 +123,13 @@ extension AudioChannel {
     func toDictionary() -> ChannelObject {
 
         let channelInfo: ChannelObject = [
+
             Schema.roomID: self.roomID,
             Schema.participant: self.participant,
             Schema.owner: self.owner,
             Schema.isLocked: self.isLocked,
             Schema.isFinished: self.isFinished
+
         ]
 
         return channelInfo

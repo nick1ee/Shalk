@@ -28,7 +28,7 @@ class FirebaseManager {
 
         // MARK: Start to login Firebase
 
-        Auth.auth().signIn(withEmail: email, password: pwd) { (user, error) in
+        Auth.auth().signIn(withEmail: email, password: pwd, completion: { (user, error) in
 
             if let error = error {
 
@@ -46,17 +46,22 @@ class FirebaseManager {
 
                 // MARK: User Signed in Firebase successfully, start sign in with Quickblox.
 
-                QBManager().logIn(withEmail: email, withPassword: okUser.uid)
+                QBManager().logIn(
+                    credential: email,
+                    okUser.uid
+                )
 
             }
 
-        }
-
+        })
     }
 
     func signUp(name: String, withEmail email: String, withPassword pwd: String) {
 
-        Auth.auth().createUser(withEmail: email, password: pwd) { (user, error) in
+        Auth.auth().createUser(
+            withEmail: email,
+            password: pwd,
+            completion: { (user, error) in
 
             if let error = error {
 
@@ -90,13 +95,13 @@ class FirebaseManager {
 
             }
 
-        }
+        })
 
     }
 
     func resetPassword(_ withVC: UIViewController, withEmail email: String) {
 
-        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+        Auth.auth().sendPasswordReset(withEmail: email, completion: { (error) in
 
             if let error = error {
 
@@ -121,8 +126,7 @@ class FirebaseManager {
                 completion: nil
             )
 
-        }
-
+        })
     }
 
     func logOut() {

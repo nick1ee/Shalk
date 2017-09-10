@@ -1527,7 +1527,7 @@
                                                     <constraint firstAttribute="height" constant="0.5" id="uOb-Dc-4Lj"/>
                                                 </constraints>
                                             </view>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bigUser" translatesAutoresizingMaskIntoConstraints="NO" id="FER-gx-HWX">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bigUser" translatesAutoresizingMaskIntoConstraints="NO" id="FER-gx-HWX">
                                                 <rect key="frame" x="107" y="87" width="200" height="200"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -2447,7 +2447,7 @@
         <image name="icon-user" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xxV-J9-TX2"/>
+        <segue reference="M4q-bF-we2"/>
         <segue reference="SQr-9W-W6x"/>
     </inferredMetricsTieBreakers>
 </document>

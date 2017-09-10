@@ -16,6 +16,16 @@ class ProfileViewController: UIViewController {
 
     // MARK: Property
 
+    //swiftlint:disable identifier_name
+    enum ProfileCell: String {
+
+        case me
+
+        case friend = "true"
+
+    }
+    //swiftlint:enable identifier_name
+
     var friends: [User] = []
 
     let components: [ProfileCell] = [ .me, .friend ]
@@ -24,13 +34,7 @@ class ProfileViewController: UIViewController {
 
     @IBAction func btnModifyProfile(_ sender: UIButton) {
 
-        self.navigationController?.pushViewController(
-            UIStoryboard(
-                name: "Main",
-                bundle: nil
-            ).instantiateViewController(
-                withIdentifier: "ModifyProfile")
-        )
+        self.navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ModifyProfile"))
 
     }
 

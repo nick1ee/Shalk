@@ -27,12 +27,3 @@ enum CallType: String {
     case none
 
 }
-
-//swiftlint:disable identifier_name
-enum ProfileCell: String {
-
-    case me
-
-    case friend = "true"
-
-}

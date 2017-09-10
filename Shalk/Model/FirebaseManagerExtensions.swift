@@ -78,7 +78,10 @@ extension FirebaseManager {
 
         }
 
-        let newChannel = AudioChannel.init(roomID: roomId, owner: uid)
+        let newChannel = AudioChannel(
+            roomID: roomId,
+            owner: uid
+        )
 
         UserManager.shared.roomKey = roomId
 
@@ -195,7 +198,10 @@ extension FirebaseManager {
 
                     let friendUid = friend.key
 
-                    self.fetchFriendInfo(friendUid, completion: completion)
+                    self.fetchFriendInfo(
+                        friendUid,
+                        completion: completion
+                    )
 
                 }
 
@@ -225,7 +231,10 @@ extension FirebaseManager {
 
                 // MARK: Failed to fetch friend info.
 
-                Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_FriendInfo_Error"])
+                Crashlytics.sharedInstance().recordError(
+                    error,
+                    withAdditionalUserInfo: ["info": "Fetch_FriendInfo_Error"]
+                )
 
                 UIAlertController(error: error).show()
 
@@ -293,7 +302,10 @@ extension FirebaseManager {
 
                 // MARK: Failed to fetch user profile
 
-                Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_MyProfile_Error"])
+                Crashlytics.sharedInstance().recordError(
+                    error,
+                    withAdditionalUserInfo: ["info": "Fetch_MyProfile_Error"]
+                )
 
                 UIAlertController(error: error).show()
             }
@@ -373,7 +385,10 @@ extension FirebaseManager {
 
         }
 
-        let room = ChatRoom.init(roomId: roomId, opponent: opponent)
+        let room = ChatRoom(
+            roomId: roomId,
+            opponent: opponent
+        )
 
         ref?.child("chatRoomList").child(myUid).child(roomId).setValue(room.toDictionary())
 
@@ -401,7 +416,7 @@ extension FirebaseManager {
 
                 do {
 
-                    let room = try ChatRoom.init(json: object.value)
+                    let room = try ChatRoom(json: object.value)
 
                     rooms.append(room)
 
@@ -409,7 +424,10 @@ extension FirebaseManager {
 
                     // MARK: Failed to fetch the list of chat rooms.
 
-                    Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_ChatRoom_Error"])
+                    Crashlytics.sharedInstance().recordError(
+                        error,
+                        withAdditionalUserInfo: ["info": "Fetch_ChatRoom_Error"]
+                    )
 
                     UIAlertController(error: error).show()
 
@@ -435,7 +453,10 @@ extension FirebaseManager {
 
             DispatchQueue.main.async {
 
-                self.chatRoomDelegate?.manager(self, didGetChatRooms: sortedRooms)
+                self.chatRoomDelegate?.manager(
+                    self,
+                    didGetChatRooms: sortedRooms
+                )
 
             }
 
@@ -495,7 +516,11 @@ extension FirebaseManager {
 
             let timestamp = formatter.string(from: Date())
 
-            let newMessage = Message.init(text: duration, senderId: callType.rawValue, time: timestamp)
+            let newMessage = Message(
+                text: duration,
+                senderId: callType.rawValue,
+                time: timestamp
+            )
 
             ref?.child("chatHistory").child(roomId).child(messageId).updateChildValues(newMessage.toDictionary())
 
@@ -535,7 +560,10 @@ extension FirebaseManager {
 
                 // MARK: Failed to fetch hcat histroy
 
-                Crashlytics.sharedInstance().recordError(error, withAdditionalUserInfo: ["info": "Fetch_ChatHistory_Error"])
+                Crashlytics.sharedInstance().recordError(
+                    error,
+                    withAdditionalUserInfo: ["info": "Fetch_ChatHistory_Error"]
+                )
 
                 UIAlertController(error: error).show()
 
@@ -603,11 +631,13 @@ extension FirebaseManager {
         let timestamp = formatter.string(from: Date())
 
         let report = [
+
             "ausiveUser": opponentUid,
             "prosecutor": myUid,
             "reason": reason,
             "time": timestamp,
             "reportId": reportId
+
         ]
 
         ref?.child("ReportUser").child(reportId).updateChildValues(report)

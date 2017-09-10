@@ -14,11 +14,13 @@ typealias UserObject = [String: Any]
 
 struct User {
 
+    // MARK: Property
+
     var name: String
 
-    var uid: String
+    let uid: String
 
-    var email: String
+    let email: String
 
     var quickbloxId: String
 
@@ -137,12 +139,14 @@ extension User {
     func toDictionary() -> UserProfile {
 
         let userInfo: UserProfile = [
+
             Schema.name: self.name,
             Schema.uid: self.uid,
             Schema.email: self.email,
             Schema.qbID: self.quickbloxId,
             Schema.imageUrl: self.imageUrl,
             Schema.intro: self.intro
+
         ]
 
         return userInfo
