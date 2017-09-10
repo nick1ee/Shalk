@@ -18,13 +18,19 @@ class ProfileViewController: UIViewController {
 
     var friends: [User] = []
 
-    var components: [ProfileCell] = [ .me, .friend ]
+    let components: [ProfileCell] = [ .me, .friend ]
 
     @IBOutlet weak var tableView: UITableView!
 
     @IBAction func btnModifyProfile(_ sender: UIButton) {
 
-        self.navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ModifyProfile"))
+        self.navigationController?.pushViewController(
+            UIStoryboard(
+                name: "Main",
+                bundle: nil
+            ).instantiateViewController(
+                withIdentifier: "ModifyProfile")
+        )
 
     }
 
@@ -83,7 +89,12 @@ class ProfileViewController: UIViewController {
 
         }
 
-        NotificationCenter.default.addObserver(self, selector: #selector(handleFriendChange), name: NSNotification.Name(rawValue: "FriendChange"), object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleFriendChange),
+            name: NSNotification.Name(rawValue: "FriendChange"),
+            object: nil
+        )
 
     }
 
@@ -104,7 +115,11 @@ class ProfileViewController: UIViewController {
 
     deinit {
 
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "FriendChange"), object: self)
+        NotificationCenter.default.removeObserver(
+            self,
+            name: NSNotification.Name(rawValue: "FriendChange"),
+            object: self
+        )
 
     }
 
@@ -209,9 +224,23 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             let screen = UIScreen.main.bounds
 
-            let header = UIView(frame: CGRect(x: 0.0, y: 0.0, width: screen.width, height: 30.0))
+            let header = UIView(
+                frame: CGRect(
+                    x: 0.0,
+                    y: 0.0,
+                    width: screen.width,
+                    height: 30.0
+                )
+            )
 
-            let headerLabel = UILabel(frame: CGRect(x: 20.0, y: 0.0, width: screen.width, height: 30.0))
+            let headerLabel = UILabel(
+                frame: CGRect(
+                    x: 20.0,
+                    y: 0.0,
+                    width: screen.width,
+                    height: 30.0
+                )
+            )
 
             headerLabel.font = UIFont.boldSystemFont(ofSize: 13)
 
@@ -221,7 +250,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             headerLabel.layer.shadowColor = UIColor.black.cgColor
 
-            headerLabel.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+            headerLabel.layer.shadowOffset = CGSize(
+                width: 1.0,
+                height: 1.0
+            )
 
             headerLabel.layer.shadowRadius = 10.0
 
@@ -292,7 +324,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
         case .friend:
 
-            UserManager.shared.startChat(withVC: self, to: friends[indexPath.row])
+            UserManager.shared.startChat(
+                withVC: self,
+                to: friends[indexPath.row]
+            )
 
         }
 
@@ -332,7 +367,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
             let friend = friends[indexPath.row]
 
-            cell.friendImageView.sd_setImage(with: URL(string: friend.imageUrl), placeholderImage: UIImage(named: "icon-user"))
+            cell.friendImageView.sd_setImage(
+                with: URL(string: friend.imageUrl),
+                placeholderImage: UIImage(named: "icon-user")
+            )
 
             cell.friendImageView.tag = indexPath.row
 
