@@ -1,6 +1,6 @@
-# Shalk # [<img src="https://github.com/nick1ee/Shalk/blob/master/screenshot/DownloadAppStoreBadge.png" width = "160" height = "50" alt="Eatvago" align=center />](https://itunes.apple.com/us/app/shalk/id1272630937)
+# Shalk [<img src="https://github.com/nick1ee/Shalk/blob/master/screenshot/DownloadAppStoreBadge.png" width = "160" height = "50" alt="Shalk" align=center />](https://itunes.apple.com/us/app/shalk/id1272630937)
 
-Shalk is a platform that allow users to find a partenr and get started to talk by the interested langauge. Once you and your partner become friends, you could start a video/audio call with your friends.
+Shalk means Share & Talk, which is a platform that allow users to find partenrs and get started to talk by the interesting langauge. Once the call ended, users could decide to send the friend request or not. If you and your partner are friends, you could start a video/audio call with your friends.
 
 # Note #
 Private keys are necessary for this project. If you want to run this app, please download from app store directly.  
