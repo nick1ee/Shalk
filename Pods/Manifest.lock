@@ -83,22 +83,22 @@ PODS:
   - SwiftLint (0.20.1)
 
 DEPENDENCIES:
-  - Crashlytics
-  - Fabric
-  - Firebase/Auth
-  - Firebase/Core
-  - Firebase/Crash
-  - Firebase/Database
-  - Firebase/Storage
-  - Magnetic
-  - NVActivityIndicatorView
+  - Crashlytics (= 3.8.5)
+  - Fabric (= 1.6.12)
+  - Firebase/Auth (= 4.0.4)
+  - Firebase/Core (= 4.0.4)
+  - Firebase/Crash (= 4.0.4)
+  - Firebase/Database (= 4.0.4)
+  - Firebase/Storage (= 4.0.4)
+  - Magnetic (= 1.0.7)
+  - NVActivityIndicatorView (= 3.7.0)
   - QuickBlox (~> 2.9.2)
   - Quickblox-WebRTC (~> 2.6.1)
-  - SCLAlertView
-  - SDWebImage
-  - SVProgressHUD
-  - SwifterSwift
-  - SwiftLint
+  - SCLAlertView (= 0.7.0)
+  - SDWebImage (= 4.0.0)
+  - SVProgressHUD (= 2.1.2)
+  - SwifterSwift (= 3.1.0)
+  - SwiftLint (= 0.20.1)
 
 SPEC CHECKSUMS:
   Crashlytics: dfbae35ef22ca189240d230ad501feea4ee85d2d
@@ -125,6 +125,6 @@ SPEC CHECKSUMS:
   SwifterSwift: f84eb7308f7742724b3cbf84283ce00f7c06d7fc
   SwiftLint: f60095dc173a3f3ec505bb34f5229c3dfd779a54
 
-PODFILE CHECKSUM: 8a80d1066bebac9ac95c153a569ff2cf72327d01
+PODFILE CHECKSUM: 7c5b7536d64b4c4d0972fde6f642eeedb642094f
 
 COCOAPODS: 1.2.0
