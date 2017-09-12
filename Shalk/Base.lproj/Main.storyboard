@@ -475,7 +475,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shake your mobile to find the partner!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ud4-SZ-7yg">
-                                        <rect key="frame" x="30" y="176" width="354" height="47"/>
+                                        <rect key="frame" x="30" y="176" width="354" height="57"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -492,7 +492,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Ud4-SZ-7yg" secondAttribute="bottom" constant="40" id="3KK-oI-o6P"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ud4-SZ-7yg" secondAttribute="bottom" constant="30" id="3KK-oI-o6P"/>
                                     <constraint firstAttribute="trailing" secondItem="Ud4-SZ-7yg" secondAttribute="trailing" constant="30" id="4WF-50-XZs"/>
                                     <constraint firstItem="Ud4-SZ-7yg" firstAttribute="top" secondItem="LY4-cU-geX" secondAttribute="bottom" constant="20" id="9Lv-fz-L1v"/>
                                     <constraint firstItem="Ud4-SZ-7yg" firstAttribute="top" secondItem="fAX-J7-cMa" secondAttribute="bottom" constant="30" id="Y2n-Ai-L3J"/>
