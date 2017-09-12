@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -31,9 +30,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qS4-tJ-u5Q">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="reO-g8-15a">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="reO-g8-15a">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dTh-8X-izs">
                                                 <rect key="frame" x="242" y="596" width="122" height="30"/>
@@ -182,8 +180,12 @@
                             </scrollView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="UdB-jv-KTA" firstAttribute="top" secondItem="reO-g8-15a" secondAttribute="bottom" id="69v-VF-sOD"/>
+                            <constraint firstAttribute="trailing" secondItem="reO-g8-15a" secondAttribute="trailing" id="QfL-DQ-PMr"/>
+                            <constraint firstItem="reO-g8-15a" firstAttribute="top" secondItem="FjL-BK-3Oi" secondAttribute="bottom" constant="-20" id="Rby-oR-rAi"/>
                             <constraint firstAttribute="trailing" secondItem="UPA-Bj-1n1" secondAttribute="trailing" id="Rsw-Mt-1q5"/>
                             <constraint firstItem="UPA-Bj-1n1" firstAttribute="leading" secondItem="YNb-XY-9QR" secondAttribute="leading" id="d0H-LH-ZR4"/>
+                            <constraint firstItem="reO-g8-15a" firstAttribute="leading" secondItem="YNb-XY-9QR" secondAttribute="leading" id="eiU-9j-qy7"/>
                             <constraint firstItem="UdB-jv-KTA" firstAttribute="top" secondItem="UPA-Bj-1n1" secondAttribute="bottom" id="gCj-6h-aqY"/>
                             <constraint firstItem="UPA-Bj-1n1" firstAttribute="top" secondItem="FjL-BK-3Oi" secondAttribute="bottom" constant="-20" id="xmj-op-eKQ"/>
                         </constraints>
@@ -216,9 +218,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dVa-f5-xna">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="2U3-MD-cqI">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="2U3-MD-cqI">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zzE-0E-EP6" userLabel="InputPasswordView">
                                                 <rect key="frame" x="50" y="528" width="314" height="40"/>
@@ -413,10 +414,14 @@
                             </scrollView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="fMw-MW-3gn" firstAttribute="top" secondItem="2U3-MD-cqI" secondAttribute="bottom" id="4bc-LT-7gc"/>
                             <constraint firstItem="iwl-S7-xJY" firstAttribute="top" secondItem="Dn0-Mc-qBd" secondAttribute="bottom" constant="-20" id="7FK-lP-ot2"/>
+                            <constraint firstItem="2U3-MD-cqI" firstAttribute="top" secondItem="Dn0-Mc-qBd" secondAttribute="bottom" constant="-20" id="dxU-Rh-jAD"/>
+                            <constraint firstItem="2U3-MD-cqI" firstAttribute="leading" secondItem="IeW-4l-MGK" secondAttribute="leading" id="ft3-QA-Neh"/>
                             <constraint firstItem="fMw-MW-3gn" firstAttribute="top" secondItem="iwl-S7-xJY" secondAttribute="bottom" id="igk-sq-BbR"/>
                             <constraint firstAttribute="trailing" secondItem="iwl-S7-xJY" secondAttribute="trailing" id="sv1-fO-smz"/>
                             <constraint firstItem="iwl-S7-xJY" firstAttribute="leading" secondItem="IeW-4l-MGK" secondAttribute="leading" id="t7E-Qp-PqH"/>
+                            <constraint firstAttribute="trailing" secondItem="2U3-MD-cqI" secondAttribute="trailing" id="yQg-jE-6Zr"/>
                         </constraints>
                     </view>
                     <connections>
@@ -470,7 +475,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shake your mobile to find the partner!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ud4-SZ-7yg">
-                                        <rect key="frame" x="30" y="176" width="354" height="21"/>
+                                        <rect key="frame" x="30" y="176" width="354" height="57"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -487,6 +492,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Ud4-SZ-7yg" secondAttribute="bottom" constant="30" id="3KK-oI-o6P"/>
                                     <constraint firstAttribute="trailing" secondItem="Ud4-SZ-7yg" secondAttribute="trailing" constant="30" id="4WF-50-XZs"/>
                                     <constraint firstItem="Ud4-SZ-7yg" firstAttribute="top" secondItem="LY4-cU-geX" secondAttribute="bottom" constant="20" id="9Lv-fz-L1v"/>
                                     <constraint firstItem="Ud4-SZ-7yg" firstAttribute="top" secondItem="fAX-J7-cMa" secondAttribute="bottom" constant="30" id="Y2n-Ai-L3J"/>
@@ -1452,9 +1458,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ivy-Nt-3yE">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="Tpg-vm-nFT">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="Tpg-vm-nFT">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="M O D I F Y" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEq-am-aLT">
                                                 <rect key="frame" x="163" y="35" width="88" height="22"/>
@@ -1656,11 +1661,15 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="SgA-N5-abi" secondAttribute="trailing" id="6MD-tH-IlL"/>
+                            <constraint firstItem="Tpg-vm-nFT" firstAttribute="top" secondItem="jmC-61-egx" secondAttribute="bottom" constant="-20" id="DaX-jT-NRA"/>
+                            <constraint firstAttribute="trailing" secondItem="Tpg-vm-nFT" secondAttribute="trailing" id="Eqq-DA-aCw"/>
+                            <constraint firstItem="z5e-24-kpp" firstAttribute="top" secondItem="Tpg-vm-nFT" secondAttribute="bottom" id="Nut-Nq-TOa"/>
                             <constraint firstItem="szY-a1-opx" firstAttribute="bottom" secondItem="FER-gx-HWX" secondAttribute="bottom" id="PDE-51-EpO"/>
                             <constraint firstItem="szY-a1-opx" firstAttribute="trailing" secondItem="FER-gx-HWX" secondAttribute="trailing" id="S6z-6F-wMA"/>
                             <constraint firstItem="SgA-N5-abi" firstAttribute="top" secondItem="jmC-61-egx" secondAttribute="bottom" constant="-20" id="VnH-Ix-GEG"/>
                             <constraint firstItem="SgA-N5-abi" firstAttribute="leading" secondItem="iXb-lX-dZj" secondAttribute="leading" id="aAV-FL-W5z"/>
                             <constraint firstItem="z5e-24-kpp" firstAttribute="top" secondItem="SgA-N5-abi" secondAttribute="bottom" id="g84-tj-v6l"/>
+                            <constraint firstItem="Tpg-vm-nFT" firstAttribute="leading" secondItem="iXb-lX-dZj" secondAttribute="leading" id="vQf-5J-whI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Modify" id="uVp-Cd-Qq4">

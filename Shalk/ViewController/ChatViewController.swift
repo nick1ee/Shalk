@@ -123,6 +123,14 @@ class ChatViewController: UIViewController {
 
         alertSheet.addAction(cancel)
 
+        if let popoverController = alertSheet.popoverPresentationController {
+
+            popoverController.sourceView = self.view
+
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.height, width: 0, height: 0)
+
+        }
+
         self.present(
             alertSheet,
             animated: true,
@@ -148,7 +156,7 @@ class ChatViewController: UIViewController {
                 title: nil,
                 message: NSLocalizedString("Block_Confirmation", comment: ""),
                 preferredStyle: .alert
-                )
+            )
 
             alert.addAction(title: NSLocalizedString("Cancel", comment: ""))
 
@@ -307,6 +315,14 @@ class ChatViewController: UIViewController {
         alertSheet.addAction(report)
 
         alertSheet.addAction(cancel)
+
+        if let popoverController = alertSheet.popoverPresentationController {
+
+            popoverController.sourceView = self.view
+
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.height, width: 0, height: 0)
+
+        }
 
         self.present(
             alertSheet,

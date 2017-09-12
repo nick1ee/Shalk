@@ -185,7 +185,12 @@ class ShakeViewController: UIViewController {
 
             colorArray.removeAll(color)
 
-            let node = Node(text: language.capitalized, image: UIImage(named: language), color: color, radius: UIScreen.main.bounds.width / 9)
+            let node = Node(
+                text: language.capitalized,
+                image: UIImage(named: language),
+                color: color,
+                radius: UIScreen.main.bounds.width / 9
+            )
 
             magnetic.addChild(node)
 
