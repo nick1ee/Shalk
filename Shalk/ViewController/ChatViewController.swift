@@ -122,13 +122,13 @@ class ChatViewController: UIViewController {
         alertSheet.addAction(videoCall)
 
         alertSheet.addAction(cancel)
-        
+
         if let popoverController = alertSheet.popoverPresentationController {
-            
+
             popoverController.sourceView = self.view
-            
+
             popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.height, width: 0, height: 0)
-            
+
         }
 
         self.present(
@@ -146,7 +146,6 @@ class ChatViewController: UIViewController {
             message: nil,
             preferredStyle: .actionSheet
         )
-
 
         let block = UIAlertAction(
             title: NSLocalizedString("Block", comment: ""),
@@ -316,13 +315,13 @@ class ChatViewController: UIViewController {
         alertSheet.addAction(report)
 
         alertSheet.addAction(cancel)
-        
+
         if let popoverController = alertSheet.popoverPresentationController {
-            
+
             popoverController.sourceView = self.view
-            
+
             popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.height, width: 0, height: 0)
-            
+
         }
 
         self.present(
